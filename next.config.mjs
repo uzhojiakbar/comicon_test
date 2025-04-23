@@ -1,4 +1,17 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'api.comiccon.uz',
+                port: '',
+                pathname: '/**', // Allow all paths under this hostname
+            },
+        ],
+        unoptimized: true, 
+
+    }
+};
 
 export default nextConfig;

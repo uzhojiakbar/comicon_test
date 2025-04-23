@@ -1,0 +1,261 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 36px 36px 36px;
+    justify-content: space-between;
+    height: 100%;
+    gap: 12px;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.containerContent {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 44px;
+}
+
+
+.boxCalendar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.boxCalendarTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    align-self: stretch;
+}
+
+.boxCalendarTop h1 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%;
+    width: 55%;
+}
+
+.calendarTopRightBtns {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.calendarTopRightBtns button {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    aspect-ratio: 90.20/44.00;
+    border-radius: 999px;
+    background: #FFF;
+}
+
+.calendarTopRightBtns p {
+    color: #9BA4C2;
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.boxCalendarBottom {
+    display: flex;
+    padding: 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 24px;
+    background: #FFF;
+}
+
+.boxCalendarBottom h2 {
+    color: rgba(0, 0, 0, 0.30);
+    font-family: Involve;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+    text-transform: uppercase;
+}
+
+.boxrowdates {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    overflow-x: scroll;
+    width: 100%;
+    scrollbar-width: none;
+}
+
+.oneday {
+    display: flex;
+    width: 40px;
+    padding: 7px 14px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 100px;
+}
+
+.oneday p:first-child {
+    color: #000;
+    text-align: center;
+    font-family: Involve;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.oneday p:last-child {
+    color: rgba(0, 0, 0, 0.50);
+    text-align: center;
+    font-family: Arial;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: uppercase;
+}
+
+.boxMovieCard {
+    display: flex;
+    width: 324px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.boxMovieCardImage {
+    height: 220px;
+    align-self: stretch;
+    border-radius: 24px;
+    background-size: cover;
+    background-position: center;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.boxMovieCard h1 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.boxMovieCard h6 {
+    color: rgba(28, 39, 76, 0.50);
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%
+}
+
+.boxMovieCardText {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    align-self: stretch;
+}
+
+
+.boxraiting {
+    width: 37px;
+    display: flex;
+    flex-direction: row;
+    display: inline-flex;
+    padding: 4px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    border-radius: 999px;
+    background: var(--Success-Success, #A4F4BC);
+}
+
+.boxraiting p {
+    color: var(--Success-Success600, #108834);
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.boxticketandlikes {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: end;
+}
+
+.boxticketandlikes p {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+    margin-top: 3px;
+}
+
+.boxticket {
+    display: inline-flex;
+    height: 40px;
+    padding: 10px 14px;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: #FFF;
+}
+
+.boxlike {
+    display: inline-flex;
+    height: 40px;
+    padding: 0px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: #FFF;
+    backdrop-filter: blur(10.999999046325684px);
+}
+
+.showmore {
+    display: flex;
+    padding: 14px 0px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    background: #FFF;
+}
+
+.showmore {
+    color: rgba(28, 39, 76, 0.50);
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    margin-top: 3px;
+}

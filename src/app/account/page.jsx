@@ -1,0 +1,883 @@
+"use client";
+import Image from "next/image";
+import styles from "./account.module.css";
+import NavBar from "@/components/nav";
+import Footer from "@/components/footer";
+import { useState, useEffect, useRef } from "react";
+import { useUser } from "@/utils/userProvider";
+import { useGoogleLogin } from "@react-oauth/google";
+import { UseLinkUnlickAccount, useUpdateUserAvatar } from "@/utils/server";
+import { ModalContainer, StyledModal } from "@/app/account/style";
+import styles2 from "./../login/login.module.css";
+import { formatPhoneNumber } from "@/utils/PhoneFormatter";
+import { useToast } from "@/components/toastProvider";
+import useApi from "@/utils/api";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+
+export default function account() {
+  const [account, setAccount] = useState("tickets");
+  const [login, setLogin] = useState(false);
+  const api = useApi();
+  const { user, isLoadingUser } = useUser();
+  const [sessionId, setSessionId] = useState();
+  const router = useRouter();
+
+  const countryCode = "+998";
+  const [phoneNumber, setPhoneNumber] = useState(countryCode);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
+  const [code, setCode] = useState(new Array(6).fill(""));
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [secondsLeft, setSecondsLeft] = useState(60);
+  const inputs = useRef([]);
+  const { addToast } = useToast();
+
+  const mutationLinkUnlik = UseLinkUnlickAccount();
+  const mutationLinkAvatarUpdate = useUpdateUserAvatar();
+  // -------------------------- Link unlink google --------------------------
+  const LinkGoogle = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        const requestData = {
+          provider: "google",
+          detail: {
+            data: tokenResponse?.access_token,
+          },
+        };
+        console.log(tokenResponse);
+        console.log(requestData);
+        mutationLinkUnlik.mutate({
+          data: requestData,
+          onSuccess: async (data) => {
+            console.log("DataLinkGoogle", data);
+            console.log(data);
+            addToast(data?.data?.detail, "success");
+          },
+          onError: async (err) => {
+            addToast(
+              err?.response?.data?.error || "Xatolik | Error",
+              "warning"
+            );
+            console.log("ErrorLinkGoogle", err);
+            console.log(err);
+          },
+        });
+      } catch (e) {
+        console.error("Error during API request:", e);
+        addToast("Xatolik | Error", "error");
+      }
+    },
+    onError: (error) => console.error("Google login failed:", error),
+  });
+
+  const UnLinkGoogle = () => {
+    mutationLinkUnlik.mutate({
+      data: {
+        provider: "google",
+      },
+      onSuccess: async (data) => {
+        addToast(data?.data?.detail, "success");
+        console.log("DataUnLinkLinkGoogle", data);
+      },
+      onError: async (err) => {
+        addToast(err?.response?.data?.error || "Xatolik | Error", "error");
+
+        console.log("ErrorUnLinkLinkGoogle", err);
+      },
+    });
+  };
+  // ------------------------------------------------------------------------------
+
+  // -------------------------- Link unlink telegram --------------------------
+  const LinkOrUnlinkTelegram = async () => {
+    mutationLinkUnlik.mutate({
+      data: {
+        provider: "telegram",
+        detail: { token: null },
+      },
+      onSuccess: async (data) => {
+        addToast(data?.data?.detail, "success");
+        console.log("DataUnLinkLinkGoogle", data);
+
+        const { token, telegram_link: bot_link } = data.data;
+        const telegramWindow = window.open(bot_link, "_blank"); // Открываем Telegram
+
+        let intervalId = setInterval(() => {
+          mutationLinkUnlik.mutate({
+            data: { provider: "telegram", detail: { token } },
+            onSuccess: async (data) => {
+              console.log("TG INNER", data);
+              if (data?.data?.status === "success") {
+                addToast(data?.data?.detail, "success");
+                clearInterval(intervalId);
+
+                // Закрываем Telegram-вкладку после успешной привязки
+                if (telegramWindow) {
+                  telegramWindow.close();
+                }
+              }
+            },
+            onError: async (err) => {
+              if (err?.response?.data?.status === "error") {
+                addToast(
+                  err?.response?.data?.error || "Xatolik | Error",
+                  "error"
+                );
+                clearInterval(intervalId);
+              } else {
+                addToast(
+                  err?.response?.data?.error || "Xatolik | Error",
+                  "error"
+                );
+              }
+              console.log("INNER ERROR", err);
+            },
+          });
+        }, 1000); // Проверяем каждые 1 секунду
+      },
+      onError: async (err) => {
+        addToast(err?.response?.data?.error || "Xatolik | Error", "error");
+        console.log("ErrorUnLinkLinkGoogle", err);
+      },
+    });
+  };
+  // ------------------------------------------------------------------------------
+
+  // -------------------------- Link Phone number --------------------------
+  const handlePhoneNumberChange = (e) => {
+    let value = e.target.value;
+
+    // Разрешаем только цифры и первый символ '+'
+    if (value[0] === "+") {
+      value = "+" + value.slice(1).replace(/[^0-9]/g, ""); // Оставляем + и удаляем остальные нецифровые символы
+    } else {
+      value = value.replace(/[^0-9]/g, ""); // Оставляем только цифры
+    }
+
+    // Проверяем, если номер начинается с 0, добавляем префикс страны
+    if (!value.startsWith(countryCode)) {
+      value = countryCode + value.slice(countryCode.length); // Добавляем код страны
+    }
+
+    setPhoneNumber(value);
+
+    // Убираем ошибку, если пользователь начал вводить заново
+    if (errorMessage) setErrorMessage(null);
+
+    // Проверка на валидность номера
+    setIsPhoneNumberValid(value.length === 13); // Предполагаем, что валидный номер — 13 символов
+  };
+
+  const handlePhoneNumberFocus = (e) => {
+    if (e.target.selectionStart < countryCode.length) {
+      e.target.setSelectionRange(countryCode.length, countryCode.length);
+    }
+  };
+
+  const LoginSubmit = async () => {
+    try {
+      mutationLinkUnlik.mutate({
+        data: {
+          provider: "phone_number",
+          detail: {
+            phone_number: phoneNumber,
+          },
+        },
+        onSuccess: async (data) => {
+          console.log(data);
+          if (data?.data?.status == "success") {
+            setSessionId(data?.data.session_id);
+            setLogin(true);
+            setPhoneNumber(countryCode);
+            addToast(data?.data?.message, "success");
+            setErrorMessage(null);
+          } else {
+          }
+        },
+        onError: async (err) => {
+          console.log(err);
+          if (err?.response?.data?.status == "error") {
+            addToast(err?.response?.data?.error || "Xatolik | Error", "error");
+          }
+        },
+      });
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (login === true) {
+      setSecondsLeft(60); // Сброс таймера
+      setIsButtonDisabled(true); // Блокировка кнопки
+
+      const timer = setInterval(() => {
+        setSecondsLeft((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            setIsButtonDisabled(false); // Разблокировка кнопки
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      return () => clearInterval(timer); // Очистка таймера при выходе со страницы
+    }
+  }, [login]);
+  // Verifcation code
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pasteData = e.clipboardData
+      .getData("text")
+      .slice(0, 6)
+      .replace(/\D/g, "")
+      .split("");
+    if (pasteData.every((char) => /^[0-9]$/.test(char))) {
+      setCode(pasteData);
+      pasteData.forEach((char, index) => {
+        if (inputs.current[index]) {
+          inputs.current[index].value = char;
+        }
+      });
+      const nextFocusIndex = Math.min(pasteData.length, 6) - 1;
+      if (inputs.current[nextFocusIndex]) {
+        inputs.current[nextFocusIndex].focus();
+      }
+    }
+  };
+
+  const handleBackspace = (e, index) => {
+    if (e.key === "Backspace") {
+      const newCode = [...code];
+      if (newCode[index] === "") {
+        if (index > 0) {
+          newCode[index - 1] = "";
+          setCode(newCode);
+          if (inputs.current[index - 1]) {
+            inputs.current[index - 1].focus();
+          }
+        }
+      } else {
+        newCode[index] = "";
+        setCode(newCode);
+      }
+    }
+  };
+
+  const handleChangeVerification = (e, index) => {
+    const value = e.target.value.replace(/\D/g, "");
+    if (value.length === 1) {
+      const newCode = [...code];
+      newCode[index] = value;
+      setCode(newCode);
+      if (index < 5 && value !== "") {
+        if (inputs.current[index + 1]) {
+          inputs.current[index + 1].focus();
+        }
+      }
+    } else {
+      e.target.value = "";
+    }
+  };
+
+  const LoginVerifySubmit = async () => {
+    try {
+      mutationLinkUnlik.mutate({
+        data: {
+          provider: "phone_number",
+          detail: {
+            session_id: sessionId,
+            otp_code: code.join(""),
+          },
+        },
+        onSuccess: async (data) => {
+          console.log(data);
+          setLogin(false);
+        },
+        onError: async (err) => {
+          if (err?.response?.data?.status == "error") {
+            // addToast(err?.response?.data?.error || "Xatolik | Error", "error")
+            if (err.response) {
+              if (err.response.status === 400) {
+                // setErrorMessage(`${translate("error400")}`);
+              } else if (err.response.status === 429) {
+                // setErrorMessage(`${translate("error429")}`);
+              } else {
+                // setErrorMessage(`${translate("error")}`);
+              }
+            }
+          }
+        },
+      });
+
+      // Обновляем страницу, чтобы сработал редирект в /account/
+      // await document.location.reload();
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  // ------------------------------------------------------------------------------
+
+  // -------------------------- Logout --------------------------
+  const LogoutSubmit = async () => {
+    try {
+      await api.post("user/logout/", { withCredentials: true });
+      Cookies.remove("access_token", {
+        domain: ".tcats.uz",
+        sameSite: "Lax"
+      });
+      Cookies.remove("access_token")
+
+      console.log("Вы успешно вышли из аккаунта!");
+
+      // Перенаправляем пользователя на страницу логина
+      router.replace("/login");
+    } catch (error) {
+      console.error("Ошибка при выходе:", error);
+    }
+  };
+  // ------------------------------------------------------------------------------
+
+  // -------------------------- Change Avatar --------------------------
+  const [avatarPreview, setAvatarPreview] = useState(user?.avatar); // Avatar oldindan ko‘rish uchun
+  const fileInputRef = useRef(null); // File input’ni boshqarish uchun ref
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    handleFile(file);
+  };
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleFileInput = (e) => {
+    const file = e.target.files[0];
+    handleFile(file);
+  };
+
+  const handleFile = async (file) => {
+    if (file) {
+      const previewUrl = URL.createObjectURL(file);
+      setAvatarPreview(previewUrl);
+
+      mutationLinkAvatarUpdate.mutate({
+        avatar: file,
+        onSuccess: async (data) => {
+          console.log(data);
+          addToast(data?.data?.detail, "success");
+        },
+        onError: async (err) => {
+          addToast(err?.response?.data?.avatar[0], "error");
+        },
+      });
+    }
+  };
+
+  const handleClick = () => {
+    fileInputRef.current.click();
+  };
+  // ------------------------------------------------------------------------------
+
+  return (
+    <section className={styles.mainContainer}>
+      <NavBar />
+      <section className={styles.accountContent}>
+        {/* -------------------------- Информация о пользователе -------------------------- */}
+        {account === "tickets" || account === "ticketHistory" ? (
+          <div className={styles.boxUserInfo}>
+            <div className={styles.boxUserAvatar}>
+              <Image src={user.avatar} alt="avatar" width={80} height={80} />
+              <p>{user.first_name} {user.last_name}</p>
+            </div>
+            <div className={styles.boxUserTicketButton}>
+              <button
+                onClick={() => setAccount("tickets")}
+                className={
+                  account === "tickets"
+                    ? styles.oneButton
+                    : styles.oneButtonNotActive
+                }
+              >
+                Билеты
+              </button>
+              <button
+                onClick={() => setAccount("ticketHistory")}
+                className={
+                  account === "ticketHistory"
+                    ? styles.oneButton
+                    : styles.oneButtonNotActive
+                }
+              >
+                История покупок
+              </button>
+            </div>
+            <div className={styles.boxUserSettingsButton}>
+              <button
+                onClick={() => setAccount("settings")}
+                className={styles.settingsButton}
+              >
+                <Image
+                  src="/settings.svg"
+                  alt="settings"
+                  width={20}
+                  height={20}
+                />
+                Настройки
+              </button>
+              <button onClick={LogoutSubmit} className={styles.logoutButton}>
+                <Image
+                  src="/logout.svg"
+                  alt="settings"
+                  width={20}
+                  height={20}
+                />
+                Выход
+              </button>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+        {account === "tickets" || account === "ticketHistory" ? (
+          <div className={styles.boxTicketsTab}>
+            <div className={styles.boxLeftBlock}>
+              <div className={styles.boxLeftBlockH1}>
+                <Image src="/list.svg" alt="list" width={24} height={24} />
+                Мои покупки
+              </div>
+              <div className={styles.boxLeftBlockButtons}>
+                <button className={styles.boxLeftBlockOneBtn}>
+                  Активные билеты
+                  <p>52</p>
+                </button>
+                <button className={styles.boxLeftBlockOneBtnNotActive}>
+                  Избранные билеты
+                  <p>52</p>
+                </button>
+                <button className={styles.boxLeftBlockOneBtnNotActive}>
+                  Пропущенные билеты
+                  <p>52</p>
+                </button>
+                <button className={styles.boxLeftBlockOneBtnNotActive}>
+                  Архивные билеты
+                  <p>52</p>
+                </button>
+              </div>
+            </div>
+            {/* -------------------------- Вкладка билеты -------------------------- */}
+            <div className={styles.boxRightBlock}>
+              {account === "tickets" && (
+                <>
+                  <div className={styles.boxOneTicket}>
+                    <div className={styles.boxMpName}>
+                      <Image
+                        src="/GeekCon.png"
+                        alt="MpLogo"
+                        width={275}
+                        height={36}
+                      />
+                      Мероприятие
+                    </div>
+                    <div className={styles.boxTicketAndMpInfo}>
+                      <div className={styles.boxOneInfo}>99.000</div>
+                      <div className={styles.boxOneInfo}>Билет №1</div>
+                      <div className={styles.boxOneInfo}>Общий зал</div>
+                      <div className={styles.boxOneInfo}>22 Декабря</div>
+                      <div className={styles.boxOneInfo}>12:00</div>
+                      <div className={styles.boxOneInfo}>
+                        Ледовый дворец Алпомиш
+                      </div>
+                    </div>
+                    <button className={styles.boxButtonQr}>
+                      <Image
+                        src="/qrcode.svg"
+                        alt="qrcode"
+                        width={25}
+                        height={25}
+                      />
+                    </button>
+                  </div>
+                  <hr />
+                </>
+              )}
+              {/* -------------------------- Вкладка история покупок -------------------------- */}
+              {account === "ticketHistory" && (
+                <>
+                  <div className={styles.boxOneTicketHistory}>
+                    <div className={styles.boxMpName}>
+                      <Image
+                        src="/GeekCon.png"
+                        alt="MpLogo"
+                        width={275}
+                        height={36}
+                      />
+                      Мероприятие
+                    </div>
+                    <div className={styles.boxHistoryAndMpInfo}>
+                      <div className={styles.boxOneInfoHistory}>Билет №1</div>
+                      <div className={styles.boxOneInfoHistory}>Общий зал</div>
+                      <div className={styles.boxOneInfoHistory}>22 Декабря</div>
+                      <div className={styles.boxOneInfoHistory}>12:00</div>
+                      <div className={styles.boxOneInfoHistory}>
+                        Ледовый дворец Алпомиш
+                      </div>
+                    </div>
+                    <div className={styles.boxHistoryTicketPrice}>
+                      99.000 сум
+                    </div>
+                  </div>
+                  <hr />
+                </>
+              )}
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+        {account === "settings" ? (
+          <div className={styles.boxSettingsTab}>
+            <div className={styles.boxSettingsLeftBlock}>
+              <div className={styles.leftBlockOneButton}>
+                <Image
+                  src="/profile.svg"
+                  alt="profile"
+                  width={24}
+                  height={24}
+                />
+                Профиль
+              </div>
+              <div className={styles.leftBlockOneButtonNotActive}>
+                <div className={styles.leftBlockText}>
+                  <Image
+                    src="/security.svg"
+                    alt="security"
+                    width={24}
+                    height={24}
+                  />
+                  Безопастность и вход
+                </div>
+                <div className={styles.boxSoon}>Скоро</div>
+              </div>
+              <div className={styles.leftBlockOneButtonNotActive}>
+                <div className={styles.leftBlockText}>
+                  <Image
+                    src="/transaction.svg"
+                    alt="transaction"
+                    width={24}
+                    height={24}
+                  />
+                  Платежи
+                </div>
+                <div className={styles.boxSoon}>Скоро</div>
+              </div>
+            </div>
+            <div className={styles.boxSettingsRightBlock}>
+              <div className={styles.boxSettingsH1}>
+                Настройки профиля
+                <div className={styles.boxCancelSaveButtons}>
+                  <button onClick={() => setAccount("tickets")}>
+                    Сохранить
+                  </button>
+                  <button onClick={() => setAccount("tickets")}>
+                    Отменить
+                  </button>
+                </div>
+              </div>
+              <div className={styles.boxSettingsRow}>
+                <div className={styles.boxAvatar}>
+                  <h1>Аватар</h1>
+                  <div className={styles.boxAvatarRow}>
+                    <div
+                      onDrop={handleDrop}
+                      onDragOver={handleDragOver}
+                      onClick={handleClick}
+                      className={styles.boxUserImageInSettings}
+                      style={{backgroundImage: `linear-gradient(0deg, rgba(42, 44, 58, 0.80) 0%, rgba(42, 44, 58, 0.80) 100%), url('${avatarPreview}')`,}}>
+                      <Image
+                        src="/uploadAvatar.svg"
+                        alt="upload"
+                        width={42}
+                        height={42}
+                        loading="lazy"
+                      />
+                      <p>Нажмите или перетащите изображение</p>
+                      <input
+                        type="file"
+                        ref={fileInputRef}
+                        onChange={handleFileInput}
+                        accept="image/*" // Faqat rasm fayllarini qabul qilish
+                        style={{ display: "none" }}
+                      />
+                    </div>
+                    <h1>
+                      {user.first_name} {user.last_name}
+                    </h1>
+                  </div>
+                </div>
+                <div className={styles.boxSettingsSecurity}>
+                  Безопастность и вход
+                  <div className={styles.boxSettingsSocial}>
+                    <button
+                      onClick={
+                        !user.phone_number ? () => setLogin("step1") : () => {}
+                      }
+                      className={styles.boxOneSocial}
+                    >
+                      <Image
+                        src="/phone.svg"
+                        alt="phone"
+                        width={32}
+                        height={32}
+                      />
+                      {user.phone_number !== null ? (
+                        <p>{formatPhoneNumber(user.phone_number)}</p>
+                      ) : (
+                        "Привязать номер"
+                      )}
+                    </button>
+                    <button
+                      onClick={!user.google ? LinkGoogle : () => {}}
+                      className={styles.boxOneSocial}
+                    >
+                      <Image
+                        src="/google.svg"
+                        alt="phone"
+                        width={28}
+                        height={28}
+                      />
+                      {user.google !== null ? (
+                        <>
+                          <p>{user.google.replace("@gmail.com", "")}</p>
+                          <Image
+                            onClick={UnLinkGoogle}
+                            src="/closeRed.svg"
+                            alt="google"
+                            width={28}
+                            height={28}
+                            loading="lazy"
+                          />
+                        </>
+                      ) : (
+                        "Привязать Google"
+                      )}
+                    </button>
+                    <button
+                      onClick={!user.telegram ? LinkOrUnlinkTelegram : () => {}}
+                      className={styles.boxOneSocial}
+                    >
+                      <Image
+                        src="/telegramAccount.svg"
+                        alt="phone"
+                        width={28}
+                        height={28}
+                      />
+                      {user.telegram !== null ? (
+                        <>
+                          <p>{user?.telegram}</p>
+                          <Image
+                            onClick={LinkOrUnlinkTelegram}
+                            src="/closeRed.svg"
+                            alt="google"
+                            width={28}
+                            height={28}
+                            loading="lazy"
+                          />
+                        </>
+                      ) : (
+                        "Привязать Telegram"
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+      </section>
+      {login ? (
+        <ModalContainer
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+          }}
+        >
+          <StyledModal
+            open={login}
+            onCancel={() => setLogin(false)} // Modalni yopish uchun (agar xochcha bosilsa)
+            footer={null} // Footer’ni o‘chirish
+            closable={false} // Xochchani yashirish (agar kerak bo‘lmasa)
+          >
+            {login === "step1" ? (
+              <div className={styles2.container1}>
+                <div className={styles2.boxPart1}>
+                  <div
+                    id="btn_text"
+                    onClick={() => setLogin(false)}
+                    className={styles2.btn_back}
+                  >
+                    <Image
+                      src="/loginArrowLeft.svg"
+                      width={24}
+                      height={24}
+                      alt="Back arrow"
+                      loading="lazy"
+                    />
+                    {/* {translate("back")} */}
+                    Далее
+                  </div>
+                  <Image
+                    src={
+                      // theme === "dark"
+                      // ? "/Tcatslogo.svg"
+                      // :
+                      "/TcatslogoLight.svg"
+                    }
+                    alt="logo"
+                    width={150}
+                    height={57}
+                    loading="lazy"
+                  />
+                </div>
+                <div className={styles2.boxPart2}>
+                  {/* <h1>{translate("connectphone")}</h1> */}
+                  <h1>Изменения номера</h1>
+                  <div className={styles2.boxInput}>
+                    <div className={styles2.boxOneInput}>
+                      <Image
+                        src={
+                          // theme === "dark" ? "/phone.svg" :
+                          "/phoneLight.svg"
+                        }
+                        alt="phone"
+                        width={28}
+                        height={28}
+                        loading="lazy"
+                      />
+                      <input
+                        type="tel"
+                        name="phone"
+                        id="phone"
+                        placeholder={countryCode}
+                        value={phoneNumber}
+                        maxLength={13}
+                        onChange={handlePhoneNumberChange}
+                        onFocus={handlePhoneNumberFocus}
+                      />
+                    </div>
+                    <button
+                      disabled={phoneNumber.length != 13}
+                      onClick={LoginSubmit}
+                      className={styles2.btnNext}
+                    >
+                      {/* <p>{translate("next")}</p> */}
+                      <p>Далее</p>
+                    </button>
+                  </div>
+                </div>
+                {errorMessage && <p>{errorMessage}</p>}
+              </div>
+            ) : (
+              ""
+            )}
+
+            {login === true ? (
+              <div className={styles2.boxVerification}>
+                <div className={styles2.boxPart1}>
+                  <button
+                    onClick={() => {
+                      setLogin("step1");
+                      setCode(new Array(6).fill(""));
+                    }}
+                    id="btn_text"
+                    className={styles2.btn_back}
+                  >
+                    <Image
+                      src="/loginArrowLeft.svg"
+                      width={24}
+                      height={24}
+                      alt="Back arrow"
+                      loading="lazy"
+                    />
+                    {/* {translate("back")} */}
+                    Назад
+                  </button>
+                  <Image
+                    src={
+                      // theme === "dark"
+                      // ? "/Tcatslogo.svg"
+                      // :
+                      "/TcatslogoLight.svg"
+                    }
+                    alt="logo"
+                    width={150}
+                    height={57}
+                    loading="lazy"
+                  />
+                </div>
+                <div className={styles2.verification}>
+                  {/* <h1>{translate("entersms")}</h1> */}
+                  <h1>Введите код из СМС</h1>
+                  <div className={styles2.boxInputs}>
+                    <div className={styles2.InputVerification}>
+                      {code.map((_, index) => (
+                        <input
+                          key={index}
+                          ref={(el) => (inputs.current[index] = el)}
+                          type="text"
+                          inputMode="numeric" // Ограничиваем ввод только цифрами
+                          maxLength="1"
+                          value={code[index]}
+                          onChange={(e) => handleChangeVerification(e, index)}
+                          onKeyDown={(e) => handleBackspace(e, index)}
+                          onPaste={handlePaste}
+                          placeholder="x"
+                          id={`input-${index}`}
+                        />
+                      ))}
+                    </div>
+                    <div className={styles2.boxNextPrevousBtns}>
+                      <button
+                        onClick={() => {
+                          setLogin("step1");
+                          setCode(new Array(6).fill(""));
+                        }}
+                      >
+                        {/* {translate("back")} */}
+                        Назад
+                      </button>
+                      <button onClick={LoginVerifySubmit}>
+                        {/* {translate("next")} */}
+                        Далее
+                      </button>
+                    </div>
+                    <button onClick={LoginSubmit} disabled={isButtonDisabled}>
+                      <h6
+                        style={
+                          isButtonDisabled
+                            ? {}
+                            : { textDecoration: "underline" }
+                        }
+                      >
+                        {isButtonDisabled ? `${secondsLeft}` : "sendagain"}
+                      </h6>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+          </StyledModal>
+        </ModalContainer>
+      ) : (
+        ""
+      )}
+      <Footer />
+    </section>
+  );
+}

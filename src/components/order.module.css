@@ -1,0 +1,239 @@
+.mainContainer {
+    display: flex;
+    padding: 24px 36px 36px 36px;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+    gap: 12px;
+    z-index: 1000;
+    max-width: 1440px;
+    background: rgba(0, 0, 0, 0.80);
+    backdrop-filter: blur(50px);
+    animation: showModal 0.3s ease-out;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.mainBoxOrder {
+    width: 100%;
+    height: 100%;
+    padding: 22px;
+    flex-shrink: 0;
+    border-radius: 46px;
+    background: #F2F3F7;
+    display: flex;
+    gap: 30px;
+}
+
+.boxMovieInfo {
+    display: flex;
+    width: 44%;
+    height: 100%;
+    padding: 24px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-radius: 34px;
+    background: #FFF;
+}
+
+.boxMovieInfoTop {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 56px;
+    width: 100%;
+}
+
+.boxMovieInformation {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
+    width: 100%;
+}
+
+.boxMovieName {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.boxMovieName h1 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%
+}
+
+.boxMovieName h6 {
+    border-radius: 999px;
+    border: 1px solid var(--Error-Error200, #FF7784);
+    display: flex;
+    width: 44px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: var(--Error-Error200, #FF7784);
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.boxMovieName h5 {
+    border-radius: 999px;
+    border: 1px solid #1C274C;
+    display: flex;
+    width: 44px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.boxMovieWhen {
+    display: flex;
+    align-items: flex-start;
+    gap: 90px;
+}
+
+.boxMovieWhenPlace {
+    display: flex;
+    width: 195px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.boxMovieWhen p {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+}
+
+.boxMovieWhenPlace h6 {
+    color: rgba(28, 39, 76, 0.50);
+    font-family: Involve;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+
+.boxMovieTicketInformation {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    align-self: stretch;
+}
+
+.boxMovieTicketInformation h3 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+}
+
+.boxMovieTicketInformation hr {
+    stroke-width: 1px;
+    stroke: rgba(28, 39, 76, 0.20);
+    height: 0px;
+    align-self: stretch;
+}
+
+.boxTicketRows {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+}
+
+.oneRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.oneRow p {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+}
+
+.ticketInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.totalRow p {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.boxCinemaAdvertising {
+    display: flex;
+    height: 230px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.boxAdvertising {
+    display: flex;
+    width: 536px;
+    justify-content: center;
+    align-items: center;
+    flex: 1 0 0;
+    border-radius: 24px;
+    border: 1px dashed #BEBEBE;
+    background: #F2F3F7;
+}
+
+.boxAdvertising p {
+    color: rgba(28, 39, 76, 0.50);
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+}

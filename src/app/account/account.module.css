@@ -1,0 +1,595 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 100vh;
+    padding: 24px 36px;
+    gap: 44px;
+}
+
+.accountContent {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* -------------------------- Информация о пользователе -------------------------- */
+
+.boxUserInfo {
+    display: flex;
+    width: 100%;
+    padding: 22px 24px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 30px;
+    background: #FFF;
+}
+
+.boxUserAvatar {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.boxUserAvatar img{
+    border-radius: 80px;
+}
+
+.boxUserAvatar p {
+    color: #101217;
+    font-family: Involve;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 90%;
+}
+
+.boxUserTicketButton {
+    display: flex;
+    height: 44px;
+    padding: 10px;
+    align-items: center;
+    gap: 4px;
+    border-radius: 999px;
+    background: #F1F2F6;
+}
+
+.boxUserTicketButton .oneButton {
+    display: flex;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 999px;
+    background: #FFF;
+    color: #101217;
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+    transition: 0.3s;
+}
+
+.boxUserTicketButton .oneButtonNotActive {
+    display: flex;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #101217;
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+    transition: 0.3s;
+}
+
+.boxUserSettingsButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.settingsButton {
+    display: flex;
+    height: 44px;
+    padding: 10px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    background: #F1F2F6;
+    color: #101217;
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.logoutButton {
+    display: flex;
+    height: 44px;
+    padding: 10px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    background: var(--Error-Error, #FF3347);
+    color: #FFF;
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+
+.boxTicketsTab {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.boxLeftBlock {
+    display: flex;
+    width: 100%;
+    max-width: 324px;
+    padding: 22px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    border-radius: 30px;
+    background: #FFF;
+}
+
+.boxLeftBlockH1 {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.boxLeftBlockButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    align-self: stretch;
+}
+
+.boxLeftBlockOneBtn {
+    display: flex;
+    height: 44px;
+    padding: 10px 18px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 999px;
+    background: #F0F3FF;
+    color: #101217;
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.boxLeftBlockOneBtnNotActive {
+    display: flex;
+    height: 44px;
+    padding: 10px 18px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    color: #101217;
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.boxRightBlock {
+    display: flex;
+    width: 100%;
+    padding: 22px;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    border-radius: 30px;
+    background: #FFF;
+    transition: 0.3s;
+}
+
+.boxRightBlock hr {
+    width: 100%;
+    background-color: #E3E3E3;
+}
+
+/* -------------------------- Вкладка билеты -------------------------- */
+
+.boxOneTicket {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+
+.boxMpName {
+    max-width: 275px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    color: #959EBB;
+    font-family: Involve;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%;
+}
+
+.boxTicketAndMpInfo {
+    display: flex;
+    max-width: 450px;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+
+.boxOneInfo:first-child {
+    display: flex;
+    padding: 12px 15px 9px 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    border-radius: 999px;
+    background: #191D2B;
+    color: #FFF;
+    text-align: center;
+    font-family: Involve;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.boxOneInfo {
+    display: flex;
+    padding: 12px 15px 9px 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    border-radius: 999px;
+    background: #F1F2F6;
+    color: #101217;
+    text-align: center;
+    font-family: Involve;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.boxButtonQr {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    padding: 17.4px 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border-radius: 36px;
+    border: 0.6px solid var(--Neutrals-Neutrals1800, #5C5C5C);
+}
+
+
+/* -------------------------- Вкладка История покупок -------------------------- */
+
+.boxOneTicketHistory {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.boxOneInfoHistory {
+    display: flex;
+    padding: 12px 15px 9px 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    border-radius: 999px;
+    background: #F1F2F6;
+    color: #101217;
+    text-align: center;
+    font-family: Involve;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.boxHistoryTicketPrice {
+    display: flex;
+    padding: 12px 15px 9px 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    border-radius: 999px;
+    background: #F1F2F6;
+    color: #101217;
+    text-align: center;
+    font-family: Involve;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.boxHistoryAndMpInfo {
+    max-width: 419px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+/* -------------------------- Вкладка настройки -------------------------- */
+
+.boxSettingsTab {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.boxSettingsLeftBlock {
+    display: flex;
+    width: 100%;
+    max-width: 324px;
+    padding: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    border-radius: 30px;
+    background: #FFF;
+}
+
+.leftBlockOneButton {
+    display: flex;
+    height: 44px;
+    padding: 10px 12px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    border-radius: 999px;
+    background: #F1F2F6;
+    color: #101217;
+    font-family: Involve;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.leftBlockOneButtonNotActive {
+    display: flex;
+    height: 44px;
+    padding: 10px 12px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 999px;
+    color: #101217;
+    font-family: Involve;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.leftBlockText {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.boxSoon {
+    display: flex;
+    padding: 4px 7px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 63px;
+    border: 0.5px solid #959EBB;
+    color: #C9D1ED;
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.boxSettingsRightBlock {
+    display: flex;
+    width: 100%;
+    max-width: 1020px;
+    padding: 22px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    border-radius: 30px;
+    background: #FFF;
+}
+
+.boxSettingsH1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    color: #101217;
+    font-family: Involve;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 90%;
+}
+
+.boxCancelSaveButtons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.boxCancelSaveButtons button:first-child {
+    display: flex;
+    height: 44px;
+    padding: 10px 12px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    background: var(--Success-Success500, #17C14A);
+    color: #FFF;
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.boxCancelSaveButtons button:last-child {
+    display: flex;
+    height: 44px;
+    padding: 10px 12px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    background: #F1F2F6;
+    color: #101217;
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.boxSettingsRow {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    align-self: stretch;
+    gap: 112px;
+}
+
+.boxAvatar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    color: #959EBB;
+    font-family: Involve;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+
+.boxAvatarRow {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: 0.3s;
+}
+
+.boxAvatarRow h3 {
+    color: var(--boxUserName);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 90%;
+    transition: 0.3s;
+}
+
+.boxUserImageInSettings {
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+    background-position: 50%;
+    background-size: cover;
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    user-select: none;
+}
+
+/* Hover effekti qo‘shish mumkin */
+.boxUserImageInSettings:hover {
+    opacity: 0.7;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.boxUserImageInSettings.dragOver {
+    border: 2px dashed #1890ff;
+}
+
+.boxUserImageInSettings p {
+    color: #959EBB;
+    text-align: center;
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+    transition: 0.3s;
+}
+
+.boxSettingsSecurity {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    flex: 1 0 0;
+    color: #959EBB;
+    font-family: Involve;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.boxSettingsSocial {
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 8px;
+    align-self: stretch;
+    flex-wrap: wrap;
+}
+
+.boxOneSocial {
+    display: flex;
+    padding: 10px 18px;
+    align-items: center;
+    gap: 12px;
+    border-radius: 60px;
+    background: #F1F2F6;
+    color: #101217;
+    font-family: Involve;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
