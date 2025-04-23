@@ -1,0 +1,11 @@
+
+
+services:
+  web:
+    build: .
+    container_name: tcats_frontend
+    ports:
+      - "3001:3000"
+    # Для продакшн-режима не используется volumes (иначе будут проблемы с кешированием)
+    command: ["npm", "start"]
+    restart: always

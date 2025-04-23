@@ -22,7 +22,7 @@ const processQueue = (error, token = null) => {
 const useApi = () => {
   const { logout } = useGlobal();
   const { language } = useLanguage();
-  const BASE_URL = "https://api.comiccon.uz/api/v1/";
+  const BASE_URL = "https://testapi.tcats.uz/api/v1/";
   let token = Cookies.get("access_token") || null;
 
   const axiosInstance = axios.create({
@@ -64,10 +64,10 @@ const useApi = () => {
 
             // Cookies.set("access_token", newAccessToken);
             Cookies.set("access_token", newAccessToken, {
-              domain: ".comiccon.uz",
+              domain: ".tcats.uz",
               sameSite: "Lax",
+              secure: true,
               expires: 60,
-              secure: true
             });
             axiosInstance.defaults.headers["Authorization"] = `Bearer ${newAccessToken}`;
             originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;

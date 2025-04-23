@@ -1,15 +1,16 @@
 .footer {
   display: flex;
   width: 100%;
-  max-width: 1368px;
-  margin: 0 auto;
-  height: 462px;
+  max-width: 1440px;
   padding: 110px 104px 74px 104px;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
   border-radius: 48px;
-  background: radial-gradient(49.27% 47.42% at 50% 110.17%,rgba(94, 105, 142, 0) 0%,rgba(25, 29, 43, 0.8) 100%),#191d2b}
+  background: var(--footerBg);
+  margin: 0 auto;
+  margin-bottom: 24px;
+}
 
 .boxfooter {
   display: flex;
@@ -43,8 +44,7 @@
   flex-direction: row;
   gap: 5px;
   align-items: center;
-
-  color: #fff;
+  color: var(--text);
   text-overflow: ellipsis;
   font-family: Involve;
   font-size: 14px;
@@ -72,10 +72,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8px;
   align-self: stretch;
   border-radius: 10.095px;
-  background: #272d40;
+  background:var(--cardDarkColor);
 }
 
 .boxversion {
@@ -93,17 +92,23 @@
   align-items: center;
   gap: 4px;
   border-radius: 8px;
-  border: 0.5px solid #959ebb;
-  background: #232737;
   overflow: hidden;
   color: #959ebb;
+  border: 0.5px solid #FFF;
+  background: var(--footerVersion);
+}
+
+.versionText {
+  overflow: hidden;
+  color: #959EBB;
   text-overflow: ellipsis;
-  font-family: Involve;
+  font-family: Involve, Arial, sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: 120%;
 }
+
 
 .boxfooterlinks {
   display: flex;
@@ -125,7 +130,7 @@
   height: 20px;
   align-self: stretch;
   overflow: hidden;
-  color: #FFF;
+  color: var(--text);
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: Involve;
@@ -155,7 +160,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: 120%;
-  /* 14.4px */
 }
 
 .footerlinksPart2 {
@@ -176,7 +180,7 @@
 
 .footerlinksPart3 p {
   overflow: hidden;
-  color: #FFF;
+  color: var(--text);
   text-overflow: ellipsis;
   font-family: Involve;
   font-size: 14px;
@@ -204,6 +208,7 @@
 
 .payments {
   display: flex;
+  width: 100px;
   height: 46px;
   padding: 14px;
   flex-direction: column;
@@ -211,5 +216,56 @@
   align-items: center;
   gap: 8px;
   border-radius: 10.095px;
-  background-color: #272D40;
+  background: var(--cardDarkColor);
+}
+
+@media screen and (max-width:1290px) {
+  .footer {
+    padding: 80px 24px 54px 24px;
+  }
+}
+
+@media screen and (max-width:1120px) {
+  .boxfooterlinks {
+    gap: 14px;
+  }
+
+  .footerLogo {
+    width: 86px;
+    height: 32px;
+  }
+
+  .oneboxsocial {
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+  }
+
+  .boxfooterlogo p {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+}
+
+@media screen and (max-width:980px) {
+  .boxfooterlinks {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .footerLogo {
+    width: 184px;
+    height: 70px;
+  }
+
+  .footer {
+    padding: 80px 54px 54px 54px;
+  }
+}
+
+@media screen and (max-width:690px) {
+  .footer {
+    display: none;
+  }
 }

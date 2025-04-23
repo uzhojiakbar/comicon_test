@@ -3,151 +3,186 @@
 @tailwind utilities;
 
 :root {
-  --background: #F2F3F7;
-  --foreground: #171717;
+    --background: #F2F3F7;
+    --foreground: #171717;
+    --secondColor: white;
+    --navColor: #1C274C;
+    --navBackground: rgba(255, 255, 255, 0.95);
+    --navShadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.10) inset, 0px 2px 8px 0px rgba(255, 255, 255, 0.30);
+    --navLoginButton: #F0F3FF;
+    --cardDarkColor: #FFF;
+    --footerBg: #FFF;
+    --footerversion: #F2F3F7;
+    --newsButton: #FFF;
+    --homeColor1: rgba(28, 39, 76, 0.50);
+    --buyTicketButton: #191D2B;
+    --homeButton2: #FFF;
+    --homeBoxColor: #F2F3F7;
+    --loginBackground: #FFF;
+    --loginButton: #F1F2F6;
+    --loginInput: #F1F2F6;
+    --loginHr: #959EBB;
+    --navBar: rgba(255, 255, 255, 0.90);
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
+
+.dark {
+    --navBar: rgba(23, 24, 37, 0.95);
+    --secondColor: #2A2C3A;
+    --background: #101217;
+    --foreground: #FFF;
+    --navColor: #C9D1ED;
+    --navBackground: rgba(23, 24, 37, 0.95);
+    --navShadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.10) inset, 0px 2px 8px 0px rgba(0, 0, 0, 0.30);
+    --navLoginButton: #2A2C3A;
+    --cardDarkColor: #191A23;
+    --footerBg: linear-gradient(311deg, #1E1E1E -0.59%, #000 89.21%);
+    --footerversion: #191A23;
+    --newsButton: #2A2C3A;
+    --homeColor1: #C9D1ED;
+    --buyTicketButton: #2A2C3A;
+    --homeButton2: #C9D1ED;
+    --homeBoxColor: #2A2C3A;
+    --loginBackground: #171825;
+    --loginButton: #2A2C3A;
+    --loginInput: #252633;
+    --loginHr: #4A4F6D;
+}
 
 
 @font-face {
-  font-family: 'Involve';
-  src: url('/fonts/Involve-Bold.ttf') format('truetype');
-  font-weight: 700;
+    font-family: 'Involve';
+    src: url('/fonts/Involve-Bold.ttf') format('truetype');
+    font-weight: 700;
 }
 
 @font-face {
-  font-family: 'Involve';
-  src: url('/fonts/Involve-SemiBold.ttf') format('truetype');
-  font-weight: 600;
+    font-family: 'Involve';
+    src: url('/fonts/Involve-SemiBold.ttf') format('truetype');
+    font-weight: 600;
 }
 
 @font-face {
-  font-family: 'Involve';
-  src: url('/fonts/Involve-Medium.ttf') format('truetype');
-  font-weight: 500;
+    font-family: 'Involve';
+    src: url('/fonts/Involve-Medium.ttf') format('truetype');
+    font-weight: 500;
 }
 
 @font-face {
-  font-family: 'Involve';
-  src: url('/fonts/Involve-Regular.ttf') format('truetype');
-  font-weight: 400;
+    font-family: 'Involve';
+    src: url('/fonts/Involve-Regular.ttf') format('truetype');
+    font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Organetto';
-  src: url('/fonts/organetto-bold.ttf') format('truetype');
-  font-weight: 700;
+    font-family: 'Organetto';
+    src: url('/fonts/organetto-bold.ttf') format('truetype');
+    font-weight: 700;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Involve;
-  font-weight: 500;
+    color: var(--foreground);
+    background: var(--background);
+    font-family: Involve;
+    font-weight: 500;
 }
 
 
 /* custom-toast.css */
 .my-toast-container {
-  z-index: 99999;
+    z-index: 99999;
 }
 
 .my-toast {
-  background: #121212 !important;
-  color: #fff !important;
-  border-radius: 12px !important;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
-  padding: 16px !important;
-  min-height: 64px !important;
-  display: flex;
-  align-items: center;
+    background: #121212 !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    padding: 16px !important;
+    min-height: 64px !important;
+    display: flex;
+    align-items: center;
 }
 
 .my-toast-body {
-  font-family: "Involve", sans-serif;
-  font-size: 14px;
+    font-family: "Involve", sans-serif;
+    font-size: 14px;
 }
 
 .my-toast-progress {
-  background: linear-gradient(90deg, #00ff7f, #00c6ff) !important;
-  height: 4px !important;
-  border-radius: 4px;
+    background: linear-gradient(90deg, #00ff7f, #00c6ff) !important;
+    height: 4px !important;
+    border-radius: 4px;
 }
 
 
 .toast-container {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 1000;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000;
 }
 
 .toast {
-  padding: 14px 12px;
-  margin: 5px;
-  border-radius: 8px;
-  /* animation: fadeInOut 2s ease-in-out; */
-  color: #FFF;
-  font-family: Involve;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 110%;
-  width: 315px;
+    padding: 14px 12px;
+    margin: 5px;
+    border-radius: 8px;
+    /* animation: fadeInOut 2s ease-in-out; */
+    color: #FFF;
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    width: 315px;
 }
 
 /* Разные стили для типов уведомлений */
 .toast.success {
-  border-radius: 24px;
-  border: 1px solid #2A2C3A;
-  background: linear-gradient(135deg, #1C3D2C, #0E261B);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    border-radius: 24px;
+    border: 1px solid #2A2C3A;
+    background: linear-gradient(135deg, #1C3D2C, #0E261B);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .toast.error {
-  border-radius: 24px;
-  border: 1px solid #2A2C3A;
-  background: linear-gradient(135deg, #502525, #3D1C1C);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    border-radius: 24px;
+    border: 1px solid #2A2C3A;
+    background: linear-gradient(135deg, #502525, #3D1C1C);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .toast.warning {
-  border-radius: 24px;
-  border: 1px solid #2A2C3A;
-  background: linear-gradient(135deg, #503D2F, #2E2B23);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    border-radius: 24px;
+    border: 1px solid #2A2C3A;
+    background: linear-gradient(135deg, #503D2F, #2E2B23);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .toastIconText {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
 }
 
 .button {
-  display: inline-flex;
-  padding: 6px 12px;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  border-radius: 50px;
-  background: #2A2C3A;
-  width: fit-content;
+    display: inline-flex;
+    padding: 6px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border-radius: 50px;
+    background: #2A2C3A;
+    width: fit-content;
 }

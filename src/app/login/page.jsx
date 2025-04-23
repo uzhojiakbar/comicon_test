@@ -3,7 +3,7 @@ import styles from "./login.module.css";
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-// import { useTheme } from "next-themes";
+import { useTheme } from "next-themes";
 import useApi from "@/utils/api";
 import { useGlobal } from "@/utils/global";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -28,6 +28,7 @@ export default function LoginPage() {
   const [firstNameError, setFirstNameError] = useState();
   const [LastNameError, setLastNameError] = useState();
   const lastNameRef = useRef(null);
+  const { theme } = useTheme();
   // const { addToast } = useToast();
 
   const [secondsLeft, setSecondsLeft] = useState(0);
@@ -135,7 +136,7 @@ export default function LoginPage() {
 
       // Сохраняем access_token в куки
       Cookies.set("access_token", response?.data?.access_token || null, {
-        domain: ".comiccon.uz",
+        domain: ".tcats.uz",
         sameSite: "Lax",
         expires: 60,
         secure: true
@@ -184,19 +185,19 @@ export default function LoginPage() {
           cookie: true,
         });
 
-        Cookies.set("access_token", response?.data?.access_token || null, {
-          domain: ".comiccon.uz",
-          sameSite: "Lax",
-          expires: 60,
-          secure: true
-        });
-        // if (tokenResponse?.refresh_token) {
-        //   Cookies.set("refresh_token", tokenResponse?.refresh_token || null);
-        // }
+        // Cookies.set("access_token", response?.data?.access_token || null, {
+        //   domain: ".tcats.uz",
+        //   sameSite: "Lax",
+        //   expires: 60,
+        //   secure: true
+        // });
 
-        if (response?.data?.refresh_token) {
-          Cookies.set("refresh_token", response?.data?.refresh_token || null);
-        }
+        Cookies.set("access_token", response?.data?.access_token || null);
+
+
+        // if (response?.data?.refresh_token) {
+        //   Cookies.set("refresh_token", response?.data?.refresh_token || null);
+        // }
         console.log(tokenResponse);
         console.log("respone: ", response);
 
@@ -274,13 +275,16 @@ export default function LoginPage() {
   
       if (response?.data?.status === "success") {
         Cookies.set("access_token", response?.data?.access_token || null, {
-          domain: ".comiccon.uz",
+          domain: ".tcats.uz",
           sameSite: "Lax",
           expires: 60,
           secure: true
         });
-
-
+  
+        // if (response?.data?.refresh_token) {
+        //   Cookies.set("refresh_token", response?.data?.refresh_token || null);
+        // }
+  
         Cookies.remove("access_telegram_token");
         console.log("LOGIN SUCCESSFUL", response);
   
@@ -433,7 +437,7 @@ export default function LoginPage() {
           <div className={styles.boxPart1}>
             <a id="btn_text" href="/" className={styles.btn_back}>
               <Image
-                src="/loginArrowLeft.svg"
+                src={theme === "dark" ? "loginArrowLeftDark.svg" : "/loginArrowLeft.svg"}
                 width={20}
                 height={20}
                 alt="Back arrow"
@@ -444,8 +448,8 @@ export default function LoginPage() {
             <Link href="/">
               <Image
                 src={
-                  // theme === "dark" ? "/Tcatslogo.svg" : 
-                  "/TcatslogoLight.svg"}
+                  theme === "dark" ? "/TcatslogoDark.svg" : 
+                  "/Tcatslogo.svg"}
                 alt="logo"
                 width={100}
                 height={38}
@@ -528,7 +532,7 @@ export default function LoginPage() {
               className={styles.btn_back}
             >
               <Image
-                src="/loginArrowLeft.svg"
+                src={theme === "dark" ? "loginArrowLeftDark.svg" : "/loginArrowLeft.svg"}
                 width={24}
                 height={24}
                 alt="Back arrow"
@@ -539,12 +543,12 @@ export default function LoginPage() {
             <Link href="/">
               <Image
                 src={
-                  // theme === "dark" ? "/Tcatslogo.svg" :
-                  "/TcatslogoLight.svg"
+                  theme === "dark" ? "/TcatslogoDark.svg" :
+                  "/Tcatslogo.svg"
                 }
                 alt="logo"
-                width={150}
-                height={57}
+                width={100}
+                height={38}
                 loading="lazy"
               />
             </Link>
@@ -601,7 +605,7 @@ export default function LoginPage() {
               className={styles.btn_back}
             >
               <Image
-                src="/loginArrowLeft.svg"
+                src={theme === "dark" ? "loginArrowLeftDark.svg" : "/loginArrowLeft.svg"}
                 width={24}
                 height={24}
                 alt="Back arrow"
@@ -612,11 +616,11 @@ export default function LoginPage() {
             <Link href="/">
               <Image
                 src={
-                  // theme === "dark" ? "/Tcatslogo.svg" :
-                   "/TcatslogoLight.svg"}
+                  theme === "dark" ? "/TcatslogoDark.svg" :
+                   "/Tcatslogo.svg"}
                 alt="logo"
-                width={150}
-                height={57}
+                width={100}
+                height={38}
                 loading="lazy"
               />
             </Link>

@@ -20,7 +20,7 @@ export const useGlobal = create((set, get) => ({
 
     logout: async () => {
         Cookies.remove("access_token", {
-                domain: ".comiccon.uz",
+                domain: ".tcats.uz",
                 sameSite: "Lax",
                 secure: true
               });

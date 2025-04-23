@@ -1,10 +1,7 @@
-"use client";
-import { Geist, Geist_Mono } from "next/font/google";
-import { LanguageProvider } from "@/context/languageContext";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// app/layout.jsx
 import "./globals.css";
-import { UserProvider } from "@/utils/userProvider";
-import { ToastProvider } from "@/components/toastProvider";
+import { Geist, Geist_Mono } from "next/font/google";
+import ClientProviders from "@/app/ClientProviders"; // путь к твоему ClientProviders
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,28 +13,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// export const metadata = {
-//   title: "TCats",
-//   description: "TCats",
-// };
-
-const queryClient = new QueryClient();
+export const metadata = {
+  title: "TCats",
+  description: "TCats",
+};
 
 export default function RootLayout({ children }) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <html lang="ru">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <LanguageProvider>
-            <ToastProvider>
-              <UserProvider>{children}</UserProvider>
-            </ToastProvider>
-          </LanguageProvider>
-        </body>
-      </html>
-    </QueryClientProvider>
+    <html lang="ru" suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ClientProviders>{children}</ClientProviders>
+      </body>
+    </html>
   );
 }
-

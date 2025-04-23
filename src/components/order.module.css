@@ -1,36 +1,35 @@
-.mainContainer {
-    display: flex;
-    padding: 24px 36px 36px 36px;
-    justify-content: space-between;
-    width: 100%;
-    height: 100vh;
-    gap: 12px;
-    z-index: 1000;
-    max-width: 1440px;
-    background: rgba(0, 0, 0, 0.80);
-    backdrop-filter: blur(50px);
-    animation: showModal 0.3s ease-out;
-    flex-direction: column;
+.modalOverlay {
     position: fixed;
     top: 0;
     left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+    pointer-events: auto;
+    padding: 36px;
 }
 
-.mainBoxOrder {
+.mainContainer {
     width: 100%;
-    height: 100%;
-    padding: 22px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 95vh;
     flex-shrink: 0;
     border-radius: 46px;
     background: #F2F3F7;
-    display: flex;
-    gap: 30px;
+    padding: 22px;
 }
 
-.boxMovieInfo {
+.modalLeftBox {
     display: flex;
-    width: 44%;
-    height: 100%;
+    width: 46%;
     padding: 24px;
     flex-direction: column;
     justify-content: space-between;
@@ -38,81 +37,78 @@
     flex-shrink: 0;
     border-radius: 34px;
     background: #FFF;
+    height: 100%;
+    gap: 45px;
 }
 
-.boxMovieInfoTop {
+
+.boxModalLeftTop {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 56px;
+    gap: 46px;
     width: 100%;
 }
 
-.boxMovieInformation {
+.eventInfo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 26px;
+    gap: 18px;
     width: 100%;
 }
 
-.boxMovieName {
+.eventName {
     display: flex;
     align-items: center;
+    align-self: stretch;
     justify-content: space-between;
-    width: 100%;
+    width: 100% !important;
+    gap: 11px;
 }
 
-.boxMovieName h1 {
+.eventName h1 {
     color: #1C274C;
     font-family: Involve;
     font-size: 28px;
     font-style: normal;
     font-weight: 700;
-    line-height: 120%
+    line-height: 100%;
 }
 
-.boxMovieName h6 {
-    border-radius: 999px;
-    border: 1px solid var(--Error-Error200, #FF7784);
+.eventName h6 {
     display: flex;
     width: 44px;
     height: 30px;
+    padding: 8px 10px;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    border-radius: 999px;
+    border: 1px solid var(--Error-Error200, #FF7784);
     color: var(--Error-Error200, #FF7784);
+}
+
+.eventName h6 span {
     font-family: Involve;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    line-height: 120%;
+    line-height: 110%;
+    margin-top: 3px;
 }
 
-.boxMovieName h5 {
-    border-radius: 999px;
-    border: 1px solid #1C274C;
-    display: flex;
-    width: 44px;
-    height: 30px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    color: #1C274C;
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
+.closeIconMobile {
+    display: none !important;
 }
 
-.boxMovieWhen {
+.eventPlace {
     display: flex;
     align-items: flex-start;
     gap: 90px;
 }
 
-.boxMovieWhenPlace {
+.boxEventPlace {
     display: flex;
     width: 195px;
     flex-direction: column;
@@ -120,7 +116,7 @@
     gap: 8px;
 }
 
-.boxMovieWhen p {
+.eventPlace p {
     color: #1C274C;
     font-family: Involve;
     font-size: 18px;
@@ -129,7 +125,7 @@
     line-height: 120%;
 }
 
-.boxMovieWhenPlace h6 {
+.eventPlace h6 {
     color: rgba(28, 39, 76, 0.50);
     font-family: Involve;
     font-size: 18px;
@@ -138,16 +134,37 @@
     line-height: 120%;
 }
 
-
-.boxMovieTicketInformation {
+.eventTicket {
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    max-height: 75%;
+    overflow-y: auto;
     gap: 18px;
-    align-self: stretch;
+    padding: 0 5px;
 }
 
-.boxMovieTicketInformation h3 {
+
+/* Scroll-bar stili */
+.eventTicket::-webkit-scrollbar {
+    width: 6px;
+}
+
+.eventTicket::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.eventTicket::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Scroll rangini o'zgartiring */
+    border-radius: 6px;
+}
+
+.eventTicket:hover::-webkit-scrollbar-thumb {
+    background-color: #999; /* Hover qilganda biroz to'qroq */
+}
+
+.eventTicket h2 {
     color: #1C274C;
     font-family: Involve;
     font-size: 18px;
@@ -156,29 +173,28 @@
     line-height: 120%;
 }
 
-.boxMovieTicketInformation hr {
+.eventTicket hr {
     stroke-width: 1px;
     stroke: rgba(28, 39, 76, 0.20);
     height: 0px;
     align-self: stretch;
 }
 
-.boxTicketRows {
+.oneTypeTicket {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
+    gap: 8px;
     align-self: stretch;
 }
 
-.oneRow {
+.oneTypeTicketHead {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    gap: 8px;
 }
 
-.oneRow p {
+.oneTypeTicketHead h6 {
     color: #1C274C;
     font-family: Involve;
     font-size: 18px;
@@ -187,53 +203,407 @@
     line-height: 120%;
 }
 
-.ticketInfo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.oneTypeTicketHead p {
+    color: rgba(28, 39, 76, 0.50);
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
 }
 
-.totalRow {
+.boxOneTypeTicektBody {
+    display: flex;
+    padding: 14px 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+    border-radius: 20px;
+    background: #F2F3F7;
+}
+
+.boxTypeHead {
     display: flex;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
 }
 
-.totalRow p {
+
+.boxRowGap12 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.boxRowGap12 p {
+    color: #191D2B !important;
+    font-family: Involve;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+    margin-top: 1px;
+}
+
+.boxRowGap12 h6 {
+    display: flex;
+    padding: 6px 8px 4px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 999px;
+    border: 1px solid var(--Error-Error200, #FF7784);
+}
+
+.boxRowGap12 h6 span {
+    color: var(--Error-Error200, #FF7784);
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 110%;
+}
+
+.boxTypeHead p {
+    color: var(--Error-Error, #FF3347);
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+}
+
+.boxTypeBody {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.boxTypeBody h3 {
+    color: #191D2B;
+    font-family: Involve;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.boxTicketQuantity {
+    display: flex;
+    padding: 8px 4px;
+    align-items: center;
+    gap: 12px;
+    border-radius: 25px;
+    background: #FFF;
+}
+
+.boxTicketQuantity p {
+    color: #191D2B !important;
+}
+
+.boxTotalPrice {
+    display: flex;
+    padding: 24px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 20px;
+    background: #F2F3F7;
+}
+
+.boxTotalPrice p {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.overPrice {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.price {
     color: #1C274C;
     font-family: Involve;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.boxCinemaAdvertising {
+.discount {
     display: flex;
-    height: 230px;
+    gap: 6px;
+    align-items: center;
+    justify-content: flex-start;
+    color: #191D2B;
+}
+
+.modalRightBox {
+    width: 52%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.boxModalRightTop {
+    width: 100%;
+}
+
+.boxRowH1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.boxRowH1 h1 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+}
+
+.boxRightModal {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
-    flex-shrink: 0;
+    gap: 26px;
+    align-self: stretch;
 }
 
-.boxAdvertising {
+.boxTimer {
     display: flex;
-    width: 536px;
+    padding: 14px 10px;
     justify-content: center;
     align-items: center;
-    flex: 1 0 0;
-    border-radius: 24px;
-    border: 1px dashed #BEBEBE;
-    background: #F2F3F7;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 8px;
+    background: #FFF;
 }
 
-.boxAdvertising p {
+.boxTimer p {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+}
+
+.boxPaymentsType {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 12px;
+    align-self: stretch;
+}
+
+.boxPaymentsType input {
+    display: flex;
+    min-width: 130px;
+    padding: 24px 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 29px;
+    align-self: stretch;
+    border-radius: 20px;
+    background: #FFF;
+    outline: none;
+}
+
+.boxPaymentsType input::placeholder {
+    color: rgba(28, 39, 76, 0.40);
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+}
+
+
+.boxPayments {
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.onePaymentType {
+    display: flex;
+    height: 100px;
+    width: 48%;
+    min-width: 130px;
+    padding: 15px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 20px;
+    background: #FFF;
+    border: 1px solid #fff;
+}
+
+.onePaymentTypeActive {
+    display: flex;
+    height: 100px;
+    width: 48%;
+    min-width: 130px;
+    padding: 15px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 20px;
+    background: #FFF;
+    border: 1px solid rgba(28, 39, 76, 0.20);
+}
+
+.onePaymentType p,
+.onePaymentTypeActive p {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    text-align: start;
+}
+
+.paymentName {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    background: #FFF;
+    gap: 5px;
+}
+
+.boxPrivatyPolicy {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.boxPrivatyPolicy p {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+}
+
+.boxPrivatyPolicy p a {
     color: rgba(28, 39, 76, 0.50);
     font-family: Involve;
     font-size: 14px;
     font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
+    font-weight: 500;
+    line-height: 110%;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+}
+
+.boxkvadrat {
+    display: flex;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(28, 39, 76, 0.20);
+}
+
+.boxkvadratActive {
+    display: flex;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: #FFF;
+}
+
+.boxButtonNext {
+    display: inline-flex;
+    width: fit-content;
+    height: 60px;
+    padding: 0px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: #191D2B;
+}
+
+
+.boxButtonNext {
+    color: #FFF;
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%;
+}
+
+@media (max-width: 1024px) {
+    .modalLeftBox {
+        width: 100%;
+    }
+
+    .modalRightBox {
+        display: none;
+    }
+
+    .closeIconMobile {
+        display: flex !important;
+    }
+
+}
+
+@media (max-width: 550px) {
+    .mainContainer {
+        padding: 0;
+    }
+
+    .modalOverlay {
+        padding: 10px;
+    }
+}
+
+
+@media (max-width: 400px) {
+    .eventPlace {
+        flex-direction: column;
+        gap: 20px;
+    }
 }

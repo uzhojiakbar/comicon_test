@@ -4,12 +4,12 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'api.comiccon.uz',
+                hostname: 'testapi.tcats.uz',
                 port: '',
                 pathname: '/**', // Allow all paths under this hostname
             },
         ],
-        unoptimized: true, 
+        unoptimized: true,
 
     }
 };

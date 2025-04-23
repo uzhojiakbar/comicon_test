@@ -1,0 +1,501 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1440px;
+    min-height: 100vh;
+    justify-content: space-between;
+    padding: 24px 36px;
+    gap: 12px;
+    margin: 0 auto;
+}
+
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+}
+
+.boxRowEventInfo {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.boxEventInfoLeft {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 52px;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 48px;
+    background: #FFF;
+    gap: 22px;
+
+}
+
+.boxEventTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    align-self: stretch;
+    text-align: center;
+    font-family: Involve;
+    font-style: normal;
+    line-height: 120%;
+}
+
+.boxEventTitle h3 {
+    color: rgba(28, 39, 76, 0.50);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.boxEventTitle h2 {
+    color: #1C274C;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.boxEventTitle p {
+    color: rgba(28, 39, 76, 0.80);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.boxEventTitle h4 {
+    color: rgba(28, 39, 76, 0.80);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.boxEventPlace {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    align-self: stretch;
+}
+
+.boxEventBuyTicket {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.buyTicket {
+    width: 100%;
+    display: flex;
+    height: 60px;
+    padding: 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+    border-radius: 999px;
+    background: #191D2B;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.boxTimeLeft {
+    display: flex;
+    padding: 4px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border-radius: 999px;
+    background: var(--Error-Error100, #FFBBC2);
+}
+
+.boxTimeLeft p {
+    color: var(--Error-Error, #FF3347);
+    text-align: center;
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%;
+    margin-top: 2px;
+}
+
+.boxEventInfoRight {
+    height: 100%;
+    border-radius: 48px;
+}
+
+.boxAboutEvent {
+    display: flex;
+    width: 100%;
+    padding: 28px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 19px;
+    border-radius: 48px;
+    background: #FFF;
+}
+
+.boxAboutEventTop {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    flex-shrink: 0;
+}
+
+.boxAboutEventTop h1 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%;
+}
+
+.boxAboutEventTop p {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+}
+
+.boxAboutEventTop p b {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    text-transform: uppercase;
+}
+
+.boxRowAboutEventTop {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.boxOneInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.boxOneInfo h5 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%;
+}
+
+.boxOneInfo h6 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.boxAboutEventBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.oneAboutImage {
+    border-radius: 32px;
+    display: flex;
+    width: 324px;
+    height: 220px;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Затемнение последней картинки */
+.lastImage::before {
+    content: "";
+    position: absolute;
+    border-radius: 32px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Текст "+4" */
+.overlayText {
+    color: #E0E7FF;
+    font-family: Involve;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 110%;
+    position: relative;
+    /* чтобы быть над ::before */
+    z-index: 1;
+}
+
+
+.boxOurGuests {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.boxOurGuests h1 {
+    color: #1C274C;
+    text-align: center;
+    font-family: Involve;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+}
+
+.boxDateAndTime {
+    display: flex;
+    width: 100%;
+    padding: 24px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    border-radius: 48px;
+    background: #FFF;
+}
+
+.boxDateAndTime h1 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+}
+
+.boxOneDayTicket {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-self: stretch;
+    gap: 124px;
+}
+
+.boxTicketDay {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.boxcolMonth {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.boxTicketDay h1 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+}
+
+.boxTicketDay h2 {
+    color: var(--Error-Error, #FF3347);
+    font-family: Involve;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+}
+
+.boxTicketDay h3 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+}
+
+
+.boxOneTicketInformation {
+    display: flex;
+    padding: 18px 18px 18px 28px;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1 0 0;
+    border-radius: 24px;
+    background: #F2F3F7;
+    height: 100%;
+}
+
+.boxBeforeIncreasePrice {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.boxBeforeIncreasePrice h5 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.boxBeforeIncreasePrice p {
+    color: var(--Error-Error, #FF3347);
+    text-align: center;
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%;
+}
+
+.boxButtonsVip {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.oneButtonVipActive {
+    border-radius: 25px;
+    border: 0.8px solid #1C274C;
+    background: #FFF;
+    display: flex;
+    padding: 8px 24px 5px 24px;
+    align-items: center;
+    gap: 12px;
+}
+
+.oneButtonVip {
+    display: flex;
+    padding: 8px 24px 5px 24px;
+    align-items: center;
+    gap: 12px;
+    border-radius: 25px;
+    background: #FFF;
+    border: 0.8px solid #FFF;
+}
+
+.boxPriceAndBuyTicket {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.boxPriceAndBuyTicket h1 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+
+.boxOneCinema {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.boxCinemaName {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.boxCinemaLogo {
+    display: flex;
+    width: 120px;
+    height: 120px;
+    padding: 46px 11px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 42px;
+    background: #F2F3F7;
+}
+
+.boxCinemaNameAndLocation {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.boxCinemaNameAndLocation h1 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+}
+
+.boxCinemaLocationText {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.boxCinemaLocation {
+    display: flex;
+    width: 443px;
+    /* padding: 19px 28px; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    border-radius: 24px 24px 42px 24px;
+    box-shadow: 0px 0px 14px 0px #B1B6CC inset;
+}
+
+
+.boxOurGuestsRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    align-self: stretch;
+}
+
+.boxButtonLeftOrRight {
+    display: flex;
+    padding: 14px;
+    align-items: center;
+    gap: 14px;
+    border-radius: 999px;
+    background: #FFF;
+}
