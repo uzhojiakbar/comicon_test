@@ -182,6 +182,7 @@
     line-height: 120%;
     background-color: var(--navLoginButton);
     color: var(--color);
+    transition: 0.3s;
 }
 
 .boxLeftBlockOneBtnNotActive {
@@ -197,6 +198,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 120%;
+    transition: 0.3s;
 }
 
 .boxRightBlock {

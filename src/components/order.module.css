@@ -15,7 +15,8 @@
     padding: 36px;
 }
 
-.mainContainer {
+.mainContainer,
+.mainContainer1 {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -25,6 +26,22 @@
     border-radius: 46px;
     background: #F2F3F7;
     padding: 22px;
+}
+
+.mainContainer1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainContainer1 h3 {
+    color: #191D2B;
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
 }
 
 .modalLeftBox {
@@ -156,12 +173,14 @@
 }
 
 .eventTicket::-webkit-scrollbar-thumb {
-    background-color: #ccc; /* Scroll rangini o'zgartiring */
+    background-color: #ccc;
+    /* Scroll rangini o'zgartiring */
     border-radius: 6px;
 }
 
 .eventTicket:hover::-webkit-scrollbar-thumb {
-    background-color: #999; /* Hover qilganda biroz to'qroq */
+    background-color: #999;
+    /* Hover qilganda biroz to'qroq */
 }
 
 .eventTicket h2 {
@@ -588,6 +607,192 @@
         display: flex !important;
     }
 
+}
+
+.firstPayment {
+    display: flex;
+    max-width: 478px;
+    width: 100%;
+    height: fit-content;
+    padding: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 19px;
+    border-radius: 34px;
+    background: #FFF;
+}
+
+.firstPayment h1 {
+    color: #1C274C;
+    font-family: Involve;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+}
+
+.boxColGap4 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.boxRowGap8 {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.boxRowGap8 input {
+    height: 60px;
+    width: 65px;
+    padding: 24px 15px;
+    border-radius: 20px;
+    background: #F2F3F7;
+    text-align: center;
+    font-size: 20px;
+    outline: none;
+    color: #000;
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.boxRowGap8 input::placeholder {
+    text-align: center;
+    color: rgba(25, 29, 43, 0.50);
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.boxInput,
+.boxInput1 {
+    display: flex;
+    height: 60px;
+    padding: 10px 15px;
+    align-items: center;
+    gap: 12px;
+    border-radius: 20px;
+    background: #F2F3F7;
+}
+
+.boxInput {
+    min-width: 130px;
+    width: 70%;
+}
+
+.boxInput1 {
+    display: flex;
+    height: 60px;
+    padding: 10px 15px;
+    align-items: center;
+    gap: 12px;
+    border-radius: 20px;
+    width: 30%;
+    background: #F2F3F7;
+
+}
+
+.boxInput input,
+.boxInput1 input {
+    display: flex;
+    flex-direction: row;
+    background: #F2F3F7;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    padding: 0px 10px;
+    color: rgba(25, 29, 43, 0.50);
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+
+.boxRowGap4 {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.boxPayment {
+    display: flex;
+    width: 100px;
+    height: 46px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    background: #F2F3F7;
+}
+
+.boxRowSpaceBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.boxRowSpaceBetween h1 {
+    color: #191D2B;
+    font-family: Involve;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+}
+
+.buttonPey {
+    display: flex;
+    height: 60px;
+    padding: 0px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 999px;
+    background: #191D2B;
+    color: #FFF;
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%;
+}
+
+
+.buttonNext {
+    display: flex;
+    height: 60px;
+    width: 100%;
+    padding: 0px 64px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 999px;
+    background: #191D2B;
+    color: #FFF;
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%;
+}
+
+.boxColGap16 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
 }
 
 @media (max-width: 550px) {

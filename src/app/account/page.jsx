@@ -413,7 +413,10 @@ export default function account() {
         {/* -------------------------- Информация о пользователе -------------------------- */}
         {account === "tickets" ||
         account === "ticketHistory" ||
-        account === "qrcode" ? (
+        account === "qrcode" ||
+        account === "favourites" ||
+        account === "missed" ||
+        account === "archived" ? (
           <>
             <div className={styles.boxUserInfo}>
               <div className={styles.boxUserAvatar}>
@@ -427,7 +430,11 @@ export default function account() {
                 <button
                   onClick={() => setAccount("tickets")}
                   className={
-                    account === "tickets" || account === "qrcode"
+                    account === "tickets" ||
+                    account === "qrcode" ||
+                    account === "favourites" ||
+                    account === "missed" ||
+                    account === "archived"
                       ? styles.oneButton
                       : styles.oneButtonNotActive
                   }
@@ -439,9 +446,7 @@ export default function account() {
                   className={
                     account === "ticketHistory"
                       ? styles.oneButton
-                      : styles.oneButtonNotActive
-                  }
-                >
+                      : styles.oneButtonNotActive}>
                   История покупок
                 </button>
               </div>
@@ -476,9 +481,7 @@ export default function account() {
                 className={
                   account === "tickets" || account === "qrcode"
                     ? styles.oneButton
-                    : styles.oneButtonNotActive
-                }
-              >
+                    : styles.oneButtonNotActive}>
                 Билеты
               </button>
               <button
@@ -486,9 +489,7 @@ export default function account() {
                 className={
                   account === "ticketHistory"
                     ? styles.oneButtonDispay
-                    : styles.oneButtonNotActiveDisplay
-                }
-              >
+                    : styles.oneButtonNotActiveDisplay}>
                 История покупок
               </button>
             </div>
@@ -498,7 +499,10 @@ export default function account() {
         )}
         {account === "tickets" ||
         account === "ticketHistory" ||
-        account === "qrcode" ? (
+        account === "qrcode" ||
+        account === "favourites" ||
+        account === "missed" ||
+        account === "archived" ? (
           <div className={styles.boxTicketsTab}>
             <div className={styles.boxLeftBlock}>
               <div className={styles.boxLeftBlockH1}>
@@ -506,19 +510,26 @@ export default function account() {
                 Мои покупки
               </div>
               <div className={styles.boxLeftBlockButtons}>
-                <button className={styles.boxLeftBlockOneBtn}>
+                <button
+                  onClick={() => setAccount("tickets")}
+                  className={account === "tickets" || account === "ticketHistory" ? styles.boxLeftBlockOneBtn : styles.boxLeftBlockOneBtnNotActive}>
                   Активные билеты
                   <p>52</p>
                 </button>
-                <button className={styles.boxLeftBlockOneBtnNotActive}>
+                <button
+                  onClick={() => setAccount("favourites")}
+                  className={account === "favourites" ? styles.boxLeftBlockOneBtn : styles.boxLeftBlockOneBtnNotActive}>
                   Избранные билеты
                   <p>52</p>
                 </button>
-                <button className={styles.boxLeftBlockOneBtnNotActive}>
+                <button
+                  onClick={() => setAccount("missed")}
+                  className={account === "missed" ? styles.boxLeftBlockOneBtn : styles.boxLeftBlockOneBtnNotActive}>
                   Пропущенные билеты
                   <p>52</p>
                 </button>
-                <button className={styles.boxLeftBlockOneBtnNotActive}>
+                <button onClick={() => setAccount("archived")}
+                  className={account === "archived" ? styles.boxLeftBlockOneBtn : styles.boxLeftBlockOneBtnNotActive}>
                   Архивные билеты
                   <p>52</p>
                 </button>
@@ -677,6 +688,108 @@ export default function account() {
                       <p>Назад</p>
                     </button>
                   </div>
+                </>
+              )}
+              {account === "favourites" && (
+                <>
+                  <div className={styles.boxOneTicket}>
+                    <div className={styles.boxMpName}>
+                      <Image
+                        src="/GeekCon.png"
+                        alt="MpLogo"
+                        width={275}
+                        height={36}
+                      />
+                      Мероприятие
+                    </div>
+                    <div className={styles.boxTicketAndMpInfo}>
+                      <div className={styles.boxOneInfo}>99.000</div>
+                      <div className={styles.boxOneInfo}>Билет №1</div>
+                      <div className={styles.boxOneInfo}>Общий зал</div>
+                      <div className={styles.boxOneInfo}>22 Декабря</div>
+                      <div className={styles.boxOneInfo}>12:00</div>
+                      <div className={styles.boxOneInfo}>
+                        Ледовый дворец Алпомиш
+                      </div>
+                    </div>
+                    <button className={styles.boxButtonQr}>
+                      <Image
+                        src="/qrcode.svg"
+                        alt="qrcode"
+                        width={25}
+                        height={25}
+                      />
+                    </button>
+                  </div>
+                  <hr />
+                </>
+              )}
+              {account === "missed" && (
+                <>
+                  <div className={styles.boxOneTicket}>
+                    <div className={styles.boxMpName}>
+                      <Image
+                        src="/GeekCon.png"
+                        alt="MpLogo"
+                        width={275}
+                        height={36}
+                      />
+                      Мероприятие
+                    </div>
+                    <div className={styles.boxTicketAndMpInfo}>
+                      <div className={styles.boxOneInfo}>99.000</div>
+                      <div className={styles.boxOneInfo}>Билет №1</div>
+                      <div className={styles.boxOneInfo}>Общий зал</div>
+                      <div className={styles.boxOneInfo}>22 Декабря</div>
+                      <div className={styles.boxOneInfo}>12:00</div>
+                      <div className={styles.boxOneInfo}>
+                        Ледовый дворец Алпомиш
+                      </div>
+                    </div>
+                    <button className={styles.boxButtonQr}>
+                      <Image
+                        src="/qrcode.svg"
+                        alt="qrcode"
+                        width={25}
+                        height={25}
+                      />
+                    </button>
+                  </div>
+                  <hr />
+                </>
+              )}
+            {account === "archived" && (
+                <>
+                  <div className={styles.boxOneTicket}>
+                    <div className={styles.boxMpName}>
+                      <Image
+                        src="/GeekCon.png"
+                        alt="MpLogo"
+                        width={275}
+                        height={36}
+                      />
+                      Мероприятие
+                    </div>
+                    <div className={styles.boxTicketAndMpInfo}>
+                      <div className={styles.boxOneInfo}>99.000</div>
+                      <div className={styles.boxOneInfo}>Билет №1</div>
+                      <div className={styles.boxOneInfo}>Общий зал</div>
+                      <div className={styles.boxOneInfo}>22 Декабря</div>
+                      <div className={styles.boxOneInfo}>12:00</div>
+                      <div className={styles.boxOneInfo}>
+                        Ледовый дворец Алпомиш
+                      </div>
+                    </div>
+                    <button className={styles.boxButtonQr}>
+                      <Image
+                        src="/qrcode.svg"
+                        alt="qrcode"
+                        width={25}
+                        height={25}
+                      />
+                    </button>
+                  </div>
+                  <hr />
                 </>
               )}
             </div>
