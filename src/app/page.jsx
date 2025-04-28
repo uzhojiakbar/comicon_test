@@ -293,10 +293,7 @@ export default function EventPage() {
                                 </div>
                                 <div className={styles.boxPriceAndBuyTicket}>
                                     <h1>От 150 000 сум до 1 350 000 сум</h1>
-                                    <button
-                                        onClick={() => setIsModalOpen(true)}
-                                        className={styles.buyTicket2}
-                                    >
+                                    <button onClick={() => setIsModalOpen(true)}className={styles.buyTicket2}>
                                         <p>Купить билет</p>
                                     </button>
                                 </div>

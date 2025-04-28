@@ -135,12 +135,14 @@ export default function LoginPage() {
       console.log("API Response:", response?.data);
 
       // Сохраняем access_token в куки
-      Cookies.set("access_token", response?.data?.access_token || null, {
-        domain: ".tcats.uz",
-        sameSite: "Lax",
-        expires: 60,
-        secure: true
-      });
+      // Cookies.set("access_token", response?.data?.access_token || null, {
+      //   domain: ".tcats.uz",
+      //   sameSite: "Lax",
+      //   expires: 60,
+      //   secure: true
+      // });
+
+      Cookies.set("access_token", response?.data?.access_token || null);
 
       // Обновляем страницу, чтобы сработал редирект в /account/
       await document.location.reload();

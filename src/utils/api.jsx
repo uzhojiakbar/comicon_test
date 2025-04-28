@@ -22,7 +22,7 @@ const processQueue = (error, token = null) => {
 const useApi = () => {
   const { logout } = useGlobal();
   const { language } = useLanguage();
-  const BASE_URL = "https://testapi.tcats.uz/api/v1/";
+  const BASE_URL = "https://api.comiccon.uz/api/v1/";
   let token = Cookies.get("access_token") || null;
 
   const axiosInstance = axios.create({

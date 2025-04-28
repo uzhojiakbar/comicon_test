@@ -209,8 +209,6 @@
     border-radius: 30px;
     background: #ffffff;
     transition: 0.3s;
-    overflow: auto;
-    max-height: 540px;
 }
 
 .boxRightBlock hr {
@@ -219,6 +217,12 @@
 }
 
 /* -------------------------- Вкладка билеты -------------------------- */
+
+.boxTIcketsMap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 
 .boxOneTicket {
     display: flex;
@@ -261,8 +265,8 @@
     align-items: center;
     gap: 20px;
     border-radius: 999px;
-    background: var(--background);
-    color: var(--color);
+    background: var(--foreground);
+    color: var(--background);
     text-align: center;
     font-family: Involve;
     font-size: 16px;

@@ -7,7 +7,7 @@ export const ReadEvents = (language) => {
         queryKey: ["eventData", language],
         queryFn: async () => {
             try {
-                const data = await api.get(`/tcats/events/`);
+                const data = await api.get(`events/events/`);
                 console.log("EVENT DATA", data);
                 return data?.data;
             } catch (error) {
