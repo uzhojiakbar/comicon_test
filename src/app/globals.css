@@ -23,6 +23,7 @@
     --loginInput: #F1F2F6;
     --loginHr: #959EBB;
     --navBar: rgba(255, 255, 255, 0.90);
+    --ticketQuantity:#1c274c80;
 }
 
 
@@ -47,6 +48,7 @@
     --loginButton: #2A2C3A;
     --loginInput: #252633;
     --loginHr: #4A4F6D;
+    --ticketQuantity:#1C274C80;
 }
 
 

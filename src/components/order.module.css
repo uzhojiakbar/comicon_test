@@ -36,7 +36,7 @@
 }
 
 .mainContainer1 h3 {
-    color: #191D2B;
+    color: var(--foreground);
     font-family: Involve;
     font-size: 14px;
     font-style: normal;
@@ -223,7 +223,7 @@
 }
 
 .oneTypeTicketHead p {
-    color: rgba(28, 39, 76, 0.50);
+    color: var(--navColor);
     font-family: Involve;
     font-size: 14px;
     font-style: normal;
@@ -240,7 +240,7 @@
     gap: 8px;
     align-self: stretch;
     border-radius: 20px;
-    background: #F2F3F7;
+    background: var(--background);
 }
 
 .boxTypeHead {
@@ -258,7 +258,7 @@
 }
 
 .boxRowGap12 p {
-    color: #191D2B !important;
+    color: var(--foreground) !important;
     font-family: Involve;
     font-size: 16px;
     font-style: normal;
@@ -303,7 +303,7 @@
 }
 
 .boxTypeBody h3 {
-    color: #191D2B;
+    color: var(--foreground);
     font-family: Involve;
     font-size: 18px;
     font-style: normal;
@@ -317,11 +317,11 @@
     align-items: center;
     gap: 12px;
     border-radius: 25px;
-    background: #FFF;
+    background: var(--cardDarkColor);
 }
 
 .boxTicketQuantity p {
-    color: #191D2B !important;
+    color: var(--foreground) !important;
 }
 
 .boxTotalPrice {
@@ -331,11 +331,11 @@
     align-items: center;
     align-self: stretch;
     border-radius: 20px;
-    background: #F2F3F7;
+    background: var(--background);
 }
 
 .boxTotalPrice p {
-    color: #1C274C;
+    color: var(--foreground);
     font-family: Involve;
     font-size: 24px;
     font-style: normal;
@@ -350,7 +350,7 @@
 }
 
 .price {
-    color: #1C274C;
+    color: var(--foreground);
     font-family: Involve;
     font-size: 24px;
     font-style: normal;
@@ -371,12 +371,17 @@
     color: #191D2B;
 }
 
-.modalRightBox {
+.modalRightBox, .modalRightBox1 {
     width: 52%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: end;
+}
+
+.modalRightBox1{
+    width: 100%;
+    height: 100%;
 }
 
 .boxModalRightTop {
@@ -435,11 +440,11 @@
     gap: 10px;
     align-self: stretch;
     border-radius: 8px;
-    background: #FFF;
+    background: var(--cardDarkColor);
 }
 
 .boxTimer p {
-    color: #1C274C;
+    color: var(--foreground);
     font-family: Involve;
     font-size: 14px;
     font-style: normal;
@@ -465,12 +470,13 @@
     gap: 29px;
     align-self: stretch;
     border-radius: 20px;
-    background: #FFF;
+    background: var(--cardDarkColor);
     outline: none;
+    color: var(--foreground);
 }
 
 .boxPaymentsType input::placeholder {
-    color: rgba(28, 39, 76, 0.40);
+    color: var(--foreground);
     font-family: Involve;
     font-size: 14px;
     font-style: normal;
@@ -479,7 +485,7 @@
 }
 
 
-.boxPayments {
+.boxPayments{
     display: flex;
     width: 90%;
     flex-direction: row;
@@ -487,6 +493,7 @@
     gap: 12px;
     flex-wrap: wrap;
 }
+
 
 .onePaymentType {
     display: flex;
@@ -498,8 +505,8 @@
     justify-content: space-between;
     align-items: flex-start;
     border-radius: 20px;
-    background: #FFF;
-    border: 1px solid #fff;
+    background: var(--cardDarkColor);
+    border: 1px solid var(--cardDarkColor);
 }
 
 .onePaymentTypeActive {
@@ -512,13 +519,13 @@
     justify-content: space-between;
     align-items: flex-start;
     border-radius: 20px;
-    background: #FFF;
-    border: 1px solid rgba(28, 39, 76, 0.20);
+    background: var(--cardDarkColor);
+    border: 1px solid var(--foreground);
 }
 
 .onePaymentType p,
 .onePaymentTypeActive p {
-    color: #1C274C;
+    color: var(--foreground);
     font-family: Involve;
     font-size: 14px;
     font-style: normal;
@@ -533,7 +540,7 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 20px;
-    background: #FFF;
+    background: var(--cardDarkColor);
     gap: 5px;
 }
 
@@ -544,7 +551,7 @@
 }
 
 .boxPrivatyPolicy p {
-    color: #1C274C;
+    color: var(--foreground);
     font-family: Involve;
     font-size: 14px;
     font-style: normal;
@@ -553,7 +560,7 @@
 }
 
 .boxPrivatyPolicy p a {
-    color: rgba(28, 39, 76, 0.50);
+    color: var(--foreground);
     font-family: Involve;
     font-size: 14px;
     font-style: normal;
@@ -571,11 +578,12 @@
     display: flex;
     width: 44px;
     height: 44px;
+    min-width: 44px;
     padding: 10px;
     align-items: center;
     gap: 10px;
     border-radius: 12px;
-    border: 1px solid rgba(28, 39, 76, 0.20);
+    border: 1px solid var(--cardDarkColor);
 }
 
 .boxkvadratActive {
@@ -588,7 +596,7 @@
     gap: 10px;
     flex-shrink: 0;
     border-radius: 12px;
-    background: #FFF;
+    background: var(--cardDarkColor);
 }
 
 .boxButtonNext {
@@ -639,11 +647,11 @@
     align-items: flex-start;
     gap: 19px;
     border-radius: 34px;
-    background: #FFF;
+    background: var(--cardDarkColor);
 }
 
 .firstPayment h1 {
-    color: #1C274C;
+    color: var(--foreground);
     font-family: Involve;
     font-size: 28px;
     font-style: normal;
@@ -665,16 +673,24 @@
     align-self: stretch;
 }
 
+.boxRowGap8:last-child {
+    text-align: center;
+}
+
+.boxRowGap8:last-child input {
+    text-align: center;
+}
+
 .boxRowGap8 input {
     height: 60px;
     width: 65px;
     padding: 24px 15px;
     border-radius: 20px;
-    background: #F2F3F7;
-    text-align: center;
+    background: var(--background);
+    /* text-align: center; */
     font-size: 20px;
     outline: none;
-    color: #000;
+    color: var(--foreground);
     font-family: Involve;
     font-size: 14px;
     font-style: normal;
@@ -683,8 +699,7 @@
 }
 
 .boxRowGap8 input::placeholder {
-    text-align: center;
-    color: rgba(25, 29, 43, 0.50);
+    color: var(--foreground);
     font-family: Involve;
     font-size: 14px;
     font-style: normal;
@@ -700,7 +715,7 @@
     align-items: center;
     gap: 12px;
     border-radius: 20px;
-    background: #F2F3F7;
+    background: var(--background);
 }
 
 .boxInput {
@@ -716,7 +731,7 @@
     gap: 12px;
     border-radius: 20px;
     width: 30%;
-    background: #F2F3F7;
+    background: var(--background);
 
 }
 
@@ -724,12 +739,12 @@
 .boxInput1 input {
     display: flex;
     flex-direction: row;
-    background: #F2F3F7;
+    background: var(--background);
     width: 100%;
     height: 100%;
     outline: none;
     padding: 0px 10px;
-    color: rgba(25, 29, 43, 0.50);
+    color: var(--foreground);
     font-family: Involve;
     font-size: 14px;
     font-style: normal;
@@ -737,6 +752,16 @@
     line-height: 120%;
 }
 
+
+.boxInput input::placeholder,
+.boxInput1 input::placeholder {
+    color: var(--foreground);
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
 
 .boxRowGap4 {
     display: flex;
@@ -751,7 +776,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 16px;
-    background: #F2F3F7;
+    background: var(--background);
 }
 
 .boxRowSpaceBetween {
@@ -762,7 +787,7 @@
 }
 
 .boxRowSpaceBetween h1 {
-    color: #191D2B;
+    color: var(--foreground);
     font-family: Involve;
     font-size: 24px;
     font-style: normal;
@@ -815,6 +840,17 @@
     align-self: stretch;
 }
 
+.boxButtonNextAdaptive {
+    display: flex;
+    padding: 20px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 999px;
+    background: #191D2B;
+}
+
 @media (max-width: 550px) {
     .mainContainer {
         padding: 0;
@@ -822,6 +858,47 @@
 
     .modalOverlay {
         padding: 10px;
+    }
+    
+    .boxRowGap8:last-child{
+        justify-content: space-between;
+    }
+
+    .boxRowGap8:last-child input{
+        width: 55px;
+        height: 55px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .boxColGap4{
+        width: 100%;
+    }
+    .boxRowGap8{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .boxInput, .boxInput1{
+        width: 100%;
+    }
+    
+    .boxRowGap8:last-child{
+        flex-direction: row;
+    }
+
+    .boxRowGap8:last-child{
+        justify-content: space-between;
+    }
+
+    .boxRowGap8:last-child input{
+        width: 40px;
+        height: 40px;
+        padding: 0px;
+    }
+
+    .firstPayment{
+        padding: 20px 15px;
     }
 }
 
@@ -835,7 +912,7 @@
 
 
 @media screen and (max-height:700px) {
- .boxModalRightTop{
-    overflow-y: scroll;
- }   
+    .boxModalRightTop {
+        overflow-y: scroll;
+    }
 }

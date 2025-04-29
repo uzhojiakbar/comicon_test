@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "./order.module.css";
 import useNumberFormatter from "@/utils/NumberFormatter";
 import { Modak } from "next/font/google";
+import { useTheme } from "next-themes";
 
 export default function order({ isOpen, onClose }) {
   const [quantity, setQuantity] = useState(0);
@@ -17,9 +18,7 @@ export default function order({ isOpen, onClose }) {
   const { formatNumber } = useNumberFormatter();
   const [login, setLogin] = useState();
   const inputs = useRef([]);
-
-
-
+  const { resolvedTheme, theme } = useTheme();
 
   //  -------------------------------------- Verification --------------------------------------
 
@@ -196,7 +195,11 @@ export default function order({ isOpen, onClose }) {
                           <Image
                             src={
                               quantity < 1
-                                ? "/removeTicektNotActive.svg"
+                                ? theme === "dark"
+                                  ? "removeTicektNotActiveDark.svg"
+                                  : "/removeTicektNotActive.svg"
+                                : theme === "dark"
+                                ? "/removeTicketDark.svg"
                                 : "/removeTicket.svg"
                             }
                             alt="remove Ticket"
@@ -207,7 +210,11 @@ export default function order({ isOpen, onClose }) {
                         <p>{quantity}</p>
                         <button onClick={() => setQuantity(quantity + 1)}>
                           <Image
-                            src="/addTicket.svg"
+                            src={
+                              theme === "dark"
+                                ? "/addTicketDark.svg"
+                                : "/addTicket.svg"
+                            }
                             alt="add Ticket"
                             width={24}
                             height={24}
@@ -228,6 +235,12 @@ export default function order({ isOpen, onClose }) {
                 {promocodeVerify ? <></> : <></>}
               </div>
             </div>
+            <button
+              onClick={() => setModal(modal + 1)}
+              className={styles.boxButtonNextAdaptive}
+            >
+              Далее: 3 399 000 so’m
+            </button>
           </div>
           <div className={styles.modalRightBox}>
             <div className={styles.boxModalRightTop}>
@@ -245,7 +258,11 @@ export default function order({ isOpen, onClose }) {
               <div className={styles.boxRightModal}>
                 <div className={styles.boxTimer}>
                   <Image
-                    src="/orderTimer.svg"
+                    src={
+                      theme === "dark"
+                        ? "/orderTimerDark.svg"
+                        : "/orderTimer.svg"
+                    }
                     alt="orderTimer"
                     width={24}
                     height={24}
@@ -303,7 +320,11 @@ export default function order({ isOpen, onClose }) {
                     >
                       <div className={styles.paymentName}>
                         <Image
-                          src="/card.svg"
+                          src={
+                            resolvedTheme === "dark"
+                              ? "/cardDark.svg"
+                              : "/card.svg"
+                          }
                           alt="click"
                           width={32}
                           height={32}
@@ -329,7 +350,11 @@ export default function order({ isOpen, onClose }) {
                   >
                     {privatyPolicy ? (
                       <Image
-                        src="/orderPrivaty.svg"
+                        src={
+                          theme === "dark"
+                            ? "/orderPrivatyDark.svg"
+                            : "/orderPrivaty.svg"
+                        }
                         alt="галочка"
                         width={28}
                         height={28}
@@ -339,14 +364,14 @@ export default function order({ isOpen, onClose }) {
                     )}
                   </button>
                   <p>
-                    Совершая оплату, вы принимаете{" "}
+                    Совершая оплату, вы принимаете
                     <a href="">пользовательское соглашение</a>
                   </p>
                 </div>
               </div>
             </div>
             <button
-              onClick={() => setModal(modal + 1)}
+              onClick={() => setModal(modal + 2)}
               className={styles.boxButtonNext}
             >
               <p>Далее: 3 399 000 so’m</p>
@@ -355,6 +380,144 @@ export default function order({ isOpen, onClose }) {
         </div>
       )}
       {modal === 2 && (
+        <div className={styles.mainContainer1}onClick={(e) => e.stopPropagation()}>
+          <div className={styles.modalRightBox1}>
+            <div className={styles.boxModalRightTop}>
+              <div className={styles.boxRowH1}>
+                <h1>ОПЛАТА</h1>
+                <button onClick={onClose}>
+                  <Image
+                    src="/closeModal.svg"
+                    alt="closeModal"
+                    width={72}
+                    height={72}
+                  />
+                </button>
+              </div>
+              <div className={styles.boxRightModal}>
+                <div className={styles.boxTimer}>
+                  <Image
+                    src={
+                      theme === "dark"
+                        ? "/orderTimerDark.svg"
+                        : "/orderTimer.svg"
+                    }
+                    alt="orderTimer"
+                    width={24}
+                    height={24}
+                  />
+                  <p>Оплатите в течении 15:00 минут</p>
+                </div>
+                <div className={styles.boxPaymentsType}>
+                  <p>Способ оплаты</p>
+                  <div className={styles.boxPayments}>
+                    <button
+                      onClick={() => setPaymentType("click")}
+                      className={
+                        paymentType === "click"
+                          ? styles.onePaymentTypeActive
+                          : styles.onePaymentType
+                      }
+                    >
+                      <div className={styles.paymentName}>
+                        <Image
+                          src="/click.svg"
+                          alt="click"
+                          width={32}
+                          height={32}
+                        />
+                        <p>Click</p>
+                      </div>
+                      <p>Система оплаты через Click</p>
+                    </button>
+                    <button
+                      onClick={() => setPaymentType("payme")}
+                      className={
+                        paymentType === "payme"
+                          ? styles.onePaymentTypeActive
+                          : styles.onePaymentType
+                      }
+                    >
+                      <div className={styles.paymentName}>
+                        <Image
+                          src="/payme.svg"
+                          alt="click"
+                          width={32}
+                          height={32}
+                        />
+                        <p>Payme</p>
+                      </div>
+                      <p>Система оплаты через Payme</p>
+                    </button>
+                    <button
+                      onClick={() => setPaymentType("card")}
+                      className={
+                        paymentType === "card"
+                          ? styles.onePaymentTypeActive
+                          : styles.onePaymentType
+                      }
+                    >
+                      <div className={styles.paymentName}>
+                        <Image
+                          src={
+                            resolvedTheme === "dark"
+                              ? "/cardDark.svg"
+                              : "/card.svg"
+                          }
+                          alt="click"
+                          width={32}
+                          height={32}
+                        />
+                        <p>Банковская карта</p>
+                      </div>
+                      <p>Новая банковская карта</p>
+                    </button>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Промокод или код сертификата"
+                  />
+                </div>
+                <div className={styles.boxPrivatyPolicy}>
+                  <button
+                    onClick={() => setPrivatyPolicy(!privatyPolicy)}
+                    className={
+                      privatyPolicy
+                        ? styles.boxkvadratActive
+                        : styles.boxkvadrat
+                    }
+                  >
+                    {privatyPolicy ? (
+                      <Image
+                        src={
+                          theme === "dark"
+                            ? "/orderPrivatyDark.svg"
+                            : "/orderPrivaty.svg"
+                        }
+                        alt="галочка"
+                        width={28}
+                        height={28}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                  </button>
+                  <p>
+                    Совершая оплату, вы принимаете
+                    <a href=""> пользовательское соглашение</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => setModal(modal + 1)}
+              className={styles.boxButtonNextAdaptive}>
+              <p>Далее: 3 399 000 so’m</p>
+            </button>
+          </div>
+        </div>
+      )}
+      {modal === 3 && (
         <div
           className={styles.mainContainer1}
           onClick={(e) => e.stopPropagation()}
@@ -364,7 +527,14 @@ export default function order({ isOpen, onClose }) {
             <div className={styles.boxColGap4}>
               <div className={styles.boxRowGap8}>
                 <div className={styles.boxInput}>
-                  <Image src="/card.svg" alt="card" width={32} height={32} />
+                  <Image
+                    src={
+                      resolvedTheme === "dark" ? "/cardDark.svg" : "/card.svg"
+                    }
+                    alt="card"
+                    width={32}
+                    height={32}
+                  />
                   <input type="text" placeholder="XXXX XXXX XXXX XXXX" />
                 </div>
                 <div className={styles.boxInput1}>
@@ -377,7 +547,7 @@ export default function order({ isOpen, onClose }) {
                 </div>
                 <div className={styles.boxPayment}>
                   <Image
-                    src="/uzcard.svg"
+                    src={theme === "dark" ? "/uzcardDark.svg" : "/uzcard.svg"}
                     alt="uzcard"
                     width={76}
                     height={14}
@@ -398,7 +568,7 @@ export default function order({ isOpen, onClose }) {
         </div>
       )}
 
-      {modal === 3 && (
+      {modal === 4 && (
         <div
           className={styles.mainContainer1}
           onClick={(e) => e.stopPropagation()}
@@ -426,7 +596,10 @@ export default function order({ isOpen, onClose }) {
               </div>
             </div>
             <div className={styles.boxRowSpaceBetween}>
-              <button className={styles.buttonNext}onClick={() => setModal(modal + 1)}>
+              <button
+                className={styles.buttonNext}
+                onClick={() => setModal(modal + 1)}
+              >
                 Далее
               </button>
             </div>
