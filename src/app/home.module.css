@@ -1,29 +1,630 @@
 .mainContainer {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 1440px;
-    justify-content: space-between;
-    padding: 36px;
-    gap: 12px;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1440px;
+  justify-content: space-between;
+  padding: 36px;
+  gap: 12px;
+  margin: 0 auto;
 }
 
 .mainContent {
-    display: flex;
-    flex-direction: column;
-    gap: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
 }
 
 .boxRowEventInfo {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-items: flex-end;
-    gap: 5px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: flex-end;
+  gap: 5px;
 }
 
 .boxEventInfoLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px 52px;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 48px;
+  background: var(--cardDarkColor);
+  gap: 22px;
+  width: 100%;
+  min-width: 250px;
+  max-width: 450px;
+}
+
+.boxEventTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  align-self: stretch;
+  text-align: center;
+  font-family: Involve;
+  font-style: normal;
+  line-height: 120%;
+}
+
+.boxEventTitle h3 {
+  color: var(--homeColor1);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.boxEventTitle h2 {
+  color: var(--navColor);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.boxEventTitle p {
+  color: var(--navColor);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.boxEventTitle h4 {
+  color: var(--navColor);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.boxEventPlace {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  align-self: stretch;
+}
+
+.boxEventBuyTicket {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.buyTicket {
+  width: 100%;
+  display: flex;
+  height: 60px;
+  padding: 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+  border-radius: 999px;
+  background: var(--buyTicketButton);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.buyTicket2 {
+  width: 100%;
+  display: flex;
+  height: 60px;
+  padding: 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+  border-radius: 999px;
+  background: #191d2b;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.boxTimeLeft {
+  display: flex;
+  padding: 4px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  background: var(--Error-Error100, #ffbbc2);
+}
+
+.boxTimeLeft p {
+  color: var(--Error-Error, #ff3347);
+  text-align: center;
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
+  margin-top: 2px;
+}
+
+.boxEventInfoRight {
+  display: flex;
+}
+
+.boxAboutEvent {
+  display: flex;
+  width: 100%;
+  padding: 28px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 19px;
+  border-radius: 48px;
+  background: var(--cardDarkColor);
+  min-width: 280px;
+}
+
+.boxAboutEventTop {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+.boxAboutEventTop h1 {
+  color: var(--navColor);
+  font-family: Involve;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
+}
+
+.boxAboutEventTop p {
+  color: var(--homeColor1);
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.boxAboutEventTop p b {
+  color: var(--homeColor1);
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  text-transform: uppercase;
+}
+
+.boxRowAboutEventTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.boxOneInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.boxOneInfo h5 {
+  color: var(--navColor);
+  font-family: Involve;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
+}
+
+.boxOneInfo h6 {
+  color: var(--navColor);
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+}
+
+.boxAboutEventBottom {
+  padding: 10px 0;
+  width: 100%;
+}
+
+/*display: grid;*/
+/*align-self: stretch;*/
+/*grid-template-columns: 324px 324px 324px 324px;*/
+/*gap: 5px;*/
+/*width: 100%;*/
+/*overflow: auto;*/
+.oneAboutImage {
+  pointer-events: auto;
+  width: 324px !important;
+  height: 220px;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  border-radius: 32px;
+  flex-shrink: 0;
+}
+
+.swiper-slide {
+  display: flex !important;
+  justify-content: center;
+}
+
+.oneAboutImage:hover {
+  opacity: 0.7;
+}
+
+/* Затемнение последней картинки */
+.lastImage::before {
+  content: "";
+  position: absolute;
+  border-radius: 32px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Текст "+4" */
+.overlayText {
+  color: #e0e7ff;
+  font-family: Involve;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%;
+  position: relative;
+  /* чтобы быть над ::before */
+  z-index: 1;
+}
+
+.boxOurGuests {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.boxOurGuests h1 {
+  color: var(--navColor);
+  text-align: center;
+  font-family: Involve;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.boxDateAndTime {
+  display: flex;
+  width: 100%;
+  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  border-radius: 48px;
+  background: var(--cardDarkColor);
+}
+
+.boxDateAndTime h1 {
+  color: var(--navColor);
+  font-family: Involve;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.boxOneDayTicket {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  gap: 124px;
+}
+
+.boxTicketDay {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.boxcolMonth {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.boxTicketDay h1 {
+  color: var(--navColor);
+  font-family: Involve;
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.boxTicketDay h2 {
+  color: var(--Error-Error, #ff3347);
+  font-family: Involve;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.boxTicketDay h3 {
+  color: var(--navColor);
+  font-family: Involve;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+}
+
+.boxOneTicketInformation {
+  display: flex;
+  padding: 18px 18px 18px 28px;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 0;
+  border-radius: 24px;
+  background: var(--homeBoxColor);
+  height: 100%;
+  width: 100%;
+}
+
+.boxBeforeIncreasePrice {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.boxBeforeIncreasePrice h5 {
+  color: var(--navColor);
+  font-family: Involve;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+}
+
+.boxBeforeIncreasePrice p {
+  color: var(--Error-Error, #ff3347);
+  text-align: center;
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
+}
+
+.boxButtonsVip {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.oneButtonVipActive {
+  border-radius: 25px;
+  border: 0.8px solid #1c274c;
+  background: var(--homeButton2);
+  display: flex;
+  padding: 8px 24px 5px 24px;
+  align-items: center;
+  gap: 12px;
+  color: #191d2b;
+}
+
+.oneButtonVip {
+  display: flex;
+  padding: 8px 24px 5px 24px;
+  align-items: center;
+  gap: 12px;
+  border-radius: 25px;
+  background: var(--homeButton2);
+  border: 0.8px solid #fff;
+  color: #191d2b;
+}
+
+.boxPriceAndBuyTicket {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.boxPriceAndBuyTicket h1 {
+  color: var(--navColor);
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+}
+
+.boxOneCinema {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.boxCinemaName {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.boxCinemaLogo {
+  display: flex;
+  width: 120px;
+  height: 120px;
+  padding: 46px 11px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 42px;
+  background: #f2f3f7;
+}
+
+.boxCinemaNameAndLocation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.boxCinemaNameAndLocation h1 {
+  color: var(--navColor);
+  font-family: Involve;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%;
+}
+
+.boxCinemaLocationText {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  color: var(--navColor);
+}
+
+.boxCinemaLocation {
+  display: flex;
+  width: 443px;
+  /* padding: 19px 28px; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 24px 24px 42px 24px;
+  box-shadow: 0px 0px 14px 0px #b1b6cc inset;
+}
+
+.carouselWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.arrow {
+  background: var(--homeButton2, #666);
+  border-radius: 50%;
+  padding: 10px 14px;
+  font-size: 18px;
+  cursor: pointer;
+  color: white;
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+}
+
+.swiperSlide {
+  width: fit-content; /* ❌ bu xatolik */
+  flex-shrink: 0;
+  display: flex;
+  transition: all 0.3s ease;
+}
+
+.guestCard {
+  width: 250px;
+  transition: width 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.hovered {
+  width: 400px !important;
+}
+
+.guestContent {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--cardDarkColor, #222);
+  border-radius: 25px;
+  padding-left: 15px;
+  height: 250px;
+  width: 95%;
+  gap: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.guestImg {
+  width: 215px;
+  height: auto;
+  object-fit: contain;
+  z-index: 99999999;
+}
+
+.guestHover {
+  color: var(--navColor, white);
+  font-size: 14px;
+  max-width: 250px;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* УБЕРИ ЭТО — оно мешает переносам */
+  /* white-space: nowrap; */
+
+  /* ДОБАВЬ ЭТО — оно позволяет ломать длинные слова */
+  word-break: break-word;
+
+  /* Если нужно жёстко ломать даже любые символы — можно так:
+       word-break: break-all;
+    */
+}
+
+.guestName {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--navColor, white);
+  text-align: center;
+}
+
+.boxButtonsVip {
+  display: none;
+}
+
+/* media */
+
+@media screen and (max-width: 1024px) {
+  .boxOneDayTicket {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-self: stretch;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .boxEventInfoRight {
+    display: none;
+  }
+
+  .boxEventInfoLeft {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,748 +635,131 @@
     background: var(--cardDarkColor);
     gap: 22px;
     width: 100%;
-    min-width: 250px;
-    max-width: 450px;
-}
-
-.boxEventTitle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    align-self: stretch;
-    text-align: center;
-    font-family: Involve;
-    font-style: normal;
-    line-height: 120%;
-}
-
-.boxEventTitle h3 {
-    color: var(--homeColor1);
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.boxEventTitle h2 {
-    color: var(--navColor);
-    font-size: 28px;
-    font-weight: 700;
-}
-
-.boxEventTitle p {
-    color: var(--navColor);
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.boxEventTitle h4 {
-    color: var(--navColor);
-    font-size: 16px;
-    font-weight: 700;
-}
-
-.boxEventPlace {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    align-self: stretch;
-}
-
-.boxEventBuyTicket {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-}
-
-.buyTicket {
-    width: 100%;
-    display: flex;
-    height: 60px;
-    padding: 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex: 1 0 0;
-    border-radius: 999px;
-    background: var(--buyTicketButton);
-    color: #FFF;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.buyTicket2 {
-    width: 100%;
-    display: flex;
-    height: 60px;
-    padding: 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex: 1 0 0;
-    border-radius: 999px;
-    background: #191D2B;
-    color: #FFF;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.boxTimeLeft {
-    display: flex;
-    padding: 4px 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    border-radius: 999px;
-    background: var(--Error-Error100, #FFBBC2);
-}
-
-.boxTimeLeft p {
-    color: var(--Error-Error, #FF3347);
-    text-align: center;
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 110%;
-    margin-top: 2px;
-}
-
-.boxEventInfoRight {
-    display: flex;
-}
-
-
-.boxAboutEvent {
-    display: flex;
-    width: 100%;
-    padding: 28px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 19px;
-    border-radius: 48px;
-    background: var(--cardDarkColor);
-    min-width: 280px;
-
-}
-
-.boxAboutEventTop {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    flex-shrink: 0;
-}
-
-.boxAboutEventTop h1 {
-    color: var(--navColor);
-    font-family: Involve;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 110%;
-}
-
-.boxAboutEventTop p {
-    color: var(--homeColor1);
-    font-family: Involve;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-}
-
-.boxAboutEventTop p b {
-    color: var(--homeColor1);
-    font-family: Involve;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
-    text-transform: uppercase;
-}
-
-.boxRowAboutEventTop {
-    display: flex;
-    align-items: flex-start;
-    gap: 24px;
-}
-
-.boxOneInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-}
-
-.boxOneInfo h5 {
-    color: var(--navColor);
-    font-family: Involve;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 110%;
-}
-
-.boxOneInfo h6 {
-    color: var(--navColor);
-    font-family: Involve;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
-}
-
-.boxAboutEventBottom {
-    padding: 10px 0;
-    width: 100%;
-}
-
-/*display: grid;*/
-/*align-self: stretch;*/
-/*grid-template-columns: 324px 324px 324px 324px;*/
-/*gap: 5px;*/
-/*width: 100%;*/
-/*overflow: auto;*/
-.oneAboutImage {
-    pointer-events: auto;
-    width: 324px !important;
-    height: 220px;
-    cursor: pointer;
-    background-size: cover;
-    background-position: center;
-    border-radius: 32px;
-    flex-shrink: 0;
-}
-
-
-.swiper-slide {
-    display: flex !important;
-    justify-content: center;
-}
-
-.oneAboutImage:hover {
-    opacity: 0.7;
-}
-
-/* Затемнение последней картинки */
-.lastImage::before {
-    content: "";
-    position: absolute;
-    border-radius: 32px;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-/* Текст "+4" */
-.overlayText {
-    color: #E0E7FF;
-    font-family: Involve;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 110%;
-    position: relative;
-    /* чтобы быть над ::before */
-    z-index: 1;
-}
-
-
-.boxOurGuests {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-}
-
-.boxOurGuests h1 {
-    color: var(--navColor);
-    text-align: center;
-    font-family: Involve;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 100%;
-}
-
-.boxDateAndTime {
-    display: flex;
-    width: 100%;
-    padding: 24px;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-    border-radius: 48px;
-    background: var(--cardDarkColor);
-}
-
-.boxDateAndTime h1 {
-    color: var(--navColor);
-    font-family: Involve;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 100%;
-}
-
-.boxOneDayTicket {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    align-self: stretch;
-    gap: 124px;
-}
-
-.boxTicketDay {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.boxcolMonth {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-}
-
-.boxTicketDay h1 {
-    color: var(--navColor);
-    font-family: Involve;
-    font-size: 56px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 100%;
-}
-
-.boxTicketDay h2 {
-    color: var(--Error-Error, #FF3347);
-    font-family: Involve;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 100%;
-}
-
-.boxTicketDay h3 {
-    color: var(--navColor);
-    font-family: Involve;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
-}
-
-
-.boxOneTicketInformation {
-    display: flex;
-    padding: 18px 18px 18px 28px;
-    justify-content: space-between;
-    align-items: center;
-    flex: 1 0 0;
-    border-radius: 24px;
-    background: var(--homeBoxColor);
-    height: 100%;
-    width: 100%;
-}
-
-.boxBeforeIncreasePrice {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-}
-
-.boxBeforeIncreasePrice h5 {
-    color: var(--navColor);
-    font-family: Involve;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
-}
-
-.boxBeforeIncreasePrice p {
-    color: var(--Error-Error, #FF3347);
-    text-align: center;
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 110%;
-}
-
-.boxButtonsVip {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-}
-
-.oneButtonVipActive {
-    border-radius: 25px;
-    border: 0.8px solid #1C274C;
-    background: var(--homeButton2);
-    display: flex;
-    padding: 8px 24px 5px 24px;
-    align-items: center;
-    gap: 12px;
-    color: #191D2B;
-}
-
-.oneButtonVip {
-    display: flex;
-    padding: 8px 24px 5px 24px;
-    align-items: center;
-    gap: 12px;
-    border-radius: 25px;
-    background: var(--homeButton2);
-    border: 0.8px solid #FFF;
-    color: #191D2B;
-}
-
-.boxPriceAndBuyTicket {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-}
-
-.boxPriceAndBuyTicket h1 {
-    color: var(--navColor);
-    font-family: Involve;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
-}
-
-
-.boxOneCinema {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-}
-
-.boxCinemaName {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-}
-
-.boxCinemaLogo {
-    display: flex;
-    width: 120px;
-    height: 120px;
-    padding: 46px 11px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 42px;
-    background: #F2F3F7;
-}
-
-.boxCinemaNameAndLocation {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-}
-
-.boxCinemaNameAndLocation h1 {
-    color: var(--navColor);
-    font-family: Involve;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 100%;
-}
-
-.boxCinemaLocationText {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    align-self: stretch;
-    color: var(--navColor);
-}
-
-.boxCinemaLocation {
-    display: flex;
-    width: 443px;
-    /* padding: 19px 28px; */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    align-self: stretch;
-    border-radius: 24px 24px 42px 24px;
-    box-shadow: 0px 0px 14px 0px #B1B6CC inset;
-}
-
-.carouselWrapper {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    overflow: hidden;
-    width: 100%;
-}
-
-.arrow {
-    background: var(--homeButton2, #666);
-    border-radius: 50%;
-    padding: 10px 14px;
-    font-size: 18px;
-    cursor: pointer;
-    color: white;
-    width: 50px; 
-    height: 50px;
-    min-width: 50px;
-}
-
-.swiperSlide {
-    width: fit-content; /* ❌ bu xatolik */
-    flex-shrink: 0;
-    display: flex;
-    transition: all 0.3s ease;
-}
-
-.guestCard {
-    width: 250px;
-    transition: width 0.4s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-}
-
-.hovered {
-    width: 400px !important;
-}
-
-.guestContent {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: var(--cardDarkColor, #222);
-    border-radius: 25px;
-    padding-left: 15px;
-    height: 250px;
-    width: 95%;
-    gap: 10px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.guestImg {
-    width: 215px;
-    height: auto;
-    object-fit: contain;
-    z-index: 99999999;
-}
-
-.guestHover {
-    color: var(--navColor, white);
-    font-size: 14px;
-    max-width: 250px;
-    display: -webkit-box;
-    -webkit-line-clamp: 7;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  
-    /* УБЕРИ ЭТО — оно мешает переносам */
-    /* white-space: nowrap; */
-  
-    /* ДОБАВЬ ЭТО — оно позволяет ломать длинные слова */
-    word-break: break-word;
-  
-    /* Если нужно жёстко ломать даже любые символы — можно так:
-       word-break: break-all;
-    */
+    min-width: 300px;
+    max-width: 100%;
   }
 
-.guestName {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--navColor, white);
-    text-align: center;
-}
+  /*    */
+  .boxOneTicketInformation {
+    flex: 1 1;
+  }
 
+  .boxPriceAndBuyTicket {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+  }
 
-.boxButtonsVip {
-    display: none;
-}
+  .boxBeforeIncreasePrice {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-/* media */
+  .boxPriceAndBuyTicket h1 {
+    font-size: 18px;
+  }
 
-@media screen and (max-width: 1024px) {
-    .boxOneDayTicket {
-        width: 100%;
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        align-self: stretch;
-        flex-direction: column;
-        gap: 12px;
-    }
+  .buyTicket2 {
+    width: 70% !important;
+    height: 60px;
 
-}
+    font-size: 14px;
+    font-weight: 700;
 
-@media screen and (max-width: 768px) {
-    .boxEventInfoRight {
-        display: none;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .boxEventInfoLeft {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 30px 52px;
-        align-items: center;
-        align-self: stretch;
-        border-radius: 48px;
-        background: var(--cardDarkColor);
-        gap: 22px;
-        width: 100%;
-        min-width: 300px;
-        max-width: 100%;
-    }
+    padding: 15px;
+    gap: 10px;
+    flex: 1 0 0;
 
-
-    /*    */
-    .boxOneTicketInformation {
-        flex: 1 1;
-    }
-
-
-    .boxPriceAndBuyTicket {
-        flex-direction: column-reverse;
-        align-items: flex-end;
-    }
-
-    .boxBeforeIncreasePrice {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .boxPriceAndBuyTicket h1 {
-        font-size: 18px;
-    }
-
-    .buyTicket2 {
-        width: 70% !important;
-        height: 60px;
-
-        font-size: 14px;
-        font-weight: 700;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        padding: 15px;
-        gap: 10px;
-        flex: 1 0 0;
-
-        border-radius: 999px;
-        background: #191D2B;
-        color: #FFF;
-
-    }
+    border-radius: 999px;
+    background: #191d2b;
+    color: #fff;
+  }
 }
 
 @media (max-width: 550px) {
+  .boxOneTicketInformation {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
 
-    .boxOneTicketInformation {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-
-    }
-
-    .boxPriceAndBuyTicket {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+  .boxPriceAndBuyTicket {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 425px) {
-    .mainContainer {
-        padding: 36px 10px;
-    }
+  .mainContainer {
+    padding: 36px 10px;
+  }
 
-    .boxOneTicketInformation {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-    }
+  .boxOneTicketInformation {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
 
-    .boxPriceAndBuyTicket {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+  .boxPriceAndBuyTicket {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .boxPriceAndBuyTicket h1 {
-        font-size: 14px !important;
-        text-align: center;
-    }
+  .boxPriceAndBuyTicket h1 {
+    font-size: 14px !important;
+    text-align: center;
+  }
 
-    .boxcolMonth h2 {
-        font-size: 24px;
-    }
+  .boxcolMonth h2 {
+    font-size: 24px;
+  }
 
-    .boxcolMonth h3 {
-        font-size: 18px;
-    }
+  .boxcolMonth h3 {
+    font-size: 18px;
+  }
 
-    .boxTicketDay h1 {
-        font-size: 32px;
-    }
+  .boxTicketDay h1 {
+    font-size: 32px;
+  }
 
-    .buyTicket2 {
-        width: 100% !important;
-    }
+  .buyTicket2 {
+    width: 100% !important;
+  }
 
-    /**/
-    .boxOneCinema {
-        flex-direction: column;
-        gap: 12px;
-    }
+  /**/
+  .boxOneCinema {
+    flex-direction: column;
+    gap: 12px;
+  }
 
-    .boxOneCinema {
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
+  .boxOneCinema {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
 
-    .boxCinemaNameAndLocation h1 {
-        font-size: 21px;
-    }
+  .boxCinemaNameAndLocation h1 {
+    font-size: 21px;
+  }
 
-    .boxCinemaNameAndLocation p {
-        font-size: 14px;
-    }
+  .boxCinemaNameAndLocation p {
+    font-size: 14px;
+  }
 
-    .boxCinemaLocation {
-        width: 100%;
-    }
+  .boxCinemaLocation {
+    width: 100%;
+  }
 
-
-    .boxCinemaLogo {
-        display: flex;
-        width: 86px;
-        height: 86px;
-        border-radius: 16.1px;
-    }
-
+  .boxCinemaLogo {
+    display: flex;
+    width: 86px;
+    height: 86px;
+    border-radius: 16.1px;
+  }
 }
-
