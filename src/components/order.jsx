@@ -226,6 +226,7 @@ export default function order({ isOpen, onClose }) {
                 </div>
               ))}
             </div>
+            <div className={styles.boxGap12}>
             <div className={styles.boxTotalPrice}>
               <p>Итого:</p>
               <div className={styles.overPrice}>
@@ -237,10 +238,10 @@ export default function order({ isOpen, onClose }) {
             </div>
             <button
               onClick={() => setModal(modal + 1)}
-              className={styles.boxButtonNextAdaptive}
-            >
+              className={styles.boxButtonNextAdaptive}>
               Далее: 3 399 000 so’m
             </button>
+            </div>
           </div>
           <div className={styles.modalRightBox}>
             <div className={styles.boxModalRightTop}>

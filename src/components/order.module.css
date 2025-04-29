@@ -841,7 +841,7 @@
 }
 
 .boxButtonNextAdaptive {
-    display: flex;
+    display: none;
     padding: 20px 24px;
     justify-content: center;
     align-items: center;
@@ -849,6 +849,20 @@
     align-self: stretch;
     border-radius: 999px;
     background: #191D2B;
+}
+
+.boxGap12{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+
+@media screen and (max-width:1024px) {
+    .boxButtonNextAdaptive{
+        display: flex;
+    }
 }
 
 @media (max-width: 550px) {
