@@ -532,6 +532,9 @@
     font-size: 18px;
     cursor: pointer;
     color: white;
+    width: 50px; 
+    height: 50px;
+    min-width: 50px;
 }
 
 .swiperSlide {
@@ -585,8 +588,17 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: normal;
-}
+  
+    /* УБЕРИ ЭТО — оно мешает переносам */
+    /* white-space: nowrap; */
+  
+    /* ДОБАВЬ ЭТО — оно позволяет ломать длинные слова */
+    word-break: break-word;
+  
+    /* Если нужно жёстко ломать даже любые символы — можно так:
+       word-break: break-all;
+    */
+  }
 
 .guestName {
     font-size: 20px;

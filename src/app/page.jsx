@@ -145,12 +145,6 @@ export default function EventPage() {
                             className={styles.boxAboutEventBottom}
                             freeMode={true} // ✅ bu orqali “snap” yo‘qoladi
                             breakpoints={{
-                                350: {slidesPerView: 1},
-                                400: {slidesPerView: 1},
-                                500: {slidesPerView: 1},
-                                550: {slidesPerView: 1},
-                                650: {slidesPerView: 1},
-                                700: {slidesPerView: 1},
                                 800: {slidesPerView: 1},
                                 900: {slidesPerView: 2.7},
                                 1000: {slidesPerView: 3},

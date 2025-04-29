@@ -209,7 +209,7 @@
     align-items: center;
     gap: 12px;
     border-radius: 30px;
-    background: #ffffff;
+    background: var(--cardDarkColor);
     transition: 0.3s;
 }
 
@@ -267,8 +267,8 @@
     align-items: center;
     gap: 20px;
     border-radius: 999px;
-    background: var(--foreground);
-    color: var(--background);
+    background: var(--buyTicketButton);
+    color: #FFF;
     text-align: center;
     font-family: Involve;
     font-size: 16px;
@@ -284,8 +284,8 @@
     align-items: center;
     gap: 20px;
     border-radius: 999px;
-    background: #f1f2f6;
-    color: #101217;
+    background: var(--loginButton);
+    color: var(--foreground);
     text-align: center;
     font-family: Involve;
     font-size: 16px;
@@ -322,8 +322,8 @@
     align-items: center;
     gap: 20px;
     border-radius: 999px;
-    background: #f1f2f6;
-    color: #101217;
+    background: var(--loginButton);
+    color: var(--foreground);
     text-align: center;
     font-family: Involve;
     font-size: 16px;
@@ -339,8 +339,8 @@
     align-items: center;
     gap: 20px;
     border-radius: 999px;
-    background: #f1f2f6;
-    color: #101217;
+    background: var(--loginButton);
+    color: var(--foreground);
     text-align: center;
     font-family: Involve;
     font-size: 16px;
@@ -644,8 +644,8 @@
     gap: 8px;
     align-self: stretch;
     border-radius: 999px;
-    background: #f1f2f6;
-    color: #101217;
+    background: var(--loginButton);
+    color: var(--foreground);
 }
 
 .boxUserTicketButtonDisplay {

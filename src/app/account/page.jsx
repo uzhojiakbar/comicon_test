@@ -15,10 +15,13 @@ import useApi from "@/utils/api";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
+import {useTheme} from "next-themes";
+
 
 export default function account() {
   const [account, setAccount] = useState("tickets");
   const [login, setLogin] = useState(false);
+  const {resolvedTheme, theme} = useTheme();
   const api = useApi();
   const { user, isLoadingUser } = useUser();
   const [sessionId, setSessionId] = useState();
@@ -559,7 +562,7 @@ export default function account() {
                                 className={styles.boxButtonQrDisplay}
                               >
                                 <Image
-                                  src="/qrcode.svg"
+                                  src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
                                   alt="qrcode"
                                   width={25}
                                   height={25}
@@ -590,10 +593,9 @@ export default function account() {
                             </div>
                             <button
                               onClick={() => setAccount("qrcode")}
-                              className={styles.boxButtonQr}
-                            >
+                              className={styles.boxButtonQr}>
                               <Image
-                                src="/qrcode.svg"
+                                src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
                                 alt="qrcode"
                                 width={25}
                                 height={25}
@@ -677,10 +679,9 @@ export default function account() {
                     </div>
                     <button
                       onClick={() => setAccount("tickets")}
-                      className={styles.boxBtnBack}
-                    >
+                      className={styles.boxBtnBack}>
                       <Image
-                        src="/arrowBack.svg"
+                        src={theme === "dark" ? "/arrowBackDark.svg" : "/arrowBack.svg"}
                         alt="arrow"
                         width={24}
                         height={24}
@@ -714,7 +715,7 @@ export default function account() {
                     </div>
                     <button className={styles.boxButtonQr}>
                       <Image
-                        src="/qrcode.svg"
+                        src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
                         alt="qrcode"
                         width={25}
                         height={25}
@@ -748,7 +749,7 @@ export default function account() {
                     </div>
                     <button className={styles.boxButtonQr}>
                       <Image
-                        src="/qrcode.svg"
+                        src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
                         alt="qrcode"
                         width={25}
                         height={25}
@@ -782,7 +783,7 @@ export default function account() {
                     </div>
                     <button className={styles.boxButtonQr}>
                       <Image
-                        src="/qrcode.svg"
+                        src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
                         alt="qrcode"
                         width={25}
                         height={25}
