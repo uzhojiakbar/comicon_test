@@ -2,15 +2,18 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./footer.module.css";
+import { useTheme } from "next-themes";
+
 
 export default function Footer() {
+    const {theme} = useTheme();
     return (
         <footer className={styles.footer}>
             <div className={styles.boxfooter}>
                 <div className={styles.boxfootertop}>
                     <div className={styles.boxfooterlogo}>
                         <Image
-                            src="/TcatslogoLight.svg"
+                            src={theme === "dark" ? "/tcatsLogoDark.svg" : "/tcatsLogo.svg"}
                             alt="logo"
                             width={184}
                             height={70}
@@ -63,7 +66,7 @@ export default function Footer() {
                                 <h1>Способы оплаты</h1>
                                 <div className={styles.boxpayments}>
                                     <div className={styles.payments}>
-                                        <Image src='/clickLight.svg' alt="click" width={76} height={19}/>
+                                        <Image src={theme === "dark" ?'/clickDark.svg' : '/clickLight.svg'} alt="click" width={76} height={19}/>
                                     </div>
                                     <div className={styles.payments}>
                                         <Image src='/footerHumo.svg' alt="humo" width={50} height={29}/>
@@ -72,13 +75,13 @@ export default function Footer() {
                                         <Image src='/footerPayme.svg' alt="payme" width={76} height={24}/>
                                     </div>
                                     <div className={styles.payments}>
-                                        <Image src='/UzCardLight.svg' alt="uzcard" width={76} height={14}/>
+                                        <Image src={theme === "dark" ? '/uzcardDark.svg' : '/uzcard.svg'} alt="uzcard" width={76} height={14}/>
                                     </div>
                                     <div className={styles.payments}>
-                                        <Image src='/visaLight.svg' alt="visa" width={70} height={21}/>
+                                        <Image src={theme === "dark" ? "visaDark.svg" : '/visaLight.svg'} alt="visa" width={70} height={21}/>
                                     </div>
                                     <div className={styles.payments}>
-                                        <Image src='/footerMastercard.svg' alt="mastercard" width={46} height={35}/>
+                                        <Image src={theme === "dark" ? "/footerMastercardDark.svg" : '/footerMastercard.svg'} alt="mastercard" width={46} height={35}/>
                                     </div>
                                 </div>
                             </div>
