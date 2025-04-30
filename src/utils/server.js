@@ -1,4 +1,4 @@
-import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useApi from "@/utils/api";
 import Cookies from "js-cookie";
 
@@ -12,7 +12,7 @@ export const useCreateComment = () => {
 
             const response = await api.post(
                 `/comments/news/${commentData?.requestData?.newsId}/comments/create/`,
-                {content: commentData?.requestData?.content}
+                { content: commentData?.requestData?.content }
             );
             queryClient.invalidateQueries(["Comments", commentData?.requestData?.newsId]);
             return response;
@@ -26,7 +26,7 @@ export const useCreateComment = () => {
     });
 };
 
-export const useGetCommentsWithWPostId = ({postID = null}) => {
+export const useGetCommentsWithWPostId = ({ postID = null }) => {
     const api = useApi()
 
     return useQuery({
@@ -139,11 +139,11 @@ export const useChapterRead = () => {
     const api = useApi();
 
     return useMutation({
-        mutationFn: async ({id, chapterID}) => {
+        mutationFn: async ({ id, chapterID }) => {
             if (!id || !chapterID) {
                 throw new Error("ID yoki ChapterID yetishmayapti");
             }
-            const {data} = await api.get(`comica/book/${id}/chapters/${chapterID}/read/`);
+            const { data } = await api.get(`comica/book/${id}/chapters/${chapterID}/read/`);
             console.log("CHAPTER READ DATA 111", data);
             return data;
         },
@@ -157,7 +157,7 @@ export const useGetUserBooks = () => {
         queryFn: async () => {
             try {
                 const data = await api.get(`comica/user-books/`);
-                console.log("RESSS",data?.data)
+                console.log("RESSS", data?.data)
                 return data?.data;
             } catch (error) {
                 console.error("Error fetching data", error);
@@ -180,11 +180,11 @@ export const useGetUserBooksStatus = (id) => {
                     for (const key in data?.data?.by_list_type) {
                         const status = data?.data?.by_list_type[key];
                         if (status?.books?.some(book => book?.id === id)) {
-                            return {key, display_name: status?.display_name};
+                            return { key, display_name: status?.display_name };
                         }
                     }
-                }else{
-                    return {key: "none", display_name: "No books available"};
+                } else {
+                    return { key: "none", display_name: "No books available" };
                 }
             } catch (error) {
                 console.error("Error fetching data", error);
@@ -201,7 +201,7 @@ export const useUpdateBookStatus = () => {
 
     return useMutation({
         mutationFn: async (data) => {
-            queryClient.invalidateQueries(["UserBooksStatus",data?.requestData?.id]);
+            queryClient.invalidateQueries(["UserBooksStatus", data?.requestData?.id]);
             // {
             //     "book_id": 1,
             //     "new_status": "reading"
@@ -210,7 +210,7 @@ export const useUpdateBookStatus = () => {
                 `/comica/update-status/`,
                 data?.requestData
             );
-            queryClient.invalidateQueries(["UserBooksStatus",data?.requestData?.id]);
+            queryClient.invalidateQueries(["UserBooksStatus", data?.requestData?.id]);
             return response;
         },
         onSuccess: (data, variables) => {
@@ -251,7 +251,7 @@ export const useRatingOnComment = () => {
 
             const response = await api.post(
                 `/comments/comments/${commentData?.requestData?.commentID}/rating/`,
-                {vote: commentData?.requestData?.vote}
+                { vote: commentData?.requestData?.vote }
             );
             queryClient.invalidateQueries(["Comments", commentData?.requestData?.newsId]);
             return response;
@@ -294,7 +294,7 @@ export const UseLinkUnlickAccount = () => {
         mutationFn: async (commentData) => {
             const response = await api.post(
                 `user/link-unlink-account/`,
-                {...commentData?.data}
+                { ...commentData?.data }
             );
             queryClient.invalidateQueries(["userData"]);
             return response;
@@ -314,11 +314,11 @@ export const useUpdateUserAvatar = () => {
 
     return useMutation({
         mutationFn: async (avatarData) => {
-            console.log("SERVR",avatarData)
+            console.log("SERVR", avatarData)
             const response = await api.patch(
                 `/user/avatar/update/`,
-                {avatar: avatarData?.avatar},
-                { headers: { "Content-Type": "multipart/form-data" }}
+                { avatar: avatarData?.avatar },
+                { headers: { "Content-Type": "multipart/form-data" } }
             );
             queryClient.invalidateQueries(["userData"]); // User ma’lumotlarini yangilash uchun
             return response;

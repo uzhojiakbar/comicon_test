@@ -1,932 +1,923 @@
 .modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px);
-    z-index: 1000;
-    animation: fadeIn 0.3s ease-in-out;
-    pointer-events: auto;
-    padding: 36px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+  pointer-events: auto;
+  padding: 36px;
 }
 
 .mainContainer,
 .mainContainer1 {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 95vh;
-    flex-shrink: 0;
-    border-radius: 46px;
-    background: var(--background);
-    padding: 22px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 95vh;
+  flex-shrink: 0;
+  border-radius: 46px;
+  background: var(--background);
+  padding: 22px;
 }
 
 .mainContainer1 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .mainContainer1 h3 {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
 }
 
 .modalLeftBox {
-    display: flex;
-    width: 46%;
-    padding: 24px;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-shrink: 0;
-    border-radius: 34px;
-    background: var(--cardDarkColor);
-    height: 100%;
-    gap: 45px;
+  display: flex;
+  width: 46%;
+  padding: 24px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 34px;
+  background: var(--cardDarkColor);
+  height: 100%;
+  gap: 45px;
 }
 
-
 .boxModalLeftTop {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 46px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 46px;
+  width: 100%;
 }
 
 .eventInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  width: 100%;
 }
 
 .eventName {
-    display: flex;
-    align-items: center;
-    align-self: stretch;
-    justify-content: space-between;
-    width: 100% !important;
-    gap: 11px;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  justify-content: space-between;
+  width: 100% !important;
+  gap: 11px;
 }
 
 .eventName h1 {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 100%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
 }
 
 .eventName h6 {
-    display: flex;
-    width: 44px;
-    height: 30px;
-    padding: 8px 10px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 999px;
-    border: 1px solid var(--Error-Error200, #FF7784);
-    color: var(--Error-Error200, #FF7784);
+  display: flex;
+  width: 44px;
+  height: 30px;
+  padding: 8px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  border: 1px solid var(--Error-Error200, #ff7784);
+  color: var(--Error-Error200, #ff7784);
 }
 
 .eventName h6 span {
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 110%;
-    margin-top: 3px;
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%;
+  margin-top: 3px;
 }
 
 .closeIconMobile {
-    display: none !important;
+  display: none !important;
 }
 
 .eventPlace {
-    display: flex;
-    align-items: flex-start;
-    gap: 90px;
+  display: flex;
+  align-items: flex-start;
+  gap: 90px;
 }
 
 .boxEventPlace {
-    display: flex;
-    width: 195px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+  display: flex;
+  width: 195px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .eventPlace p {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
 }
 
 .eventPlace h6 {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
 }
 
 .eventTicket {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    max-height: 75%;
-    overflow-y: auto;
-    gap: 18px;
-    padding: 0 5px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-height: 75%;
+  height: 75%;
+  overflow-y: auto;
+  gap: 18px;
+  padding: 0 5px;
 }
-
 
 /* Scroll-bar stili */
 .eventTicket::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 
 .eventTicket::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent;
 }
 
 .eventTicket::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    /* Scroll rangini o'zgartiring */
-    border-radius: 6px;
+  background-color: #ccc;
+  /* Scroll rangini o'zgartiring */
+  border-radius: 6px;
 }
 
 .eventTicket:hover::-webkit-scrollbar-thumb {
-    background-color: #999;
-    /* Hover qilganda biroz to'qroq */
+  background-color: #999;
+  /* Hover qilganda biroz to'qroq */
 }
 
 .eventTicket h2 {
-    color: #1C274C;
-    font-family: Involve;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
+  color: #1c274c;
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
 }
 
 .eventTicket hr {
-    stroke-width: 1px;
-    stroke: rgba(28, 39, 76, 0.20);
-    height: 0px;
-    align-self: stretch;
+  stroke-width: 1px;
+  stroke: rgba(28, 39, 76, 0.2);
+  height: 0px;
+  align-self: stretch;
 }
 
 .oneTypeTicket {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
 }
 
 .oneTypeTicketHead {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .oneTypeTicketHead h6 {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
 }
 
 .oneTypeTicketHead p {
-    color: var(--navColor);
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 110%;
+  color: var(--navColor);
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%;
 }
 
 .boxOneTypeTicektBody {
-    display: flex;
-    padding: 14px 24px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 8px;
-    align-self: stretch;
-    border-radius: 20px;
-    background: var(--background);
+  display: flex;
+  padding: 14px 24px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 20px;
+  background: var(--background);
 }
 
 .boxTypeHead {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
 }
 
-
 .boxRowGap12 {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .boxRowGap12 p {
-    color: var(--foreground) !important;
-    font-family: Involve;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-    margin-top: 1px;
+  color: var(--foreground) !important;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  margin-top: 1px;
 }
 
 .boxRowGap12 h6 {
-    display: flex;
-    padding: 6px 8px 4px 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 999px;
-    border: 1px solid var(--Error-Error200, #FF7784);
+  display: flex;
+  padding: 6px 8px 4px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  border: 1px solid var(--Error-Error200, #ff7784);
 }
 
 .boxRowGap12 h6 span {
-    color: var(--Error-Error200, #FF7784);
-    font-family: Involve;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 110%;
+  color: var(--Error-Error200, #ff7784);
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%;
 }
 
 .boxTypeHead p {
-    color: var(--Error-Error, #FF3347);
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 110%;
+  color: var(--Error-Error, #ff3347);
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%;
 }
 
 .boxTypeBody {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
 }
 
 .boxTypeBody h3 {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
 }
 
 .boxTicketQuantity {
-    display: flex;
-    padding: 8px 4px;
-    align-items: center;
-    gap: 12px;
-    border-radius: 25px;
-    background: var(--cardDarkColor);
+  display: flex;
+  padding: 8px 4px;
+  align-items: center;
+  gap: 12px;
+  border-radius: 25px;
+  background: var(--cardDarkColor);
 }
 
 .boxTicketQuantity p {
-    color: var(--foreground) !important;
+  color: var(--foreground) !important;
 }
 
 .boxTotalPrice {
-    display: flex;
-    padding: 24px;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-    border-radius: 20px;
-    background: var(--background);
+  display: flex;
+  padding: 24px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 20px;
+  background: var(--background);
 }
 
 .boxTotalPrice p {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
 }
 
 .overPrice {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .price {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .discount {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    justify-content: flex-start;
-    color: #191D2B;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-start;
+  color: #191d2b;
 }
 
-.modalRightBox, .modalRightBox1 {
-    width: 52%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: end;
+.modalRightBox,
+.modalRightBox1 {
+  width: 52%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
 }
 
-.modalRightBox1{
-    width: 100%;
-    height: 100%;
+.modalRightBox1 {
+  width: 100%;
+  height: 100%;
 }
 
 .boxModalRightTop {
-    width: 100%;
+  width: 100%;
 }
 
 /* Scroll-bar stili */
 .boxModalRightTop::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 
 .boxModalRightTop::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent;
 }
 
 .boxModalRightTop::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    /* Scroll rangini o'zgartiring */
-    border-radius: 6px;
+  background-color: #ccc;
+  /* Scroll rangini o'zgartiring */
+  border-radius: 6px;
 }
 
 .boxModalRightTop:hover::-webkit-scrollbar-thumb {
-    background-color: #999;
-    /* Hover qilganda biroz to'qroq */
+  background-color: #999;
+  /* Hover qilganda biroz to'qroq */
 }
 
 .boxRowH1 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .boxRowH1 h1 {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 100%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
 }
 
 .boxRightModal {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 26px;
-    align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 26px;
+  align-self: stretch;
 }
 
 .boxTimer {
-    display: flex;
-    padding: 14px 10px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-    border-radius: 8px;
-    background: var(--cardDarkColor);
+  display: flex;
+  padding: 14px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 8px;
+  background: var(--cardDarkColor);
 }
 
 .boxTimer p {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 110%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%;
 }
 
 .boxPaymentsType {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-content: flex-start;
-    gap: 12px;
-    align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 12px;
+  align-self: stretch;
 }
 
 .boxPaymentsType input {
-    display: flex;
-    min-width: 130px;
-    padding: 24px 15px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 29px;
-    align-self: stretch;
-    border-radius: 20px;
-    background: var(--cardDarkColor);
-    outline: none;
-    color: var(--foreground);
+  display: flex;
+  min-width: 130px;
+  padding: 24px 15px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 29px;
+  align-self: stretch;
+  border-radius: 20px;
+  background: var(--cardDarkColor);
+  outline: none;
+  color: var(--foreground);
 }
 
 .boxPaymentsType input::placeholder {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 110%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%;
 }
 
-
-.boxPayments{
-    display: flex;
-    width: 90%;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 12px;
-    flex-wrap: wrap;
+.boxPayments {
+  display: flex;
+  width: 90%;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
 }
-
 
 .onePaymentType {
-    display: flex;
-    height: 100px;
-    width: 48%;
-    min-width: 130px;
-    padding: 15px;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    border-radius: 20px;
-    background: var(--cardDarkColor);
-    border: 1px solid var(--cardDarkColor);
+  display: flex;
+  height: 100px;
+  width: 48%;
+  min-width: 130px;
+  padding: 15px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-radius: 20px;
+  background: var(--cardDarkColor);
+  border: 1px solid var(--cardDarkColor);
 }
 
 .onePaymentTypeActive {
-    display: flex;
-    height: 100px;
-    width: 48%;
-    min-width: 130px;
-    padding: 15px;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    border-radius: 20px;
-    background: var(--cardDarkColor);
-    border: 1px solid var(--foreground);
+  display: flex;
+  height: 100px;
+  width: 48%;
+  min-width: 130px;
+  padding: 15px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-radius: 20px;
+  background: var(--cardDarkColor);
+  border: 1px solid var(--foreground);
 }
 
 .onePaymentType p,
 .onePaymentTypeActive p {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 110%;
-    text-align: start;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%;
+  text-align: start;
 }
 
 .paymentName {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 20px;
-    background: var(--cardDarkColor);
-    gap: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  background: var(--cardDarkColor);
+  gap: 5px;
 }
 
 .boxPrivatyPolicy {
-    display: flex;
-    align-items: center;
-    gap: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .boxPrivatyPolicy p {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 110%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%;
 }
 
 .boxPrivatyPolicy p a {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 110%;
-    text-decoration-line: underline;
-    text-decoration-style: solid;
-    text-decoration-skip-ink: none;
-    text-decoration-thickness: auto;
-    text-underline-offset: auto;
-    text-underline-position: from-font;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
 }
 
 .boxkvadrat {
-    display: flex;
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    padding: 10px;
-    align-items: center;
-    gap: 10px;
-    border-radius: 12px;
-    border: 1px solid var(--cardDarkColor);
+  display: flex;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  padding: 10px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--cardDarkColor);
 }
 
 .boxkvadratActive {
-    display: flex;
-    width: 44px;
-    height: 44px;
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-    border-radius: 12px;
-    background: var(--cardDarkColor);
+  display: flex;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: var(--cardDarkColor);
 }
 
 .boxButtonNext {
-    display: inline-flex;
-    width: fit-content;
-    height: 60px;
-    padding: 0px 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-    border-radius: 999px;
-    background: #191D2B;
+  display: inline-flex;
+  width: fit-content;
+  height: 60px;
+  padding: 0px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: #191d2b;
 }
 
-
 .boxButtonNext {
-    color: #FFF;
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 110%;
+  color: #fff;
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
 }
 
 @media (max-width: 1024px) {
-    .modalLeftBox {
-        width: 100%;
-    }
+  .modalLeftBox {
+    width: 100%;
+  }
 
-    .modalRightBox {
-        display: none;
-    }
+  .modalRightBox {
+    display: none;
+  }
 
-    .closeIconMobile {
-        display: flex !important;
-    }
-
+  .closeIconMobile {
+    display: flex !important;
+  }
 }
 
 .firstPayment {
-    display: flex;
-    max-width: 478px;
-    width: 100%;
-    height: fit-content;
-    padding: 24px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 19px;
-    border-radius: 34px;
-    background: var(--cardDarkColor);
+  display: flex;
+  max-width: 478px;
+  width: 100%;
+  height: fit-content;
+  padding: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 19px;
+  border-radius: 34px;
+  background: var(--cardDarkColor);
 }
 
 .firstPayment h1 {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 100%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
 }
 
 .boxColGap4 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
 }
 
 .boxRowGap8 {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
 }
 
 .boxRowGap8:last-child {
-    text-align: center;
+  text-align: center;
 }
 
 .boxRowGap8:last-child input {
-    text-align: center;
+  text-align: center;
 }
 
 .boxRowGap8 input {
-    height: 60px;
-    width: 65px;
-    padding: 24px 15px;
-    border-radius: 20px;
-    background: var(--background);
-    /* text-align: center; */
-    font-size: 20px;
-    outline: none;
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
+  height: 60px;
+  width: 65px;
+  padding: 24px 15px;
+  border-radius: 20px;
+  background: var(--background);
+  /* text-align: center; */
+  font-size: 20px;
+  outline: none;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
 }
 
 .boxRowGap8 input::placeholder {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
 }
 
 .boxInput,
 .boxInput1 {
-    display: flex;
-    height: 60px;
-    padding: 10px 15px;
-    align-items: center;
-    gap: 12px;
-    border-radius: 20px;
-    background: var(--background);
+  display: flex;
+  height: 60px;
+  padding: 10px 15px;
+  align-items: center;
+  gap: 12px;
+  border-radius: 20px;
+  background: var(--background);
 }
 
 .boxInput {
-    min-width: 130px;
-    width: 70%;
+  min-width: 130px;
+  width: 70%;
 }
 
 .boxInput1 {
-    display: flex;
-    height: 60px;
-    padding: 10px 15px;
-    align-items: center;
-    gap: 12px;
-    border-radius: 20px;
-    width: 30%;
-    background: var(--background);
-
+  display: flex;
+  height: 60px;
+  padding: 10px 15px;
+  align-items: center;
+  gap: 12px;
+  border-radius: 20px;
+  width: 30%;
+  background: var(--background);
 }
 
 .boxInput input,
 .boxInput1 input {
-    display: flex;
-    flex-direction: row;
-    background: var(--background);
-    width: 100%;
-    height: 100%;
-    outline: none;
-    padding: 0px 10px;
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
+  display: flex;
+  flex-direction: row;
+  background: var(--background);
+  width: 100%;
+  height: 100%;
+  outline: none;
+  padding: 0px 10px;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
 }
-
 
 .boxInput input::placeholder,
 .boxInput1 input::placeholder {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
 }
 
 .boxRowGap4 {
-    display: flex;
-    align-items: flex-start;
-    gap: 4px;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
 }
 
 .boxPayment {
-    display: flex;
-    width: 100px;
-    height: 46px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 16px;
-    background: var(--background);
+  display: flex;
+  width: 100px;
+  height: 46px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  background: var(--background);
 }
 
 .boxRowSpaceBetween {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
 }
 
 .boxRowSpaceBetween h1 {
-    color: var(--foreground);
-    font-family: Involve;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
 }
 
 .buttonPey {
-    display: flex;
-    height: 60px;
-    padding: 0px 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 999px;
-    background: #191D2B;
-    color: #FFF;
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 110%;
+  display: flex;
+  height: 60px;
+  padding: 0px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  background: #191d2b;
+  color: #fff;
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
 }
 
-
 .buttonNext {
-    display: flex;
-    height: 60px;
-    width: 100%;
-    padding: 0px 64px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-    border-radius: 999px;
-    background: #191D2B;
-    color: #FFF;
-    font-family: Involve;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 110%;
+  display: flex;
+  height: 60px;
+  width: 100%;
+  padding: 0px 64px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 999px;
+  background: #191d2b;
+  color: #fff;
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
 }
 
 .boxColGap16 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
 }
 
 .boxButtonNextAdaptive {
-    display: none;
-    padding: 20px 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-    border-radius: 999px;
-    background: #191D2B;
+  display: none;
+  padding: 20px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 999px;
+  background: #191d2b;
 }
 
-.boxGap12{
+.boxGap12 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+  .boxButtonNextAdaptive {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-}
-
-
-@media screen and (max-width:1024px) {
-    .boxButtonNextAdaptive{
-        display: flex;
-    }
+  }
 }
 
 @media (max-width: 550px) {
-    .mainContainer {
-        padding: 0;
-    }
+  .mainContainer {
+    padding: 0;
+  }
 
-    .modalOverlay {
-        padding: 10px;
-    }
-    
-    .boxRowGap8:last-child{
-        justify-content: space-between;
-    }
+  .modalOverlay {
+    padding: 10px;
+  }
 
-    .boxRowGap8:last-child input{
-        width: 55px;
-        height: 55px;
-    }
+  .boxRowGap8:last-child {
+    justify-content: space-between;
+  }
+
+  .boxRowGap8:last-child input {
+    width: 55px;
+    height: 55px;
+  }
 }
 
-@media screen and (max-width:500px) {
-    .boxColGap4{
-        width: 100%;
-    }
-    .boxRowGap8{
-        flex-direction: column;
-        width: 100%;
-    }
+@media screen and (max-width: 500px) {
+  .boxColGap4 {
+    width: 100%;
+  }
+  .boxRowGap8 {
+    flex-direction: column;
+    width: 100%;
+  }
 
-    .boxInput, .boxInput1{
-        width: 100%;
-    }
-    
-    .boxRowGap8:last-child{
-        flex-direction: row;
-    }
+  .boxInput,
+  .boxInput1 {
+    width: 100%;
+  }
 
-    .boxRowGap8:last-child{
-        justify-content: space-between;
-    }
+  .boxRowGap8:last-child {
+    flex-direction: row;
+  }
 
-    .boxRowGap8:last-child input{
-        width: 40px;
-        height: 40px;
-        padding: 0px;
-    }
+  .boxRowGap8:last-child {
+    justify-content: space-between;
+  }
 
-    .firstPayment{
-        padding: 20px 15px;
-    }
+  .boxRowGap8:last-child input {
+    width: 40px;
+    height: 40px;
+    padding: 0px;
+  }
+
+  .firstPayment {
+    padding: 20px 15px;
+  }
 }
-
 
 @media (max-width: 400px) {
-    .eventPlace {
-        flex-direction: column;
-        gap: 20px;
-    }
+  .eventPlace {
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
-
-@media screen and (max-height:700px) {
-    .boxModalRightTop {
-        overflow-y: scroll;
-    }
+@media screen and (max-height: 700px) {
+  .boxModalRightTop {
+    overflow-y: scroll;
+  }
 }

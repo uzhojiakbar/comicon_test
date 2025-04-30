@@ -1,5 +1,5 @@
 import useApi from "@/utils/api";
-import {useQuery} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export const ReadEvents = (language) => {
     const api = useApi()

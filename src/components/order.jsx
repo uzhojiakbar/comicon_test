@@ -5,8 +5,10 @@ import styles from "./order.module.css";
 import useNumberFormatter from "@/utils/NumberFormatter";
 import { Modak } from "next/font/google";
 import { useTheme } from "next-themes";
+import { PrepareOrder, OrderEdit } from "@/utils/server/order";
+import useApi from "@/utils/api";
 
-export default function order({ isOpen, onClose }) {
+export default function order({ seans, isOpen, onClose }) {
   const [quantity, setQuantity] = useState(0);
   const [privatyPolicy, setPrivatyPolicy] = useState(false);
   const [paymentType, setPaymentType] = useState("");
@@ -17,8 +19,52 @@ export default function order({ isOpen, onClose }) {
   const [phoneNumber, setPhoneNumber] = useState(countryCode);
   const { formatNumber } = useNumberFormatter();
   const [login, setLogin] = useState();
+  const [loading, setLoading] = useState(false);
   const inputs = useRef([]);
   const { resolvedTheme, theme } = useTheme();
+
+  const [eventData, setEventData] = useState()
+
+  const api = useApi()
+  const prepareOrderMutation = PrepareOrder(); // Hook yuqori darajada chaqiriladi
+  const EditOrderMutation = OrderEdit(); // Hook yuqori darajada chaqiriladi
+
+
+  const handlePrepareOrder = () => {
+    prepareOrderMutation.mutate(seans, {
+      onSuccess: (data) => {
+        console.log("Order prepared successfully:", data);
+        setEventData(data)
+      },
+      onError: (error) => {
+        console.error("Failed to prepare order:", error);
+      },
+    });
+  };
+
+
+  const OrderEditFunc = (id = 1, value = 1) => {
+    EditOrderMutation.mutate({
+      "ticket_type_id": id || 1,
+      "quantity": value || 1
+    }, {
+      onSuccess: (data) => {
+        console.log("Order edited successfully:", data);
+        handlePrepareOrder()
+      },
+      onError: (error) => {
+        console.error("Failed to edit order:", error);
+      },
+    });
+  }
+
+  console.log("EventData", eventData);
+
+
+  useEffect(() => {
+    handlePrepareOrder()
+  }, [isOpen])
+
 
   //  -------------------------------------- Verification --------------------------------------
 
@@ -123,8 +169,24 @@ export default function order({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
+  if (!seans) return null;
+
+
+
+
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
+
+      {
+        loading ?
+          <div
+            className="loaderWindow"
+          >
+            <div className="loader" ></div>
+          </div>
+          : ""
+      }
+
       {modal === 1 && (
         <div
           className={styles.mainContainer}
@@ -134,7 +196,7 @@ export default function order({ isOpen, onClose }) {
             <div className={styles.boxModalLeftTop}>
               <div className={styles.eventInfo}>
                 <div className={styles.eventName}>
-                  <h1>GEEK CON</h1>
+                  <h1 onClick={handlePrepareOrder} >GEEK CON</h1>
                   <button className={styles.closeIconMobile} onClick={onClose}>
                     <Image
                       src="/closeModal.svg"
@@ -154,93 +216,97 @@ export default function order({ isOpen, onClose }) {
               </div>
             </div>
             <div className={styles.eventTicket}>
-              {[1, 2, 3, 4, 5, 6].map((item, index) => (
-                <div key={index} className={styles.oneTypeTicket}>
-                  <div className={styles.oneTypeTicketHead}>
-                    <h6>Входной билет</h6>
-                    <svg
-                      width="4"
-                      height="4"
-                      viewBox="0 0 4 4"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <circle
-                        cx="2"
-                        cy="2"
-                        r="2"
-                        fill="#1C274C"
-                        fillOpacity="0.2"
-                      />
-                    </svg>
-                    <p>{formatNumber("4000")} билетов</p>
-                  </div>
 
-                  <div className={styles.boxOneTypeTicektBody}>
-                    <div className={styles.boxTypeHead}>
-                      <div className={styles.boxRowGap12}>
-                        <p>Обычный</p>
-                        <h6>
-                          <span>18+</span>
-                        </h6>
-                      </div>
+              {eventData?.sessions
+                ?.filter((session) => session.session_id === isOpen)
+                ?.flatMap((session) => session.tickets)
+                ?.map((ticket, index) => (
+                  <div key={index} className={styles.oneTypeTicket}>
+                    <div className={styles.oneTypeTicketHead}>
+                      <h6>{ticket.ticket_type_name}</h6>
+                      <svg
+                        width="4"
+                        height="4"
+                        viewBox="0 0 4 4"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <circle
+                          cx="2"
+                          cy="2"
+                          r="2"
+                          fill="#1C274C"
+                          fillOpacity="0.2"
+                        />
+                      </svg>
+                      <p>{formatNumber(ticket.remaining)} билетов</p>
                     </div>
-                    <div className={styles.boxTypeBody}>
-                      <h3>{formatNumber(195000)} сум</h3>
-                      <div className={styles.boxTicketQuantity}>
-                        <button
-                          onClick={() => setQuantity(quantity - 1)}
-                          disabled={quantity < 1}
-                        >
-                          <Image
-                            src={
-                              quantity < 1
-                                ? theme === "dark"
-                                  ? "removeTicektNotActiveDark.svg"
-                                  : "/removeTicektNotActive.svg"
-                                : theme === "dark"
-                                ? "/removeTicketDark.svg"
-                                : "/removeTicket.svg"
-                            }
-                            alt="remove Ticket"
-                            width={24}
-                            height={24}
-                          />
-                        </button>
-                        <p>{quantity}</p>
-                        <button onClick={() => setQuantity(quantity + 1)}>
-                          <Image
-                            src={
-                              theme === "dark"
-                                ? "/addTicketDark.svg"
-                                : "/addTicket.svg"
-                            }
-                            alt="add Ticket"
-                            width={24}
-                            height={24}
-                          />
-                        </button>
+
+                    <div className={styles.boxOneTypeTicektBody}>
+                      <div className={styles.boxTypeHead}>
+                        <div className={styles.boxRowGap12}>
+                          <p>{ticket?.ticket_type_category ? ticket?.ticket_type_category : ticket?.ticket_type_name}</p>
+                          <h6>
+                            <span>{ticket.age_allowed || 18}</span>
+                          </h6>
+                        </div>
+                      </div>
+                      <div className={styles.boxTypeBody}>
+                        <h3>{formatNumber(ticket.price)} сум</h3>
+                        <div className={styles.boxTicketQuantity}>
+                          <button
+                            onClick={() => OrderEditFunc(ticket?.ticket_type_id, -1)}
+                            disabled={(ticket?.quantity < 1)}
+                          >
+                            <Image
+                              src={
+                                quantity < 1
+                                  ? theme === "dark"
+                                    ? "removeTicektNotActiveDark.svg"
+                                    : "/removeTicektNotActive.svg"
+                                  : theme === "dark"
+                                    ? "/removeTicketDark.svg"
+                                    : "/removeTicket.svg"
+                              }
+                              alt="remove Ticket"
+                              width={24}
+                              height={24}
+                            />
+                          </button>
+                          <p>{ticket?.quantity}</p>
+                          <button onClick={() => OrderEditFunc(ticket?.ticket_type_id, 1)}>
+                            <Image
+                              src={
+                                theme === "dark"
+                                  ? "/addTicketDark.svg"
+                                  : "/addTicket.svg"
+                              }
+                              alt="add Ticket"
+                              width={24}
+                              height={24}
+                            />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
             <div className={styles.boxGap12}>
-            <div className={styles.boxTotalPrice}>
-              <p>Итого:</p>
-              <div className={styles.overPrice}>
-                <div className={styles.price}>
-                  {formatNumber("3399000")} so’m
+              <div className={styles.boxTotalPrice}>
+                <p>Итого:</p>
+                <div className={styles.overPrice}>
+                  <div className={styles.price}>
+                    {formatNumber("3399000")} so’m
+                  </div>
+                  {promocodeVerify ? <></> : <></>}
                 </div>
-                {promocodeVerify ? <></> : <></>}
               </div>
-            </div>
-            <button
-              onClick={() => setModal(modal + 1)}
-              className={styles.boxButtonNextAdaptive}>
-              Далее: 3 399 000 so’m
-            </button>
+              <button
+                onClick={() => setModal(modal + 1)}
+                className={styles.boxButtonNextAdaptive}>
+                Далее: 3 399 000 so’m
+              </button>
             </div>
           </div>
           <div className={styles.modalRightBox}>
@@ -377,233 +443,6 @@ export default function order({ isOpen, onClose }) {
             >
               <p>Далее: 3 399 000 so’m</p>
             </button>
-          </div>
-        </div>
-      )}
-      {modal === 2 && (
-        <div className={styles.mainContainer1}onClick={(e) => e.stopPropagation()}>
-          <div className={styles.modalRightBox1}>
-            <div className={styles.boxModalRightTop}>
-              <div className={styles.boxRowH1}>
-                <h1>ОПЛАТА</h1>
-                <button onClick={onClose}>
-                  <Image
-                    src="/closeModal.svg"
-                    alt="closeModal"
-                    width={72}
-                    height={72}
-                  />
-                </button>
-              </div>
-              <div className={styles.boxRightModal}>
-                <div className={styles.boxTimer}>
-                  <Image
-                    src={
-                      theme === "dark"
-                        ? "/orderTimerDark.svg"
-                        : "/orderTimer.svg"
-                    }
-                    alt="orderTimer"
-                    width={24}
-                    height={24}
-                  />
-                  <p>Оплатите в течении 15:00 минут</p>
-                </div>
-                <div className={styles.boxPaymentsType}>
-                  <p>Способ оплаты</p>
-                  <div className={styles.boxPayments}>
-                    <button
-                      onClick={() => setPaymentType("click")}
-                      className={
-                        paymentType === "click"
-                          ? styles.onePaymentTypeActive
-                          : styles.onePaymentType
-                      }
-                    >
-                      <div className={styles.paymentName}>
-                        <Image
-                          src="/click.svg"
-                          alt="click"
-                          width={32}
-                          height={32}
-                        />
-                        <p>Click</p>
-                      </div>
-                      <p>Система оплаты через Click</p>
-                    </button>
-                    <button
-                      onClick={() => setPaymentType("payme")}
-                      className={
-                        paymentType === "payme"
-                          ? styles.onePaymentTypeActive
-                          : styles.onePaymentType
-                      }
-                    >
-                      <div className={styles.paymentName}>
-                        <Image
-                          src="/payme.svg"
-                          alt="click"
-                          width={32}
-                          height={32}
-                        />
-                        <p>Payme</p>
-                      </div>
-                      <p>Система оплаты через Payme</p>
-                    </button>
-                    <button
-                      onClick={() => setPaymentType("card")}
-                      className={
-                        paymentType === "card"
-                          ? styles.onePaymentTypeActive
-                          : styles.onePaymentType
-                      }
-                    >
-                      <div className={styles.paymentName}>
-                        <Image
-                          src={
-                            resolvedTheme === "dark"
-                              ? "/cardDark.svg"
-                              : "/card.svg"
-                          }
-                          alt="click"
-                          width={32}
-                          height={32}
-                        />
-                        <p>Банковская карта</p>
-                      </div>
-                      <p>Новая банковская карта</p>
-                    </button>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Промокод или код сертификата"
-                  />
-                </div>
-                <div className={styles.boxPrivatyPolicy}>
-                  <button
-                    onClick={() => setPrivatyPolicy(!privatyPolicy)}
-                    className={
-                      privatyPolicy
-                        ? styles.boxkvadratActive
-                        : styles.boxkvadrat
-                    }
-                  >
-                    {privatyPolicy ? (
-                      <Image
-                        src={
-                          theme === "dark"
-                            ? "/orderPrivatyDark.svg"
-                            : "/orderPrivaty.svg"
-                        }
-                        alt="галочка"
-                        width={28}
-                        height={28}
-                      />
-                    ) : (
-                      <></>
-                    )}
-                  </button>
-                  <p>
-                    Совершая оплату, вы принимаете
-                    <a href=""> пользовательское соглашение</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <button
-              onClick={() => setModal(modal + 1)}
-              className={styles.boxButtonNextAdaptive}>
-              <p>Далее: 3 399 000 so’m</p>
-            </button>
-          </div>
-        </div>
-      )}
-      {modal === 3 && (
-        <div
-          className={styles.mainContainer1}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className={styles.firstPayment}>
-            <h1>Реквизиты для оплаты</h1>
-            <div className={styles.boxColGap4}>
-              <div className={styles.boxRowGap8}>
-                <div className={styles.boxInput}>
-                  <Image
-                    src={
-                      resolvedTheme === "dark" ? "/cardDark.svg" : "/card.svg"
-                    }
-                    alt="card"
-                    width={32}
-                    height={32}
-                  />
-                  <input type="text" placeholder="XXXX XXXX XXXX XXXX" />
-                </div>
-                <div className={styles.boxInput1}>
-                  <input type="text" placeholder="ММ / ГГ" />
-                </div>
-              </div>
-              <div className={styles.boxRowGap4}>
-                <div className={styles.boxPayment}>
-                  <Image src="/humo.svg" alt="humo" width={50} height={30} />
-                </div>
-                <div className={styles.boxPayment}>
-                  <Image
-                    src={theme === "dark" ? "/uzcardDark.svg" : "/uzcard.svg"}
-                    alt="uzcard"
-                    width={76}
-                    height={14}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className={styles.boxRowSpaceBetween}>
-              <h1>Итого: 3 399 000 so’m</h1>
-              <button
-                className={styles.buttonPey}
-                onClick={() => setModal(modal + 1)}
-              >
-                Оплатить
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {modal === 4 && (
-        <div
-          className={styles.mainContainer1}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className={styles.firstPayment}>
-            <h1>Введите код из СМС</h1>
-            <h3>Мы отправили СМС на ваш номер</h3>
-            <div className={styles.boxColGap16}>
-              <div className={styles.boxRowGap8}>
-                {code.map((_, index) => (
-                  <input
-                    key={index}
-                    ref={(el) => (inputs.current[index] = el)}
-                    type="text"
-                    inputMode="numeric" // Ограничиваем ввод только цифрами
-                    maxLength="1"
-                    value={code[index]}
-                    onChange={(e) => handleChangeVerification(e, index)}
-                    onKeyDown={(e) => handleBackspace(e, index)}
-                    onPaste={handlePaste}
-                    placeholder="x"
-                    id={`input-${index}`}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className={styles.boxRowSpaceBetween}>
-              <button
-                className={styles.buttonNext}
-                onClick={() => setModal(modal + 1)}
-              >
-                Далее
-              </button>
-            </div>
           </div>
         </div>
       )}

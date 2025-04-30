@@ -431,9 +431,8 @@ export default function EventPage() {
                       </button>
                     </div>
                     <div className={styles.boxPriceAndBuyTicket}>
-                      <h1>От 150 000 сум до 1 350 000 сум</h1>
                       <button
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={() => setIsModalOpen(session?.id)}
                         className={styles.buyTicket2}
                       >
                         <p>Купить билет</p>
@@ -478,7 +477,7 @@ export default function EventPage() {
           </div>
         </div>
         <Footer />
-        <Order isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <Order seans={event?.id || 1} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </section>
       <NavAdaptive />
     </div>
