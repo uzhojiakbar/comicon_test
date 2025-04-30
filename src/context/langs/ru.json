@@ -27,5 +27,21 @@
   "Wednesday": "Среда",
   "Thursday": "Четверг",
   "Friday": "Пятница",
-  "Saturday": "Суббота"
+  "Saturday": "Суббота",
+  "orderEditedPlusText": "Вы добавили билет",
+  "orderEditedMinusText": "Вы убрали билет",
+  "uzs_som": "сум",
+  "uzs_som_plural": "сумов",
+  "next": "Далее",
+  "total": "Итого",
+  "paymentAcceptance": "Совершая оплату, вы принимаете",
+  "userAgreement": "пользовательское соглашение ",
+  "newBankCard": "Новая банковская карта",
+  "bankCard": "Банковская карта",
+  "payWithPayme": "Система оплаты через Payme",
+  "payWithClick": "Система оплаты через Click",
+  "CLICK": "Click",
+  "paymentMethod": "Способ оплаты",
+  "payWithin": "Оплатите в течении 5:00 минут",
+  "pay": "ОПЛАТА"
 }

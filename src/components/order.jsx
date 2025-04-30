@@ -3,12 +3,20 @@ import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import styles from "./order.module.css";
 import useNumberFormatter from "@/utils/NumberFormatter";
-import { Modak } from "next/font/google";
 import { useTheme } from "next-themes";
 import { PrepareOrder, OrderEdit } from "@/utils/server/order";
 import useApi from "@/utils/api";
+import { useToast } from "./toastProvider";
+import { useLanguage } from "@/context/languageContext";
 
 export default function order({ seans, isOpen, onClose }) {
+
+
+  const api = useApi()
+  const prepareOrderMutation = PrepareOrder(); // Hook yuqori darajada chaqiriladi
+  const EditOrderMutation = OrderEdit(); // Hook yuqori darajada chaqiriladi
+
+
   const [quantity, setQuantity] = useState(0);
   const [privatyPolicy, setPrivatyPolicy] = useState(false);
   const [paymentType, setPaymentType] = useState("");
@@ -22,12 +30,13 @@ export default function order({ seans, isOpen, onClose }) {
   const [loading, setLoading] = useState(false);
   const inputs = useRef([]);
   const { resolvedTheme, theme } = useTheme();
-
+  const { addToast } = useToast();
+  const { translate } = useLanguage()
+  const [currentSession, setCurrentSession] = useState({})
   const [eventData, setEventData] = useState()
 
-  const api = useApi()
-  const prepareOrderMutation = PrepareOrder(); // Hook yuqori darajada chaqiriladi
-  const EditOrderMutation = OrderEdit(); // Hook yuqori darajada chaqiriladi
+
+
 
 
   const handlePrepareOrder = () => {
@@ -51,6 +60,12 @@ export default function order({ seans, isOpen, onClose }) {
       onSuccess: (data) => {
         console.log("Order edited successfully:", data);
         handlePrepareOrder()
+        if (value === 1) {
+          addToast(translate("orderEditedPlusText"), "success");
+        } else {
+          addToast(translate("orderEditedMinusText"), "success");
+        }
+
       },
       onError: (error) => {
         console.error("Failed to edit order:", error);
@@ -167,9 +182,69 @@ export default function order({ seans, isOpen, onClose }) {
     };
   }, [isOpen]);
 
+
+  useEffect(() => {
+    setCurrentSession(
+      eventData?.sessions
+        ?.filter((session) => session.session_id === isOpen)
+    )
+  }, [eventData, isOpen])
+
   if (!isOpen) return null;
 
   if (!seans) return null;
+
+
+
+  function parseDate(inputDateString) {
+    const date = new Date(inputDateString);
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
+    const day = date.getDate();
+
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const month = monthNames[date.getMonth()];
+
+    let qachonligi = "";
+
+    const isToday = date.toDateString() === today.toDateString();
+    const isTomorrow = date.toDateString() === tomorrow.toDateString();
+
+    if (isToday) {
+      qachonligi = "Today";
+    } else if (isTomorrow) {
+      qachonligi = "Tomorrow";
+    } else {
+      qachonligi = `${day}-${month}`;
+    }
+
+    // Soat va minutni formatlash (00:00 shaklida)
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const time = `${hours}:${minutes}`;
+
+    return {
+      day: isToday || isTomorrow ? qachonligi : day,
+      month: isToday || isTomorrow ? "" : month,
+      qachonligi,
+      time,
+    };
+  }
 
 
 
@@ -196,7 +271,9 @@ export default function order({ seans, isOpen, onClose }) {
             <div className={styles.boxModalLeftTop}>
               <div className={styles.eventInfo}>
                 <div className={styles.eventName}>
-                  <h1 onClick={handlePrepareOrder} >GEEK CON</h1>
+                  <h1 onClick={handlePrepareOrder}>{
+                    currentSession?.[0]?.event_name || ""
+                  }</h1>
                   <button className={styles.closeIconMobile} onClick={onClose}>
                     <Image
                       src="/closeModal.svg"
@@ -207,9 +284,17 @@ export default function order({ seans, isOpen, onClose }) {
                   </button>
                 </div>
                 <div className={styles.eventPlace}>
-                  <p>Сегодня в 12:00</p>
+                  <p>{translate(parseDate(currentSession?.[0]?.session_time)?.day)}
+                    {
+                      translate(parseDate(currentSession?.[0]?.session_time)?.month)
+                        ?
+                        ` - ${translate(parseDate(currentSession?.[0]?.session_time)?.month)} `
+                        : ""
+
+                    }
+                    в {parseDate(currentSession?.[0]?.session_time)?.time}</p>
                   <div className={styles.boxEventPlace}>
-                    <p>Magic Cinema</p>
+                    <p>{currentSession?.[0]?.location_name}</p>
                     <h6>улица Бабура, 174/12</h6>
                   </div>
                 </div>
@@ -294,10 +379,10 @@ export default function order({ seans, isOpen, onClose }) {
             </div>
             <div className={styles.boxGap12}>
               <div className={styles.boxTotalPrice}>
-                <p>Итого:</p>
+                <p>{translate("total")}:</p>
                 <div className={styles.overPrice}>
                   <div className={styles.price}>
-                    {formatNumber("3399000")} so’m
+                    {formatNumber(eventData?.total_amount)} {translate("uzs_som")}
                   </div>
                   {promocodeVerify ? <></> : <></>}
                 </div>
@@ -305,14 +390,15 @@ export default function order({ seans, isOpen, onClose }) {
               <button
                 onClick={() => setModal(modal + 1)}
                 className={styles.boxButtonNextAdaptive}>
-                Далее: 3 399 000 so’m
+                {translate("next")}:
+                {formatNumber(eventData?.total_amount)} {translate("uzs_som")}
               </button>
             </div>
           </div>
           <div className={styles.modalRightBox}>
             <div className={styles.boxModalRightTop}>
               <div className={styles.boxRowH1}>
-                <h1>ОПЛАТА</h1>
+                <h1>{translate("pay")}</h1>
                 <button onClick={onClose}>
                   <Image
                     src="/closeModal.svg"
@@ -334,72 +420,87 @@ export default function order({ seans, isOpen, onClose }) {
                     width={24}
                     height={24}
                   />
-                  <p>Оплатите в течении 15:00 минут</p>
+                  <p>{translate("payWithin")}</p>
                 </div>
                 <div className={styles.boxPaymentsType}>
-                  <p>Способ оплаты</p>
+                  <p>{translate("paymentMethod")}</p>
                   <div className={styles.boxPayments}>
-                    <button
-                      onClick={() => setPaymentType("click")}
-                      className={
-                        paymentType === "click"
-                          ? styles.onePaymentTypeActive
-                          : styles.onePaymentType
-                      }
-                    >
-                      <div className={styles.paymentName}>
-                        <Image
-                          src="/click.svg"
-                          alt="click"
-                          width={32}
-                          height={32}
-                        />
-                        <p>Click</p>
-                      </div>
-                      <p>Система оплаты через Click</p>
-                    </button>
-                    <button
-                      onClick={() => setPaymentType("payme")}
-                      className={
-                        paymentType === "payme"
-                          ? styles.onePaymentTypeActive
-                          : styles.onePaymentType
-                      }
-                    >
-                      <div className={styles.paymentName}>
-                        <Image
-                          src="/payme.svg"
-                          alt="click"
-                          width={32}
-                          height={32}
-                        />
-                        <p>Payme</p>
-                      </div>
-                      <p>Система оплаты через Payme</p>
-                    </button>
-                    <button
-                      onClick={() => setPaymentType("card")}
-                      className={
-                        paymentType === "card"
-                          ? styles.onePaymentTypeActive
-                          : styles.onePaymentType
-                      }
-                    >
-                      <div className={styles.paymentName}>
-                        <Image
-                          src={
-                            resolvedTheme === "dark"
-                              ? "/cardDark.svg"
-                              : "/card.svg"
+                    {/* CARD */}
+
+                    {
+                      eventData?.payment_methods?.includes("CLICK") ?
+                        <button
+                          onClick={() => setPaymentType("click")}
+                          className={
+                            paymentType === "click"
+                              ? styles.onePaymentTypeActive
+                              : styles.onePaymentType
                           }
-                          alt="click"
-                          width={32}
-                          height={32}
-                        />
-                        <p>Банковская карта</p>
-                      </div>
-                      <p>Новая банковская карта</p>
-                    </button>
+                        >
+                          <div className={styles.paymentName}>
+                            <Image
+                              src="/click.svg"
+                              alt="click"
+                              width={32}
+                              height={32}
+                            />
+                            <p>{translate("CLICK")}</p>
+                          </div>
+                          <p>{translate("payWithClick")}</p>
+                        </button>
+                        : ""
+                    }
+
+                    {/* PAYME */}
+                    {eventData?.payment_methods?.includes("PAYME") ?
+                      <button
+                        onClick={() => setPaymentType("payme")}
+                        className={
+                          paymentType === "payme"
+                            ? styles.onePaymentTypeActive
+                            : styles.onePaymentType
+                        }
+                      >
+                        <div className={styles.paymentName}>
+                          <Image
+                            src="/payme.svg"
+                            alt="click"
+                            width={32}
+                            height={32}
+                          />
+                          <p>{translate("Payme")}</p>
+                        </div>
+                        <p>{translate("payWithPayme")}</p>
+                      </button>
+                      : ""
+                    }
+
+                    {/* CARD */}
+                    {eventData?.payment_methods?.includes("ATMOSPAY") ?
+                      <button
+                        onClick={() => setPaymentType("card")}
+                        className={
+                          paymentType === "card"
+                            ? styles.onePaymentTypeActive
+                            : styles.onePaymentType
+                        }
+                      >
+                        <div className={styles.paymentName}>
+                          <Image
+                            src={
+                              resolvedTheme === "dark"
+                                ? "/cardDark.svg"
+                                : "/card.svg"
+                            }
+                            alt="click"
+                            width={32}
+                            height={32}
+                          />
+                          <p>{translate("bankCard")}</p>
+                        </div>
+                        <p>{translate("newBankCard")}</p>
+                      </button>
+                      : ""}
                   </div>
                   <input
                     type="text"
@@ -431,8 +532,8 @@ export default function order({ seans, isOpen, onClose }) {
                     )}
                   </button>
                   <p>
-                    Совершая оплату, вы принимаете
-                    <a href="">пользовательское соглашение</a>
+                    {translate("paymentAcceptance")} {" "}
+                    <a href="">{translate("userAgreement")}</a>
                   </p>
                 </div>
               </div>
@@ -441,7 +542,7 @@ export default function order({ seans, isOpen, onClose }) {
               onClick={() => setModal(modal + 2)}
               className={styles.boxButtonNext}
             >
-              <p>Далее: 3 399 000 so’m</p>
+              <p>Далее: {formatNumber(eventData?.total_amount)} {translate("uzs_som")}</p>
             </button>
           </div>
         </div>
