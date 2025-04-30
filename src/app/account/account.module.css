@@ -389,7 +389,7 @@
     gap: 8px;
     align-self: stretch;
     border-radius: 999px;
-    background: var(--secondColor);
+    background: var(--navLoginButton);
     color: var(--color);
     font-family: Involve;
     font-size: 16px;
@@ -490,7 +490,7 @@
     align-items: center;
     gap: 8px;
     border-radius: 999px;
-    background: var(--secondColor);
+    background: var(--navLoginButton);
     color: var(--color);
     font-family: Involve;
     font-size: 12px;
@@ -712,8 +712,6 @@
         gap: 4px;
         font-size: 11px;
         border-radius: 999px;
-        background: none;
-        color: var(--color);
         font-family: Involve;
         font-style: normal;
         font-weight: 500;
@@ -728,8 +726,6 @@
         gap: 8px;
         font-size: 12px;
         border-radius: 999px;
-        background: none;
-        color: var(--color);
         font-family: Involve;
         font-style: normal;
         font-weight: 500;
@@ -754,12 +750,10 @@
         align-items: center;
         gap: 12px;
         border-radius: 999px;
-
         justify-content: space-between;
         background: var(--cardDarkColor);
         color: var(--color);
         max-width: 227px;
-        width: 227px;
         margin: 0 auto;
     }
 

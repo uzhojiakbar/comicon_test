@@ -445,7 +445,7 @@ export default function order({ seans, isOpen, onClose }) {
                     в {parseDate(currentSession?.[0]?.session_time)?.time}</p>
                   <div className={styles.boxEventPlace}>
                     <p>{currentSession?.[0]?.location_name}</p>
-                    <h6>улица Бабура, 174/12</h6>
+                    <h6>{translate("улица Бабура, 174/12")}</h6>
                   </div>
                 </div>
               </div>
@@ -473,7 +473,7 @@ export default function order({ seans, isOpen, onClose }) {
                           fillOpacity="0.2"
                         />
                       </svg>
-                      <p>{formatNumber(ticket.remaining)} билетов</p>
+                      <p>{formatNumber(ticket.remaining)} {translate("билетов")}</p>
                     </div>
 
                     <div className={styles.boxOneTypeTicektBody}>
@@ -486,7 +486,7 @@ export default function order({ seans, isOpen, onClose }) {
                         </div>
                       </div>
                       <div className={styles.boxTypeBody}>
-                        <h3>{formatNumber(ticket.price)} сум</h3>
+                        <h3>{formatNumber(ticket.price)} {translate("сум")}</h3>
                         <div className={styles.boxTicketQuantity}>
                           <button
                             onClick={() => OrderEditFunc(ticket?.ticket_type_id, -1)}
@@ -539,7 +539,7 @@ export default function order({ seans, isOpen, onClose }) {
               <button
                 onClick={() => setModal(modal + 1)}
                 className={styles.boxButtonNextAdaptive}>
-                {translate("next")}:
+                {translate("next")} :
                 {formatNumber(eventData?.total_amount)} {translate("uzs_som")}
               </button>
             </div>
@@ -576,8 +576,7 @@ export default function order({ seans, isOpen, onClose }) {
                   <div className={styles.boxPayments}>
                     {/* CLICK */}
 
-                    {
-                      eventData?.payment_methods?.includes("CLICK") ?
+                    {eventData?.payment_methods?.includes("CLICK") ?
                         <button
                           onClick={() => setPaymentType("click")}
                           className={
@@ -661,7 +660,7 @@ export default function order({ seans, isOpen, onClose }) {
                       type="text"
                       disabled={!!eventData?.promo?.discount_amount}
                       onChange={(e) => setPromocodeVerify(e?.target?.value)}
-                      placeholder="Промокод или код сертификата"
+                      placeholder={translate("Промокод или код сертификата")}
                     />
                     {/* PostPromocode */}
                     <button
@@ -669,7 +668,7 @@ export default function order({ seans, isOpen, onClose }) {
                       onClick={() => PostPromocode()}
                       className={styles.boxButtonNext}
                     >
-                      Применить
+                      {translate("Применить")}
                     </button></div>
 
                 </div>
@@ -706,9 +705,8 @@ export default function order({ seans, isOpen, onClose }) {
             </div>
             <button
               onClick={() => HandelPayment()}
-              className={styles.boxButtonNext}
-            >
-              <p>Далее: {formatNumber(eventData?.total_amount)} {translate("uzs_som")}</p>
+              className={styles.boxButtonNext} disabled={!privatyPolicy}>
+              <p>{translate("Далее")}: {formatNumber(eventData?.total_amount)} {translate("uzs_som")}</p>
             </button>
           </div>
         </div>
@@ -718,7 +716,7 @@ export default function order({ seans, isOpen, onClose }) {
           <div className={styles.modalRightBox1}>
             <div className={styles.boxModalRightTop}>
               <div className={styles.boxRowH1}>
-                <h1>ОПЛАТА</h1>
+                <h1>{translate("ОПЛАТА")}</h1>
                 <button onClick={onClose}>
                   <Image
                     src="/closeModal.svg"
@@ -740,77 +738,80 @@ export default function order({ seans, isOpen, onClose }) {
                     width={24}
                     height={24}
                   />
-                  <p>Оплатите в течении 15:00 минут</p>
+                  <p>{translate("Оплатите в течении 15:00 минут")}</p>
                 </div>
                 <div className={styles.boxPaymentsType}>
-                  <p>Способ оплаты</p>
+                  <p>{translate("Способ оплаты")}</p>
                   <div className={styles.boxPayments}>
-                    <button
-                      onClick={() => setPaymentType("click")}
-                      className={
-                        paymentType === "click"
-                          ? styles.onePaymentTypeActive
-                          : styles.onePaymentType
-                      }
-                    >
-                      <div className={styles.paymentName}>
-                        <Image
-                          src="/click.svg"
-                          alt="click"
-                          width={32}
-                          height={32}
-                        />
-                        <p>Click</p>
-                      </div>
-                      <p>Система оплаты через Click</p>
-                    </button>
-                    <button
-                      onClick={() => setPaymentType("payme")}
-                      className={
-                        paymentType === "payme"
-                          ? styles.onePaymentTypeActive
-                          : styles.onePaymentType
-                      }
-                    >
-                      <div className={styles.paymentName}>
-                        <Image
-                          src="/payme.svg"
-                          alt="click"
-                          width={32}
-                          height={32}
-                        />
-                        <p>Payme</p>
-                      </div>
-                      <p>Система оплаты через Payme</p>
-                    </button>
-                    <button
-                      onClick={() => setPaymentType("card")}
-                      className={
-                        paymentType === "card"
-                          ? styles.onePaymentTypeActive
-                          : styles.onePaymentType
-                      }
-                    >
-                      <div className={styles.paymentName}>
-                        <Image
-                          src={
-                            resolvedTheme === "dark"
-                              ? "/cardDark.svg"
-                              : "/card.svg"
+                  {eventData?.payment_methods?.includes("CLICK") ?
+                        <button
+                          onClick={() => setPaymentType("click")}
+                          className={
+                            paymentType === "click"
+                              ? styles.onePaymentTypeActive
+                              : styles.onePaymentType
                           }
-                          alt="click"
-                          width={32}
-                          height={32}
-                        />
-                        <p>Банковская карта</p>
-                      </div>
-                      <p>Новая банковская карта</p>
-                    </button>
+                        >
+                          <div className={styles.paymentName}>
+                            <Image
+                              src="/click.svg"
+                              alt="click"
+                              width={32}
+                              height={32}
+                            />
+                            <p>{translate("CLICK")}</p>
+                          </div>
+                          <p>{translate("payWithClick")}</p>
+                        </button>
+                        : ""
+                    }
+                    {eventData?.payment_methods?.includes("ATMOSPAY") ?
+                      <button
+                        onClick={() => setPaymentType("card")}
+                        className={
+                          paymentType === "card"
+                            ? styles.onePaymentTypeActive
+                            : styles.onePaymentType
+                        }
+                      >
+                        <div className={styles.paymentName}>
+                          <Image
+                            src={
+                              resolvedTheme === "dark"
+                                ? "/cardDark.svg"
+                                : "/card.svg"
+                            }
+                            alt="click"
+                            width={32}
+                            height={32}
+                          />
+                          <p>{translate("bankCard")}</p>
+                        </div>
+                        <p>{translate("newBankCard")}</p>
+                      </button>
+                      : ""}
+
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Промокод или код сертификата"
-                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "20px"
+                    }}
+                  > <input
+                      style={{ width: "80%" }}
+                      type="text"
+                      disabled={!!eventData?.promo?.discount_amount}
+                      onChange={(e) => setPromocodeVerify(e?.target?.value)}
+                      placeholder={translate("Промокод или код сертификата")}
+                    />
+                    {/* PostPromocode */}
+                    <button
+                      disabled={!!eventData?.promo?.discount_amount}
+                      onClick={() => PostPromocode()}
+                      className={styles.boxButtonNext}
+                    >
+                      {translate("Применить")}
+                    </button></div>
                 </div>
                 <div className={styles.boxPrivatyPolicy}>
                   <button
@@ -837,16 +838,16 @@ export default function order({ seans, isOpen, onClose }) {
                     )}
                   </button>
                   <p>
-                    Совершая оплату, вы принимаете
-                    <a href=""> пользовательское соглашение</a>
+                    {translate("Совершая оплату, вы принимаете")}
+                    <a href=""> {translate("пользовательское соглашение")}</a>
                   </p>
                 </div>
               </div>
             </div>
             <button
-              onClick={() => setModal(modal + 1)}
-              className={styles.boxButtonNextAdaptive}>
-              <p>Далее: 3 399 000 so’m</p>
+              onClick={() => HandelPayment()}
+              className={styles.boxButtonNext} disabled={!privatyPolicy}>
+              <p>{translate("Далее")}: {formatNumber(eventData?.total_amount)} {translate("uzs_som")}</p>
             </button>
           </div>
         </div>
@@ -857,7 +858,7 @@ export default function order({ seans, isOpen, onClose }) {
           onClick={(e) => e.stopPropagation()}
         >
           <div className={styles.firstPayment}>
-            <h1>Реквизиты для оплаты</h1>
+            <h1>{translate("Реквизиты для оплаты")}</h1>
             <div className={styles.boxColGap4}>
               <div className={styles.boxRowGap8}>
                 <div className={styles.boxInput}>
@@ -880,7 +881,7 @@ export default function order({ seans, isOpen, onClose }) {
                       ...cardData,
                       "expiry": e.target.value
                     })}
-                    type="text" placeholder="ММ / ГГ" />
+                    type="text" placeholder={translate("ММ / ГГ")} />
                 </div>
               </div>
               <div className={styles.boxRowGap4}>
@@ -898,12 +899,12 @@ export default function order({ seans, isOpen, onClose }) {
               </div>
             </div>
             <div className={styles.boxRowSpaceBetween}>
-              <h1>Итого:  {formatNumber(totalAmoutForModal3?.amount)} {translate("uzs_som")}</h1>
+              <h1>{translate("Итого")}:  {formatNumber(totalAmoutForModal3?.amount)} {translate("uzs_som")}</h1>
               <button
                 className={styles.buttonPey}
                 onClick={() => AtmosPyPreApply()}
               >
-                Оплатить
+                {translate("Оплатить")}
               </button>
             </div>
           </div>
@@ -915,8 +916,8 @@ export default function order({ seans, isOpen, onClose }) {
           onClick={(e) => e.stopPropagation()}
         >
           <div className={styles.firstPayment}>
-            <h1>Введите код из СМС</h1>
-            <h3>Мы отправили СМС на ваш номер</h3>
+            <h1>{translate("Введите код из СМС")}</h1>
+            <h3>{translate("Мы отправили СМС на ваш номер")}</h3>
             <div className={styles.boxColGap16}>
               <div className={styles.boxRowGap8}>
                 {code.map((_, index) => (
@@ -941,7 +942,7 @@ export default function order({ seans, isOpen, onClose }) {
                 className={styles.buttonNext}
                 onClick={() => AtmosPyeApply()}
               >
-                Далее
+                {translate("Далее")}
               </button>
             </div>
           </div>

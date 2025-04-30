@@ -532,10 +532,11 @@
 }
 
 .swiperSlide {
-  width: fit-content; /* ❌ bu xatolik */
-  flex-shrink: 0;
+  /* width: fit-content; ❌ bu xatolik */
+  /* flex-shrink: 0; */
   display: flex;
   transition: all 0.3s ease;
+  flex-direction: column !important;
 }
 
 .guestCard {
@@ -550,7 +551,10 @@
 
 .hovered {
   width: 400px !important;
+  flex-direction: column;
+  display: flex;
 }
+
 
 .guestContent {
   display: flex;
@@ -607,6 +611,17 @@
 
 /* media */
 
+@media screen and (max-width:1050px) {
+  
+  .hovered, .guestCard{
+    width: 100% !important;
+  }
+
+  .guestContent{
+    justify-content: space-around;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   .boxOneDayTicket {
     width: 100%;
@@ -616,6 +631,43 @@
     align-self: stretch;
     flex-direction: column;
     gap: 12px;
+  }
+}
+
+@media screen and (max-width:930px) {
+  .boxOneCinema{
+    flex-direction: column;
+    gap: 10px;
+  }
+  .boxCinemaName{
+    width: 100%;
+    justify-content: center;
+  }
+  .boxCinemaLocation {
+    width: 100%;
+  }
+
+}
+
+@media screen and (max-width:900px) {
+  .buyTicket2, .boxPriceAndBuyTicket{
+    width: 100%;
+  }
+  .guestContent{
+    flex-direction: column;
+    height: 450px;
+    justify-content: space-around;
+    padding: 0px;
+  }
+  .hovered, .guestCard{
+    width: 100% !important;
+  }
+
+  .guestHover{
+    padding: 5px;
+  }
+  .carouselWrapper{
+    gap: 0px;
   }
 }
 
@@ -699,6 +751,7 @@
     padding: 36px 10px;
   }
 
+
   .boxOneTicketInformation {
     flex-direction: column;
     align-items: center;
@@ -750,10 +803,6 @@
 
   .boxCinemaNameAndLocation p {
     font-size: 14px;
-  }
-
-  .boxCinemaLocation {
-    width: 100%;
   }
 
   .boxCinemaLogo {

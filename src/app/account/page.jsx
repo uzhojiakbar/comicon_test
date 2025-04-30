@@ -17,9 +17,12 @@ import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { useTheme } from "next-themes";
 import { QRCodeSVG } from "qrcode.react";
+import { useLanguage } from "@/context/languageContext";
+
 
 
 export default function account() {
+  const { translate, language } = useLanguage();
   const [account, setAccount] = useState("tickets");
   const [login, setLogin] = useState(false);
   const [ticketdata, setTicketData] = useState({});
@@ -304,14 +307,14 @@ export default function account() {
         },
         onError: async (err) => {
           if (err?.response?.data?.status == "error") {
-            // addToast(err?.response?.data?.error || "Xatolik | Error", "error")
+            addToast(err?.response?.data?.error || "Xatolik | Error", "error")
             if (err.response) {
               if (err.response.status === 400) {
-                // setErrorMessage(`${translate("error400")}`);
+                setErrorMessage(`${translate("error400")}`);
               } else if (err.response.status === 429) {
-                // setErrorMessage(`${translate("error429")}`);
+                setErrorMessage(`${translate("error429")}`);
               } else {
-                // setErrorMessage(`${translate("error")}`);
+                setErrorMessage(`${translate("error")}`);
               }
             }
           }
@@ -447,7 +450,7 @@ export default function account() {
                       : styles.oneButtonNotActive
                   }
                 >
-                  Билеты
+                  {translate("Билеты")}
                 </button>
                 <button
                   onClick={() => setAccount("ticketHistory")}
@@ -455,7 +458,7 @@ export default function account() {
                     account === "ticketHistory"
                       ? styles.oneButton
                       : styles.oneButtonNotActive}>
-                  История покупок
+                  {translate("История покупок")}
                 </button>
               </div>
 
@@ -470,7 +473,7 @@ export default function account() {
                     width={20}
                     height={20}
                   />
-                  Настройки
+                  {translate("Настройки")}
                 </button>
                 <button onClick={LogoutSubmit} className={styles.logoutButton}>
                   <Image
@@ -479,7 +482,7 @@ export default function account() {
                     width={20}
                     height={20}
                   />
-                  Выход
+                  {translate("Выход")}
                 </button>
               </div>
             </div>
@@ -488,9 +491,9 @@ export default function account() {
                 onClick={() => setAccount("tickets")}
                 className={
                   account === "tickets" || account === "qrcode"
-                    ? styles.oneButton
-                    : styles.oneButtonNotActive}>
-                Билеты
+                    ? styles.oneButtonDispay
+                    : styles.oneButtonNotActiveDisplay}>
+                {translate("Билеты")}
               </button>
               <button
                 onClick={() => setAccount("ticketHistory")}
@@ -498,7 +501,7 @@ export default function account() {
                   account === "ticketHistory"
                     ? styles.oneButtonDispay
                     : styles.oneButtonNotActiveDisplay}>
-                История покупок
+                {translate("История покупок")}
               </button>
             </div>
           </>
@@ -515,30 +518,30 @@ export default function account() {
             <div className={styles.boxLeftBlock}>
               <div className={styles.boxLeftBlockH1}>
                 <Image src="/list.svg" alt="list" width={24} height={24} />
-                Мои покупки
+                {translate("Мои покупки")}
               </div>
               <div className={styles.boxLeftBlockButtons}>
                 <button
                   onClick={() => setAccount("tickets")}
                   className={account === "tickets" || account === "ticketHistory" ? styles.boxLeftBlockOneBtn : styles.boxLeftBlockOneBtnNotActive}>
-                  Активные билеты
+                  {translate("Активные билеты")}
                   <p>{ticketList?.by_list_type?.active?.count || 0}</p>
                 </button>
                 <button
                   onClick={() => setAccount("favourites")}
                   className={account === "favourites" ? styles.boxLeftBlockOneBtn : styles.boxLeftBlockOneBtnNotActive}>
-                  Избранные билеты
+                  {translate("Избранные билеты")}
                   <p>{ticketList?.by_list_type?.archived?.count || 0}</p>
                 </button>
                 <button
                   onClick={() => setAccount("missed")}
                   className={account === "missed" ? styles.boxLeftBlockOneBtn : styles.boxLeftBlockOneBtnNotActive}>
-                  Пропущенные билеты
+                  {translate("Пропущенные билеты")}
                   <p>{ticketList?.by_list_type?.favorites?.count || 0}</p>
                 </button>
                 <button onClick={() => setAccount("archived")}
                   className={account === "archived" ? styles.boxLeftBlockOneBtn : styles.boxLeftBlockOneBtnNotActive}>
-                  Архивные билеты
+                  {translate("Архивные билеты")}
                   <p>{ticketList?.by_list_type?.missed?.count || 0}</p>
                 </button>
               </div>
@@ -587,7 +590,7 @@ export default function account() {
                                 ).toLocaleString("ru-RU")}
                               </div>
                               <div className={styles.boxOneInfo}>
-                                Билет №{ticket.id}
+                                {translate("Билет")} №{ticket.id}
                               </div>
                               <div className={styles.boxOneInfo}>
                                 {ticket.seat_info || "Общий зал"}
@@ -623,7 +626,7 @@ export default function account() {
                       ))}
                     </>
                   ) : (
-                    <>У вас нет билетов</>
+                    <>{translate("У вас нет билетов")}</>
                   )}
                 </>
               )}
@@ -670,7 +673,7 @@ export default function account() {
                                 ).toLocaleString("ru-RU")}
                               </div>
                               <div className={styles.boxOneInfo}>
-                                Билет №{ticket.id}
+                                {translate("Билет")} №{ticket.id}
                               </div>
                               <div className={styles.boxOneInfo}>
                                 {ticket.seat_info || "Общий зал"}
@@ -706,7 +709,7 @@ export default function account() {
                       ))}
                     </>
                   ) : (
-                    <>У вас нет билетов</>
+                    <>{translate("У вас нет билетов")}</>
                   )}
                 </>
               )}
@@ -731,7 +734,7 @@ export default function account() {
 
                     </div>
                     <div className={styles.boxHistoryAndMpInfo}>
-                      <div className={styles.boxOneInfoHistory}>Билет №{ticketdata.id}</div>
+                      <div className={styles.boxOneInfoHistory}>{translate("Билет")} №{ticketdata.id}</div>
                       <div className={styles.boxOneInfoHistory}>{ticketdata?.seat_info || "Общий зал"}</div>
                       <div className={styles.boxOneInfoHistory}>{ticketdata?.event_date?.split(" ")[0]}</div>
                       <div className={styles.boxOneInfoHistory}>{ticketdata?.event_date?.split(" ")[1]}</div>
@@ -758,7 +761,7 @@ export default function account() {
                         width={24}
                         height={24}
                       />
-                      <p>Назад</p>
+                      <p>{translate("Назад")}</p>
                     </button>
                   </div>
                 </>
@@ -805,7 +808,7 @@ export default function account() {
                                 ).toLocaleString("ru-RU")}
                               </div>
                               <div className={styles.boxOneInfo}>
-                                Билет №{ticket.id}
+                                {translate("Билет")} №{ticket.id}
                               </div>
                               <div className={styles.boxOneInfo}>
                                 {ticket.seat_info || "Общий зал"}
@@ -841,7 +844,7 @@ export default function account() {
                       ))}
                     </>
                   ) : (
-                    <>У вас нет билетов</>
+                    <>{translate("У вас нет билетов")}</>
                   )}
                 </>
               )}
@@ -887,7 +890,7 @@ export default function account() {
                                 ).toLocaleString("ru-RU")}
                               </div>
                               <div className={styles.boxOneInfo}>
-                                Билет №{ticket.id}
+                                {translate("Билет")} №{ticket.id}
                               </div>
                               <div className={styles.boxOneInfo}>
                                 {ticket.seat_info || "Общий зал"}
@@ -923,7 +926,7 @@ export default function account() {
                       ))}
                     </>
                   ) : (
-                    <>У вас нет билетов</>
+                    <>{translate("У вас нет билетов")}</>
                   )}
                 </>
               )}
@@ -970,7 +973,7 @@ export default function account() {
                                   ).toLocaleString("ru-RU")}
                                 </div>
                                 <div className={styles.boxOneInfo}>
-                                  Билет №{ticket.id}
+                                  {translate("Билет")} №{ticket.id}
                                 </div>
                                 <div className={styles.boxOneInfo}>
                                   {ticket.seat_info || "Общий зал"}
@@ -1006,7 +1009,7 @@ export default function account() {
                         ))}
                       </>
                     ) : (
-                      <>У вас нет билетов</>
+                      <>{translate("У вас нет билетов")}</>
                     )}
                   </>
                 </>
@@ -1027,7 +1030,7 @@ export default function account() {
                   width={24}
                   height={24}
                 />
-                Профиль
+                {translate("Профиль")}
               </div>
               <div className={styles.leftBlockOneButtonNotActive}>
                 <div className={styles.leftBlockText}>
@@ -1037,9 +1040,9 @@ export default function account() {
                     width={24}
                     height={24}
                   />
-                  Безопастность и вход
+                  {translate("Безопастность и вход")}
                 </div>
-                <div className={styles.boxSoon}>Скоро</div>
+                <div className={styles.boxSoon}>{translate("Скоро")}</div>
               </div>
               <div className={styles.leftBlockOneButtonNotActive}>
                 <div className={styles.leftBlockText}>
@@ -1049,27 +1052,27 @@ export default function account() {
                     width={24}
                     height={24}
                   />
-                  Платежи
+                  {translate("Платежи")}
                 </div>
-                <div className={styles.boxSoon}>Скоро</div>
+                <div className={styles.boxSoon}>{translate("Скоро")}</div>
               </div>
             </div>
             <div className={styles.boxSettingsRightBlock}>
               <div className={styles.boxSettingsH1}>
-                <h1>Настройки профиля</h1>
+                <h1>{translate("Настройки профиля")}</h1>
                 <div className={styles.boxCancelSaveButtons}>
                   <button onClick={() => setAccount("tickets")}>
-                    Сохранить
+                    {translate("Сохранить")}
                   </button>
                   <button onClick={() => setAccount("tickets")}>
-                    Отменить
+                    {translate("Отменить")}
                   </button>
                 </div>
               </div>
 
               <div className={styles.boxSettingsRow}>
                 <div className={styles.boxAvatar}>
-                  <h1>Аватар</h1>
+                  <h1>{translate("Аватар")}</h1>
                   <div className={styles.boxAvatarRow}>
                     <div
                       onDrop={handleDrop}
@@ -1087,7 +1090,7 @@ export default function account() {
                         height={42}
                         loading="lazy"
                       />
-                      <p>Нажмите или перетащите изображение</p>
+                      <p>{translate("Нажмите или перетащите изображение")}</p>
                       <input
                         type="file"
                         ref={fileInputRef}
@@ -1102,7 +1105,7 @@ export default function account() {
                   </div>
                 </div>
                 <div className={styles.boxSettingsSecurity}>
-                  <h1>Безопастность и вход</h1>
+                  <h1>{translate("Безопастность и вход")}</h1>
                   <div className={styles.boxSettingsSocial}>
                     <button
                       onClick={
@@ -1119,7 +1122,7 @@ export default function account() {
                       {user.phone_number !== null ? (
                         <p>{formatPhoneNumber(user.phone_number)}</p>
                       ) : (
-                        "Привязать номер"
+                        translate("Привязать номер")
                       )}
                     </button>
                     <button
@@ -1145,7 +1148,7 @@ export default function account() {
                           />
                         </>
                       ) : (
-                        "Привязать Google"
+                        translate("Привязать Google")
                       )}
                     </button>
                     <button
@@ -1171,7 +1174,7 @@ export default function account() {
                           />
                         </>
                       ) : (
-                        "Привязать Telegram"
+                        translate("Привязать Telegram")
                       )}
                     </button>
                   </div>
@@ -1185,7 +1188,7 @@ export default function account() {
                       width={24}
                       height={24}
                     />
-                    Профиль
+                    {translate("Профиль")}
                   </div>
                   <div className={styles.leftBlockOneButtonNotActive}>
                     <div className={styles.leftBlockText}>
@@ -1195,9 +1198,9 @@ export default function account() {
                         width={24}
                         height={24}
                       />
-                      Безопастность и вход
+                      {translate("Безопастность и вход")}
                     </div>
-                    <div className={styles.boxSoon}>Скоро</div>
+                    <div className={styles.boxSoon}>{translate("Скоро")}</div>
                   </div>
                   <div className={styles.leftBlockOneButtonNotActive}>
                     <div className={styles.leftBlockText}>
@@ -1207,9 +1210,9 @@ export default function account() {
                         width={24}
                         height={24}
                       />
-                      Платежи
+                      {translate("Платежи")}
                     </div>
-                    <div className={styles.boxSoon}>Скоро</div>
+                    <div className={styles.boxSoon}>{translate("Скоро")}</div>
                   </div>
                 </div>
               </div>
@@ -1249,7 +1252,7 @@ export default function account() {
                         loading="lazy"
                       />
                       {/* {translate("back")} */}
-                      Далее
+                      {translate("next")}
                     </div>
                     <Image
                       src={
@@ -1266,7 +1269,7 @@ export default function account() {
                   </div>
                   <div className={styles2.boxPart2}>
                     {/* <h1>{translate("connectphone")}</h1> */}
-                    <h1>Изменения номера</h1>
+                    <h1>{translate("Изменения номера")}</h1>
                     <div className={styles2.boxInput}>
                       <div className={styles2.boxOneInput}>
                         <Image
@@ -1296,7 +1299,7 @@ export default function account() {
                         className={styles2.btnNext}
                       >
                         {/* <p>{translate("next")}</p> */}
-                        <p>Далее</p>
+                        <p>{translate("next")}</p>
                       </button>
                     </div>
                   </div>
@@ -1325,7 +1328,7 @@ export default function account() {
                         loading="lazy"
                       />
                       {/* {translate("back")} */}
-                      Назад
+                      {translate("Назад")}
                     </button>
                     <Image
                       src={
@@ -1342,7 +1345,7 @@ export default function account() {
                   </div>
                   <div className={styles2.verification}>
                     {/* <h1>{translate("entersms")}</h1> */}
-                    <h1>Введите код из СМС</h1>
+                    <h1>{translate("Введите код из СМС")}</h1>
                     <div className={styles2.boxInputs}>
                       <div className={styles2.InputVerification}>
                         {code.map((_, index) => (
@@ -1369,7 +1372,7 @@ export default function account() {
                           }}
                         >
                           {/* {translate("back")} */}
-                          Назад
+                          {translate("Назад")}
                         </button>
                         <button onClick={LoginVerifySubmit}>
                           {/* {translate("next")} */}

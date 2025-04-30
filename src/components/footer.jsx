@@ -3,10 +3,13 @@ import React from "react";
 import Image from "next/image";
 import styles from "./footer.module.css";
 import { useTheme } from "next-themes";
+import { useLanguage } from "@/context/languageContext";
 
 
 export default function Footer() {
     const {theme} = useTheme();
+      const { translate, language } = useLanguage();
+    
     return (
         <footer className={styles.footer}>
             <div className={styles.boxfooter}>
@@ -43,27 +46,9 @@ export default function Footer() {
                         </div>
                     </div>
                     <div className={styles.boxfooterlinks}>
-                        <div className={styles.footerlinksPart1}>
-                            <h1>TCats Афиша</h1>
-                            <div className={styles.description}>
-                                <a href="#">Справка</a>
-                                <a href="#">Пользовательское соглашение</a>
-                                <a href="#">Подарочные сертификаты</a>
-                                <a href="#">Возврат билетов</a>
-                            </div>
-                        </div>
-                        <div className={styles.footerlinksPart2}>
-                            <h1>Партнерам и организаторам</h1>
-                            <div className={styles.description}>
-                                <a href="#">Афиша для бизнеса</a>
-                                <a href="#">Обратная связь</a>
-                                <a href="#">Часто задаваемые вопросы</a>
-                                <a href="#">Правовая информация</a>
-                            </div>
-                        </div>
                         <div className={styles.footerlinksPart3}>
                             <div className={styles.footerPayments}>
-                                <h1>Способы оплаты</h1>
+                                <h1>{translate("Способы оплаты")}</h1>
                                 <div className={styles.boxpayments}>
                                     <div className={styles.payments}>
                                         <Image src={theme === "dark" ?'/clickDark.svg' : '/clickLight.svg'} alt="click" width={76} height={19}/>
@@ -92,7 +77,7 @@ export default function Footer() {
                 <div className={styles.boxversion}>
                     <div className={styles.version}><Image src='/stars.svg' alt="stars" width={18} height={18}/>
                         <p className={styles.versionText}>
-                            β Версия: 0.1.21
+                            {translate("β Версия: 0.1.21")}
                         </p>
                     </div>
                 </div>

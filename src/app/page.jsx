@@ -209,7 +209,7 @@ export default function EventPage() {
                     />
                   ))}
                 <div className={styles.boxEventTitle}>
-                  <h3>Фестиваль</h3>
+                  <h3>{translate("Фестиваль")}</h3>
                   <h2>{event?.title}</h2>
                   <div className={styles.boxEventPlace}>
                     <Image
@@ -218,17 +218,14 @@ export default function EventPage() {
                       width={24}
                       height={24}
                     />
-                    <p>Яшнабадский район, Компас</p>
+                    <p>{event.sessions[0].location_name}</p>
                   </div>
-                  <h4>12 апреля в 12:00</h4>
+                  <h4>{new Date(event.sessions[0].date).toLocaleDateString("ru-RU")}</h4>
                 </div>
                 <div className={styles.boxEventBuyTicket}>
-                  <button
-                    onClick={() => setIsModalOpen(true)}
-                    className={styles.buyTicket}
-                  >
+                  <a href="#tickets"  className={styles.buyTicket}>
                     <p>{translate("buyTicket")}</p>
-                  </button>
+                  </a>
                 </div>
               </div>
             ) : (
@@ -338,16 +335,15 @@ export default function EventPage() {
                 }}
                 breakpoints={{
                   320: { slidesPerView: 1 },
-                  640: { slidesPerView: 2 },
-                  1024: { slidesPerView: 3 },
+                  1050: { slidesPerView: 2 },
+                  1400: { slidesPerView: 3 },
                 }}
                 onBeforeInit={(swiper) => {
                   swiper.params.navigation.prevEl = prevRef.current;
                   swiper.params.navigation.nextEl = nextRef.current;
                 }}
                 modules={[Navigation]}
-                className={styles.swiperCustom}
-              >
+                className={styles.swiperCustom}>
                 {event?.event_guests?.map((guest) => (
                   <SwiperSlide key={guest.id} className={styles.swiperSlide}>
                     <div
@@ -388,7 +384,7 @@ export default function EventPage() {
             </div>
           </div>
 
-          <div className={styles.boxDateAndTime}>
+          <div id="tickets" className={styles.boxDateAndTime}>
             <h1>{translate("Дата_время")}</h1>
 
             {event?.sessions?.map((session) => {
@@ -435,7 +431,7 @@ export default function EventPage() {
                         onClick={() => setIsModalOpen(session?.id)}
                         className={styles.buyTicket2}
                       >
-                        <p>Купить билет</p>
+                        <p>{translate("buyTicket")}</p>
                       </button>
                     </div>
                   </div>

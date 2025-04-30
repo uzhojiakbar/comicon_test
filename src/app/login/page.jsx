@@ -445,7 +445,7 @@ export default function LoginPage() {
                 alt="Back arrow"
                 loading="lazy"
               />
-              {translate("back")}
+              {translate("Назад")}
             </a>
             <Link href="/">
               <Image
@@ -460,7 +460,7 @@ export default function LoginPage() {
             </Link>
           </div>
           <div className={styles.boxPart2}>
-            <h1>Вход и регистрация</h1>
+            <h1>{translate("Вход и регистрация")}</h1>
             <div className={styles.boxInput}>
               <div className={styles.boxOneInput}>
                 <Image
@@ -488,7 +488,7 @@ export default function LoginPage() {
                 onClick={LoginSubmit}
                 className={styles.btnNext}
               >
-                <p>Далее</p>
+                <p>{translate("next")}</p>
               </button>
             </div>
             <hr />
@@ -507,7 +507,7 @@ export default function LoginPage() {
                   width={20}
                   height={20}
                 />
-                <p>Войти через Google</p>
+                <p>{translate("Войти через Google")}</p>
               </button>
               <button
                 className={styles.oneSocial}
@@ -519,7 +519,7 @@ export default function LoginPage() {
                   height={20}
                   loading="lazy"
                 />
-                <p>Войти через Телеграм</p>
+                <p>{translate("Войти через Телеграм")}</p>
               </button>
             </div>
           </div>
@@ -540,7 +540,7 @@ export default function LoginPage() {
                 alt="Back arrow"
                 loading="lazy"
               />
-              Назад
+              {translate("Назад")}
             </button>
             <Link href="/">
               <Image
@@ -556,14 +556,14 @@ export default function LoginPage() {
             </Link>
           </div>
           <main className={styles.boxPart2}>
-            <h1>Введите имя и фамилию</h1>
+            <h1>{translate("Введите имя и фамилию")}</h1>
             <div className={styles.text2}>
               <div className={styles.inputNumberred}>
                 <input
                   type="text"
                   name="FirstName"
                   id="FirstName"
-                  placeholder="Имя"
+                  placeholder={translate("Имя")}
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   onKeyDown={handleFirstNameKeyDown}
@@ -574,7 +574,7 @@ export default function LoginPage() {
                   type="text"
                   name="SecondName"
                   id="SecondName"
-                  placeholder="Фамилия"
+                  placeholder={translate("Фамилия")}
                   value={secondName}
                   onChange={(e) => {
                     setSecondName(e.target.value);
@@ -588,7 +588,7 @@ export default function LoginPage() {
               </div>
               <button onClick={LoginDetailSubmit} className={styles.next_btn}>
                 <div id="btn_text">
-                  <p>Далее</p>
+                  <p>{translate("next")}</p>
                 </div>
               </button>
             </div>
@@ -613,7 +613,7 @@ export default function LoginPage() {
                 alt="Back arrow"
                 loading="lazy"
               />
-              {translate("back")}
+              {translate("Назад")}
             </button>
             <Link href="/">
               <Image
@@ -628,7 +628,7 @@ export default function LoginPage() {
             </Link>
           </div>
           <div className={styles.verification}>
-            <h1>Введите код из СМС</h1>
+            <h1>{translate("Введите код из СМС")}</h1>
             <div className={styles.boxInputs}>
               <div className={styles.InputVerification}>
                 {code.map((_, index) => (
@@ -653,9 +653,9 @@ export default function LoginPage() {
                     setLogin(undefined);
                     setCode(new Array(6).fill(""));
                   }}>
-                  Назад
+                  {translate("Назад")}
                 </button>
-                <button onClick={LoginVerifySubmit}>Далее</button>
+                <button onClick={LoginVerifySubmit}>{translate("next")}</button>
               </div>
               <button onClick={LoginOTPSubmit} disabled={isButtonDisabled}>
                 <h6
@@ -663,7 +663,7 @@ export default function LoginPage() {
                     isButtonDisabled ? {} : { textDecoration: "underline" }
                   }
                 >
-                  {isButtonDisabled ? `Отправить СМС через ${secondsLeft}  секунд...` : "Отправь СМС еще раз"}
+                  {isButtonDisabled ? `${translate("Отправить СМС через")} ${secondsLeft}  ${translate("секунд")}...` : translate("Отправь СМС еще раз")}
                 </h6>
               </button>
             </div>

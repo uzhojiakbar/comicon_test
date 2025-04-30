@@ -616,7 +616,14 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
+  transition: 0.2s;
   line-height: 110%;
+}
+
+.boxButtonNext:disabled{
+  opacity: 0.8;
+  cursor: not-allowed;
+  transition: 0.2s;
 }
 
 @media (max-width: 1024px) {
@@ -842,6 +849,7 @@
   align-self: stretch;
   border-radius: 999px;
   background: #191d2b;
+  color: #fff;
 }
 
 .boxGap12 {

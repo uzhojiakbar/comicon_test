@@ -135,12 +135,12 @@ export default function Nav() {
                         {/*        </div>*/}
                         {/*    </div>*/}
                         {/*</motion.div>*/}
-                        <Link href="/news" className={styles.navleftbutton}>
+                        {/* <Link href="/news" className={styles.navleftbutton}>
                             <p>{translate("Новости")}</p>
-                        </Link>
-                        <Link href="/" className={styles.navleftbutton}>
+                        </Link> */}
+                        {/* <Link href="/" className={styles.navleftbutton}>
                             <p>{translate("about_Tcats")}</p>
-                        </Link>
+                        </Link> */}
 
                     </div>
                 </div>
