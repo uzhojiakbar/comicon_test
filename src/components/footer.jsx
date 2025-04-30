@@ -23,10 +23,10 @@ export default function Footer() {
                         />
                         <div className={styles.boxfooterlogotext}>
                             <p>Дизайн создан с
-                                <Image src="/heartLight.svg" alt="heart" width={18} height={18}/>
+                                <Image src={theme === "dark" ? "/heart.svg" : "/heartLight.svg"} alt="heart" width={18} height={18}/>
                             </p>
                             <p>и разработан
-                                <Image src="/abexLight.svg" alt="abex" width={80} height={22}/>{" "}
+                                <Image src={theme === "dark" ? "/abex.svg" : "/abexLight.svg"} alt="abex" width={80} height={22}/>
                             </p>
                         </div>
                         <div className={styles.boxsocial}>
