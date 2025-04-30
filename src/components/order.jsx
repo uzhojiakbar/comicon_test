@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./order.module.css";
 import useNumberFormatter from "@/utils/NumberFormatter";
 import { useTheme } from "next-themes";
-import { PrepareOrder, OrderEdit } from "@/utils/server/order";
+import { PrepareOrder, OrderEdit, OrderApply, AtmosPayCreate, AtmosPayApplyWithOTP, AtmosPayPreApply, OrderPostPromocode } from "@/utils/server/order";
 import useApi from "@/utils/api";
 import { useToast } from "./toastProvider";
 import { useLanguage } from "@/context/languageContext";
@@ -12,14 +12,18 @@ import { useLanguage } from "@/context/languageContext";
 export default function order({ seans, isOpen, onClose }) {
 
 
-  const api = useApi()
   const prepareOrderMutation = PrepareOrder(); // Hook yuqori darajada chaqiriladi
   const EditOrderMutation = OrderEdit(); // Hook yuqori darajada chaqiriladi
+  const OrderApplyMutation = OrderApply(); // Hook yuqori darajada chaqiriladi
+  const AtmosPayCreateMutation = AtmosPayCreate(); // Hook yuqori darajada chaqiriladi
+  const AtmosPayPreApplyMutation = AtmosPayPreApply(); // Hook yuqori darajada chaqiriladi
+  const AtmosPayApplyWithOTPMutation = AtmosPayApplyWithOTP(); // Hook yuqori darajada chaqiriladi
+  const OrderPostPromocodeMutation = OrderPostPromocode(); // Hook yuqori darajada chaqiriladi
 
 
   const [quantity, setQuantity] = useState(0);
   const [privatyPolicy, setPrivatyPolicy] = useState(false);
-  const [paymentType, setPaymentType] = useState("");
+  const [paymentType, setPaymentType] = useState("click");
   const [promocodeVerify, setPromocodeVerify] = useState(1);
   const [modal, setModal] = useState(1);
   const [code, setCode] = useState(new Array(6).fill(""));
@@ -34,10 +38,14 @@ export default function order({ seans, isOpen, onClose }) {
   const { translate } = useLanguage()
   const [currentSession, setCurrentSession] = useState({})
   const [eventData, setEventData] = useState()
+  const [cardData, setCardData] = useState({
+    "card_number": "string",
+    "expiry": "string",
+    "transaction_id": 0
+  })
 
 
-
-
+  const [totalAmoutForModal3, setTotalAMoutFOrModal3] = useState(0)
 
   const handlePrepareOrder = () => {
     prepareOrderMutation.mutate(seans, {
@@ -79,7 +87,6 @@ export default function order({ seans, isOpen, onClose }) {
   useEffect(() => {
     handlePrepareOrder()
   }, [isOpen])
-
 
   //  -------------------------------------- Verification --------------------------------------
 
@@ -157,6 +164,13 @@ export default function order({ seans, isOpen, onClose }) {
     }, 1000);
   };
 
+
+  const CloseAndClearModal = () => {
+    onClose()
+    setModal(1)
+    setCode(new Array(6).fill(""))
+  }
+
   // useEffect запускает таймер, когда `login === true`
   useEffect(() => {
     if (login) {
@@ -171,7 +185,7 @@ export default function order({ seans, isOpen, onClose }) {
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") {
-        onClose();
+        CloseAndClearModal();
       }
     };
     if (isOpen) {
@@ -191,7 +205,6 @@ export default function order({ seans, isOpen, onClose }) {
   }, [eventData, isOpen])
 
   if (!isOpen) return null;
-
   if (!seans) return null;
 
 
@@ -246,8 +259,145 @@ export default function order({ seans, isOpen, onClose }) {
     };
   }
 
+  const AtmosPyPreApply = () => {
+    AtmosPayPreApplyMutation.mutate(
+      {
+        ...cardData,
+        "transaction_id": totalAmoutForModal3?.transaction_id
+      },
+      {
+        onSuccess: (data) => {
+          console.log("Order click successfully:", data);
+          setTotalAMoutFOrModal3(data)
+          setModal(4)
+          addToast(translate("confirmationAndCardDetails"), "success"); // Toast qo'shish
+        },
+        onError: (error) => {
+          console.error("Failed to click apply order:", error);
+          addToast(translate("error"), "error"); // Toast qo'shish
+        },
+      }
+    );
+    return;
+  }
+
+  const AtmosPyeApply = () => {
+
+    console.log("OTP", code.join(""));
+
+    AtmosPayApplyWithOTPMutation.mutate(
+      {
+        "otp": code.join(""),
+        "transaction_id": +totalAmoutForModal3?.transaction_id
+      },
+      {
+        onSuccess: (data) => {
+          console.log("Order click successfully:", data);
+          setTotalAMoutFOrModal3(data?.data)
+          onClose()
+          addToast(translate("confirmationAndCardDetails"), "success"); // Toast qo'shish
+        },
+        onError: (error) => {
+          console.error("Failed to click apply order:", error);
+          addToast(translate("error"), "error"); // Toast qo'shish
+        },
+      }
+    );
+    return;
+  }
+
+  const AtmosPyCreate = () => {
+    AtmosPayCreateMutation.mutate(
+      {
+        "order_id": eventData?.order_id
+      },
+      {
+        onSuccess: (data) => {
+          console.log("Order click successfully:", data);
+          setTotalAMoutFOrModal3(data?.data)
+          setModal(3)
+          addToast(translate("confirmationAndCardDetails"), "success"); // Toast qo'shish
+        },
+        onError: (error) => {
+          console.error("Failed to click apply order:", error);
+          addToast(translate("error"), "error"); // Toast qo'shish
+        },
+      }
+    );
+    return;
+  }
+
+  const HandelPayment = () => {
+    if (paymentType === "click") {
+      console.log("click");
+      OrderApplyMutation.mutate(
+        {
+          payment_method: "CLICK", // To'g'ri kalit va qiymat
+          return_url: "http://localhost:3000/account", // To'g'ri URL
+        },
+        {
+          onSuccess: (data) => {
+            console.log("Order click successfully:", data);
+            addToast(translate("redirectingToClick"), "success"); // Toast qo'shish
+            if (data?.url) {
+              setTimeout(() => {
+                window.location.href = data.url; // Foydalanuvchini URL ga yo'naltirish
+              }, 300);
+            }
+          },
+          onError: (error) => {
+            console.error("Failed to click apply order:", error);
+            addToast(translate("error"), "error"); // Toast qo'shish
+          },
+        }
+      );
+      return;
+    }
+
+    if (paymentType === "card") {
+      console.log("ATMOSPAY");
+      OrderApplyMutation.mutate(
+        {
+          payment_method: "ATMOSPAY", // To'g'ri kalit va qiymat
+          return_url: "http://localhost:3000/account", // To'g'ri URL
+        },
+        {
+          onSuccess: (data) => {
+            console.log("Order click successfully:", data);
+            AtmosPyCreate()
+          },
+          onError: (error) => {
+            console.error("Failed to click apply order:", error);
+            addToast(translate("error"), "error"); // Toast qo'shish
+          },
+        }
+      );
+      return;
+    }
+
+  }
 
 
+
+  const PostPromocode = () => {
+    OrderPostPromocodeMutation.mutate(
+      {
+        "promo_code": promocodeVerify
+      },
+      {
+        onSuccess: (data) => {
+          console.log("Order click successfully:", data);
+          handlePrepareOrder()
+          addToast(translate("promoCodeApplied"), "success"); // Toast qo'shish
+        },
+        onError: (error) => {
+          console.error("promoCodeError", error);
+          addToast(translate("error"), "error"); // Toast qo'shish
+        },
+      }
+    );
+    return;
+  }
 
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
@@ -301,7 +451,6 @@ export default function order({ seans, isOpen, onClose }) {
               </div>
             </div>
             <div className={styles.eventTicket}>
-
               {eventData?.sessions
                 ?.filter((session) => session.session_id === isOpen)
                 ?.flatMap((session) => session.tickets)
@@ -425,7 +574,7 @@ export default function order({ seans, isOpen, onClose }) {
                 <div className={styles.boxPaymentsType}>
                   <p>{translate("paymentMethod")}</p>
                   <div className={styles.boxPayments}>
-                    {/* CARD */}
+                    {/* CLICK */}
 
                     {
                       eventData?.payment_methods?.includes("CLICK") ?
@@ -502,10 +651,27 @@ export default function order({ seans, isOpen, onClose }) {
                       </button>
                       : ""}
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Промокод или код сертификата"
-                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "20px"
+                    }}
+                  > <input
+                      style={{ width: "80%" }}
+                      type="text"
+                      disabled={!!eventData?.promo?.discount_amount}
+                      onChange={(e) => setPromocodeVerify(e?.target?.value)}
+                      placeholder="Промокод или код сертификата"
+                    />
+                    {/* PostPromocode */}
+                    <button
+                      disabled={!!eventData?.promo?.discount_amount}
+                      onClick={() => PostPromocode()}
+                      className={styles.boxButtonNext}
+                    >
+                      Применить
+                    </button></div>
+
                 </div>
                 <div className={styles.boxPrivatyPolicy}>
                   <button
@@ -539,11 +705,245 @@ export default function order({ seans, isOpen, onClose }) {
               </div>
             </div>
             <button
-              onClick={() => setModal(modal + 2)}
+              onClick={() => HandelPayment()}
               className={styles.boxButtonNext}
             >
               <p>Далее: {formatNumber(eventData?.total_amount)} {translate("uzs_som")}</p>
             </button>
+          </div>
+        </div>
+      )}
+      {modal === 2 && (
+        <div className={styles.mainContainer1} onClick={(e) => e.stopPropagation()}>
+          <div className={styles.modalRightBox1}>
+            <div className={styles.boxModalRightTop}>
+              <div className={styles.boxRowH1}>
+                <h1>ОПЛАТА</h1>
+                <button onClick={onClose}>
+                  <Image
+                    src="/closeModal.svg"
+                    alt="closeModal"
+                    width={72}
+                    height={72}
+                  />
+                </button>
+              </div>
+              <div className={styles.boxRightModal}>
+                <div className={styles.boxTimer}>
+                  <Image
+                    src={
+                      theme === "dark"
+                        ? "/orderTimerDark.svg"
+                        : "/orderTimer.svg"
+                    }
+                    alt="orderTimer"
+                    width={24}
+                    height={24}
+                  />
+                  <p>Оплатите в течении 15:00 минут</p>
+                </div>
+                <div className={styles.boxPaymentsType}>
+                  <p>Способ оплаты</p>
+                  <div className={styles.boxPayments}>
+                    <button
+                      onClick={() => setPaymentType("click")}
+                      className={
+                        paymentType === "click"
+                          ? styles.onePaymentTypeActive
+                          : styles.onePaymentType
+                      }
+                    >
+                      <div className={styles.paymentName}>
+                        <Image
+                          src="/click.svg"
+                          alt="click"
+                          width={32}
+                          height={32}
+                        />
+                        <p>Click</p>
+                      </div>
+                      <p>Система оплаты через Click</p>
+                    </button>
+                    <button
+                      onClick={() => setPaymentType("payme")}
+                      className={
+                        paymentType === "payme"
+                          ? styles.onePaymentTypeActive
+                          : styles.onePaymentType
+                      }
+                    >
+                      <div className={styles.paymentName}>
+                        <Image
+                          src="/payme.svg"
+                          alt="click"
+                          width={32}
+                          height={32}
+                        />
+                        <p>Payme</p>
+                      </div>
+                      <p>Система оплаты через Payme</p>
+                    </button>
+                    <button
+                      onClick={() => setPaymentType("card")}
+                      className={
+                        paymentType === "card"
+                          ? styles.onePaymentTypeActive
+                          : styles.onePaymentType
+                      }
+                    >
+                      <div className={styles.paymentName}>
+                        <Image
+                          src={
+                            resolvedTheme === "dark"
+                              ? "/cardDark.svg"
+                              : "/card.svg"
+                          }
+                          alt="click"
+                          width={32}
+                          height={32}
+                        />
+                        <p>Банковская карта</p>
+                      </div>
+                      <p>Новая банковская карта</p>
+                    </button>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Промокод или код сертификата"
+                  />
+                </div>
+                <div className={styles.boxPrivatyPolicy}>
+                  <button
+                    onClick={() => setPrivatyPolicy(!privatyPolicy)}
+                    className={
+                      privatyPolicy
+                        ? styles.boxkvadratActive
+                        : styles.boxkvadrat
+                    }
+                  >
+                    {privatyPolicy ? (
+                      <Image
+                        src={
+                          theme === "dark"
+                            ? "/orderPrivatyDark.svg"
+                            : "/orderPrivaty.svg"
+                        }
+                        alt="галочка"
+                        width={28}
+                        height={28}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                  </button>
+                  <p>
+                    Совершая оплату, вы принимаете
+                    <a href=""> пользовательское соглашение</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => setModal(modal + 1)}
+              className={styles.boxButtonNextAdaptive}>
+              <p>Далее: 3 399 000 so’m</p>
+            </button>
+          </div>
+        </div>
+      )}
+      {modal === 3 && (
+        <div
+          className={styles.mainContainer1}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className={styles.firstPayment}>
+            <h1>Реквизиты для оплаты</h1>
+            <div className={styles.boxColGap4}>
+              <div className={styles.boxRowGap8}>
+                <div className={styles.boxInput}>
+                  <Image
+                    src={
+                      resolvedTheme === "dark" ? "/cardDark.svg" : "/card.svg"
+                    }
+                    alt="card"
+                    width={32}
+                    height={32}
+                  />
+                  <input onChange={(e) => setCardData({
+                    ...cardData,
+                    "card_number": e.target.value
+                  })} type="text" placeholder="XXXX XXXX XXXX XXXX" />
+                </div>
+                <div className={styles.boxInput1}>
+                  <input
+                    onChange={(e) => setCardData({
+                      ...cardData,
+                      "expiry": e.target.value
+                    })}
+                    type="text" placeholder="ММ / ГГ" />
+                </div>
+              </div>
+              <div className={styles.boxRowGap4}>
+                <div className={styles.boxPayment}>
+                  <Image src="/humo.svg" alt="humo" width={50} height={30} />
+                </div>
+                <div className={styles.boxPayment}>
+                  <Image
+                    src={theme === "dark" ? "/uzcardDark.svg" : "/uzcard.svg"}
+                    alt="uzcard"
+                    width={76}
+                    height={14}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className={styles.boxRowSpaceBetween}>
+              <h1>Итого:  {formatNumber(totalAmoutForModal3?.amount)} {translate("uzs_som")}</h1>
+              <button
+                className={styles.buttonPey}
+                onClick={() => AtmosPyPreApply()}
+              >
+                Оплатить
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {modal === 4 && (
+        <div
+          className={styles.mainContainer1}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className={styles.firstPayment}>
+            <h1>Введите код из СМС</h1>
+            <h3>Мы отправили СМС на ваш номер</h3>
+            <div className={styles.boxColGap16}>
+              <div className={styles.boxRowGap8}>
+                {code.map((_, index) => (
+                  <input
+                    key={index}
+                    ref={(el) => (inputs.current[index] = el)}
+                    type="text"
+                    inputMode="numeric" // Ограничиваем ввод только цифрами
+                    maxLength="1"
+                    value={code[index]}
+                    onChange={(e) => handleChangeVerification(e, index)}
+                    onKeyDown={(e) => handleBackspace(e, index)}
+                    onPaste={handlePaste}
+                    placeholder="x"
+                    id={`input-${index}`}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className={styles.boxRowSpaceBetween}>
+              <button
+                className={styles.buttonNext}
+                onClick={() => AtmosPyeApply()}
+              >
+                Далее
+              </button>
+            </div>
           </div>
         </div>
       )}

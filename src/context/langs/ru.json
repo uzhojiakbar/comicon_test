@@ -42,6 +42,11 @@
   "payWithClick": "Система оплаты через Click",
   "CLICK": "Click",
   "paymentMethod": "Способ оплаты",
-  "payWithin": "Оплатите в течении 5:00 минут",
-  "pay": "ОПЛАТА"
+  "payWithin": "Оплатите в течении 15:00 минут",
+  "pay": "ОПЛАТА",
+  "redirectingToClick": "Вы перенаправляетесь на Click",
+  "error": "Ошибка",
+  "confirmationAndCardDetails": "Подтверждено! Введите данные карты",
+  "promoCodeApplied": "Вы успешно применили промокод",
+  "promoCodeError": "Ошибка применения промокода"
 }
