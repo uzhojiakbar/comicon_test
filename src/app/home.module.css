@@ -588,7 +588,7 @@
   width: 300px !important;
   height: 300px !important;
   border-radius: 35px;
-  background: #191A23;
+  background: var(--cardDarkColor);
   position: relative;
   transition: 0.3s;
   display: flex;
@@ -607,7 +607,7 @@
 
 .boxoneSlideBackground p {
   display: none;
-  color: #C9D1ED;
+  color: var(--navColor);
   font-family: Involve;
   font-size: 14px;
   font-style: normal;
@@ -624,7 +624,10 @@
 .guestImg {
   position: absolute;
   z-index: 100;
-  bottom: 30px;
+  bottom: 40px;
+
+  width: 250;
+  height: 368;
 }
 
 /* .guestCard {
@@ -678,9 +681,9 @@
 } */
 
 .guestName {
-  font-size: 20px;
+  font-size: 32px;
   font-weight: 600;
-  color: var(--navColor, white);
+  color: var(--navColor);
 }
 
 .boxButtonsVip {
@@ -694,16 +697,14 @@
 /* media */
 
 @media screen and (max-width: 1050px) {
-
   .boxoneSlideBackground {
     width: 100% !important;
     padding: 10px 30px;
   }
 
-  .boxoneSlideBackground p{
+  .boxoneSlideBackground p {
     display: flex;
   }
-
 }
 
 @media screen and (max-width: 1024px) {
@@ -856,25 +857,26 @@
   }
 }
 
-@media screen and (max-width:700px) {
-  .boxoneSlideBackground{
+@media screen and (max-width: 700px) {
+  .boxoneSlideBackground {
     height: 500px !important;
     justify-content: end;
     align-items: center;
   }
 
-  .oneSlide, .swiperSlide{
+  .oneSlide,
+  .swiperSlide {
     height: 500px !important;
   }
 
-.oneSlide{
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-  
-  .guestImg{
+  .oneSlide {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .guestImg {
     top: 10px;
     margin: 0 auto;
   }

@@ -15,12 +15,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Pagination, Scrollbar } from "swiper/modules";
 import ImageViewer from "@/components/ImagerViewer";
+import { useUser } from "@/utils/userProvider";
 
 export default function EventPage() {
   const [ticketType, setTicketType] = useState("ordinary");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { translate, language } = useLanguage();
   const { resolvedTheme, theme } = useTheme();
+  const { user } = useUser();
   const [vegetation, setVegetation] = useState(null);
 
   const prevRef = useRef(null);
@@ -201,6 +203,15 @@ export default function EventPage() {
   const [lat, lng] =
     coordsString?.split(",").map((coord) => coord.trim()) || [];
 
+
+
+  const OrderModalController = (sessionId) => {
+    if (user) {
+      setIsModalOpen(sessionId);
+    } else {
+      window.location.href = "/login";
+    }
+  }
 
   // for change
 
@@ -389,12 +400,10 @@ export default function EventPage() {
                   height={34}
                 />
               </button>
-
               <Swiper
                 slidesPerView={3} // 👈 Aynan shu yer elementlar sonini belgilaydi
-                spaceBetween={24}
+                spaceBetween={12}
                 onSwiper={setSwiperInstance}
-
                 breakpoints={{
                   320: { slidesPerView: 1 },
                   1050: { slidesPerView: 2 },
@@ -409,26 +418,22 @@ export default function EventPage() {
                   swiper.params.navigation.nextEl = nextRef.current;
                 }}
                 modules={[Navigation]}
-                className={styles.swiperCustom}>
+                className={styles.swiperCustom}
+              >
                 {event?.event_guests?.map((guest) => (
                   <SwiperSlide key={guest.id} className={styles.swiperSlide}>
                     <div
-                      className={styles.guestCard}
-                      onMouseEnter={(e) =>
-                        e.currentTarget.classList.add(styles.hovered)
-                      }
-                      onMouseLeave={(e) =>
-                        e.currentTarget.classList.remove(styles.hovered)
-                      }
-                    >
-                      <div className={styles.guestContent}>
-                        <Image
-                          src={guest.image}
-                          alt={guest.name}
-                          width={215}
-                          height={215}
-                          className={styles.guestImg}
-                        />
+                      className={styles.oneSlide}
+                      onMouseEnter={(e) => e.currentTarget.classList.add(styles.hovered)}
+                      onMouseLeave={(e) => e.currentTarget.classList.remove(styles.hovered)}>
+                      <Image
+                        src={guest.image}
+                        alt={guest.name}
+                        width={250}
+                        height={250}
+                        className={styles.guestImg}
+                      />
+                      <div className={styles.boxoneSlideBackground}>
                         <p className={styles.guestHover}>
                           {guest.name} — {guest.description}
                         </p>
@@ -510,7 +515,7 @@ export default function EventPage() {
                     </div>
                     <div className={styles.boxPriceAndBuyTicket}>
                       <button
-                        onClick={() => setIsModalOpen(session?.id)}
+                        onClick={() => OrderModalController(session?.id)}
                         className={styles.buyTicket2}
                       >
                         <p>{translate("buyTicket")}</p>

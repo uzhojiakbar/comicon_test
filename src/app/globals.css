@@ -4,6 +4,7 @@
 
 :root {
   --background: #f2f3f7;
+  --backgroundModal: #f2f3f7;
   --Buttonbackground: #f2f3f7;
   --foreground: #171717;
   --secondColor: white;
@@ -27,11 +28,16 @@
   --navBar: rgba(255, 255, 255, 0.9);
   --ticketQuantity: #1c274c80;
   --loader-background: #0065ff;
+  --borderChexkbox: rgba(28, 39, 76, 0.2);
+  --ModalSectionContainer: #f2f3f7;
+  --ModalSectionContainerPaymentCard: #fff;
+  --btnBackground: #191d2b;
 }
 
 .dark {
   --navBar: rgba(23, 24, 37, 0.95);
   --secondColor: #2a2c3a;
+  --backgroundModal: #191a23;
   --Buttonbackground: #2a2c3a;
   --background: #101217;
   --foreground: #fff;
@@ -54,6 +60,15 @@
   --loginHr: #4a4f6d;
   --loader-background: #0065ff;
   --ticketQuantity: #1c274c80;
+  --borderChexkbox: rgba(255, 255, 255, 0.3);
+  --ModalSectionContainer: #21232f;
+  --ModalSectionContainerPaymentCard: #21232f;
+  --btnBackground: radial-gradient(
+      64.97% 100% at 50.24% 0%,
+      #954cff 0%,
+      #ba8aff 100%
+    ),
+    #191d2b;
 }
 
 @font-face {
