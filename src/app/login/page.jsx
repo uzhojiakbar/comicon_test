@@ -545,9 +545,8 @@ export default function LoginPage() {
             <Link href="/">
               <Image
                 src={
-                  theme === "dark" ? "/TcatslogoDark.svg" :
-                    "/Tcatslogo.svg"
-                }
+                  theme === "dark" ? "/ComiconDark.svg" :
+                    "/ComiconLogo.svg"}
                 alt="logo"
                 width={100}
                 height={38}
@@ -618,8 +617,8 @@ export default function LoginPage() {
             <Link href="/">
               <Image
                 src={
-                  theme === "dark" ? "/TcatslogoDark.svg" :
-                    "/Tcatslogo.svg"}
+                  theme === "dark" ? "/ComiconDark.svg" :
+                    "/ComiconLogo.svg"}
                 alt="logo"
                 width={100}
                 height={38}
