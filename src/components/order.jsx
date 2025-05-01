@@ -43,7 +43,51 @@ export default function order({ seans, isOpen, onClose }) {
     "expiry": "string",
     "transaction_id": 0
   })
+  const now = new Date();
+  const [expireData, setExpiredData] = useState("")
+  const [created_at, setCreatedAt] = useState("")
 
+
+
+  const [timeLeft, setTimeLeft] = useState("");
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date(created_at.replace(" ", "T"));
+      const expireTime = new Date(expireData.replace(" ", "T")); // ISO formatga aylantirish
+      const difference = expireTime - now;
+
+
+      console.log("expireTime", expireTime);
+      console.log("now", now);
+
+      console.log(difference);
+
+      console.log("differencedifferencedifferencedifferencedifferencedifference");
+
+
+      if (difference !== 0) {
+        console.log("work 00");
+        const minutes = Math.floor((difference / 1000 / 60) % 60);
+        const seconds = Math.floor((difference / 1000) % 60);
+        console.log("minutes", minutes);
+        console.log("seconds", seconds);
+
+        setTimeLeft(`${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`);
+      } else {
+        console.log("workkkkkkkkkkkkkkkkkk1");
+        setTimeLeft("00:00");
+      }
+    };
+
+    // Har soniyada hisoblash uchun interval o'rnatamiz
+    const timer = setInterval(() => {
+      calculateTimeLeft();
+    }, 1000);
+
+    // Komponent unmount bo'lganda intervalni tozalash
+    return () => clearInterval(timer);
+  }, [expireData]);
 
   const [totalAmoutForModal3, setTotalAMoutFOrModal3] = useState(0)
 
@@ -52,6 +96,10 @@ export default function order({ seans, isOpen, onClose }) {
       onSuccess: (data) => {
         console.log("Order prepared successfully:", data);
         setEventData(data)
+        setExpiredData(data?.expired_at
+        )
+        setCreatedAt(data?.created_at
+        )
       },
       onError: (error) => {
         console.error("Failed to prepare order:", error);
@@ -567,8 +615,9 @@ export default function order({ seans, isOpen, onClose }) {
                     height={24}
                   />
                   <p>
-                    15:00
-                  </p>
+                    {
+                      timeLeft
+                    }                  </p>
                   <p>{translate("payWithin")}</p>
                 </div>
                 <div className={styles.boxPaymentsType}>

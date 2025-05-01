@@ -624,7 +624,7 @@
 .guestImg {
   position: absolute;
   z-index: 100;
-  bottom: 40px;
+  bottom: 48px;
 
   width: 250;
   height: 368;

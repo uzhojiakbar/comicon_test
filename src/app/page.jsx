@@ -444,7 +444,7 @@ export default function EventPage() {
                 ))}
               </Swiper>
 
-              <button ref={nextRef} className={styles.arrow}>
+              <button id="tickets" ref={nextRef} className={styles.arrow}>
                 <Image
                   src="/altarrowright.svg"
                   alt="arrow"
@@ -456,7 +456,7 @@ export default function EventPage() {
           </div>
           {/* for change */}
 
-          <div id="tickets" className={styles.boxDateAndTime}>
+          <div className={styles.boxDateAndTime}>
             <h1>{translate("Дата_время")}</h1>
 
             {event?.sessions?.map((session) => {
