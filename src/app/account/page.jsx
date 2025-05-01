@@ -1026,41 +1026,7 @@ export default function account() {
         {/* -------------------------- Вкладка настройки -------------------------- */}
         {account === "settings" ? (
           <div className={styles.boxSettingsTab}>
-            <div className={styles.boxSettingsLeftBlock}>
-              <div className={styles.leftBlockOneButton}>
-                <Image
-                  src="/profile.svg"
-                  alt="profile"
-                  width={24}
-                  height={24}
-                />
-                {translate("Профиль")}
-              </div>
-              <div className={styles.leftBlockOneButtonNotActive}>
-                <div className={styles.leftBlockText}>
-                  <Image
-                    src="/security.svg"
-                    alt="security"
-                    width={24}
-                    height={24}
-                  />
-                  {translate("Безопастность и вход")}
-                </div>
-                <div className={styles.boxSoon}>{translate("Скоро")}</div>
-              </div>
-              <div className={styles.leftBlockOneButtonNotActive}>
-                <div className={styles.leftBlockText}>
-                  <Image
-                    src="/transaction.svg"
-                    alt="transaction"
-                    width={24}
-                    height={24}
-                  />
-                  {translate("Платежи")}
-                </div>
-                <div className={styles.boxSoon}>{translate("Скоро")}</div>
-              </div>
-            </div>
+
             <div className={styles.boxSettingsRightBlock}>
               <div className={styles.boxSettingsH1}>
                 <h1>{translate("Настройки профиля")}</h1>
@@ -1184,41 +1150,7 @@ export default function account() {
                   </div>
                   <div></div>
                 </div>
-                <div className={styles.profileSetting}>
-                  <div className={styles.leftBlockOneButton}>
-                    <Image
-                      src="/profile.svg"
-                      alt="profile"
-                      width={24}
-                      height={24}
-                    />
-                    {translate("Профиль")}
-                  </div>
-                  <div className={styles.leftBlockOneButtonNotActive}>
-                    <div className={styles.leftBlockText}>
-                      <Image
-                        src="/security.svg"
-                        alt="security"
-                        width={24}
-                        height={24}
-                      />
-                      {translate("Безопастность и вход")}
-                    </div>
-                    <div className={styles.boxSoon}>{translate("Скоро")}</div>
-                  </div>
-                  <div className={styles.leftBlockOneButtonNotActive}>
-                    <div className={styles.leftBlockText}>
-                      <Image
-                        src="/transaction.svg"
-                        alt="transaction"
-                        width={24}
-                        height={24}
-                      />
-                      {translate("Платежи")}
-                    </div>
-                    <div className={styles.boxSoon}>{translate("Скоро")}</div>
-                  </div>
-                </div>
+
               </div>
             </div>
           </div>

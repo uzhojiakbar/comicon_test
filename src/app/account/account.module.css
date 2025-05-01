@@ -448,7 +448,6 @@
 .boxSettingsRightBlock {
   display: flex;
   width: 100%;
-  max-width: 1020px;
   padding: 22px 24px;
   flex-direction: column;
   align-items: flex-start;
