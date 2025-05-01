@@ -167,13 +167,43 @@
   flex-shrink: 0;
 }
 
-.boxAboutEventTop h1 {
+.boxAboutEvent h1 {
   color: var(--navColor);
+  width: 100%;
   font-family: Involve;
   font-size: 32px;
   font-style: normal;
   font-weight: 700;
   line-height: 110%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.boxAboutEvent h1 .actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.actionButton button {
+  padding: 10px;
+  background-color: var(--Buttonbackground);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionButton button:disabled {
+  filter: grayscale(100%); /* Tugmani kulrang qilish */
+  opacity: 0.5; /* Tugmani biroz shaffof qilish */
+  cursor: not-allowed; /* Tugma ustida ko'rsatkichni o'zgartirish */
 }
 
 .boxAboutEventTop p {
@@ -332,6 +362,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  width: 35%;
 }
 
 .boxcolMonth {
@@ -380,13 +411,19 @@
   width: 100%;
 }
 
-.boxBeforeIncreasePrice {
+.boxBeforeIncreasePrice,
+.boxBeforeIncreasePriceMobile {
   display: flex;
   align-items: center;
   gap: 24px;
 }
 
-.boxBeforeIncreasePrice h5 {
+.boxBeforeIncreasePriceMobile {
+  display: none;
+}
+
+.boxBeforeIncreasePrice h5,
+.boxBeforeIncreasePriceMobile h5 {
   color: var(--navColor);
   font-family: Involve;
   font-size: 24px;
@@ -555,7 +592,6 @@
   display: flex;
 }
 
-
 .guestContent {
   display: flex;
   align-items: center;
@@ -573,7 +609,6 @@
 .guestImg {
   width: 215px;
   height: auto;
-  object-fit: contain;
   z-index: 99999999;
 }
 
@@ -609,15 +644,19 @@
   display: none;
 }
 
+.boxTicketDayMobile {
+  display: none;
+}
+
 /* media */
 
-@media screen and (max-width:1050px) {
-  
-  .hovered, .guestCard{
+@media screen and (max-width: 1050px) {
+  .hovered,
+  .guestCard {
     width: 100% !important;
   }
 
-  .guestContent{
+  .guestContent {
     justify-content: space-around;
   }
 }
@@ -632,41 +671,74 @@
     flex-direction: column;
     gap: 12px;
   }
+
+  .boxPriceAndBuyTicket {
+    width: 100%;
+  }
+
+  .boxTicketDayMobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .boxTicketDayDesktop {
+    display: none;
+  }
+
+  .boxBeforeIncreasePrice {
+    display: none;
+  }
+
+  .boxBeforeIncreasePriceMobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .boxOneTicketInformation {
+    display: flex;
+    padding: 18px 0 18px 0;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    border-radius: 0;
+    background: transparent;
+    height: 100%;
+    width: 100%;
+  }
 }
 
-@media screen and (max-width:930px) {
-  .boxOneCinema{
+@media screen and (max-width: 930px) {
+  .boxOneCinema {
     flex-direction: column;
     gap: 10px;
   }
-  .boxCinemaName{
+  .boxCinemaName {
     width: 100%;
-    justify-content: center;
   }
   .boxCinemaLocation {
     width: 100%;
   }
-
 }
 
-@media screen and (max-width:900px) {
-  .buyTicket2, .boxPriceAndBuyTicket{
-    width: 100%;
-  }
-  .guestContent{
+@media screen and (max-width: 900px) {
+  .guestContent {
     flex-direction: column;
     height: 450px;
     justify-content: space-around;
     padding: 0px;
   }
-  .hovered, .guestCard{
+  .hovered,
+  .guestCard {
     width: 100% !important;
   }
 
-  .guestHover{
+  .guestHover {
     padding: 5px;
   }
-  .carouselWrapper{
+  .carouselWrapper {
     gap: 0px;
   }
 }
@@ -693,21 +765,21 @@
 
   /*    */
   .boxOneTicketInformation {
-    flex: 1 1;
+    flex: 1;
   }
 
-  .boxPriceAndBuyTicket {
-    flex-direction: column-reverse;
-    align-items: flex-end;
-  }
-
-  .boxBeforeIncreasePrice {
+  .boxBeforeIncreasePrice,
+  .boxBeforeIncreasePriceMobile {
     flex-direction: column;
     align-items: flex-start;
   }
 
   .boxPriceAndBuyTicket h1 {
     font-size: 18px;
+  }
+
+  .boxAboutEvent h1 {
+    font-size: 24px;
   }
 
   .buyTicket2 {
@@ -729,6 +801,10 @@
     background: #191d2b;
     color: #fff;
   }
+
+  .boxTicketDay {
+    width: 100%;
+  }
 }
 
 @media (max-width: 550px) {
@@ -739,10 +815,55 @@
     gap: 12px;
   }
 
-  .boxPriceAndBuyTicket {
-    flex-direction: column;
+  .boxBeforeIncreasePriceMobile h5 {
+    font-size: 18px;
+  }
+
+  .boxAboutEvent h1 .actionButton {
+    display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+  }
+
+  .actionButton button {
+    padding: 5px;
+    background-color: var(--Buttonbackground);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+
+  .actionButtonImg {
+    width: 28px !important;
+    height: 17px !important;
+  }
+
+  .oneAboutImage {
+    pointer-events: auto;
+    width: 180px !important;
+    height: 180px;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    border-radius: 32px;
+    flex-shrink: 0;
+  }
+
+  .boxcolMonth h2 {
+    font-size: 16px;
+  }
+
+  .boxcolMonth h3 {
+    font-size: 16px;
+  }
+
+  .boxTicketDay h1 {
+    font-size: 32px;
+  }
+
+  .boxDateAndTime h1 {
+    font-size: 24px;
   }
 }
 
@@ -751,18 +872,17 @@
     padding: 36px 10px;
   }
 
+  .actionButtonImg {
+    width: 22px !important;
+    height: 13px !important;
+  }
 
   .boxOneTicketInformation {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
   }
 
   .boxPriceAndBuyTicket {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
   }
 
   .boxPriceAndBuyTicket h1 {
@@ -771,11 +891,11 @@
   }
 
   .boxcolMonth h2 {
-    font-size: 24px;
+    font-size: 16px;
   }
 
   .boxcolMonth h3 {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .boxTicketDay h1 {
@@ -797,7 +917,8 @@
     align-items: flex-start;
   }
 
-  .boxCinemaNameAndLocation h1 {
+  .boxCinemaNameAndLocation h1,
+  .boxAboutEvent h1 {
     font-size: 21px;
   }
 
@@ -807,8 +928,8 @@
 
   .boxCinemaLogo {
     display: flex;
-    width: 86px;
-    height: 86px;
+    width: 86px !important;
+    height: 46px !important;
     border-radius: 16.1px;
   }
 }

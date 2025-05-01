@@ -25,7 +25,14 @@ export default function EventPage() {
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+
+
+  const prevRefImg = useRef(null);
+  const nextRefImg = useRef(null);
+
   const [swiperInstance, setSwiperInstance] = useState(null);
+  const [swiperInstanceImg, setSwiperInstanceImg] = useState(null);
+
 
   useEffect(() => {
     if (swiperInstance && prevRef.current && nextRef.current) {
@@ -36,6 +43,16 @@ export default function EventPage() {
       swiperInstance.navigation.update();
     }
   }, [swiperInstance]);
+
+  useEffect(() => {
+    if (swiperInstanceImg && prevRefImg.current && nextRefImg.current) {
+      swiperInstanceImg.params.navigation.prevEl = prevRefImg.current;
+      swiperInstanceImg.params.navigation.nextEl = nextRefImg.current;
+      swiperInstanceImg.navigation.destroy();
+      swiperInstanceImg.navigation.init();
+      swiperInstanceImg.navigation.update();
+    }
+  }, [swiperInstanceImg]);
 
   const { data: events, isLoading, isError } = ReadEvents(language || "ru");
 
@@ -223,7 +240,7 @@ export default function EventPage() {
                   <h4>{new Date(event.sessions[0].date).toLocaleDateString("ru-RU")}</h4>
                 </div>
                 <div className={styles.boxEventBuyTicket}>
-                  <a href="#tickets"  className={styles.buyTicket}>
+                  <a href="#tickets" className={styles.buyTicket}>
                     <p>{translate("buyTicket")}</p>
                   </a>
                 </div>
@@ -245,8 +262,38 @@ export default function EventPage() {
             )}
           </div>
           <div className={styles.boxAboutEvent}>
+            <h1>
+              <span>
+                {translate("О_фестивале")}
+              </span>
+              <div className={styles.actionButton} >
+                <button
+                  ref={prevRefImg}
+                  style={{ transform: "rotate(180deg)" }}
+                >
+                  <Image
+                    src={theme === "dark" ? "/ArrowRightLigh.svg" : "/ArrowRightBlack.svg"}
+                    alt="arrow"
+                    width={34}
+                    height={34}
+                    className={styles.actionButtonImg}
+                  />
+                </button>
+
+                <button
+                  ref={nextRefImg}
+                >
+                  <Image
+                    src={theme === "dark" ? "/ArrowRightLigh.svg" : "/ArrowRightBlack.svg"}
+                    alt="arrow"
+                    width={34}
+                    height={34}
+                    className={styles.actionButtonImg}
+                  />
+                </button>
+              </div>
+            </h1>
             <div className={styles.boxAboutEventTop}>
-              <h1>{translate("О_фестивале")}</h1>
               <p>
                 <b>{event?.title}</b> — {event?.description}
               </p>
@@ -265,6 +312,7 @@ export default function EventPage() {
                 ) : null}
               </div>
             </div>
+
             <Swiper
               slidesPerView={1} // 👈 default holatda shunaqa ber
               spaceBetween={5}
@@ -281,6 +329,14 @@ export default function EventPage() {
                 1000: { slidesPerView: 3 },
                 1200: { slidesPerView: 3.5 },
                 1420: { slidesPerView: 4 },
+              }}
+              navigation={{
+                prevEl: prevRefImg.current,
+                nextEl: nextRefImg.current,
+              }}
+              onBeforeInit={(swiper) => {
+                swiper.params.navigation.prevEl = prevRefImg.current;
+                swiper.params.navigation.nextEl = nextRefImg.current;
               }}
             >
               {event?.event_images?.map((v) => (
@@ -329,14 +385,15 @@ export default function EventPage() {
                 slidesPerView={3} // 👈 Aynan shu yer elementlar sonini belgilaydi
                 spaceBetween={24}
                 onSwiper={setSwiperInstance}
-                navigation={{
-                  prevEl: prevRef.current,
-                  nextEl: nextRef.current,
-                }}
+
                 breakpoints={{
                   320: { slidesPerView: 1 },
                   1050: { slidesPerView: 2 },
                   1400: { slidesPerView: 3 },
+                }}
+                navigation={{
+                  prevEl: prevRef.current,
+                  nextEl: nextRef.current,
                 }}
                 onBeforeInit={(swiper) => {
                   swiper.params.navigation.prevEl = prevRef.current;
@@ -392,12 +449,27 @@ export default function EventPage() {
 
               return (
                 <div key={session?.id} className={styles.boxOneDayTicket}>
-                  <div className={styles.boxTicketDay}>
+                  <div className={`${styles.boxTicketDay} ${styles.boxTicketDayDesktop}`}>
                     <h1>{dayInfo?.day}</h1>
                     <div className={styles.boxcolMonth}>
                       <h2>{translate(dayInfo?.qachonligi)}</h2>
                       <h3>{translate(dayInfo?.month)}</h3>
                     </div>
+                  </div>
+                  <div className={styles.boxTicketDayMobile} >
+                    <div className={styles.boxTicketDay}>
+                      <h1>{dayInfo?.day}</h1>
+                      <div className={styles.boxcolMonth}>
+                        <h2>{translate(dayInfo?.qachonligi)}</h2>
+                        <h3>{translate(dayInfo?.month)}</h3>
+                      </div>
+                    </div>
+
+                    <div className={styles.boxBeforeIncreasePriceMobile}>
+                      <h5>{dayInfo?.time}</h5>
+                      {/*<p>до повышения цен 2 часов</p>*/}
+                    </div>
+
                   </div>
                   <div className={styles.boxOneTicketInformation}>
                     <div className={styles.boxBeforeIncreasePrice}>
@@ -445,8 +517,8 @@ export default function EventPage() {
                   <Image
                     src={event?.sessions[0]?.location?.location?.image}
                     alt="Logo Comicon"
-                    width={96}
-                    height={19}
+                    width={86}
+                    height={46}
                   />
                 </div>
                 <div className={styles.boxCinemaNameAndLocation}>

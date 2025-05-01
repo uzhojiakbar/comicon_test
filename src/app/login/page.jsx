@@ -9,7 +9,7 @@ import { useGlobal } from "@/utils/global";
 import { useGoogleLogin } from "@react-oauth/google";
 import Cookies from "js-cookie";
 import { useLanguage } from "@/context/languageContext";
-import { useToast } from "@/components/toastProvider";
+
 
 export default function LoginPage() {
   const api = useApi();
@@ -152,14 +152,14 @@ export default function LoginPage() {
     }
   };
 
-  
+
   const LoginOTPSubmit = async () => {
     try {
       const response = await api.post("user/resend-otp/", {
         session_id: sessionId,
       });
       console.log("API Response:", response?.data);
-  
+
       startTimer(response.data.wait_seconds); // Запуск таймера заново
       // addToast(translate("newsmssend"), "success");
     } catch (error) {
@@ -227,54 +227,54 @@ export default function LoginPage() {
         token: null,
         cookie: false,
       });
-  
+
       const { token, telegram_link: bot_link } = initialResponse.data;
       console.log("Generated Token:", token, "Bot Link:", bot_link);
-  
+
       // Открываем Telegram в новой вкладке
       const telegramWindow = window.open(bot_link, "_blank");
-  
+
       // Сохраняем временный токен
       Cookies.set("access_telegram_token", token);
-  
+
       let intervalId = setInterval(async () => {
         const isVerified = await verifyTelegramToken();
         console.log("IS VERIFIED:", isVerified);
-  
+
         if (isVerified) {
           Cookies.remove("access_telegram_token");
           clearInterval(intervalId); // Останавливаем интервал
-  
+
           // Закрываем Telegram вкладку
           if (telegramWindow) {
             telegramWindow.close();
           }
-  
+
           // Перенаправляем пользователя на главную страницу
           window.location.href = "/";
         }
       }, 1000); // Проверяем каждые 1 секунду
-  
+
       // addToast(translate("pleaseconfirmtelegram"), "success");
-  
+
     } catch (error) {
       console.error("Telegram Login Error:", error);
       // addToast(error.response?.data?.error || translate("telegramloginerror"),"error");
     }
   };
-  
+
   const verifyTelegramToken = async () => {
     const token = Cookies.get("access_telegram_token");
-  
+
     if (!token) {
       // addToast(translate("notokenfound"), "error");
       return false;
     }
-  
+
     try {
       const response = await api.post("/user/login-telegram/", { token, cookie: true });
       console.log("API Response:", response.data);
-  
+
       if (response?.data?.status === "success") {
         Cookies.set("access_token", response?.data?.access_token || null, {
           domain: ".tcats.uz",
@@ -282,14 +282,14 @@ export default function LoginPage() {
           expires: 60,
           secure: true
         });
-  
+
         // if (response?.data?.refresh_token) {
         //   Cookies.set("refresh_token", response?.data?.refresh_token || null);
         // }
-  
+
         Cookies.remove("access_telegram_token");
         console.log("LOGIN SUCCESSFUL", response);
-  
+
         return true; // Токен верифицирован
       } else {
         return false;
@@ -300,7 +300,7 @@ export default function LoginPage() {
       return false;
     }
   };
-  
+
   // useEffect(() => {
   //     let intervalId;
   //
@@ -397,10 +397,10 @@ export default function LoginPage() {
   const startTimer = (time) => {
     setIsButtonDisabled(true); // Блокируем кнопку
     setSecondsLeft(time);
-  
+
     // Очищаем предыдущий таймер
     if (timerRef) clearInterval(timerRef);
-  
+
     timerRef = setInterval(() => {
       setSecondsLeft((prev) => {
         if (prev <= 1) {
@@ -412,7 +412,7 @@ export default function LoginPage() {
       });
     }, 1000);
   };
-  
+
   // useEffect запускает таймер, когда `login === true`
   useEffect(() => {
     if (login) {
@@ -450,8 +450,8 @@ export default function LoginPage() {
             <Link href="/">
               <Image
                 src={
-                  theme === "dark" ? "/TcatslogoDark.svg" : 
-                  "/Tcatslogo.svg"}
+                  theme === "dark" ? "/TcatslogoDark.svg" :
+                    "/Tcatslogo.svg"}
                 alt="logo"
                 width={100}
                 height={38}
@@ -511,7 +511,7 @@ export default function LoginPage() {
               </button>
               <button
                 className={styles.oneSocial}
-                onClick={(e) => {loginTelegram()}}>
+                onClick={(e) => { loginTelegram() }}>
                 <Image
                   src="/telegramLogin.svg"
                   alt="google"
@@ -546,7 +546,7 @@ export default function LoginPage() {
               <Image
                 src={
                   theme === "dark" ? "/TcatslogoDark.svg" :
-                  "/Tcatslogo.svg"
+                    "/Tcatslogo.svg"
                 }
                 alt="logo"
                 width={100}
@@ -619,7 +619,7 @@ export default function LoginPage() {
               <Image
                 src={
                   theme === "dark" ? "/TcatslogoDark.svg" :
-                   "/Tcatslogo.svg"}
+                    "/Tcatslogo.svg"}
                 alt="logo"
                 width={100}
                 height={38}

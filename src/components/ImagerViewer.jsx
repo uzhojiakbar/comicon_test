@@ -1,10 +1,10 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import styles from "./ImagerViewer.module.css";
 import styles2 from "../app/home.module.css";
 import Image from "next/image";
 import ModalPortal from "@/components/ModalPortal";
 
-const ImageViewer = ({src, alt = "image", order = 0}) => {
+const ImageViewer = ({ src, alt = "image", order = 0 }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     // ESC bilan yopish
@@ -26,7 +26,7 @@ const ImageViewer = ({src, alt = "image", order = 0}) => {
         <>
             <div
                 className={styles2.oneAboutImage}
-                style={{backgroundImage: `url(${src})`, order: order || 0}}
+                style={{ backgroundImage: `url(${src})`, order: order || 0 }}
                 onClick={() => setIsOpen(true)}
             ></div>
 
@@ -35,8 +35,10 @@ const ImageViewer = ({src, alt = "image", order = 0}) => {
                     <div className={styles.modalOverlay} onClick={() => setIsOpen(false)}>
                         <div
                             className={styles.modalContent}
-                            onClick={(e) => e.stopPropagation()}
-                            onClick={() => setIsOpen(false)}
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                setIsOpen(false)
+                            }}
                         >
                             <Image
                                 src={src}

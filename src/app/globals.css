@@ -4,6 +4,7 @@
 
 :root {
   --background: #f2f3f7;
+  --Buttonbackground: #f2f3f7;
   --foreground: #171717;
   --secondColor: white;
   --navColor: #1c274c;
@@ -31,6 +32,7 @@
 .dark {
   --navBar: rgba(23, 24, 37, 0.95);
   --secondColor: #2a2c3a;
+  --Buttonbackground: #2a2c3a;
   --background: #101217;
   --foreground: #fff;
   --navColor: #c9d1ed;

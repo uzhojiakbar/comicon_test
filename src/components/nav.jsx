@@ -1,26 +1,26 @@
 "use client";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import styles from "./nav.module.css";
 import Link from "next/link";
-import {useUser} from "@/utils/userProvider";
+import { useUser } from "@/utils/userProvider";
 import LanguageSwitcher from "@/components/language";
 import ThemeToggle from "./ThemeToggle";
-import {useTheme} from "next-themes";
-import {useLanguage} from "@/context/languageContext";
+import { useTheme } from "next-themes";
+import { useLanguage } from "@/context/languageContext";
 
 
 export default function Nav() {
     const [afisha, setAfisha] = useState(false);
-    const {user} = useUser();
-    const {translate} = useLanguage();
-    const {theme} = useTheme();
+    const { user } = useUser();
+    const { translate } = useLanguage();
+    const { theme } = useTheme();
 
     return (
         <div className={styles.Container}>
             <nav className={styles.nav}>
                 <div className={styles.nanlefttbuttonAdaptive}>
-                    <ThemeToggle/>
+                    <ThemeToggle />
                 </div>
                 <div className={styles.navleftbtns}>
                     <Link href="/">
@@ -145,13 +145,11 @@ export default function Nav() {
                     </div>
                 </div>
                 <div className={styles.navrightbtns}>
-                    <button className={styles.navrightbuttons}>
-                        <Image src="/search.svg" alt="search" width={24} height={24}/>
-                    </button>
+
                     <div className={styles.navrightbuttons}>
-                        <ThemeToggle/>
+                        <ThemeToggle />
                     </div>
-                    <LanguageSwitcher/>
+                    <LanguageSwitcher />
                     {user ? (
                         <Link href="/account" className={styles.authavatar}>
                             <Image
