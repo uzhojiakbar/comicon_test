@@ -235,12 +235,14 @@ export default function EventPage() {
                       alt="EventLogo"
                       width={300}
                       height={120}
+                      loading="lazy"
                     />
                   ) : (
                     <Image
                       src={event?.image_black_url}
                       alt="EventLogo"
                       width={300}
+                      loading="lazy"
                       height={120}
                     />
                   ))}

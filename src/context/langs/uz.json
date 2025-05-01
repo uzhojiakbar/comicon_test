@@ -42,7 +42,7 @@
   "payWithClick": "Click orqali to‘lov tizimi",
   "CLICK": "Click",
   "paymentMethod": "To‘lov usuli",
-  "payWithin": "15:00 daqiqa ichida to‘lovni amalga oshiring",
+  "payWithin": "$time daqiqa ichida to‘lovni amalga oshiring",
   "pay": "TO‘LOV",
   "redirectingToClick": "Siz Click tizimiga yo‘naltirilmoqdasiz",
   "error": "Xatolik",

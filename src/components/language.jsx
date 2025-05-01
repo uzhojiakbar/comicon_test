@@ -1,11 +1,11 @@
-import {useLanguage} from "@/context/languageContext";
+import { useLanguage } from "@/context/languageContext";
 import styles from "./language.module.css";
-import {useEffect, useRef, useState} from "react";
-import {motion} from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 const LanguageSwitcher = () => {
-    const {language, setLanguage} = useLanguage();
+    const { language, setLanguage } = useLanguage();
     const [languageModal, setLanguageModal] = useState(false);
     const modalRef = useRef(null);
     const buttonRef = useRef(null); // ✅ Добавили ref для кнопки
@@ -60,21 +60,26 @@ const LanguageSwitcher = () => {
 
             <motion.div
                 ref={modalRef}
-                initial={{y: 60}}
+                initial={{ y: 60 }}
                 animate={
                     languageModal
-                        ? {y: 100, opacity: 1, display: "flex"}
-                        : {y: 60, opacity: 0, display: "none"}}
-                style={{display: languageModal ? "flex" : "none"}}
-                transition={{transition: "ease"}}
+                        ? { y: 100, opacity: 1, display: "flex" }
+                        : { y: 60, opacity: 0, display: "none" }}
+                style={{ display: languageModal ? "flex" : "none" }}
+                transition={{ transition: "ease" }}
                 className={styles.LanguageModal}>
                 <button onClick={() => changeLanguage("ru")}>
                     <Image src='/languageru.svg' alt="ru" width={21}
-                           height={15}/>
+                        height={15} />
                     Русский
                 </button>
                 <button onClick={() => changeLanguage("uz")}><Image src='/languageUz.svg' alt="uz" width={21}
-                                                                    height={15}/> O'zbekcha
+                    height={15} /> O'zbekcha
+                </button>
+                <button onClick={() => changeLanguage("eng")}>
+                    <Image src='/languageru.svg' alt="eng" width={21}
+                        height={15} />
+                    English
                 </button>
             </motion.div>
         </div>

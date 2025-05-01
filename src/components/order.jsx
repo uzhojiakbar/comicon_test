@@ -51,43 +51,40 @@ export default function order({ seans, isOpen, onClose }) {
 
   const [timeLeft, setTimeLeft] = useState("");
 
+
+
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const now = new Date(created_at.replace(" ", "T"));
-      const expireTime = new Date(expireData.replace(" ", "T")); // ISO formatga aylantirish
-      const difference = expireTime - now;
+      // expireData ni UTC deb qabul qilamiz
+      const expireTimeUTC = new Date(expireData.replace(" ", "T") + "Z");
+
+      // foydalanuvchi qurilmasidagi vaqtni UTC ga o‘tkazamiz
+      const nowUTC = new Date(new Date().toISOString());
+
+      const difference = expireTimeUTC - nowUTC;
 
 
-      console.log("expireTime", expireTime);
-      console.log("now", now);
-
-      console.log(difference);
-
-      console.log("differencedifferencedifferencedifferencedifferencedifference");
+      console.log("vaqt", difference);
+      console.log("nowUTC", nowUTC);
+      console.log("expireTimeUTC", expireTimeUTC);
 
 
-      if (difference !== 0) {
-        console.log("work 00");
+      if (difference > 0) {
         const minutes = Math.floor((difference / 1000 / 60) % 60);
         const seconds = Math.floor((difference / 1000) % 60);
-        console.log("minutes", minutes);
-        console.log("seconds", seconds);
-
-        setTimeLeft(`${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`);
+        setTimeLeft(
+          `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+        );
       } else {
-        console.log("workkkkkkkkkkkkkkkkkk1");
         setTimeLeft("00:00");
       }
     };
 
-    // Har soniyada hisoblash uchun interval o'rnatamiz
-    const timer = setInterval(() => {
-      calculateTimeLeft();
-    }, 1000);
-
-    // Komponent unmount bo'lganda intervalni tozalash
+    const timer = setInterval(calculateTimeLeft, 1000);
     return () => clearInterval(timer);
   }, [expireData]);
+
+
 
   const [totalAmoutForModal3, setTotalAMoutFOrModal3] = useState(0)
 
@@ -617,11 +614,7 @@ export default function order({ seans, isOpen, onClose }) {
                     width={24}
                     height={24}
                   />
-                  <p>
-                    {
-                      timeLeft
-                    }                  </p>
-                  <p>{translate("payWithin")}</p>
+                  <p>{translate("payWithin").replace("$time", timeLeft)}</p>
                 </div>
                 <div className={styles.boxPaymentsType}>
                   <p>{translate("paymentMethod")}</p>
