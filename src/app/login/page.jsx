@@ -450,8 +450,8 @@ export default function LoginPage() {
             <Link href="/">
               <Image
                 src={
-                  theme === "dark" ? "/tcatslogoDark.svg" :
-                    "/tcatslogo.svg"}
+                  theme === "dark" ? "/ComiconDark.svg" :
+                    "/ComiconLogo.svg"}
                 alt="logo"
                 width={100}
                 height={38}
