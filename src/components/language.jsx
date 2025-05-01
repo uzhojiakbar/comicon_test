@@ -50,7 +50,7 @@ const LanguageSwitcher = () => {
             {/* ✅ Добавили ref для кнопки */}
             <button ref={buttonRef} onClick={handleLanguageModal}>
                 <Image
-                    src={language === "ru" ? "/languageru.svg" : "/languageUz.svg"}
+                    src={language === "ru" ? "/languageru.svg" : language === "eng" ? "/langEng.svg" : "/languageUz.svg"}
                     alt="Language"
                     width={24}
                     height={28}
@@ -77,7 +77,7 @@ const LanguageSwitcher = () => {
                     height={15} /> O'zbekcha
                 </button>
                 <button onClick={() => changeLanguage("eng")}>
-                    <Image src='/languageru.svg' alt="eng" width={21}
+                    <Image src='/langEng.svg' alt="eng" width={21}
                         height={15} />
                     English
                 </button>
