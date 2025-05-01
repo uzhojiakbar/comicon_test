@@ -201,6 +201,14 @@ export default function EventPage() {
   const [lat, lng] =
     coordsString?.split(",").map((coord) => coord.trim()) || [];
 
+
+  // for change
+
+
+
+  // ---------------
+
+  // for change
   return (
     <div style={{ padding: "0 10px" }}>
       <Nav />
@@ -369,6 +377,7 @@ export default function EventPage() {
             {/*    <span className={styles.overlayText}>+4</span>*/}
             {/*</div>*/}
           </div>
+          {/* for change */}
           <div className={styles.boxOurGuests}>
             <h1>{translate("Наши_гости")}</h1>
             <div className={styles.carouselWrapper}>
@@ -440,6 +449,7 @@ export default function EventPage() {
               </button>
             </div>
           </div>
+          {/* for change */}
 
           <div id="tickets" className={styles.boxDateAndTime}>
             <h1>{translate("Дата_время")}</h1>
