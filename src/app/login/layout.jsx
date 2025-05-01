@@ -20,7 +20,7 @@ export default function LoginLayout({ children }) {
   }, []);
 
   return (
-    <GoogleOAuthProvider clientId="419877366301-ua97bf8lg8qgugs33bjgna4os501tne7.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="419877366301-pd3n5mkofc700h3ejs867cipgj6lj4co.apps.googleusercontent.com">
       {children}
     </GoogleOAuthProvider>
   );
