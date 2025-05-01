@@ -319,8 +319,20 @@
   background: var(--cardDarkColor);
 }
 
+.boxTicketQuantity button:disabled {
+  filter: grayscale(100%);
+  /* Tugmani kulrang qilish */
+  opacity: 0.5;
+  /* Tugmani biroz shaffof qilish */
+  cursor: not-allowed;
+}
+
 .boxTicketQuantity button:disabled img {
-  filter: brightness(50%);
+  filter: grayscale(100%);
+  /* Tugmani kulrang qilish */
+  opacity: 0.5;
+  /* Tugmani biroz shaffof qilish */
+  cursor: not-allowed;
 }
 
 .boxTicketQuantity p {

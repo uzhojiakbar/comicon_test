@@ -546,6 +546,9 @@ export default function order({ seans, isOpen, onClose }) {
                                   ? "/removeTicketDark.svg"
                                   : "/removeTicket.svg"
                               }
+                              className={
+                                theme !== "dark" && !ticket?.quantity < 1 ? styles.darkButtonRemove : styles.ButtonRemove
+                              }
                               alt="remove Ticket"
                               width={24}
                               height={24}
