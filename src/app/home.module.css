@@ -201,9 +201,12 @@
 }
 
 .actionButton button:disabled {
-  filter: grayscale(100%); /* Tugmani kulrang qilish */
-  opacity: 0.5; /* Tugmani biroz shaffof qilish */
-  cursor: not-allowed; /* Tugma ustida ko'rsatkichni o'zgartirish */
+  filter: grayscale(100%);
+  /* Tugmani kulrang qilish */
+  opacity: 0.5;
+  /* Tugmani biroz shaffof qilish */
+  cursor: not-allowed;
+  /* Tugma ustida ko'rsatkichni o'zgartirish */
 }
 
 .boxAboutEventTop p {
@@ -569,50 +572,100 @@
 }
 
 .swiperSlide {
-  /* width: fit-content; ❌ bu xatolik */
-  /* flex-shrink: 0; */
   display: flex;
-  transition: all 0.3s ease;
-  flex-direction: column !important;
+  flex-direction: column;
+  height: 450px !important;
 }
 
-.guestCard {
+.oneSlide {
+  display: flex;
+  flex-direction: column;
+  height: 450px !important;
+  justify-content: end;
+}
+
+.boxoneSlideBackground {
+  width: 300px !important;
+  height: 300px !important;
+  border-radius: 35px;
+  background: #191A23;
+  position: relative;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+  padding: 10px;
+}
+
+.hovered .boxoneSlideBackground {
+  width: 100% !important;
+  flex-direction: column;
+  display: flex;
+  transition: 0.3s;
+}
+
+.boxoneSlideBackground p {
+  display: none;
+  color: #C9D1ED;
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  transition: 0.3s;
+}
+
+.hovered .boxoneSlideBackground p {
+  display: flex;
+  transition: 0.3s;
+}
+
+.guestImg {
+  position: absolute;
+  z-index: 100;
+  bottom: 30px;
+}
+
+/* .guestCard {
   width: 250px;
+  height: 400px;
   transition: width 0.4s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: end;
   gap: 12px;
   flex-shrink: 0;
-}
+  position: relative;
+} */
 
-.hovered {
+/* .hovered {
   width: 400px !important;
   flex-direction: column;
   display: flex;
-}
+} */
 
-.guestContent {
+/* .guestContent {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   background-color: var(--cardDarkColor, #222);
   border-radius: 25px;
-  padding-left: 15px;
   height: 250px;
   width: 95%;
   gap: 10px;
   overflow: hidden;
   transition: all 0.3s ease;
-}
+} */
 
-.guestImg {
-  width: 215px;
-  height: auto;
+/* .guestImg {
   z-index: 99999999;
-}
+  position: absolute;
+  bottom: 40px;
+} */
 
-.guestHover {
+/* .guestHover {
   color: var(--navColor, white);
   font-size: 14px;
   max-width: 250px;
@@ -621,23 +674,13 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-
-  /* УБЕРИ ЭТО — оно мешает переносам */
-  /* white-space: nowrap; */
-
-  /* ДОБАВЬ ЭТО — оно позволяет ломать длинные слова */
   word-break: break-word;
-
-  /* Если нужно жёстко ломать даже любые символы — можно так:
-       word-break: break-all;
-    */
-}
+} */
 
 .guestName {
   font-size: 20px;
   font-weight: 600;
   color: var(--navColor, white);
-  text-align: center;
 }
 
 .boxButtonsVip {
@@ -651,14 +694,16 @@
 /* media */
 
 @media screen and (max-width: 1050px) {
-  .hovered,
-  .guestCard {
+
+  .boxoneSlideBackground {
     width: 100% !important;
+    padding: 10px 30px;
   }
 
-  .guestContent {
-    justify-content: space-around;
+  .boxoneSlideBackground p{
+    display: flex;
   }
+
 }
 
 @media screen and (max-width: 1024px) {
@@ -715,9 +760,11 @@
     flex-direction: column;
     gap: 10px;
   }
+
   .boxCinemaName {
     width: 100%;
   }
+
   .boxCinemaLocation {
     width: 100%;
   }
@@ -730,6 +777,7 @@
     justify-content: space-around;
     padding: 0px;
   }
+
   .hovered,
   .guestCard {
     width: 100% !important;
@@ -738,6 +786,7 @@
   .guestHover {
     padding: 5px;
   }
+
   .carouselWrapper {
     gap: 0px;
   }
@@ -804,6 +853,30 @@
 
   .boxTicketDay {
     width: 100%;
+  }
+}
+
+@media screen and (max-width:700px) {
+  .boxoneSlideBackground{
+    height: 500px !important;
+    justify-content: end;
+    align-items: center;
+  }
+
+  .oneSlide, .swiperSlide{
+    height: 500px !important;
+  }
+
+.oneSlide{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+  
+  .guestImg{
+    top: 10px;
+    margin: 0 auto;
   }
 }
 
