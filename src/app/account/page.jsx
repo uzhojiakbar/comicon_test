@@ -473,7 +473,9 @@ export default function account() {
                     width={20}
                     height={20}
                   />
-                  {translate("Настройки")}
+                  <span>
+                    {translate("Настройки")}
+                  </span>
                 </button>
                 <button onClick={LogoutSubmit} className={styles.logoutButton}>
                   <Image
@@ -482,7 +484,9 @@ export default function account() {
                     width={20}
                     height={20}
                   />
-                  {translate("Выход")}
+                  <span>
+                    {translate("Выход")}
+                  </span>
                 </button>
               </div>
             </div>

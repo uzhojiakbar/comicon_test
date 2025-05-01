@@ -5,296 +5,828 @@
 */
 
 .mainContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    min-height: 100vh;
-    padding: 24px 36px;
-    gap: 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 100vh;
+  padding: 24px 36px;
+  gap: 44px;
 }
 
 .accountContent {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    max-width: 1368px;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 1368px;
+  margin: 0 auto;
 }
 
 /* -------------------------- Информация о пользователе -------------------------- */
 
 .boxUserInfo {
-    display: flex;
-    width: 100%;
-    padding: 22px 24px;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 30px;
-    background: var(--cardDarkColor);
+  display: flex;
+  width: 100%;
+  padding: 22px 24px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 30px;
+  background: var(--cardDarkColor);
 }
 
 .boxUserAvatar {
-    display: flex;
-    align-items: center;
-    gap: 18px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
 .boxUserAvatar img {
-    border-radius: 80px;
+  border-radius: 80px;
 }
 
 .boxUserAvatar p {
-    font-family: Involve;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 90%;
+  font-family: Involve;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 90%;
 }
 
 .boxUserTicketButton {
-    display: flex;
-    height: 44px;
-    padding: 10px;
-    align-items: center;
-    gap: 4px;
-    border-radius: 999px;
-    background: var(--background);
-    color: var(--color);
+  display: flex;
+  height: 44px;
+  padding: 10px;
+  align-items: center;
+  gap: 4px;
+  border-radius: 999px;
+  background: var(--background);
+  color: var(--color);
 }
 
 .boxUserTicketButton .oneButton {
-    display: flex;
-    padding: 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 999px;
-    font-family: Involve;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-    transition: 0.3s;
-    background: var(--secondColor);
+  display: flex;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  transition: 0.3s;
+  background: var(--secondColor);
 }
 
 .boxUserTicketButton .oneButtonNotActive {
-    display: flex;
-    padding: 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    color: var(--color);
-    font-family: Involve;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-    transition: 0.3s;
+  display: flex;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: var(--color);
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  transition: 0.3s;
 }
 
 .boxUserSettingsButton {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .settingsButton {
-    display: flex;
-    height: 44px;
-    padding: 10px;
-    align-items: center;
-    gap: 8px;
-    border-radius: 999px;
-    background: var(--background);
-    color: var(--color);
-    font-family: Involve;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
+  display: flex;
+  height: 44px;
+  padding: 10px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  background: var(--background);
+  color: var(--color);
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.settingsButton span {
+  background: var(--background);
+  color: var(--color);
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
 }
 
 .logoutButton {
-    display: flex;
-    height: 44px;
-    padding: 10px;
-    align-items: center;
-    gap: 8px;
-    border-radius: 999px;
-    background: var(--Error-Error, #ff3347);
-    font-family: Involve;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-    color: white;
+  display: flex;
+  height: 44px;
+  padding: 10px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  background: var(--Error-Error, #ff3347);
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  color: white;
 }
 
 .boxTicketsTab {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
 }
 
 .boxLeftBlock {
-    display: flex;
-    width: 100%;
-    max-width: 324px;
-    max-height: 268px;
-    padding: 22px 24px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    border-radius: 30px;
-    background-color: var(--cardDarkColor);
+  display: flex;
+  width: 100%;
+  max-width: 324px;
+  max-height: 268px;
+  padding: 22px 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: 30px;
+  background-color: var(--cardDarkColor);
 }
 
 .boxLeftBlockH1 {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
 }
 
 .boxLeftBlockButtons {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
 }
 
 .boxLeftBlockOneBtn {
-    display: flex;
-    height: 44px;
-    padding: 10px 18px;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-    border-radius: 999px;
-    color: #101217;
-    font-family: Involve;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-    background-color: var(--navLoginButton);
-    color: var(--color);
-    transition: 0.3s;
+  display: flex;
+  height: 44px;
+  padding: 10px 18px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 999px;
+  color: #101217;
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  background-color: var(--navLoginButton);
+  color: var(--color);
+  transition: 0.3s;
 }
 
 .boxLeftBlockOneBtnNotActive {
-    display: flex;
-    height: 44px;
-    padding: 10px 18px;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-    color: var(--color);
-    font-family: Involve;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-    transition: 0.3s;
+  display: flex;
+  height: 44px;
+  padding: 10px 18px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  color: var(--color);
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  transition: 0.3s;
 }
 
 .boxRightBlock {
-    display: flex;
-    width: 100%;
-    padding: 22px;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    border-radius: 30px;
-    background: var(--cardDarkColor);
-    transition: 0.3s;
+  display: flex;
+  width: 100%;
+  padding: 22px;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  border-radius: 30px;
+  background: var(--cardDarkColor);
+  transition: 0.3s;
 }
 
 .boxRightBlock hr {
-    width: 100%;
-    background-color: #e3e3e3;
+  width: 100%;
+  background-color: #e3e3e3;
 }
 
 /* -------------------------- Вкладка билеты -------------------------- */
 
 .boxTIcketsMap {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .boxOneTicket {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-    margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  margin-bottom: 15px;
 }
 
 .boxMpName,
 .boxMpNameQr {
-    max-width: 275px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 10px;
-    color: #959ebb;
-    font-family: Involve;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 100%;
+  max-width: 275px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  color: #959ebb;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
 }
 
 .boxTicketAndMpInfo {
+  display: flex;
+  max-width: 450px;
+  width: 100%;
+  align-items: center;
+  align-content: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.boxOneInfo:first-child {
+  display: flex;
+  padding: 12px 15px 9px 15px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border-radius: 999px;
+  background: var(--buyTicketButton);
+  color: #fff;
+  text-align: center;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+.boxOneInfo {
+  display: flex;
+  padding: 13px 15px 9px 15px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border-radius: 999px;
+  background: var(--loginButton);
+  color: var(--foreground);
+  text-align: center;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+.boxButtonQr {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  padding: 17.4px 18px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 36px;
+  border: 0.6px solid var(--Neutrals-Neutrals1800, #5c5c5c);
+}
+
+/* -------------------------- Вкладка История покупок -------------------------- */
+
+.boxOneTicketHistory {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.boxOneInfoHistory {
+  display: flex;
+  padding: 12px 15px 9px 15px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border-radius: 999px;
+  background: var(--loginButton);
+  color: var(--foreground);
+  text-align: center;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+.boxHistoryTicketPrice {
+  display: flex;
+  padding: 12px 15px 9px 15px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border-radius: 999px;
+  background: var(--loginButton);
+  color: var(--foreground);
+  text-align: center;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+.boxHistoryAndMpInfo {
+  max-width: 419px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+/* -------------------------- Вкладка настройки -------------------------- */
+
+.boxSettingsTab {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+.boxSettingsLeftBlock {
+  display: flex;
+  width: 100%;
+  max-width: 324px;
+  padding: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border-radius: 30px;
+  background: var(--cardDarkColor);
+}
+
+.leftBlockOneButton {
+  display: flex;
+  height: 44px;
+  padding: 10px 12px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 999px;
+  background: var(--navLoginButton);
+  color: var(--color);
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.leftBlockOneButtonNotActive {
+  display: flex;
+  height: 44px;
+  padding: 10px 12px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 999px;
+  color: var(--color);
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.leftBlockText {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.boxSoon {
+  display: flex;
+  padding: 4px 7px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 63px;
+  border: 0.5px solid #959ebb;
+  color: #c9d1ed;
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.boxSettingsRightBlock {
+  display: flex;
+  width: 100%;
+  max-width: 1020px;
+  padding: 22px 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  border-radius: 30px;
+  background: var(--cardDarkColor);
+}
+
+.boxSettingsH1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  color: var(--color);
+  font-family: Involve;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 90%;
+}
+
+.boxCancelSaveButtons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.boxCancelSaveButtons button:first-child {
+  display: flex;
+  height: 44px;
+  padding: 10px 12px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  background: var(--Success-Success500, #17c14a);
+  color: white;
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.boxCancelSaveButtons button:last-child {
+  display: flex;
+  height: 44px;
+  padding: 10px 12px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  background: var(--navLoginButton);
+  color: var(--color);
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.boxSettingsRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* align-items: flex-start; */
+  /* align-self: stretch; */
+  /* gap: 112px; */
+  width: 100%;
+}
+
+.boxSettingsSecurity {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* align-items: flex-start; */
+  gap: 20px;
+  /* flex: 1; */
+  color: #959ebb;
+  font-family: Involve;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  width: 60%;
+}
+
+.boxAvatar {
+  display: flex;
+  /* flex: 1; */
+  flex-direction: column;
+
+  gap: 20px;
+  color: #959ebb;
+  font-family: Involve;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  /* width: 60%; */
+}
+
+.boxAvatarRow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: 0.3s;
+}
+
+.boxAvatarRow h3 {
+  color: var(--boxUserName);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 90%;
+  transition: 0.3s;
+}
+
+.boxUserImageInSettings {
+  cursor: pointer;
+  width: 120px;
+  height: 120px;
+  background-position: 50%;
+  background-size: cover;
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  user-select: none;
+}
+
+/* Hover effekti qo‘shish mumkin */
+.boxUserImageInSettings:hover {
+  opacity: 0.7;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.boxUserImageInSettings.dragOver {
+  border: 2px dashed #1890ff;
+}
+
+.boxUserImageInSettings p {
+  color: #959ebb;
+  text-align: center;
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  transition: 0.3s;
+}
+
+.boxSettingsSocial {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.boxOneSocial {
+  display: flex;
+  padding: 10px 18px;
+  align-items: center;
+  gap: 12px;
+  border-radius: 60px;
+  background: var(--navLoginButton);
+  color: var(--color);
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+/* -------------------------- Вкладка QR код --------------------------  */
+
+.boxColQrCode {
+  display: flex;
+  max-width: 358px;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.boxQr {
+  height: 358px;
+  align-self: stretch;
+  aspect-ratio: 1/1;
+  border-radius: 33.6px;
+  background: #f1f2f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxBtnBack {
+  display: flex;
+  padding: 16px 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 999px;
+  background: var(--loginButton);
+  color: var(--foreground);
+}
+
+.boxUserTicketButtonDisplay {
+  display: none;
+  height: 44px;
+  padding: 10px;
+  align-items: center;
+  gap: 4px;
+  border-radius: 999px;
+  background: var(--cardDarkColor);
+  color: var(--color);
+}
+
+.boxButtonQrDisplay {
+  display: none;
+}
+
+.profileSetting {
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+  .boxUserSettingsButton span {
+    display: none;
+  }
+
+  .mainContainer {
     display: flex;
-    max-width: 450px;
+    min-height: 80vh;
+    padding: 34px 16px;
+    gap: 44px;
+  }
+
+  .boxUserInfo {
+    display: flex;
+    width: 100%;
+    padding: 22px 24px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 30px;
+    background: var(--cardDarkColor);
+  }
+
+  .boxUserSettingsButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .boxUserAvatar img {
+    border-radius: 80px;
+    width: 64px;
+  }
+
+  .boxUserAvatar p {
+    font-family: Involve;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 90%;
+  }
+
+  .settingsButton {
+    display: flex;
+    height: 44px;
+    padding: 10px;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    border-radius: 999px;
+    font-family: Involve;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+  }
+
+  .logoutButton {
+    display: flex;
+    height: 44px;
+    padding: 10px;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    border-radius: 999px;
+    font-family: Involve;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+  }
+
+  .boxUserTicketButton {
+    display: none;
+    height: 44px;
+    padding: 10px;
+    align-items: center;
+    gap: 4px;
+    border-radius: 999px;
+    background: var(--background);
+    color: var(--color);
+  }
+
+  .boxUserTicketButtonDisplay {
+    display: flex;
+    height: 44px;
+    padding: 10px;
+    align-items: center;
+    gap: 12px;
+    border-radius: 999px;
+    justify-content: space-between;
+    background: var(--cardDarkColor);
+    color: var(--color);
+    max-width: 227px;
+    margin: 0 auto;
+  }
+
+  .boxUserTicketButtonDisplay .oneButtonDispay {
+    display: flex;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 999px;
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+    transition: 0.3s;
+    background-color: var(--navLoginButton);
+  }
+
+  .boxUserTicketButtonDisplay .oneButtonNotActiveDisplay {
+    display: flex;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: var(--color);
+    font-family: Involve;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+    transition: 0.3s;
+  }
+
+  .boxTicketsTab {
+    display: block;
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .boxLeftBlock {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    gap: 12px;
+    background-color: var(--cardDarkColor);
+  }
+
+  .boxTicketAndMpInfo {
+    display: flex;
+    max-width: 700px;
     width: 100%;
     align-items: center;
     align-content: center;
     gap: 4px;
     flex-wrap: wrap;
-}
+    margin-top: 20px;
+  }
 
-.boxOneInfo:first-child {
-    display: flex;
-    padding: 12px 15px 9px 15px;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    border-radius: 999px;
-    background: var(--buyTicketButton);
-    color: #FFF;
-    text-align: center;
-    font-family: Involve;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 120%;
-}
-
-.boxOneInfo {
-    display: flex;
-    padding: 13px 15px 9px 15px;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    border-radius: 999px;
-    background: var(--loginButton);
-    color: var(--foreground);
-    text-align: center;
-    font-family: Involve;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 120%;
-}
-
-.boxButtonQr {
+  .boxButtonQrDisplay {
     display: flex;
     width: 60px;
     height: 60px;
@@ -304,692 +836,173 @@
     gap: 6px;
     border-radius: 36px;
     border: 0.6px solid var(--Neutrals-Neutrals1800, #5c5c5c);
-}
+  }
 
-/* -------------------------- Вкладка История покупок -------------------------- */
-
-.boxOneTicketHistory {
+  .boxButtonQr {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-}
-
-.boxOneInfoHistory {
-    display: flex;
-    padding: 12px 15px 9px 15px;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    border-radius: 999px;
-    background: var(--loginButton);
-    color: var(--foreground);
-    text-align: center;
-    font-family: Involve;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 120%;
-}
-
-.boxHistoryTicketPrice {
-    display: flex;
-    padding: 12px 15px 9px 15px;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    border-radius: 999px;
-    background: var(--loginButton);
-    color: var(--foreground);
-    text-align: center;
-    font-family: Involve;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 120%;
-}
-
-.boxHistoryAndMpInfo {
-    max-width: 419px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    gap: 4px;
-    flex-wrap: wrap;
-}
-
-/* -------------------------- Вкладка настройки -------------------------- */
-
-.boxSettingsTab {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    gap: 20px;
-}
-
-.boxSettingsLeftBlock {
-    display: flex;
-    width: 100%;
-    max-width: 324px;
-    padding: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    border-radius: 30px;
-    background: var(--cardDarkColor);
-}
-
-.leftBlockOneButton {
-    display: flex;
-    height: 44px;
-    padding: 10px 12px;
-    align-items: center;
-    gap: 8px;
-    align-self: stretch;
-    border-radius: 999px;
-    background: var(--navLoginButton);
-    color: var(--color);
-    font-family: Involve;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-}
-
-.leftBlockOneButtonNotActive {
-    display: flex;
-    height: 44px;
-    padding: 10px 12px;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-    border-radius: 999px;
-    color: var(--color);
-    font-family: Involve;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-}
-
-.leftBlockText {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.boxSoon {
-    display: flex;
-    padding: 4px 7px;
+    width: 60px;
+    height: 60px;
+    padding: 17.4px 18px;
     justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border-radius: 36px;
+    border: 0.6px solid var(--Neutrals-Neutrals1800, #5c5c5c);
+    display: none;
+  }
+
+  /* Settings */
+  .boxSettingsLeftBlock {
+    display: none;
+  }
+
+  .boxSettingsH1 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .profileSetting {
+    display: block;
+  }
+
+  .boxAvatar {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
     align-items: center;
     gap: 10px;
-    border-radius: 63px;
-    border: 0.5px solid #959ebb;
-    color: #c9d1ed;
-    font-family: Involve;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-}
+  }
 
-.boxSettingsRightBlock {
-    display: flex;
-    width: 100%;
-    max-width: 1020px;
-    padding: 22px 24px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    border-radius: 30px;
-    background: var(--cardDarkColor);
-}
-
-.boxSettingsH1 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-    color: var(--color);
-    font-family: Involve;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 90%;
-}
-
-.boxCancelSaveButtons {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.boxCancelSaveButtons button:first-child {
-    display: flex;
-    height: 44px;
-    padding: 10px 12px;
-    align-items: center;
-    gap: 8px;
-    border-radius: 999px;
-    background: var(--Success-Success500, #17c14a);
-    color: white;
-    font-family: Involve;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-}
-
-.boxCancelSaveButtons button:last-child {
-    display: flex;
-    height: 44px;
-    padding: 10px 12px;
-    align-items: center;
-    gap: 8px;
-    border-radius: 999px;
-    background: var(--navLoginButton);
-    color: var(--color);
-    font-family: Involve;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-}
-
-.boxSettingsRow {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    /* align-items: flex-start; */
-    /* align-self: stretch; */
-    /* gap: 112px; */
-    width: 100%;
-}
-
-.boxSettingsSecurity {
+  .boxSettingsSecurity,
+  .boxSettingsSocial {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    /* align-items: flex-start; */
-    gap: 20px;
-    /* flex: 1; */
-    color: #959ebb;
-    font-family: Involve;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-    width: 60%;
-}
-
-.boxAvatar {
-    display: flex;
-    /* flex: 1; */
-    flex-direction: column;
-
-    gap: 20px;
-    color: #959ebb;
-    font-family: Involve;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-    /* width: 60%; */
-}
-
-.boxAvatarRow {
-    display: flex;
     align-items: center;
-    gap: 18px;
-    transition: 0.3s;
-}
-
-.boxAvatarRow h3 {
-    color: var(--boxUserName);
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 90%;
-    transition: 0.3s;
-}
-
-.boxUserImageInSettings {
-    cursor: pointer;
-    width: 120px;
-    height: 120px;
-    background-position: 50%;
-    background-size: cover;
-    border-radius: 32px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: 0.3s;
-    user-select: none;
-}
-
-/* Hover effekti qo‘shish mumkin */
-.boxUserImageInSettings:hover {
-    opacity: 0.7;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.boxUserImageInSettings.dragOver {
-    border: 2px dashed #1890ff;
-}
-
-.boxUserImageInSettings p {
-    color: #959ebb;
-    text-align: center;
-    font-family: Involve;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 120%;
-    transition: 0.3s;
-}
-
-.boxSettingsSocial {
-    display: flex;
-    flex-wrap: wrap;
     gap: 10px;
-}
-
-.boxOneSocial {
-    display: flex;
-    padding: 10px 18px;
-    align-items: center;
-    gap: 12px;
-    border-radius: 60px;
-    background: var(--navLoginButton);
-    color: var(--color);
-    font-family: Involve;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 120%;
-}
-
-/* -------------------------- Вкладка QR код --------------------------  */
-
-.boxColQrCode {
-    display: flex;
-    max-width: 358px;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 40px;
-}
-
-.boxQr {
-    height: 358px;
-    align-self: stretch;
-    aspect-ratio: 1/1;
-    border-radius: 33.6px;
-    background: #f1f2f6;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.boxBtnBack {
-    display: flex;
-    padding: 16px 40px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    align-self: stretch;
-    border-radius: 999px;
-    background: var(--loginButton);
-    color: var(--foreground);
-}
-
-.boxUserTicketButtonDisplay {
-    display: none;
-    height: 44px;
-    padding: 10px;
-    align-items: center;
-    gap: 4px;
-    border-radius: 999px;
-    background: var(--cardDarkColor);
-    color: var(--color);
-}
-
-.boxButtonQrDisplay {
-    display: none;
-}
-
-.profileSetting {
-    display: none;
-}
-
-@media screen and (max-width: 700px) {
-    .mainContainer {
-        display: flex;
-        min-height: 80vh;
-        padding: 34px 16px;
-        gap: 44px;
-    }
-
-    .boxUserInfo {
-        display: flex;
-        width: 100%;
-        padding: 22px 24px;
-        justify-content: space-between;
-        align-items: center;
-        border-radius: 30px;
-        background: var(--cardDarkColor);
-    }
-
-    .boxUserSettingsButton {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .boxUserAvatar img {
-        border-radius: 80px;
-        width: 64px;
-    }
-
-    .boxUserAvatar p {
-        font-family: Involve;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 90%;
-    }
-
-    .settingsButton {
-        display: flex;
-        height: 44px;
-        padding: 10px;
-        align-items: center;
-        gap: 4px;
-        font-size: 11px;
-        border-radius: 999px;
-        font-family: Involve;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 120%;
-    }
-
-    .logoutButton {
-        display: flex;
-        height: 44px;
-        padding: 10px;
-        align-items: center;
-        gap: 8px;
-        font-size: 12px;
-        border-radius: 999px;
-        font-family: Involve;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 120%;
-    }
-
-    .boxUserTicketButton {
-        display: none;
-        height: 44px;
-        padding: 10px;
-        align-items: center;
-        gap: 4px;
-        border-radius: 999px;
-        background: var(--background);
-        color: var(--color);
-    }
-
-    .boxUserTicketButtonDisplay {
-        display: flex;
-        height: 44px;
-        padding: 10px;
-        align-items: center;
-        gap: 12px;
-        border-radius: 999px;
-        justify-content: space-between;
-        background: var(--cardDarkColor);
-        color: var(--color);
-        max-width: 227px;
-        margin: 0 auto;
-    }
-
-    .boxUserTicketButtonDisplay .oneButtonDispay {
-        display: flex;
-        padding: 8px;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        border-radius: 999px;
-        font-family: Involve;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 120%;
-        transition: 0.3s;
-        background-color: var(--navLoginButton);
-    }
-
-    .boxUserTicketButtonDisplay .oneButtonNotActiveDisplay {
-        display: flex;
-        padding: 8px;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        color: var(--color);
-        font-family: Involve;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 120%;
-        transition: 0.3s;
-    }
-
-    .boxTicketsTab {
-        display: block;
-        flex-direction: row;
-        gap: 12px;
-    }
-
-    .boxLeftBlock {
-        display: flex;
-        width: 100%;
-        max-width: 100%;
-        gap: 12px;
-        background-color: var(--cardDarkColor);
-    }
-
-    .boxTicketAndMpInfo {
-        display: flex;
-        max-width: 700px;
-        width: 100%;
-        align-items: center;
-        align-content: center;
-        gap: 4px;
-        flex-wrap: wrap;
-        margin-top: 20px;
-    }
-
-    .boxButtonQrDisplay {
-        display: flex;
-        width: 60px;
-        height: 60px;
-        padding: 17.4px 18px;
-        justify-content: center;
-        align-items: center;
-        gap: 6px;
-        border-radius: 36px;
-        border: 0.6px solid var(--Neutrals-Neutrals1800, #5c5c5c);
-    }
-
-    .boxButtonQr {
-        display: flex;
-        width: 60px;
-        height: 60px;
-        padding: 17.4px 18px;
-        justify-content: center;
-        align-items: center;
-        gap: 6px;
-        border-radius: 36px;
-        border: 0.6px solid var(--Neutrals-Neutrals1800, #5c5c5c);
-        display: none;
-    }
-
-    /* Settings */
-    .boxSettingsLeftBlock {
-        display: none;
-    }
-
-    .boxSettingsH1 {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .profileSetting {
-        display: block;
-    }
-
-    .boxAvatar {
-        display: flex;
-        flex-direction: column;
-        /* justify-content: center; */
-        align-items: center;
-        gap: 10px;
-    }
-
-    .boxSettingsSecurity,
-    .boxSettingsSocial {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
+  }
 }
 
 @media screen and (max-width: 460px) {
-    .boxUserSettingsButton {
-        display: flex;
-        align-items: center;
-        gap: 3px;
-    }
+  .boxUserSettingsButton {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
 
-    .settingsButton {
-        gap: 4px;
-        font-size: 9px;
-    }
+  .settingsButton {
+    gap: 4px;
+    font-size: 9px;
+  }
 
-    .logoutButton {
-        gap: 4px;
-        font-size: 9px;
-    }
+  .logoutButton {
+    gap: 4px;
+    font-size: 9px;
+  }
 
-    .boxUserAvatar p {
-        font-family: Involve;
-        font-size: 13px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 90%;
-    }
+  .boxUserAvatar p {
+    font-family: Involve;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 90%;
+  }
 
-    .boxOneInfoHistory,
-    .boxOneInfo,
-    .boxOneInfo:first-child {
-        padding: 8px 10px 6px 10px;
-        font-size: 12px;
-    }
+  .boxOneInfoHistory,
+  .boxOneInfo,
+  .boxOneInfo:first-child {
+    padding: 8px 10px 6px 10px;
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 1024px) {
-    .boxRightBlock {
-        margin-top: 10px;
-        display: flex;
-        width: 100%;
-        padding: 22px;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        border-radius: 30px;
-        transition: 0.3s;
-    }
+  .boxRightBlock {
+    margin-top: 10px;
+    display: flex;
+    width: 100%;
+    padding: 22px;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    border-radius: 30px;
+    transition: 0.3s;
+  }
 
-    .boxOneTicket {
-        display: block;
-        justify-content: space-between;
-        align-items: center;
-        align-self: stretch;
-    }
+  .boxOneTicket {
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+  }
 
-    .boxMpName {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        align-items: flex-start;
-        gap: 10px;
-        max-width: 100%;
-        color: #959ebb;
-        font-family: Involve;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 100%;
-    }
+  .boxMpName {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 100%;
+    color: #959ebb;
+    font-family: Involve;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%;
+  }
 
-    .boxTicketAndMpInfo {
-        margin: 20px 0;
-    }
+  .boxTicketAndMpInfo {
+    margin: 20px 0;
+  }
 
-    .boxButtonQr {
-        display: none;
-    }
+  .boxButtonQr {
+    display: none;
+  }
 
-    /* Box qr code */
-    .boxOneTicketHistory {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
+  /* Box qr code */
+  .boxOneTicketHistory {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 
-    .boxHistoryTicketPrice {
-        display: none;
-    }
+  .boxHistoryTicketPrice {
+    display: none;
+  }
 
-    .boxMpNameQr {
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
+  .boxMpNameQr {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
 
-    .boxButtonQrDisplay {
-        display: block;
-    }
+  .boxButtonQrDisplay {
+    display: block;
+  }
 
-    /* Setting */
-    .boxSettingsRow {
-        gap: 30px;
-        flex-direction: column;
-    }
+  /* Setting */
+  .boxSettingsRow {
+    gap: 30px;
+    flex-direction: column;
+  }
 
-    .boxSettingsSecurity {
-        display: flex;
-        /* justify-content: start; */
-        width: 100%;
-        /* margin: 0 auto; */
-    }
+  .boxSettingsSecurity {
+    display: flex;
+    /* justify-content: start; */
+    width: 100%;
+    /* margin: 0 auto; */
+  }
 
-    .boxSettingsSocial {
-        width: 100%;
-        margin-left: 10px;
-        /* width: fit-content; */
-        /* margin: 0 auto; */
-    }
+  .boxSettingsSocial {
+    width: 100%;
+    margin-left: 10px;
+    /* width: fit-content; */
+    /* margin: 0 auto; */
+  }
 
-    .boxAvatarRow {
-        margin-left: 10px;
-    }
+  .boxAvatarRow {
+    margin-left: 10px;
+  }
 }
