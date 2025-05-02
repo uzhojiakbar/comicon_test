@@ -23,7 +23,6 @@ export default function EventPage() {
   const { translate, language } = useLanguage();
   const { resolvedTheme, theme } = useTheme();
   const { user } = useUser();
-  const [vegetation, setVegetation] = useState(null);
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -143,15 +142,11 @@ export default function EventPage() {
 
       const street = components.find((c) => c.kind === "street")?.name;
       const house = components.find((c) => c.kind === "house")?.name;
-      const vegetation = components.find((c) => c.kind === "vegetation")?.name;
       const district = components.find((c) => c.kind === "district")?.name;
       const locality = components.find((c) => c.kind === "locality")?.name;
 
       if (street || house) {
         return [street, house].filter(Boolean).join(", ");
-      }
-      if (vegetation) {
-        return vegetation;
       }
       if (district) {
         return district;
@@ -167,17 +162,6 @@ export default function EventPage() {
     }
   }
 
-  useEffect(() => {
-    if (!vegetation && event?.sessions[0]?.location?.location?.coordinates) {
-      getFullAddressYandex(
-        event.sessions[0].location.location.coordinates
-      ).then((address) => {
-        setVegetation(address);
-      });
-    }
-  }, [event]);
-
-  console.log("vegetation", vegetation);
 
   //   async function getRegionOpenStreetMap(lat, lng) {
   //     const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
