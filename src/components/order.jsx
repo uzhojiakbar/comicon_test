@@ -480,17 +480,11 @@ export default function order({ seans, isOpen, onClose }) {
                 </div>
                 <div className={styles.eventPlace}>
                   <p>{translate(parseDate(currentSession?.[0]?.session_time)?.day)}
-                    {
-                      translate(parseDate(currentSession?.[0]?.session_time)?.month)
-                        ?
-                        ` - ${translate(parseDate(currentSession?.[0]?.session_time)?.month)} `
-                        : ""
-
-                    }
+                    {translate(parseDate(currentSession?.[0]?.session_time)?.month) ? ` - ${translate(parseDate(currentSession?.[0]?.session_time)?.month)} ` : ""}
                     в {parseDate(currentSession?.[0]?.session_time)?.time}</p>
                   <div className={styles.boxEventPlace}>
                     <p>{currentSession?.[0]?.location_name}</p>
-                    <h6>{translate("улица Бабура, 174/12")}</h6>
+                    <h6>{currentSession?.[0]?.location_street}</h6>
                   </div>
                 </div>
               </div>
@@ -524,7 +518,7 @@ export default function order({ seans, isOpen, onClose }) {
                     <div className={styles.boxOneTypeTicektBody}>
                       <div className={styles.boxTypeHead}>
                         <div className={styles.boxRowGap12}>
-                          <p>{ticket?.ticket_type_category ? ticket?.ticket_type_category : ticket?.ticket_type_name}</p>
+                          <p>{ticket?.ticket_type_name}</p>
                           <h6>
                             <span>{ticket.age_allowed || 18}</span>
                           </h6>
@@ -535,17 +529,13 @@ export default function order({ seans, isOpen, onClose }) {
                         <div className={styles.boxTicketQuantity}>
                           <button
                             onClick={() => OrderEditFunc(ticket?.ticket_type_id, -1)}
-                            disabled={(ticket?.quantity < 1)}
-                          >
+                            disabled={(ticket?.quantity < 1)}>
                             <Image
                               src={
                                 theme === "dark"
                                   ? "/removeTicketDark.svg"
-                                  : "/removeTicket.svg"
-                              }
-                              className={
-                                theme !== "dark" && !ticket?.quantity < 1 ? styles.darkButtonRemove : styles.ButtonRemove
-                              }
+                                  : "/removeTicket.svg"}
+                              className={theme !== "dark" && !ticket?.quantity < 1 ? styles.darkButtonRemove : styles.ButtonRemove}
                               alt="remove Ticket"
                               width={24}
                               height={24}

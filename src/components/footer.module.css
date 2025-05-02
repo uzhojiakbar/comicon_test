@@ -233,6 +233,15 @@
   background: var(--navLoginButton);
 }
 
+@media screen and (max-width:1350px) {
+  .boxfooterlogotext{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+}
+
 @media screen and (max-width: 1290px) {
   .footer {
     padding: 80px 24px 54px 24px;
@@ -249,16 +258,29 @@
     height: 32px;
   }
 
-  .oneboxsocial {
-    width: 32px;
-    height: 32px;
-    padding: 6px;
-  }
-
   .boxfooterlogo p {
     display: flex;
     flex-direction: column;
     align-items: start;
+  }
+  .boxfootertop{
+    flex-direction: column;
+  }
+  .boxfooterlogo{
+    flex-direction: column;
+    align-items: center;
+  }
+  .boxfooterlogotext div{
+    width: 100%;
+  }
+  
+  .boxfooterlogotext div p{
+    text-align: center;
+    flex-direction: row;
+  }
+  .boxfooterlinks{
+    width: unset;
+    margin-top: 10px;
   }
 }
 

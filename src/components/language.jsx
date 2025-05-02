@@ -50,7 +50,7 @@ const LanguageSwitcher = () => {
             {/* ✅ Добавили ref для кнопки */}
             <button ref={buttonRef} onClick={handleLanguageModal}>
                 <Image
-                    src={language === "ru" ? "/languageru.svg" : language === "eng" ? "/langEng.svg" : "/languageUz.svg"}
+                    src={language === "ru" ? "/languageru.svg" : language === "en" ? "/langEng.svg" : "/languageUz.svg"}
                     alt="Language"
                     width={24}
                     height={28}
@@ -60,24 +60,21 @@ const LanguageSwitcher = () => {
 
             <motion.div
                 ref={modalRef}
-                initial={{ y: 60 }}
-                animate={
-                    languageModal
-                        ? { y: 100, opacity: 1, display: "flex" }
-                        : { y: 60, opacity: 0, display: "none" }}
+                initial={{ y: 80 }}
+                animate={languageModal ? { y: 120, opacity: 1, display: "flex" } : { y: 80, opacity: 0, display: "none" }}
                 style={{ display: languageModal ? "flex" : "none" }}
                 transition={{ transition: "ease" }}
                 className={styles.LanguageModal}>
                 <button onClick={() => changeLanguage("ru")}>
-                    <Image src='/languageru.svg' alt="ru" width={21}
+                    <Image src='/ru.svg' alt="ru" width={21}
                         height={15} />
                     Русский
                 </button>
-                <button onClick={() => changeLanguage("uz")}><Image src='/languageUz.svg' alt="uz" width={21}
+                <button onClick={() => changeLanguage("uz")}><Image src='/uz.svg' alt="uz" width={21}
                     height={15} /> O'zbekcha
                 </button>
-                <button onClick={() => changeLanguage("eng")}>
-                    <Image src='/langEng.svg' alt="eng" width={21}
+                <button onClick={() => changeLanguage("en")}>
+                    <Image src='/en.svg' alt="en" width={21}
                         height={15} />
                     English
                 </button>

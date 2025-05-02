@@ -2,11 +2,11 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import ru from "./langs/ru.json";
 import uz from "./langs/uz.json";
-import eng from "./langs/eng.json";
+import en from "./langs/en.json";
 
 
 const LanguageContext = createContext();
-const translations = { ru, uz, eng };
+const translations = { ru, uz, en };
 
 export const LanguageProvider = React.memo(({ children }) => {
   const queryClient = useQueryClient(); // Получаем queryClient

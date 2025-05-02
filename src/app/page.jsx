@@ -545,9 +545,8 @@ export default function EventPage() {
                       src="/placepink.svg"
                       alt="place"
                       width={24}
-                      height={24}
-                    />
-                    <p>{vegetation || " 1"}</p>
+                      height={24}/>
+                    <p>{event?.sessions[0]?.location?.location_street}</p>
                   </div>
                 </div>
               </div>
