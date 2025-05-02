@@ -32,8 +32,7 @@ const ComingSoon = () => {
                 initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{
-                    duration: 1,
-                    ease: [0.25, 0.1, 0.25, 1],
+                    duration: 0.3
                 }}
             >
                 <Image
