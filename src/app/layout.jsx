@@ -20,8 +20,8 @@ export const metadata = {
   description: "Один день. Тысячи фанатов. Любимые вселенные, которые оживают прямо перед тобой. Comic Con Tashkent — это место встречи тех, кто верит в чудеса, мечтает о великих приключениях и не боится быть собой. Приходи, чтобы почувствовать, как мечты становятся ближе.", // Sahifa tavsifi
   keywords: "ComiCon, фестиваль комиксов, косплей, аниме, поп-культура, комиксы, гик-культура, супергерои, мероприятия, Comic Con Uzbekistan, комикон ташкент", // Kalit so'zlar
   icons: {
-    icon: "/favicon.png", // Favicon
-    apple: "/favicon.png", // Apple uchun favicon
+    icon: "/ComiconDark.svg", // Favicon
+    apple: "/ComiconDark.svg", // Apple uchun favicon
   },
 };
 

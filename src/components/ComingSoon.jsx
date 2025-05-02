@@ -17,22 +17,13 @@ const ComingSoon = () => {
 
     return (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#101217] pointer-events-none overflow-hidden">
-            {!isImageLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div
-                        className="loader w-45 h-45 rounded-full animate-spin"
-                        style={{
-                            background: "radial-gradient(64.97% 100% at 50.24% 0%, #954CFF 0%, #BA8AFF 100%)",
-                        }}
-                    ></div>
-                </div>
-            )}
             <motion.div
                 className="flex flex-wrap gap-[20px] items-center justify-center text-white text-lg md:text-2xl mt-2"
                 initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{
-                    duration: 0.3
+                    duration: 0.6,
+                    ease: [0.25, 0.1, 0.25, 1],
                 }}
             >
                 <Image
