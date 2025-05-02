@@ -1,4 +1,5 @@
 "use client";
+const comingSoon = 1;
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./home.module.css";
@@ -207,7 +208,6 @@ export default function EventPage() {
   // for change
 
 
-  const comingSoon = 1;
   return (
     <div style={{ padding: "0 10px" }}>
       {
