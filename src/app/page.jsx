@@ -16,6 +16,7 @@ import "swiper/css/navigation";
 import { Navigation, Pagination, Scrollbar } from "swiper/modules";
 import ImageViewer from "@/components/ImagerViewer";
 import { useUser } from "@/utils/userProvider";
+import ComingSoon from "@/components/ComingSoon";
 
 export default function EventPage() {
   const [ticketType, setTicketType] = useState("ordinary");
@@ -204,8 +205,16 @@ export default function EventPage() {
   // ---------------
 
   // for change
+
+
+  const comingSoon = 1;
   return (
     <div style={{ padding: "0 10px" }}>
+      {
+        comingSoon ?
+          <ComingSoon />
+          : ""
+      }
       <Nav />
       <section className={styles.mainContainer}>
         <div className={styles.mainContent}>
@@ -529,7 +538,7 @@ export default function EventPage() {
                       src="/placepink.svg"
                       alt="place"
                       width={24}
-                      height={24}/>
+                      height={24} />
                     <p>{event?.sessions[0]?.location?.location_street}</p>
                   </div>
                 </div>
