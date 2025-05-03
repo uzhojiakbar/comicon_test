@@ -213,6 +213,12 @@ export default function order({ seans, isOpen, onClose }) {
   const CloseAndClearModal = () => {
     onClose()
     setModal(1)
+    setCardData({
+      "card_number": "",
+      "expiry": "",
+      "transaction_id": 0
+    })
+    setPrivatyPolicy(false)
     setCode(new Array(6).fill(""))
   }
 
@@ -1023,6 +1029,14 @@ export default function order({ seans, isOpen, onClose }) {
             className={styles.mainContainer1}
             onClick={(e) => e.stopPropagation()}
           >
+            <button className={styles.closeButton} onClick={CloseAndClearModal}>
+              <Image
+                src="/closeModal.svg"
+                alt="closeModal"
+                width={72}
+                height={72}
+              />
+            </button>
             <div className={styles.firstPayment}>
               <h1>{translate("Введите код из СМС")}</h1>
               <h3>{translate("Мы отправили СМС на ваш номер")}</h3>
@@ -1047,7 +1061,8 @@ export default function order({ seans, isOpen, onClose }) {
               </div>
               <div className={styles.boxRowSpaceBetween}>
                 <button
-                  className={styles.buttonNext}
+                  className={`${styles.buttonNext}`}
+                  disabled={!code.every((char) => `${char}`?.length > 0)} // Barcha elementlar to'ldirilganligini tekshirish
                   onClick={() => AtmosPyeApply()}
                 >
                   {translate("Далее")}

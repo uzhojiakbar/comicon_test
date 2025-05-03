@@ -860,13 +860,19 @@
   gap: 10px;
   align-self: stretch;
   border-radius: 999px;
-  background: #191d2b;
+  background: var(--btnBackground);
   color: #fff;
   font-family: Involve;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: 110%;
+}
+
+.buttonNext:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+  transition: 0.2s;
 }
 
 .boxColGap16 {
