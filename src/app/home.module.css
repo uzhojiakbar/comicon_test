@@ -100,7 +100,7 @@
   gap: 10px;
   flex: 1 0 0;
   border-radius: 999px;
-  background: var(--buyTicketButton);
+  background: var(--btnBackground);
   color: #fff;
   font-size: 14px;
   font-weight: 700;
@@ -116,7 +116,7 @@
   gap: 10px;
   flex: 1 0 0;
   border-radius: 999px;
-  background: #191d2b;
+  background: var(--btnBackground);
   color: #fff;
   font-size: 14px;
   font-weight: 700;

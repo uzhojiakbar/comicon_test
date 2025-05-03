@@ -1,5 +1,5 @@
 "use client";
-const comingSoon = 1
+const comingSoon = 0
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./home.module.css";
@@ -253,7 +253,8 @@ export default function EventPage() {
                   </div>
                   <h4>{new Date(event.sessions[0].date).toLocaleDateString("ru-RU")}</h4>
                 </div>
-                <div className={styles.boxEventBuyTicket}>
+                <div
+                  className={styles.boxEventBuyTicket}>
                   <a href="#tickets" className={styles.buyTicket}>
                     <p>{translate("buyTicket")}</p>
                   </a>
