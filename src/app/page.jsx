@@ -1,5 +1,5 @@
 "use client";
-const comingSoon = 0
+const comingSoon = 1;
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./home.module.css";
