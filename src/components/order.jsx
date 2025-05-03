@@ -24,7 +24,7 @@ export default function order({ seans, isOpen, onClose }) {
   const [quantity, setQuantity] = useState(0);
   const [privatyPolicy, setPrivatyPolicy] = useState(false);
   const [paymentType, setPaymentType] = useState("click");
-  const [promocodeVerify, setPromocodeVerify] = useState(1);
+  const [promocodeVerify, setPromocodeVerify] = useState(false);
   const [modal, setModal] = useState(1);
   const [code, setCode] = useState(new Array(6).fill(""));
   const countryCode = "+998";
@@ -39,8 +39,8 @@ export default function order({ seans, isOpen, onClose }) {
   const [currentSession, setCurrentSession] = useState({})
   const [eventData, setEventData] = useState()
   const [cardData, setCardData] = useState({
-    "card_number": "string",
-    "expiry": "string",
+    "card_number": "",
+    "expiry": "",
     "transaction_id": 0
   })
   const now = new Date();
@@ -304,10 +304,20 @@ export default function order({ seans, isOpen, onClose }) {
     };
   }
 
+
   const AtmosPyPreApply = () => {
+
+
+    const sanitizedCardData = {
+      ...cardData,
+      card_number: cardData.card_number.replace(/\s/g, ""), // Bo'sh joylarni olib tashlash
+      expiry: cardData.expiry.replace(/\//g, ""), // "/" belgisini olib tashlash
+    };
+
+
     AtmosPayPreApplyMutation.mutate(
       {
-        ...cardData,
+        ...sanitizedCardData,
         "transaction_id": totalAmoutForModal3?.transaction_id
       },
       {
@@ -315,11 +325,11 @@ export default function order({ seans, isOpen, onClose }) {
           console.log("Order click successfully:", data);
           setTotalAMoutFOrModal3(data)
           setModal(4)
-          addToast(translate("confirmationAndCardDetails"), "success"); // Toast qo'shish
+          addToast(translate("smsAlreadySend"), "success"); // Toast qo'shish
         },
         onError: (error) => {
           console.error("Failed to click apply order:", error);
-          addToast(translate("error"), "error"); // Toast qo'shish
+          addToast(translate(error?.response?.data?.message), "error"); // Toast qo'shish
         },
       }
     );
@@ -339,8 +349,8 @@ export default function order({ seans, isOpen, onClose }) {
         onSuccess: (data) => {
           console.log("Order click successfully:", data);
           setTotalAMoutFOrModal3(data?.data)
-          onClose()
-          addToast(translate("confirmationAndCardDetails"), "success"); // Toast qo'shish
+          CloseAndClearModal()
+          addToast(translate("confirm"), "success"); // Toast qo'shish
         },
         onError: (error) => {
           console.error("Failed to click apply order:", error);
@@ -423,8 +433,11 @@ export default function order({ seans, isOpen, onClose }) {
   }
 
 
-
   const PostPromocode = () => {
+
+    if (!promocodeVerify) {
+      return
+    }
     OrderPostPromocodeMutation.mutate(
       {
         "promo_code": promocodeVerify
@@ -437,7 +450,11 @@ export default function order({ seans, isOpen, onClose }) {
         },
         onError: (error) => {
           console.error("promoCodeError", error);
-          addToast(translate("error"), "error"); // Toast qo'shish
+          if (error?.response?.data?.error === "Promo code not found") {
+            addToast(translate("PromocodeNotFound"), "error"); // Toast qo'shish
+          } else {
+            addToast(translate("promoCodeError"), "error"); // Toast qo'shish
+          }
         },
       }
     );
@@ -583,7 +600,7 @@ export default function order({ seans, isOpen, onClose }) {
             <div className={styles.boxModalRightTop}>
               <div className={styles.boxRowH1}>
                 <h1>{translate("pay")}</h1>
-                <button onClick={onClose}>
+                <button onClick={CloseAndClearModal}>
                   <Image
                     src="/closeModal.svg"
                     alt="closeModal"
@@ -694,16 +711,20 @@ export default function order({ seans, isOpen, onClose }) {
                     }}
                   >
                     <input
-                      style={{ width: "80%" }}
-                      type="text"
+                      style={{
+                        width: "80%",
+                        filter: !!eventData?.promo?.discount_amount ? "grayscale(100%)" : "none",
+                        cursor: !!eventData?.promo?.discount_amount ? "not-allowed" : "text",
+                      }} type="text"
                       disabled={!!eventData?.promo?.discount_amount}
+
                       onChange={(e) => setPromocodeVerify(e?.target?.value)}
                       placeholder={translate("Промокод или код сертификата")}
                     />
                     {/* PostPromocode */}
                     <button
                       style={{ "width": "20%" }}
-                      disabled={!!eventData?.promo?.discount_amount}
+                      disabled={!!eventData?.promo?.discount_amount || !promocodeVerify}
                       onClick={() => PostPromocode()}
                       className={`${styles.boxButtonNext} ${styles.boxButtonNext2}`}
                     >
@@ -897,6 +918,14 @@ export default function order({ seans, isOpen, onClose }) {
           className={styles.mainContainer1}
           onClick={(e) => e.stopPropagation()}
         >
+          <button className={styles.closeButton} onClick={CloseAndClearModal}>
+            <Image
+              src="/closeModal.svg"
+              alt="closeModal"
+              width={72}
+              height={72}
+            />
+          </button>
           <div className={styles.firstPayment}>
             <h1>{translate("Реквизиты для оплаты")}</h1>
             <div className={styles.boxColGap4}>
@@ -910,18 +939,54 @@ export default function order({ seans, isOpen, onClose }) {
                     width={32}
                     height={32}
                   />
-                  <input onChange={(e) => setCardData({
-                    ...cardData,
-                    "card_number": e.target.value
-                  })} type="text" placeholder="XXXX XXXX XXXX XXXX" />
+                  <input
+                    onChange={(e) => {
+                      let value = e.target.value.replace(/\D/g, "");
+                      value = value.match(/.{1,4}/g)?.join(" ") || value;
+                      setCardData({
+                        ...cardData,
+                        card_number: value,
+                      });
+                    }}
+                    value={cardData.card_number ? cardData.card_number : ""}
+                    type="text"
+                    placeholder="XXXX XXXX XXXX XXXX"
+                    maxLength="19"
+                  />
                 </div>
                 <div className={styles.boxInput1}>
                   <input
-                    onChange={(e) => setCardData({
-                      ...cardData,
-                      "expiry": e.target.value
-                    })}
-                    type="text" placeholder={translate("ММ / ГГ")} />
+                    onChange={(e) => {
+                      let value = e.target.value.replace(/\D/g, ""); // Faqat raqamlarni qoldirish
+                      if (value.length > 4) {
+                        value = value.slice(0, 4); // Maksimal 4 ta raqamga cheklash
+                      }
+
+                      // Har 2 ta raqamdan keyin "/" qo'shish
+                      if (value.length > 1) {
+                        value = `${value.slice(0, 2)}/${value.slice(2)}`;
+                      }
+
+                      // Agar foydalanuvchi MM/YY formatida kiritgan bo'lsa, uni YY/MM formatiga o'zgartirish
+                      if (value.length === 5) {
+                        const [month, year] = value.split("/");
+                        if (month <= 12 && year <= 12) {
+                          value = value
+                        } else if (month <= 12) {
+                          value = `${year}/${month}`; // YY/MM formatiga o'zgartirish
+                        }
+                      }
+
+                      setCardData({
+                        ...cardData,
+                        expiry: value, // YY/MM formatida saqlash
+                      });
+                    }}
+                    value={cardData.expiry} // Formatlangan qiymatni inputga qaytarish
+                    type="text"
+                    placeholder={translate("ММ / ГГ")}
+                    maxLength="5" // Maksimal uzunlikni belgilash (4 raqam + 1 "/")
+                  />
                 </div>
               </div>
               <div className={styles.boxRowGap4}>
@@ -941,7 +1006,8 @@ export default function order({ seans, isOpen, onClose }) {
             <div className={styles.boxRowSpaceBetween}>
               <h1>{translate("Итого")}:  {formatNumber(totalAmoutForModal3?.amount)} {translate("uzs_som")}</h1>
               <button
-                className={styles.buttonPey}
+                className={`${styles.boxButtonNext} ${styles.boxButtonNext2}`}
+                disabled={!(cardData?.expiry?.length === 5) || !(cardData?.card_number?.length === 19)}
                 onClick={() => AtmosPyPreApply()}
               >
                 {translate("Оплатить")}
@@ -949,45 +1015,48 @@ export default function order({ seans, isOpen, onClose }) {
             </div>
           </div>
         </div>
-      )}
-      {modal === 4 && (
-        <div
-          className={styles.mainContainer1}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className={styles.firstPayment}>
-            <h1>{translate("Введите код из СМС")}</h1>
-            <h3>{translate("Мы отправили СМС на ваш номер")}</h3>
-            <div className={styles.boxColGap16}>
-              <div className={styles.boxRowGap8}>
-                {code.map((_, index) => (
-                  <input
-                    key={index}
-                    ref={(el) => (inputs.current[index] = el)}
-                    type="text"
-                    inputMode="numeric" // Ограничиваем ввод только цифрами
-                    maxLength="1"
-                    value={code[index]}
-                    onChange={(e) => handleChangeVerification(e, index)}
-                    onKeyDown={(e) => handleBackspace(e, index)}
-                    onPaste={handlePaste}
-                    placeholder="x"
-                    id={`input-${index}`}
-                  />
-                ))}
+      )
+      }
+      {
+        modal === 4 && (
+          <div
+            className={styles.mainContainer1}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.firstPayment}>
+              <h1>{translate("Введите код из СМС")}</h1>
+              <h3>{translate("Мы отправили СМС на ваш номер")}</h3>
+              <div className={styles.boxColGap16}>
+                <div className={styles.boxRowGap8}>
+                  {code.map((_, index) => (
+                    <input
+                      key={index}
+                      ref={(el) => (inputs.current[index] = el)}
+                      type="text"
+                      inputMode="numeric" // Ограничиваем ввод только цифрами
+                      maxLength="1"
+                      value={code[index]}
+                      onChange={(e) => handleChangeVerification(e, index)}
+                      onKeyDown={(e) => handleBackspace(e, index)}
+                      onPaste={handlePaste}
+                      placeholder="x"
+                      id={`input-${index}`}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className={styles.boxRowSpaceBetween}>
+                <button
+                  className={styles.buttonNext}
+                  onClick={() => AtmosPyeApply()}
+                >
+                  {translate("Далее")}
+                </button>
               </div>
             </div>
-            <div className={styles.boxRowSpaceBetween}>
-              <button
-                className={styles.buttonNext}
-                onClick={() => AtmosPyeApply()}
-              >
-                {translate("Далее")}
-              </button>
-            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+    </div >
   );
 }

@@ -18,6 +18,7 @@
 .mainContainer,
 .mainContainer1 {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -28,11 +29,18 @@
   padding: 22px;
 }
 
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
 .mainContainer1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .mainContainer1 h3 {
@@ -240,6 +248,10 @@
   gap: 8px;
   align-self: stretch;
   border-radius: 20px;
+  background: var(--ModalSectionContainer);
+}
+
+.backgroundNew {
   background: var(--ModalSectionContainer);
 }
 
@@ -670,7 +682,7 @@
   align-items: flex-start;
   gap: 19px;
   border-radius: 34px;
-  background: var(--cardDarkColor);
+  background: var(--loginButton);
 }
 
 .firstPayment h1 {
@@ -747,6 +759,7 @@
 .boxInput {
   min-width: 130px;
   width: 70%;
+  background: var(--ModalSectionContainer);
 }
 
 .boxInput1 {
@@ -757,14 +770,14 @@
   gap: 12px;
   border-radius: 20px;
   width: 30%;
-  background: var(--background);
+  background: var(--ModalSectionContainer);
 }
 
 .boxInput input,
 .boxInput1 input {
   display: flex;
   flex-direction: row;
-  background: var(--background);
+  background: transparent;
   width: 100%;
   height: 100%;
   outline: none;
@@ -796,11 +809,11 @@
 .boxPayment {
   display: flex;
   width: 100px;
-  height: 46px;
+  height: 60px;
   justify-content: center;
   align-items: center;
   border-radius: 16px;
-  background: var(--background);
+  background: var(--ModalSectionContainer);
 }
 
 .boxRowSpaceBetween {
