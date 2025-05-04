@@ -581,12 +581,38 @@
 .oneSlide {
   display: flex;
   flex-direction: column;
-  height: 450px !important;
   justify-content: end;
+  height: 450px !important;
+  transition: ease-in-out 0.2s;
+}
+
+.swiperCustom {
+  display: flex;
+  gap: 30px;
+  transition: ease-in-out 0.2s;
+}
+.swiperSlide:not(.hovered) {
+  width: 250px !important; /* Hover qilinmagan element kengligi */
+  margin: 0 120px;
+  transition: ease-in-out 0.2s;
+}
+
+.hovered {
+  transition: ease-in-out 0.2s;
+  margin: 0 120px;
+}
+
+.hovered .boxoneSlideBackground {
+  width: 500px !important; /* Element kengligini avtomatik sozlash */
+  transition: ease-in-out 0.2s;
+}
+
+.hovered .boxoneSlideBackground p {
+  display: flex;
 }
 
 .boxoneSlideBackground {
-  width: 300px !important;
+  width: 300px;
   height: 300px !important;
   border-radius: 35px;
   background: var(--cardDarkColor);
@@ -599,14 +625,8 @@
   padding: 10px;
 }
 
-.hovered .boxoneSlideBackground {
-  width: 100% !important;
-  flex-direction: column;
-  display: flex;
-  transition: 0.3s;
-}
-
 .boxoneSlideBackground p {
+  padding-left: 250px;
   display: none;
   color: var(--navColor);
   font-family: Involve;
@@ -614,19 +634,13 @@
   font-style: normal;
   font-weight: 600;
   line-height: 120%;
-  transition: 0.3s;
-}
-
-.hovered .boxoneSlideBackground p {
-  display: flex;
-  transition: 0.3s;
+  width: 500px !important; /* Element kengligini avtomatik sozlash */
 }
 
 .guestImg {
   position: absolute;
   z-index: 100;
   bottom: 48px;
-
   width: 250;
   height: 368;
 }

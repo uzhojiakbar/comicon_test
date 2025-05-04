@@ -1,5 +1,5 @@
 "use client";
-const comingSoon = 1;
+const comingSoon = 0
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./home.module.css";
@@ -398,7 +398,7 @@ export default function EventPage() {
               </button>
               <Swiper
                 slidesPerView={3} // 👈 Aynan shu yer elementlar sonini belgilaydi
-                spaceBetween={12}
+                spaceBetween={3}
                 onSwiper={setSwiperInstance}
                 breakpoints={{
                   320: { slidesPerView: 1 },
@@ -417,11 +417,14 @@ export default function EventPage() {
                 className={styles.swiperCustom}
               >
                 {event?.event_guests?.map((guest) => (
-                  <SwiperSlide key={guest.id} className={styles.swiperSlide}>
+                  <SwiperSlide key={guest.id}
+                    onMouseEnter={(e) => e.currentTarget.classList.add(styles.hovered)}
+                    onMouseLeave={(e) => e.currentTarget.classList.remove(styles.hovered)}
+                    className={styles.swiperSlide}>
                     <div
+
                       className={styles.oneSlide}
-                      onMouseEnter={(e) => e.currentTarget.classList.add(styles.hovered)}
-                      onMouseLeave={(e) => e.currentTarget.classList.remove(styles.hovered)}>
+                    >
                       <Image
                         src={guest.image}
                         alt={guest.name}
@@ -439,7 +442,6 @@ export default function EventPage() {
                   </SwiperSlide>
                 ))}
               </Swiper>
-
               <button id="tickets" ref={nextRef} className={styles.arrow}>
                 <Image
                   src="/altarrowright.svg"
