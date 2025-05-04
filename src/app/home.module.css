@@ -607,8 +607,27 @@
   transition: ease-in-out 0.2s;
 }
 
+/* Matnni yashirish uchun boshlang'ich holat */
+.boxoneSlideBackground p {
+  padding-left: 250px;
+  display: none;
+  opacity: 0; /* Matnni ko'rinmas qilish */
+  transform: translateY(70px); /* Matnni biroz pastga surish */
+  transition: all 1s ease; /* Animatsiya qo'shish */
+  color: var(--navColor);
+  font-family: Involve;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  width: 500px !important; /* Element kengligini avtomatik sozlash */
+}
+
+/* Hover qilinganda matnni ko'rsatish */
 .hovered .boxoneSlideBackground p {
   display: flex;
+  opacity: 1; /* Matnni ko'rinadigan qilish */
+  transform: translateY(0); /* Matnni asl holatiga qaytarish */
 }
 
 .boxoneSlideBackground {
@@ -623,18 +642,6 @@
   align-items: end;
   justify-content: center;
   padding: 10px;
-}
-
-.boxoneSlideBackground p {
-  padding-left: 250px;
-  display: none;
-  color: var(--navColor);
-  font-family: Involve;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 120%;
-  width: 500px !important; /* Element kengligini avtomatik sozlash */
 }
 
 .guestImg {
@@ -881,7 +888,8 @@
 
   .oneSlide,
   .swiperSlide {
-    height: 500px !important;
+    height: 300px !important;
+    margin: 30px 0 !important;
   }
 
   .oneSlide {
@@ -891,9 +899,46 @@
     flex-direction: column;
   }
 
+  /* Hover qilinganda matnni ko'rsatish */
+  /* .hovered .oneSlide,
+  .hovered .swiperSlide {
+  } */
+
+  .hovered .boxoneSlideBackground {
+    width: 200px !important; /* Element kengligini avtomatik sozlash */
+    height: 400px !important;
+  }
+  .hovered .boxoneSlideBackground p {
+    width: 200px !important; /* Element kengligini avtomatik sozlash */
+    padding-left: 0;
+    opacity: 1; /* Matnni ko'rinadigan qilish */
+  }
+  .boxoneSlideBackground {
+    width: 200px !important; /* Element kengligini avtomatik sozlash */
+  }
+
+  .hovered .boxoneSlideBackground p {
+    display: flex;
+    opacity: 1; /* Matnni ko'rinadigan qilish */
+    transform: translateY(0); /* Matnni asl holatiga qaytarish */
+    padding-left: 0;
+    padding-top: 175px;
+  }
+
+  .boxoneSlideBackground p {
+    display: flex !important;
+  }
+
   .guestImg {
-    top: 10px;
+    bottom: 40px;
+    left: 0;
     margin: 0 auto;
+    width: 150;
+    height: 268;
+  }
+
+  .guestName {
+    font-size: 21px;
   }
 }
 

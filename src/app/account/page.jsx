@@ -437,30 +437,6 @@ export default function account() {
                 </p>
               </div>
 
-              <div className={styles.boxUserTicketButton}>
-                <button
-                  onClick={() => setAccount("tickets")}
-                  className={
-                    account === "tickets" ||
-                      account === "qrcode" ||
-                      account === "favourites" ||
-                      account === "missed" ||
-                      account === "archived"
-                      ? styles.oneButton
-                      : styles.oneButtonNotActive
-                  }
-                >
-                  {translate("Билеты")}
-                </button>
-                <button
-                  onClick={() => setAccount("ticketHistory")}
-                  className={
-                    account === "ticketHistory"
-                      ? styles.oneButton
-                      : styles.oneButtonNotActive}>
-                  {translate("История покупок")}
-                </button>
-              </div>
 
               <div className={styles.boxUserSettingsButton}>
                 <button
@@ -490,24 +466,6 @@ export default function account() {
                 </button>
               </div>
             </div>
-            <div className={styles.boxUserTicketButtonDisplay}>
-              <button
-                onClick={() => setAccount("tickets")}
-                className={
-                  account === "tickets" || account === "qrcode"
-                    ? styles.oneButtonDispay
-                    : styles.oneButtonNotActiveDisplay}>
-                {translate("Билеты")}
-              </button>
-              <button
-                onClick={() => setAccount("ticketHistory")}
-                className={
-                  account === "ticketHistory"
-                    ? styles.oneButtonDispay
-                    : styles.oneButtonNotActiveDisplay}>
-                {translate("История покупок")}
-              </button>
-            </div>
           </>
         ) : (
           <></>
@@ -519,37 +477,6 @@ export default function account() {
           account === "missed" ||
           account === "archived" ? (
           <div className={styles.boxTicketsTab}>
-            <div className={styles.boxLeftBlock}>
-              <div className={styles.boxLeftBlockH1}>
-                <Image src="/list.svg" alt="list" width={24} height={24} />
-                {translate("Мои покупки")}
-              </div>
-              <div className={styles.boxLeftBlockButtons}>
-                <button
-                  onClick={() => setAccount("tickets")}
-                  className={account === "tickets" || account === "ticketHistory" ? styles.boxLeftBlockOneBtn : styles.boxLeftBlockOneBtnNotActive}>
-                  {translate("Активные билеты")}
-                  <p>{ticketList?.by_list_type?.active?.count || 0}</p>
-                </button>
-                <button
-                  onClick={() => setAccount("favourites")}
-                  className={account === "favourites" ? styles.boxLeftBlockOneBtn : styles.boxLeftBlockOneBtnNotActive}>
-                  {translate("Избранные билеты")}
-                  <p>{ticketList?.by_list_type?.archived?.count || 0}</p>
-                </button>
-                <button
-                  onClick={() => setAccount("missed")}
-                  className={account === "missed" ? styles.boxLeftBlockOneBtn : styles.boxLeftBlockOneBtnNotActive}>
-                  {translate("Пропущенные билеты")}
-                  <p>{ticketList?.by_list_type?.favorites?.count || 0}</p>
-                </button>
-                <button onClick={() => setAccount("archived")}
-                  className={account === "archived" ? styles.boxLeftBlockOneBtn : styles.boxLeftBlockOneBtnNotActive}>
-                  {translate("Архивные билеты")}
-                  <p>{ticketList?.by_list_type?.missed?.count || 0}</p>
-                </button>
-              </div>
-            </div>
             {/* -------------------------- Вкладка билеты -------------------------- */}
             <div className={styles.boxRightBlock}>
               {account === "tickets" && (
@@ -567,93 +494,9 @@ export default function account() {
                                     : ticket.event_image_black
                                     }`}
                                   alt="MpLogo"
-                                  width={275}
+                                  width={200}
                                   height={36}
                                 />
-                                {ticket.event_title}
-                              </div>
-                              <button
-                                onClick={() => {
-                                  setAccount("qrcode")
-                                  setTicketData(ticket)
-                                }}
-                                className={styles.boxButtonQrDisplay}
-                              >
-                                <Image
-                                  src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
-                                  alt="qrcode"
-                                  width={25}
-                                  height={25}
-                                />
-                              </button>
-                            </div>
-                            <div className={styles.boxTicketAndMpInfo}>
-                              <div className={styles.boxOneInfo}>
-                                {Number(
-                                  ticket.price.replace(".00", "")
-                                ).toLocaleString("ru-RU")}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {translate("Билет")} №{ticket.id}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.seat_info || "Общий зал"}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.event_date.split(" ")[0]}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.event_date.split(" ")[1]}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.location_name}
-                              </div>
-                            </div>
-                            <button
-                              onClick={() => {
-                                setAccount("qrcode")
-                                setTicketData(ticket)
-                              }}
-                              className={styles.boxButtonQr}>
-                              <Image
-                                src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
-                                alt="qrcode"
-                                width={25}
-                                height={25}
-                              />
-                            </button>
-                          </div>
-                          {index !== ticketList.all_tickets.length - 1 && (
-                            <hr />
-                          )}
-                        </div>
-                      ))}
-                    </>
-                  ) : (
-                    <>{translate("У вас нет билетов")}</>
-                  )}
-                </>
-              )}
-              {/* -------------------------- Вкладка история покупок -------------------------- */}
-              {account === "ticketHistory" && (
-                <>
-                  {ticketList?.all_tickets?.length !== 0 ? (
-                    <>
-                      {ticketList?.all_tickets?.map((ticket, index) => (
-                        <div key={ticket.id} className={styles.boxTIcketsMap}>
-                          <div className={styles.boxOneTicket}>
-                            <div className={styles.boxMpName}>
-                              <div>
-                                <Image
-                                  src={`https://api.comiccon.uz/media/${theme === "dark"
-                                    ? ticket.event_image_white
-                                    : ticket.event_image_black
-                                    }`}
-                                  alt="MpLogo"
-                                  width={275}
-                                  height={36}
-                                />
-                                {ticket.event_title}
                               </div>
                               <button
                                 onClick={() => {
@@ -718,8 +561,6 @@ export default function account() {
                 </>
               )}
               {/* -------------------------- Вкладка QR коды билетов -------------------------- */}
-              {console.log(ticketdata, "ticketdata")
-              }
               {account === "qrcode" && (
 
                 <>
@@ -731,11 +572,9 @@ export default function account() {
                           : ticketdata?.event_image_black
                           }`}
                         alt="MpLogo"
-                        width={275}
+                        width={225}
                         height={36}
                       />
-                      {ticketdata.event_title}
-
                     </div>
                     <div className={styles.boxHistoryAndMpInfo}>
                       <div className={styles.boxOneInfoHistory}>{translate("Билет")} №{ticketdata.id}</div>
@@ -770,254 +609,6 @@ export default function account() {
                   </div>
                 </>
               )}
-              {account === "favourites" && (
-                <>
-                  {ticketList?.by_list_type?.favorites?.tickets?.length !== 0 ? (
-                    <>
-                      {ticketList?.by_list_type?.favorites?.tickets?.map((ticket, index) => (
-                        <div key={ticket.id} className={styles.boxTIcketsMap}>
-                          <div className={styles.boxOneTicket}>
-                            <div className={styles.boxMpName}>
-                              <div>
-                                <Image
-                                  src={`https://api.comiccon.uz/media/${theme === "dark"
-                                    ? ticket.event_image_white
-                                    : ticket.event_image_black
-                                    }`}
-                                  alt="MpLogo"
-                                  width={275}
-                                  height={36}
-                                />
-                                {ticket.event_title}
-                              </div>
-                              <button
-                                onClick={() => {
-                                  setAccount("qrcode")
-                                  setTicketData(ticket)
-                                }}
-                                className={styles.boxButtonQrDisplay}
-                              >
-                                <Image
-                                  src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
-                                  alt="qrcode"
-                                  width={25}
-                                  height={25}
-                                />
-                              </button>
-                            </div>
-                            <div className={styles.boxTicketAndMpInfo}>
-                              <div className={styles.boxOneInfo}>
-                                {Number(
-                                  ticket.price.replace(".00", "")
-                                ).toLocaleString("ru-RU")}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {translate("Билет")} №{ticket.id}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.seat_info || "Общий зал"}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.event_date.split(" ")[0]}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.event_date.split(" ")[1]}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.location_name}
-                              </div>
-                            </div>
-                            <button
-                              onClick={() => {
-                                setAccount("qrcode")
-                                setTicketData(ticket)
-                              }}
-                              className={styles.boxButtonQr}>
-                              <Image
-                                src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
-                                alt="qrcode"
-                                width={25}
-                                height={25}
-                              />
-                            </button>
-                          </div>
-                          {index !== ticketList.all_tickets.length - 1 && (
-                            <hr />
-                          )}
-                        </div>
-                      ))}
-                    </>
-                  ) : (
-                    <>{translate("У вас нет билетов")}</>
-                  )}
-                </>
-              )}
-              {account === "missed" && (
-                <>
-                  {ticketList?.by_list_type?.missed?.tickets?.length !== 0 ? (
-                    <>
-                      {ticketList?.by_list_type?.missed?.tickets?.map((ticket, index) => (
-                        <div key={ticket.id} className={styles.boxTIcketsMap}>
-                          <div className={styles.boxOneTicket}>
-                            <div className={styles.boxMpName}>
-                              <div>
-                                <Image
-                                  src={`https://api.comiccon.uz/media/${theme === "dark"
-                                    ? ticket.event_image_white
-                                    : ticket.event_image_black
-                                    }`}
-                                  alt="MpLogo"
-                                  width={275}
-                                  height={36}
-                                />
-                                {ticket.event_title}
-                              </div>
-                              <button
-                                onClick={() => {
-                                  setAccount("qrcode")
-                                  setTicketData(ticket)
-                                }}
-                                className={styles.boxButtonQrDisplay}
-                              >
-                                <Image
-                                  src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
-                                  alt="qrcode"
-                                  width={25}
-                                  height={25}
-                                />
-                              </button>
-                            </div>
-                            <div className={styles.boxTicketAndMpInfo}>
-                              <div className={styles.boxOneInfo}>
-                                {Number(
-                                  ticket.price.replace(".00", "")
-                                ).toLocaleString("ru-RU")}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {translate("Билет")} №{ticket.id}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.seat_info || "Общий зал"}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.event_date.split(" ")[0]}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.event_date.split(" ")[1]}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.location_name}
-                              </div>
-                            </div>
-                            <button
-                              onClick={() => {
-                                setAccount("qrcode")
-                                setTicketData(ticket)
-                              }}
-                              className={styles.boxButtonQr}>
-                              <Image
-                                src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
-                                alt="qrcode"
-                                width={25}
-                                height={25}
-                              />
-                            </button>
-                          </div>
-                          {index !== ticketList.all_tickets.length - 1 && (
-                            <hr />
-                          )}
-                        </div>
-                      ))}
-                    </>
-                  ) : (
-                    <>{translate("У вас нет билетов")}</>
-                  )}
-                </>
-              )}
-              {account === "archived" && (
-                <>
-                  <>
-                    {ticketList?.by_list_type?.archived?.tickets?.length !== 0 ? (
-                      <>
-                        {ticketList?.by_list_type?.archived?.tickets?.map((ticket, index) => (
-                          <div key={ticket.id} className={styles.boxTIcketsMap}>
-                            <div className={styles.boxOneTicket}>
-                              <div className={styles.boxMpName}>
-                                <div>
-                                  <Image
-                                    src={`https://api.comiccon.uz/media/${theme === "dark"
-                                      ? ticket.event_image_white
-                                      : ticket.event_image_black
-                                      }`}
-                                    alt="MpLogo"
-                                    width={275}
-                                    height={36}
-                                  />
-                                  {ticket.event_title}
-                                </div>
-                                <button
-                                  onClick={() => {
-                                    setAccount("qrcode")
-                                    setTicketData(ticket)
-                                  }}
-                                  className={styles.boxButtonQrDisplay}
-                                >
-                                  <Image
-                                    src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
-                                    alt="qrcode"
-                                    width={25}
-                                    height={25}
-                                  />
-                                </button>
-                              </div>
-                              <div className={styles.boxTicketAndMpInfo}>
-                                <div className={styles.boxOneInfo}>
-                                  {Number(
-                                    ticket.price.replace(".00", "")
-                                  ).toLocaleString("ru-RU")}
-                                </div>
-                                <div className={styles.boxOneInfo}>
-                                  {translate("Билет")} №{ticket.id}
-                                </div>
-                                <div className={styles.boxOneInfo}>
-                                  {ticket.seat_info || "Общий зал"}
-                                </div>
-                                <div className={styles.boxOneInfo}>
-                                  {ticket.event_date.split(" ")[0]}
-                                </div>
-                                <div className={styles.boxOneInfo}>
-                                  {ticket.event_date.split(" ")[1]}
-                                </div>
-                                <div className={styles.boxOneInfo}>
-                                  {ticket.location_name}
-                                </div>
-                              </div>
-                              <button
-                                onClick={() => {
-                                  setAccount("qrcode")
-                                  setTicketData(ticket)
-                                }}
-                                className={styles.boxButtonQr}>
-                                <Image
-                                  src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
-                                  alt="qrcode"
-                                  width={25}
-                                  height={25}
-                                />
-                              </button>
-                            </div>
-                            {index !== ticketList.all_tickets.length - 1 && (
-                              <hr />
-                            )}
-                          </div>
-                        ))}
-                      </>
-                    ) : (
-                      <>{translate("У вас нет билетов")}</>
-                    )}
-                  </>
-                </>
-              )}
             </div>
           </div>
         ) : (
@@ -1026,7 +617,6 @@ export default function account() {
         {/* -------------------------- Вкладка настройки -------------------------- */}
         {account === "settings" ? (
           <div className={styles.boxSettingsTab}>
-
             <div className={styles.boxSettingsRightBlock}>
               <div className={styles.boxSettingsH1}>
                 <h1>{translate("Настройки профиля")}</h1>
@@ -1039,7 +629,6 @@ export default function account() {
                   </button>
                 </div>
               </div>
-
               <div className={styles.boxSettingsRow}>
                 <div className={styles.boxAvatar}>
                   <h1>{translate("Аватар")}</h1>
@@ -1150,7 +739,6 @@ export default function account() {
                   </div>
                   <div></div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -1181,7 +769,7 @@ export default function account() {
                       className={styles2.btn_back}
                     >
                       <Image
-                        src="/loginArrowLeft.svg"
+                        src={theme === "dark" ? "/loginArrowLeftDark.svg" : "/loginArrowLeft.svg"}
                         width={24}
                         height={24}
                         alt="Back arrow"
@@ -1192,11 +780,8 @@ export default function account() {
                     </div>
                     <Image
                       src={
-                        // theme === "dark"
-                        // ? "/Tcatslogo.svg"
-                        // :
-                        "/TcatslogoLight.svg"
-                      }
+                        theme === "dark" ? "/ComiconDark.svg" :
+                          "/ComiconLogo.svg"}
                       alt="logo"
                       width={150}
                       height={57}
@@ -1257,7 +842,7 @@ export default function account() {
                       className={styles2.btn_back}
                     >
                       <Image
-                        src="/loginArrowLeft.svg"
+                        src={theme === "dark" ? "/loginArrowLeftDark.svg" : "/loginArrowLeft.svg"}
                         width={24}
                         height={24}
                         alt="Back arrow"
@@ -1268,11 +853,8 @@ export default function account() {
                     </button>
                     <Image
                       src={
-                        // theme === "dark"
-                        // ? "/Tcatslogo.svg"
-                        // :
-                        "/TcatslogoLight.svg"
-                      }
+                        theme === "dark" ? "/ComiconDark.svg" :
+                          "/ComiconLogo.svg"}
                       alt="logo"
                       width={150}
                       height={57}
