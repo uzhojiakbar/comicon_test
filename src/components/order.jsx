@@ -394,7 +394,7 @@ export default function order({ seans, isOpen, onClose }) {
       OrderApplyMutation.mutate(
         {
           payment_method: "CLICK", // To'g'ri kalit va qiymat
-          return_url: "http://localhost:3000/account", // To'g'ri URL
+          return_url: "https://comiccon.uz/account", // To'g'ri URL
         },
         {
           onSuccess: (data) => {
@@ -420,7 +420,7 @@ export default function order({ seans, isOpen, onClose }) {
       OrderApplyMutation.mutate(
         {
           payment_method: "ATMOSPAY", // To'g'ri kalit va qiymat
-          return_url: "http://localhost:3000/account", // To'g'ri URL
+          return_url: "https://comiccon.uz/account", // To'g'ri URL
         },
         {
           onSuccess: (data) => {

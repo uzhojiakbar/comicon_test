@@ -33,20 +33,27 @@ export default function Footer() {
                         </div>
                         <div className={styles.boxsocialContainer} >
                             <div className={styles.boxsocial}>
-                                <a href="#" className={styles.oneboxsocial}>
+                                {/* Тг - https://t.me/comiccontashkent
+
+Инста - https://www.instagram.com/tashkentcomiccon?igsh=Z256d3JraWpuemtt&utm_source=qr
+
+Ютуб - https://youtube.com/@comiccontashkent?si=KEjxqlNxIKBNVryb
+
+Почта: comiccontashkent2024@gmail.com */}
+                                <a href="https://t.me/comiccontashkent" target="_blank" className={styles.oneboxsocial}>
                                     <Image src='/telegramLight.svg' alt="telegram" width={28} height={24} />
                                 </a>
-                                <a href="https://www.instagram.com/tcats.uz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                                <a href="https://www.instagram.com/tashkentcomiccon?igsh=Z256d3JraWpuemtt&utm_source=qr"
+                                    target="_blank"
                                     className={styles.oneboxsocial}>
                                     <Image src='/instaLight.svg' alt="instagram" width={28} height={24} />
                                 </a>
-                                <a href="#" className={styles.oneboxsocial}>
+                                <a href="https://youtube.com/@comiccontashkent?si=KEjxqlNxIKBNVryb" target="_blank" className={styles.oneboxsocial}>
                                     <Image src='/youtubeLight.svg' alt="youtube" width={28} height={24} />
                                 </a>
-                                <a href="#" className={styles.oneboxsocial}>
+                                <a href="mailto:comiccontashkent2024@gmail.com" className={styles.oneboxsocial}>
                                     <Image src='/mailLight.svg' alt="mail" width={28} height={24} />
                                 </a>
-
                             </div>
                             <p>© 2024-2025 ComiCon Inc. All rights reserved.</p>
                         </div>

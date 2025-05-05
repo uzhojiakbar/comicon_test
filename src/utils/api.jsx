@@ -64,10 +64,10 @@ const useApi = () => {
 
             // Cookies.set("access_token", newAccessToken);
             Cookies.set("access_token", newAccessToken, {
-              domain: ".tcats.uz",
+              domain: ".comiccon.uz",
               sameSite: "Lax",
-              secure: true,
               expires: 60,
+              secure: true
             });
             axiosInstance.defaults.headers["Authorization"] = `Bearer ${newAccessToken}`;
             originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
