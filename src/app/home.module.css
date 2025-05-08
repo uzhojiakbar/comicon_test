@@ -652,56 +652,6 @@
   height: 368;
 }
 
-/* .guestCard {
-  width: 250px;
-  height: 400px;
-  transition: width 0.4s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: end;
-  gap: 12px;
-  flex-shrink: 0;
-  position: relative;
-} */
-
-/* .hovered {
-  width: 400px !important;
-  flex-direction: column;
-  display: flex;
-} */
-
-/* .guestContent {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  background-color: var(--cardDarkColor, #222);
-  border-radius: 25px;
-  height: 250px;
-  width: 95%;
-  gap: 10px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-} */
-
-/* .guestImg {
-  z-index: 99999999;
-  position: absolute;
-  bottom: 40px;
-} */
-
-/* .guestHover {
-  color: var(--navColor, white);
-  font-size: 14px;
-  max-width: 250px;
-  display: -webkit-box;
-  -webkit-line-clamp: 7;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word;
-} */
-
 .guestName {
   font-size: 32px;
   font-weight: 600;
@@ -898,18 +848,21 @@
   .hovered .boxoneSlideBackground {
     width: 100% !important; /* Element kengligini avtomatik sozlash */
     transition: ease-in-out 0.2s;
+    display: flex;
   }
 
   .boxoneSlideBackground {
     height: 500px !important;
     justify-content: end;
     align-items: center;
+    display: flex;
   }
 
   .oneSlide,
   .swiperSlide {
     height: 350px !important;
     margin: 30px 0 !important;
+    display: flex;
   }
 
   .oneSlide {
@@ -918,64 +871,50 @@
     display: flex;
     flex-direction: column;
   }
-
-  /* Hover qilinganda matnni ko'rsatish */
-  /* .hovered .oneSlide,
-  .hovered .swiperSlide {
-  } */
-
-  .boxoneSlideBackground {
-    display: flex !important;
-  }
-
-  .boxoneSlideBackground p {
-    display: none;
-    opacity: 1; /* Matnni ko'rinadigan qilish */
-    transform: translateY(0); /* Matnni asl holatiga qaytarish */
-    text-align: center;
-  }
   .guestImg {
-    bottom: 40px;
-    left: 20;
-    top: 0;
-    margin: 0 auto;
+    position: absolute;
+    top: -30px; /* carddan biroz tepada turadi */
+    left: 25%;
     height: 300px;
     width: 200px;
     transition: all 0.1s ease-in-out;
-  }
-
-  .guestImg {
-    height: 300px;
-    width: 200px;
-    left: 20%;
-    top: -30px;
-    z-index: 999999;
-  }
-
-  .boxoneSlideBackground {
-    width: 100% !important;
-  }
-
-  .boxoneSlideBackground p {
-    display: flex;
-    width: 100% !important;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    padding-left: 0 !important;
+    z-index: 2; /* kerak bo‘lsa boshqa elementlardan ustun bo'lishi uchun */
   }
 
   .hovered .boxoneSlideBackground {
+    display: flex !important;
     width: 100% !important;
+    opacity: 1 !important;
   }
 
   .hovered .boxoneSlideBackground p {
-    display: flex;
+    display: flex !important;
     width: 100% !important;
     text-align: center;
     align-items: center;
     justify-content: center;
     padding-left: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0); /* Matnni asl holatiga qaytarish */
+  }
+
+  .boxoneSlideBackground {
+    display: flex !important;
+    width: 100% !important;
+    opacity: 1 !important;
+  }
+
+  .boxoneSlideBackground p {
+    display: flex !important;
+    width: 100% !important;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0); /* Matnni asl holatiga qaytarish */
   }
 
   .guestName {
@@ -1107,5 +1046,16 @@
     width: 86px !important;
     height: 46px !important;
     border-radius: 16.1px;
+  }
+
+  .guestImg {
+    position: absolute;
+    top: -30px; /* carddan biroz tepada turadi */
+    left: 50%;
+    transform: translateX(-50%);
+    height: 280px;
+    width: 180px;
+    transition: all 0.1s ease-in-out;
+    z-index: 2; /* kerak bo‘lsa boshqa elementlardan ustun bo'lishi uchun */
   }
 }
