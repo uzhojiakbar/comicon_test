@@ -19,8 +19,6 @@
   flex-direction: column;
   gap: 12px;
   width: 100%;
-  max-height: 45vh;
-  height: 45vh;
 
   max-width: 1368px;
   margin: 0 auto;
@@ -149,6 +147,8 @@
   display: flex;
   flex-direction: row;
   gap: 12px;
+  min-height: 45vh;
+  height: fit-content;
 }
 
 .boxLeftBlock {
@@ -223,6 +223,7 @@
   border-radius: 30px;
   background: var(--cardDarkColor);
   transition: 0.3s;
+  min-height: 40vh;
 }
 
 .boxRightBlock hr {
@@ -379,6 +380,7 @@
   justify-content: space-between;
   width: 100%;
   gap: 20px;
+  height: fit-content;
 }
 
 .boxSettingsLeftBlock {
@@ -451,6 +453,7 @@
 .boxSettingsRightBlock {
   display: flex;
   width: 100%;
+  height: 100%;
   padding: 22px 24px;
   flex-direction: column;
   align-items: flex-start;
@@ -512,6 +515,8 @@
 
 .boxSettingsRow {
   display: flex;
+  height: 100%;
+
   flex-direction: row;
   justify-content: space-between;
   /* align-items: flex-start; */
@@ -687,8 +692,8 @@
     flex-direction: column;
     gap: 12px;
     width: 100%;
-    height: 65vh;
-    max-height: 65vh;
+    height: 60vh;
+    overflow: auto;
     max-width: 1368px;
     margin: 0 auto;
   }
@@ -819,6 +824,7 @@
     display: block;
     flex-direction: row;
     gap: 12px;
+    min-height: 45vh;
   }
 
   .boxLeftBlock {
@@ -894,6 +900,7 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    height: 100%;
   }
 }
 
@@ -999,6 +1006,7 @@
   /* Setting */
   .boxSettingsRow {
     gap: 30px;
+    height: 100%;
     flex-direction: column;
   }
 

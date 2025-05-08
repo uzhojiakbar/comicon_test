@@ -919,7 +919,6 @@ export default function account() {
       }
       <Footer />
       <NavAdaptive />
-
     </section >
 
   );
