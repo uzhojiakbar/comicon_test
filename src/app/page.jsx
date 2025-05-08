@@ -402,11 +402,11 @@ export default function EventPage() {
                 onSwiper={setSwiperInstance}
                 breakpoints={{
                   0: { slidesPerView: 1 },        // Mobil (320px va undan kichik)
-                  576: { slidesPerView: 1 },      // Kichik telefonlar
+                  576: { slidesPerView: 1 },
+                  800: { slidesPerView: 1 },      // Planshet
+                  // Kichik telefonlar
                   1024: { slidesPerView: 3 },     // Kichik laptoplar
                   1400: { slidesPerView: 3 },     // Katta monitor
-                  800: { slidesPerView: 1 },      // Planshet
-
                 }}
                 navigation={{
                   prevEl: prevRef.current,

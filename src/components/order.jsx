@@ -55,37 +55,49 @@ export default function order({ seans, isOpen, onClose }) {
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      // expireData ni UTC deb qabul qilamiz
       const expireTimeUTC = new Date(expireData.replace(" ", "T") + "Z");
-
-      // foydalanuvchi qurilmasidagi vaqtni UTC ga o‘tkazamiz
       const nowUTC = new Date(new Date().toISOString());
+
+      console.log("expireTimeUTC", expireTimeUTC);
 
       const difference = expireTimeUTC - nowUTC;
 
-
-      console.log("vaqt", difference);
-      console.log("nowUTC", nowUTC);
-      console.log("expireTimeUTC", expireTimeUTC);
-
+      const minutes = Math.floor((difference / 1000 / 60) % 60);
+      const seconds = Math.floor((difference / 1000) % 60);
 
       if (difference > 0) {
-        const minutes = Math.floor((difference / 1000 / 60) % 60);
-        const seconds = Math.floor((difference / 1000) % 60);
         setTimeLeft(
           `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
         );
+
+        // 👉 Agar har ikkala qiymat 0 bo‘lsa — modalni yopamiz
+        if (minutes === 0 && seconds === 0) {
+          console.log("⏱ Modal yopildi");
+          onClose();
+          setModal(1);
+          setEventData({})
+          setCardData({
+            card_number: "",
+            expiry: "",
+            transaction_id: 0,
+          });
+          setPrivatyPolicy(false);
+          setEventData({})
+          setCode(new Array(6).fill(""));
+        }
       } else {
-        setTimeLeft("00:00");
-        onClose()
-        setModal(1)
+        console.log("⏱ Modal yopildi");
+        onClose();
+        setModal(1);
         setCardData({
-          "card_number": "",
-          "expiry": "",
-          "transaction_id": 0
-        })
-        setPrivatyPolicy(false)
-        setCode(new Array(6).fill(""))
+          card_number: "",
+          expiry: "",
+          transaction_id: 0,
+        });
+        setEventData({})
+        setPrivatyPolicy(false);
+        setCode(new Array(6).fill(""));
+        setTimeLeft("00:00");
       }
     };
 
@@ -228,6 +240,7 @@ export default function order({ seans, isOpen, onClose }) {
       "transaction_id": 0
     })
     setPrivatyPolicy(false)
+    setEventData({})
     setCode(new Array(6).fill(""))
   }
 

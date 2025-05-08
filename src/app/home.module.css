@@ -594,17 +594,29 @@
 .swiperSlide:not(.hovered) {
   width: 250px !important; /* Hover qilinmagan element kengligi */
   margin: 0 120px;
-  transition: ease-in-out 0.2s;
+  transition: all ease-in-out 0.2s;
 }
 
-.hovered {
-  transition: ease-in-out 0.2s;
-  margin: 0 120px;
-}
+.boxoneSlideBackground {
+  width: 300px;
+  height: 300px !important;
+  border-radius: 35px;
+  background: var(--cardDarkColor);
+  position: relative;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+  padding: 10px;
 
-.hovered .boxoneSlideBackground {
-  width: 500px !important; /* Element kengligini avtomatik sozlash */
-  transition: ease-in-out 0.2s;
+  /* OTH BROWSER */
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
 /* Matnni yashirish uchun boshlang'ich holat */
@@ -624,33 +636,35 @@
   visibility: hidden;
   max-height: 0;
   overflow: hidden;
-  display: flex;
   border-radius: 35px;
-
   transition: all 0.4s ease;
+
+  /*  */
+  display: flex; /* Standart flex (boshqa brauzerlar uchun) */
+  display: -webkit-box; /* Safari/WebKit eski flex modeli */
+  -webkit-box-orient: horizontal; /* Gorizontal yo'nalishda joylashish */
 }
 
+.hovered {
+  transition: ease-in-out 0.2s;
+  margin: 0 120px;
+}
+
+.hovered .boxoneSlideBackground {
+  width: 500px !important; /* Element kengligini avtomatik sozlash */
+  transition: ease-in-out 0.2s;
+}
 /* Hover qilinganda matnni ko'rsatish */
 .hovered .boxoneSlideBackground p {
   opacity: 1; /* Matnni ko'rinadigan qilish */
   transform: translateY(0); /* Matnni asl holatiga qaytarish */
-  opacity: 1;
   visibility: visible;
   max-height: 500px;
-}
 
-.boxoneSlideBackground {
-  width: 300px;
-  height: 300px !important;
-  border-radius: 35px;
-  background: var(--cardDarkColor);
-  position: relative;
-  transition: 0.3s;
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  justify-content: center;
-  padding: 10px;
+  /*  */
+  display: flex; /* Standart flex (boshqa brauzerlar uchun) */
+  display: -webkit-box; /* Safari/WebKit eski flex modeli */
+  -webkit-box-orient: horizontal; /* Gorizontal yo'nalishda joylashish */
 }
 
 .guestImg {
@@ -839,9 +853,9 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media (max-width: 700px) {
   .carouselWrapper {
-    margin-top: 70px !important;
+    margin-top: 0 !important;
   }
 
   .swiperSlide:not(.hovered) {
@@ -850,29 +864,60 @@
     transition: ease-in-out 0.2s;
   }
 
-  .hovered {
-    transition: ease-in-out 0.2s;
+  /* .swiperSlide:not(.hovered) {
+    width: 250px !important;
     margin: 0 120px;
-  }
-
-  .hovered .boxoneSlideBackground {
-    width: 100% !important; /* Element kengligini avtomatik sozlash */
-    transition: ease-in-out 0.2s;
-    display: flex;
-    border-radius: 35px;
+    transition: all ease-in-out 0.2s;
   }
 
   .boxoneSlideBackground {
-    height: 500px !important;
-    justify-content: end;
-    align-items: center;
-    display: flex;
+    width: 300px;
+    height: 300px !important;
     border-radius: 35px;
+    background: var(--cardDarkColor);
+    position: relative;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    padding: 10px;
+
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
   }
+
+  .boxoneSlideBackground p {
+    padding-left: 270px;
+    opacity: 0;
+    transform: translateY(70px);
+    transition: all 1s ease;
+    color: var(--navColor);
+    font-family: Involve;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    width: 500px !important;
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    overflow: hidden;
+    border-radius: 35px;
+    transition: all 0.4s ease;
+
+    display: flex;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+  } */
 
   .oneSlide,
   .swiperSlide {
-    height: 350px !important;
+    min-height: 350px !important;
     margin: 30px 0 !important;
     display: flex;
   }
@@ -895,17 +940,11 @@
 
   .hovered .boxoneSlideBackground {
     display: flex !important;
-    width: 100% !important;
+    width: 95% !important;
     opacity: 1 !important;
   }
 
   .hovered .boxoneSlideBackground p {
-    display: flex !important;
-    width: 100% !important;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    padding-left: 0 !important;
     opacity: 1 !important;
     visibility: visible !important;
     transform: translateY(0); /* Matnni asl holatiga qaytarish */
@@ -913,8 +952,17 @@
 
   .boxoneSlideBackground {
     display: flex !important;
-    width: 100% !important;
+    width: 95% !important;
+    height: 350px !important;
+    border-radius: 35px !important;
     opacity: 1 !important;
+
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
   }
 
   .boxoneSlideBackground p {
@@ -923,17 +971,19 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-    padding-left: 0 !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0); /* Matnni asl holatiga qaytarish */
-  }
 
-  .boxoneSlideBackground p {
+    padding-left: 0 !important;
+    padding-top: 240px !important;
     opacity: 1 !important;
     visibility: visible !important;
-    max-height: 500px !important;
     transform: translateY(0) !important;
+
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
   }
 
   .guestName {
@@ -1076,5 +1126,17 @@
     width: 180px;
     transition: all 0.1s ease-in-out;
     z-index: 2; /* kerak bo‘lsa boshqa elementlardan ustun bo'lishi uchun */
+  }
+
+  .boxoneSlideBackground p {
+    padding-top: 100px !important;
+  }
+  .boxoneSlideBackground {
+    height: 250px !important;
+    padding-top: 100px !important;
+  }
+
+  .carouselWrapper {
+    margin-top: 0px !important;
   }
 }
