@@ -671,6 +671,7 @@
 @media screen and (max-width: 1050px) {
   .boxoneSlideBackground {
     width: 100% !important;
+
     padding: 10px 30px;
   }
 
@@ -849,6 +850,7 @@
     width: 100% !important; /* Element kengligini avtomatik sozlash */
     transition: ease-in-out 0.2s;
     display: flex;
+    border-radius: 35px;
   }
 
   .boxoneSlideBackground {
@@ -856,6 +858,7 @@
     justify-content: end;
     align-items: center;
     display: flex;
+    border-radius: 35px;
   }
 
   .oneSlide,
@@ -982,7 +985,7 @@
   }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 500px) {
   .mainContainer {
     padding: 36px 10px;
   }
