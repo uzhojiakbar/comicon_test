@@ -18,6 +18,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTheme } from "next-themes";
 import { QRCodeSVG } from "qrcode.react";
 import { useLanguage } from "@/context/languageContext";
+import NavAdaptive from "@/components/navAdaptive";
 
 
 
@@ -921,6 +922,9 @@ export default function account() {
         )
       }
       <Footer />
+      <NavAdaptive />
+
     </section >
+
   );
 }

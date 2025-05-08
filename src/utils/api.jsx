@@ -63,12 +63,7 @@ const useApi = () => {
             const newAccessToken = response.data.access_token;
 
             // Cookies.set("access_token", newAccessToken);
-            Cookies.set("access_token", newAccessToken, {
-              domain: ".comiccon.uz",
-              sameSite: "Lax",
-              expires: 60,
-              secure: true
-            });
+            Cookies.set("access_token", newAccessToken);
             axiosInstance.defaults.headers["Authorization"] = `Bearer ${newAccessToken}`;
             originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
 

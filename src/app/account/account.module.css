@@ -682,7 +682,9 @@
 
   .mainContainer {
     display: flex;
-    min-height: 80vh;
+    justify-content: flex-start;
+    min-height: 100vh;
+    position: relative;
     padding: 34px 16px;
     gap: 44px;
   }

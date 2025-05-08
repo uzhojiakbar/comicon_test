@@ -19,11 +19,7 @@ export const useGlobal = create((set, get) => ({
     },
 
     logout: async () => {
-        Cookies.remove("access_token", {
-            domain: ".comiccon.uz",
-            sameSite: "Lax",
-            secure: true
-        });
+        Cookies.remove("access_token");
         Cookies.remove("access_token")
         console.log("LOGOUT");
     },

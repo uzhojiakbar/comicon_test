@@ -609,7 +609,7 @@
 
 /* Matnni yashirish uchun boshlang'ich holat */
 .boxoneSlideBackground p {
-  padding-left: 250px;
+  padding-left: 270px;
   display: none;
   opacity: 0; /* Matnni ko'rinmas qilish */
   transform: translateY(70px); /* Matnni biroz pastga surish */
@@ -880,6 +880,26 @@
 }
 
 @media screen and (max-width: 700px) {
+  .carouselWrapper {
+    margin-top: 70px !important;
+  }
+
+  .swiperSlide:not(.hovered) {
+    width: 100% !important; /* Hover qilinmagan element kengligi */
+    margin: 0 120px;
+    transition: ease-in-out 0.2s;
+  }
+
+  .hovered {
+    transition: ease-in-out 0.2s;
+    margin: 0 120px;
+  }
+
+  .hovered .boxoneSlideBackground {
+    width: 100% !important; /* Element kengligini avtomatik sozlash */
+    transition: ease-in-out 0.2s;
+  }
+
   .boxoneSlideBackground {
     height: 500px !important;
     justify-content: end;
@@ -888,7 +908,7 @@
 
   .oneSlide,
   .swiperSlide {
-    height: 300px !important;
+    height: 350px !important;
     margin: 30px 0 !important;
   }
 
@@ -904,37 +924,58 @@
   .hovered .swiperSlide {
   } */
 
-  .hovered .boxoneSlideBackground {
-    width: 200px !important; /* Element kengligini avtomatik sozlash */
-    height: 400px !important;
-  }
-  .hovered .boxoneSlideBackground p {
-    width: 200px !important; /* Element kengligini avtomatik sozlash */
-    padding-left: 0;
-    opacity: 1; /* Matnni ko'rinadigan qilish */
-  }
   .boxoneSlideBackground {
-    width: 200px !important; /* Element kengligini avtomatik sozlash */
+    display: flex !important;
+  }
+
+  .boxoneSlideBackground p {
+    display: none;
+    opacity: 1; /* Matnni ko'rinadigan qilish */
+    transform: translateY(0); /* Matnni asl holatiga qaytarish */
+    text-align: center;
+  }
+  .guestImg {
+    bottom: 40px;
+    left: 20;
+    top: 0;
+    margin: 0 auto;
+    height: 300px;
+    width: 200px;
+    transition: all 0.1s ease-in-out;
+  }
+
+  .guestImg {
+    height: 300px;
+    width: 200px;
+    left: 20%;
+    top: -30px;
+    z-index: 999999;
+  }
+
+  .boxoneSlideBackground {
+    width: 100% !important;
+  }
+
+  .boxoneSlideBackground p {
+    display: flex;
+    width: 100% !important;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0 !important;
+  }
+
+  .hovered .boxoneSlideBackground {
+    width: 100% !important;
   }
 
   .hovered .boxoneSlideBackground p {
     display: flex;
-    opacity: 1; /* Matnni ko'rinadigan qilish */
-    transform: translateY(0); /* Matnni asl holatiga qaytarish */
-    padding-left: 0;
-    padding-top: 175px;
-  }
-
-  .boxoneSlideBackground p {
-    display: flex !important;
-  }
-
-  .guestImg {
-    bottom: 40px;
-    left: 0;
-    margin: 0 auto;
-    width: 150;
-    height: 268;
+    width: 100% !important;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0 !important;
   }
 
   .guestName {
