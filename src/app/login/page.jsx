@@ -142,7 +142,12 @@ export default function LoginPage() {
       //   secure: true
       // });
 
-      Cookies.set("access_token", response?.data?.access_token || null);
+      Cookies.set("access_token", response?.data?.access_token || null, {
+        domain: ".comiccon.uz",
+        sameSite: "Lax",
+        expires: 60,
+        secure: true
+      });
 
       // Обновляем страницу, чтобы сработал редирект в /account/
       await document.location.reload();
@@ -194,7 +199,12 @@ export default function LoginPage() {
         //   secure: true
         // });
 
-        Cookies.set("access_token", response?.data?.access_token || null);
+        Cookies.set("access_token", response?.data?.access_token || null, {
+          domain: ".comiccon.uz",
+          sameSite: "Lax",
+          expires: 60,
+          secure: true
+        });
 
 
         // if (response?.data?.refresh_token) {
@@ -276,7 +286,12 @@ export default function LoginPage() {
       console.log("API Response:", response.data);
 
       if (response?.data?.status === "success") {
-        Cookies.set("access_token", response?.data?.access_token || null);
+        Cookies.set("access_token", response?.data?.access_token || null, {
+          domain: ".comiccon.uz",
+          sameSite: "Lax",
+          expires: 60,
+          secure: true
+        });
 
         // if (response?.data?.refresh_token) {
         //   Cookies.set("refresh_token", response?.data?.refresh_token || null);
