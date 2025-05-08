@@ -334,18 +334,14 @@ export default function account() {
   const LogoutSubmit = async () => {
     try {
       await api.post("user/logout/", { withCredentials: true });
-      Cookies.remove("access_token", {
-        domain: ".tcats.uz",
-        sameSite: "Lax",
-        secure: true,
-      });
-
       Cookies.remove("access_token");
-
       console.log("Вы успешно вышли из аккаунта!");
 
       // Перенаправляем пользователя на страницу логина
-      router.replace("/login");
+      if (typeof window !== "undefined") {
+        window.location.href = "/"; // Bu avtomatik refresh bilan birga ishlaydi
+      }
+
     } catch (error) {
       console.error("Ошибка при выходе:", error);
     }
@@ -640,7 +636,7 @@ export default function account() {
                       onClick={handleClick}
                       className={styles.boxUserImageInSettings}
                       style={{
-                        backgroundImage: `linear-gradient(0deg, rgba(42, 44, 58, 0.80) 0%, rgba(42, 44, 58, 0.80) 100%), url('${avatarPreview}')`,
+                        backgroundImage: `linear - gradient(0deg, rgba(42, 44, 58, 0.80) 0 %, rgba(42, 44, 58, 0.80) 100 %), url('${avatarPreview}')`,
                       }}
                     >
                       <Image
@@ -879,7 +875,7 @@ export default function account() {
                             onKeyDown={(e) => handleBackspace(e, index)}
                             onPaste={handlePaste}
                             placeholder="x"
-                            id={`input-${index}`}
+                            id={`input - ${index} `}
                           />
                         ))}
                       </div>
@@ -906,7 +902,7 @@ export default function account() {
                               : { textDecoration: "underline" }
                           }
                         >
-                          {isButtonDisabled ? `${secondsLeft}` : "sendagain"}
+                          {isButtonDisabled ? `${secondsLeft} ` : "sendagain"}
                         </h6>
                       </button>
                     </div>
