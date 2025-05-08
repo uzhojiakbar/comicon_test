@@ -610,7 +610,6 @@
 /* Matnni yashirish uchun boshlang'ich holat */
 .boxoneSlideBackground p {
   padding-left: 270px;
-  display: none;
   opacity: 0; /* Matnni ko'rinmas qilish */
   transform: translateY(70px); /* Matnni biroz pastga surish */
   transition: all 1s ease; /* Animatsiya qo'shish */
@@ -621,13 +620,23 @@
   font-weight: 600;
   line-height: 120%;
   width: 500px !important; /* Element kengligini avtomatik sozlash */
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
+  display: flex;
+  border-radius: 35px;
+
+  transition: all 0.4s ease;
 }
 
 /* Hover qilinganda matnni ko'rsatish */
 .hovered .boxoneSlideBackground p {
-  display: flex;
   opacity: 1; /* Matnni ko'rinadigan qilish */
   transform: translateY(0); /* Matnni asl holatiga qaytarish */
+  opacity: 1;
+  visibility: visible;
+  max-height: 500px;
 }
 
 .boxoneSlideBackground {
@@ -918,6 +927,13 @@
     opacity: 1 !important;
     visibility: visible !important;
     transform: translateY(0); /* Matnni asl holatiga qaytarish */
+  }
+
+  .boxoneSlideBackground p {
+    opacity: 1 !important;
+    visibility: visible !important;
+    max-height: 500px !important;
+    transform: translateY(0) !important;
   }
 
   .guestName {

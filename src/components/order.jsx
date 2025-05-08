@@ -77,6 +77,15 @@ export default function order({ seans, isOpen, onClose }) {
         );
       } else {
         setTimeLeft("00:00");
+        onClose()
+        setModal(1)
+        setCardData({
+          "card_number": "",
+          "expiry": "",
+          "transaction_id": 0
+        })
+        setPrivatyPolicy(false)
+        setCode(new Array(6).fill(""))
       }
     };
 
