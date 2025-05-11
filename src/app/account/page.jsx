@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import NextImage from 'next/image';
 import styles from "./account.module.css";
 import NavBar from "@/components/nav";
 import Footer from "@/components/footer";
@@ -16,11 +16,9 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { useTheme } from "next-themes";
-import { QRCodeSVG } from "qrcode.react";
+import { QRCodeSVG } from 'qrcode.react';
 import { useLanguage } from "@/context/languageContext";
 import NavAdaptive from "@/components/navAdaptive";
-
-
 
 export default function account() {
   const { translate, language } = useLanguage();
@@ -308,7 +306,7 @@ export default function account() {
         },
         onError: async (err) => {
           if (err?.response?.data?.status == "error") {
-            addToast(err?.response?.data?.error || "Xatolik | Error", "error")
+            addToast(err?.response?.data?.error || "Xatolik | Error", "error");
             if (err.response) {
               if (err.response.status === 400) {
                 setErrorMessage(`${translate("error400")}`);
@@ -341,7 +339,6 @@ export default function account() {
       if (typeof window !== "undefined") {
         window.location.href = "/"; // Bu avtomatik refresh bilan birga ishlaydi
       }
-
     } catch (error) {
       console.error("Ошибка при выходе:", error);
     }
@@ -410,9 +407,44 @@ export default function account() {
   });
   console.log(ticketList, ticketList?.by_list_type?.active?.count);
 
-
-
   // ------------------------------------------------------------------------------
+
+
+
+
+const downloadQRCode = () => {
+  const svg = document.getElementById('qr-code');
+  if (!svg || !(svg instanceof SVGSVGElement)) return;
+
+  const svgData = new XMLSerializer().serializeToString(svg);
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    console.error("Failed to get 2D context");
+    return;
+  }
+
+  const img = new Image();
+  const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(svgBlob);
+
+  img.onload = () => {
+    canvas.width = svg.clientWidth;
+    canvas.height = svg.clientHeight;
+    ctx.drawImage(img, 0, 0);
+    URL.revokeObjectURL(url);
+
+    const pngUrl = canvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.href = pngUrl;
+    link.download = 'qrcode.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  img.src = url;
+};
 
   return (
     <section className={styles.mainContainer}>
@@ -420,46 +452,41 @@ export default function account() {
       <section className={styles.accountContent}>
         {/* -------------------------- Информация о пользователе -------------------------- */}
         {account === "tickets" ||
-          account === "ticketHistory" ||
-          account === "qrcode" ||
-          account === "favourites" ||
-          account === "missed" ||
-          account === "archived" ? (
+        account === "ticketHistory" ||
+        account === "qrcode" ||
+        account === "favourites" ||
+        account === "missed" ||
+        account === "archived" ? (
           <>
             <div className={styles.boxUserInfo}>
               <div className={styles.boxUserAvatar}>
-                <Image src={user?.avatar} alt="avatar" width={80} height={80} />
+                <NextImage src={user?.avatar} alt="avatar" width={80} height={80} />
                 <p>
                   {user?.first_name} {user?.last_name}
                 </p>
               </div>
-
 
               <div className={styles.boxUserSettingsButton}>
                 <button
                   onClick={() => setAccount("settings")}
                   className={styles.settingsButton}
                 >
-                  <Image
+                  <NextImage
                     src="/settings.svg"
                     alt="settings"
                     width={20}
                     height={20}
                   />
-                  <span>
-                    {translate("Настройки")}
-                  </span>
+                  <span>{translate("Настройки")}</span>
                 </button>
                 <button onClick={LogoutSubmit} className={styles.logoutButton}>
-                  <Image
+                  <NextImage
                     src="/logout.svg"
                     alt="settings"
                     width={20}
                     height={20}
                   />
-                  <span>
-                    {translate("Выход")}
-                  </span>
+                  <span>{translate("Выход")}</span>
                 </button>
               </div>
             </div>
@@ -468,11 +495,11 @@ export default function account() {
           <></>
         )}
         {account === "tickets" ||
-          account === "ticketHistory" ||
-          account === "qrcode" ||
-          account === "favourites" ||
-          account === "missed" ||
-          account === "archived" ? (
+        account === "ticketHistory" ||
+        account === "qrcode" ||
+        account === "favourites" ||
+        account === "missed" ||
+        account === "archived" ? (
           <div className={styles.boxTicketsTab}>
             {/* -------------------------- Вкладка билеты -------------------------- */}
             <div className={styles.boxRightBlock}>
@@ -480,77 +507,89 @@ export default function account() {
                 <>
                   {ticketList?.by_list_type?.active?.tickets?.length !== 0 ? (
                     <>
-                      {ticketList?.by_list_type?.active?.tickets?.map((ticket, index) => (
-                        <div key={ticket.id} className={styles.boxTIcketsMap}>
-                          <div className={styles.boxOneTicket}>
-                            <div className={styles.boxMpName}>
-                              <div>
-                                <Image
-                                  src={`https://api.comiccon.uz/media/${theme === "dark"
-                                    ? ticket.event_image_white
-                                    : ticket.event_image_black
+                      {ticketList?.by_list_type?.active?.tickets?.map(
+                        (ticket, index) => (
+                          <div key={ticket.id} className={styles.boxTIcketsMap}>
+                            <div className={styles.boxOneTicket}>
+                              <div className={styles.boxMpName}>
+                                <div>
+                                  <NextImage
+                                    src={`https://api.comiccon.uz/media/${
+                                      theme === "dark"
+                                        ? ticket.event_image_white
+                                        : ticket.event_image_black
                                     }`}
-                                  alt="MpLogo"
-                                  width={200}
-                                  height={36}
-                                />
+                                    alt="MpLogo"
+                                    width={200}
+                                    height={36}
+                                  />
+                                </div>
+                                <button
+                                  onClick={() => {
+                                    setAccount("qrcode");
+                                    setTicketData(ticket);
+                                  }}
+                                  className={styles.boxButtonQrDisplay}
+                                >
+                                  <NextImage
+                                    src={
+                                      theme === "dark"
+                                        ? "/qrcodeDark.svg"
+                                        : "/qrcode.svg"
+                                    }
+                                    alt="qrcode"
+                                    width={25}
+                                    height={25}
+                                  />
+                                </button>
+                              </div>
+                              <div className={styles.boxTicketAndMpInfo}>
+                                <div className={styles.boxOneInfo}>
+                                  {Number(
+                                    ticket.price.replace(".00", "")
+                                  ).toLocaleString("ru-RU")}
+                                </div>
+                                <div className={styles.boxOneInfo}>
+                                  {translate("Билет")} №{ticket.id}
+                                </div>
+                                <div className={styles.boxOneInfo}>
+                                  {ticket.seat_info || "Общий зал"}
+                                </div>
+                                <div className={styles.boxOneInfo}>
+                                  {ticket.event_date.split(" ")[0]}
+                                </div>
+                                <div className={styles.boxOneInfo}>
+                                  {ticket.event_date.split(" ")[1]}
+                                </div>
+                                <div className={styles.boxOneInfo}>
+                                  {ticket.location_name}
+                                </div>
                               </div>
                               <button
                                 onClick={() => {
-                                  setAccount("qrcode")
-                                  setTicketData(ticket)
+                                  setAccount("qrcode");
+                                  setTicketData(ticket);
                                 }}
-                                className={styles.boxButtonQrDisplay}
+                                className={styles.boxButtonQr}
                               >
-                                <Image
-                                  src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
+                                <NextImage
+                                  src={
+                                    theme === "dark"
+                                      ? "/qrcodeDark.svg"
+                                      : "/qrcode.svg"
+                                  }
                                   alt="qrcode"
                                   width={25}
                                   height={25}
                                 />
                               </button>
                             </div>
-                            <div className={styles.boxTicketAndMpInfo}>
-                              <div className={styles.boxOneInfo}>
-                                {Number(
-                                  ticket.price.replace(".00", "")
-                                ).toLocaleString("ru-RU")}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {translate("Билет")} №{ticket.id}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.seat_info || "Общий зал"}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.event_date.split(" ")[0]}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.event_date.split(" ")[1]}
-                              </div>
-                              <div className={styles.boxOneInfo}>
-                                {ticket.location_name}
-                              </div>
-                            </div>
-                            <button
-                              onClick={() => {
-                                setAccount("qrcode")
-                                setTicketData(ticket)
-                              }}
-                              className={styles.boxButtonQr}>
-                              <Image
-                                src={theme === "dark" ? "/qrcodeDark.svg" : "/qrcode.svg"}
-                                alt="qrcode"
-                                width={25}
-                                height={25}
-                              />
-                            </button>
+                            {index !== ticketList.all_tickets.length - 1 && (
+                              <hr />
+                            )}
                           </div>
-                          {index !== ticketList.all_tickets.length - 1 && (
-                            <hr />
-                          )}
-                        </div>
-                      ))}
+                        )
+                      )}
                     </>
                   ) : (
                     <>{translate("У вас нет билетов")}</>
@@ -559,25 +598,33 @@ export default function account() {
               )}
               {/* -------------------------- Вкладка QR коды билетов -------------------------- */}
               {account === "qrcode" && (
-
                 <>
                   <div className={styles.boxOneTicketHistory}>
                     <div className={styles.boxMpNameQr}>
-                      <Image
-                        src={`https://api.comiccon.uz/media/${theme === "dark"
-                          ? ticketdata?.event_image_white
-                          : ticketdata?.event_image_black
-                          }`}
+                      <NextImage
+                        src={`https://api.comiccon.uz/media/${
+                          theme === "dark"
+                            ? ticketdata?.event_image_white
+                            : ticketdata?.event_image_black
+                        }`}
                         alt="MpLogo"
                         width={225}
                         height={36}
                       />
                     </div>
                     <div className={styles.boxHistoryAndMpInfo}>
-                      <div className={styles.boxOneInfoHistory}>{translate("Билет")} №{ticketdata.id}</div>
-                      <div className={styles.boxOneInfoHistory}>{ticketdata?.seat_info || "Общий зал"}</div>
-                      <div className={styles.boxOneInfoHistory}>{ticketdata?.event_date?.split(" ")[0]}</div>
-                      <div className={styles.boxOneInfoHistory}>{ticketdata?.event_date?.split(" ")[1]}</div>
+                      <div className={styles.boxOneInfoHistory}>
+                        {translate("Билет")} №{ticketdata.id}
+                      </div>
+                      <div className={styles.boxOneInfoHistory}>
+                        {ticketdata?.seat_info || "Общий зал"}
+                      </div>
+                      <div className={styles.boxOneInfoHistory}>
+                        {ticketdata?.event_date?.split(" ")[0]}
+                      </div>
+                      <div className={styles.boxOneInfoHistory}>
+                        {ticketdata?.event_date?.split(" ")[1]}
+                      </div>
                       <div className={styles.boxOneInfoHistory}>
                         {ticketdata.location_name}
                       </div>
@@ -590,19 +637,47 @@ export default function account() {
                   </div>
                   <div className={styles.boxColQrCode}>
                     <div className={styles.boxQr}>
-                      <QRCodeSVG value={ticketdata?.barcode ? ticketdata?.barcode : ticketdata?.qrcode} size={314} />
-                    </div>
-                    <button
-                      onClick={() => setAccount("tickets")}
-                      className={styles.boxBtnBack}>
-                      <Image
-                        src={theme === "dark" ? "/arrowBackDark.svg" : "/arrowBack.svg"}
-                        alt="arrow"
-                        width={24}
-                        height={24}
+                      <QRCodeSVG
+                      id="qr-code"
+                        value={
+                          ticketdata?.barcode
+                            ? ticketdata?.barcode
+                            : ticketdata?.qrcode
+                        }
+                        size={314}
                       />
-                      <p>{translate("Назад")}</p>
-                    </button>
+                    </div>
+                    <div className={styles.boxButtonsInQrSection}>
+                      <button onClick={downloadQRCode} className={styles.boxBtnBack}>
+                        <p>{translate("Скачать чек")}</p>
+                        <NextImage
+                          src={
+                            theme === "dark"
+                              ? "/downloadCheckDark.svg"
+                              : "/downloadCheck.svg"
+                          }
+                          alt="arrow"
+                          width={24}
+                          height={24}
+                        />
+                      </button>
+                      <button
+                        onClick={() => setAccount("tickets")}
+                        className={styles.boxBtnBack}
+                      >
+                        <NextImage
+                          src={
+                            theme === "dark"
+                              ? "/arrowBackDark.svg"
+                              : "/arrowBack.svg"
+                          }
+                          alt="arrow"
+                          width={24}
+                          height={24}
+                        />
+                        <p>{translate("Назад")}</p>
+                      </button>
+                    </div>
                   </div>
                 </>
               )}
@@ -639,7 +714,7 @@ export default function account() {
                         backgroundImage: `linear - gradient(0deg, rgba(42, 44, 58, 0.80) 0 %, rgba(42, 44, 58, 0.80) 100 %), url('${avatarPreview}')`,
                       }}
                     >
-                      <Image
+                      <NextImage
                         src="/uploadAvatar.svg"
                         alt="upload"
                         width={42}
@@ -665,11 +740,11 @@ export default function account() {
                   <div className={styles.boxSettingsSocial}>
                     <button
                       onClick={
-                        !user.phone_number ? () => setLogin("step1") : () => { }
+                        !user.phone_number ? () => setLogin("step1") : () => {}
                       }
                       className={styles.boxOneSocial}
                     >
-                      <Image
+                      <NextImage
                         src="/phone.svg"
                         alt="phone"
                         width={32}
@@ -682,10 +757,10 @@ export default function account() {
                       )}
                     </button>
                     <button
-                      onClick={!user.google ? LinkGoogle : () => { }}
+                      onClick={!user.google ? LinkGoogle : () => {}}
                       className={styles.boxOneSocial}
                     >
-                      <Image
+                      <NextImage
                         src="/google.svg"
                         alt="phone"
                         width={28}
@@ -694,7 +769,7 @@ export default function account() {
                       {user.google !== null ? (
                         <>
                           <p>{user.google.replace("@gmail.com", "")}</p>
-                          <Image
+                          <NextImage
                             onClick={UnLinkGoogle}
                             src="/closeRed.svg"
                             alt="google"
@@ -708,10 +783,10 @@ export default function account() {
                       )}
                     </button>
                     <button
-                      onClick={!user.telegram ? LinkOrUnlinkTelegram : () => { }}
+                      onClick={!user.telegram ? LinkOrUnlinkTelegram : () => {}}
                       className={styles.boxOneSocial}
                     >
-                      <Image
+                      <NextImage
                         src="/telegramAccount.svg"
                         alt="phone"
                         width={28}
@@ -720,7 +795,7 @@ export default function account() {
                       {user.telegram !== null ? (
                         <>
                           <p>{user?.telegram}</p>
-                          <Image
+                          <NextImage
                             onClick={LinkOrUnlinkTelegram}
                             src="/closeRed.svg"
                             alt="google"
@@ -743,183 +818,188 @@ export default function account() {
           <></>
         )}
       </section>
-      {
-        login ? (
-          <ModalContainer
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-            }}
+      {login ? (
+        <ModalContainer
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+          }}
+        >
+          <StyledModal
+            open={login}
+            onCancel={() => setLogin(false)} // Modalni yopish uchun (agar xochcha bosilsa)
+            footer={null} // Footer’ni o‘chirish
+            closable={false} // Xochchani yashirish (agar kerak bo‘lmasa)
           >
-            <StyledModal
-              open={login}
-              onCancel={() => setLogin(false)} // Modalni yopish uchun (agar xochcha bosilsa)
-              footer={null} // Footer’ni o‘chirish
-              closable={false} // Xochchani yashirish (agar kerak bo‘lmasa)
-            >
-              {login === "step1" ? (
-                <div className={styles2.container1}>
-                  <div className={styles2.boxPart1}>
-                    <div
-                      id="btn_text"
-                      onClick={() => setLogin(false)}
-                      className={styles2.btn_back}
-                    >
-                      <Image
-                        src={theme === "dark" ? "/loginArrowLeftDark.svg" : "/loginArrowLeft.svg"}
-                        width={24}
-                        height={24}
-                        alt="Back arrow"
-                        loading="lazy"
-                      />
-                      {/* {translate("back")} */}
-                      {translate("next")}
-                    </div>
-                    <Image
+            {login === "step1" ? (
+              <div className={styles2.container1}>
+                <div className={styles2.boxPart1}>
+                  <div
+                    id="btn_text"
+                    onClick={() => setLogin(false)}
+                    className={styles2.btn_back}
+                  >
+                    <NextImage
                       src={
-                        theme === "dark" ? "/ComiconDark.svg" :
-                          "/ComiconLogo.svg"}
-                      alt="logo"
-                      width={150}
-                      height={57}
+                        theme === "dark"
+                          ? "/loginArrowLeftDark.svg"
+                          : "/loginArrowLeft.svg"
+                      }
+                      width={24}
+                      height={24}
+                      alt="Back arrow"
                       loading="lazy"
                     />
+                    {/* {translate("back")} */}
+                    {translate("next")}
                   </div>
-                  <div className={styles2.boxPart2}>
-                    {/* <h1>{translate("connectphone")}</h1> */}
-                    <h1>{translate("Изменения номера")}</h1>
-                    <div className={styles2.boxInput}>
-                      <div className={styles2.boxOneInput}>
-                        <Image
-                          src={
-                            // theme === "dark" ? "/phone.svg" :
-                            "/phoneLight.svg"
-                          }
-                          alt="phone"
-                          width={28}
-                          height={28}
-                          loading="lazy"
-                        />
-                        <input
-                          type="tel"
-                          name="phone"
-                          id="phone"
-                          placeholder={countryCode}
-                          value={phoneNumber}
-                          maxLength={13}
-                          onChange={handlePhoneNumberChange}
-                          onFocus={handlePhoneNumberFocus}
-                        />
-                      </div>
-                      <button
-                        disabled={phoneNumber.length != 13}
-                        onClick={LoginSubmit}
-                        className={styles2.btnNext}
-                      >
-                        {/* <p>{translate("next")}</p> */}
-                        <p>{translate("next")}</p>
-                      </button>
-                    </div>
-                  </div>
-                  {errorMessage && <p>{errorMessage}</p>}
+                  <NextImage
+                    src={
+                      theme === "dark" ? "/ComiconDark.svg" : "/ComiconLogo.svg"
+                    }
+                    alt="logo"
+                    width={150}
+                    height={57}
+                    loading="lazy"
+                  />
                 </div>
-              ) : (
-                ""
-              )}
-
-              {login === true ? (
-                <div className={styles2.boxVerification}>
-                  <div className={styles2.boxPart1}>
+                <div className={styles2.boxPart2}>
+                  {/* <h1>{translate("connectphone")}</h1> */}
+                  <h1>{translate("Изменения номера")}</h1>
+                  <div className={styles2.boxInput}>
+                    <div className={styles2.boxOneInput}>
+                      <NextImage
+                        src={
+                          // theme === "dark" ? "/phone.svg" :
+                          "/phoneLight.svg"
+                        }
+                        alt="phone"
+                        width={28}
+                        height={28}
+                        loading="lazy"
+                      />
+                      <input
+                        type="tel"
+                        name="phone"
+                        id="phone"
+                        placeholder={countryCode}
+                        value={phoneNumber}
+                        maxLength={13}
+                        onChange={handlePhoneNumberChange}
+                        onFocus={handlePhoneNumberFocus}
+                      />
+                    </div>
                     <button
-                      onClick={() => {
-                        setLogin("step1");
-                        setCode(new Array(6).fill(""));
-                      }}
-                      id="btn_text"
-                      className={styles2.btn_back}
+                      disabled={phoneNumber.length != 13}
+                      onClick={LoginSubmit}
+                      className={styles2.btnNext}
                     >
-                      <Image
-                        src={theme === "dark" ? "/loginArrowLeftDark.svg" : "/loginArrowLeft.svg"}
-                        width={24}
-                        height={24}
-                        alt="Back arrow"
-                        loading="lazy"
-                      />
-                      {/* {translate("back")} */}
-                      {translate("Назад")}
+                      {/* <p>{translate("next")}</p> */}
+                      <p>{translate("next")}</p>
                     </button>
-                    <Image
-                      src={
-                        theme === "dark" ? "/ComiconDark.svg" :
-                          "/ComiconLogo.svg"}
-                      alt="logo"
-                      width={150}
-                      height={57}
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className={styles2.verification}>
-                    {/* <h1>{translate("entersms")}</h1> */}
-                    <h1>{translate("Введите код из СМС")}</h1>
-                    <div className={styles2.boxInputs}>
-                      <div className={styles2.InputVerification}>
-                        {code.map((_, index) => (
-                          <input
-                            key={index}
-                            ref={(el) => (inputs.current[index] = el)}
-                            type="text"
-                            inputMode="numeric" // Ограничиваем ввод только цифрами
-                            maxLength="1"
-                            value={code[index]}
-                            onChange={(e) => handleChangeVerification(e, index)}
-                            onKeyDown={(e) => handleBackspace(e, index)}
-                            onPaste={handlePaste}
-                            placeholder="x"
-                            id={`input - ${index} `}
-                          />
-                        ))}
-                      </div>
-                      <div className={styles2.boxNextPrevousBtns}>
-                        <button
-                          onClick={() => {
-                            setLogin("step1");
-                            setCode(new Array(6).fill(""));
-                          }}
-                        >
-                          {/* {translate("back")} */}
-                          {translate("Назад")}
-                        </button>
-                        <button onClick={LoginVerifySubmit}>
-                          {/* {translate("next")} */}
-                          Далее
-                        </button>
-                      </div>
-                      <button onClick={LoginSubmit} disabled={isButtonDisabled}>
-                        <h6
-                          style={
-                            isButtonDisabled
-                              ? {}
-                              : { textDecoration: "underline" }
-                          }
-                        >
-                          {isButtonDisabled ? `${secondsLeft} ` : "sendagain"}
-                        </h6>
-                      </button>
-                    </div>
                   </div>
                 </div>
-              ) : (
-                ""
-              )}
-            </StyledModal>
-          </ModalContainer>
-        ) : (
-          ""
-        )
-      }
+                {errorMessage && <p>{errorMessage}</p>}
+              </div>
+            ) : (
+              ""
+            )}
+
+            {login === true ? (
+              <div className={styles2.boxVerification}>
+                <div className={styles2.boxPart1}>
+                  <button
+                    onClick={() => {
+                      setLogin("step1");
+                      setCode(new Array(6).fill(""));
+                    }}
+                    id="btn_text"
+                    className={styles2.btn_back}
+                  >
+                    <NextImage
+                      src={
+                        theme === "dark"
+                          ? "/loginArrowLeftDark.svg"
+                          : "/loginArrowLeft.svg"
+                      }
+                      width={24}
+                      height={24}
+                      alt="Back arrow"
+                      loading="lazy"
+                    />
+                    {/* {translate("back")} */}
+                    {translate("Назад")}
+                  </button>
+                  <NextImage
+                    src={
+                      theme === "dark" ? "/ComiconDark.svg" : "/ComiconLogo.svg"
+                    }
+                    alt="logo"
+                    width={150}
+                    height={57}
+                    loading="lazy"
+                  />
+                </div>
+                <div className={styles2.verification}>
+                  {/* <h1>{translate("entersms")}</h1> */}
+                  <h1>{translate("Введите код из СМС")}</h1>
+                  <div className={styles2.boxInputs}>
+                    <div className={styles2.InputVerification}>
+                      {code.map((_, index) => (
+                        <input
+                          key={index}
+                          ref={(el) => (inputs.current[index] = el)}
+                          type="text"
+                          inputMode="numeric" // Ограничиваем ввод только цифрами
+                          maxLength="1"
+                          value={code[index]}
+                          onChange={(e) => handleChangeVerification(e, index)}
+                          onKeyDown={(e) => handleBackspace(e, index)}
+                          onPaste={handlePaste}
+                          placeholder="x"
+                          id={`input - ${index} `}
+                        />
+                      ))}
+                    </div>
+                    <div className={styles2.boxNextPrevousBtns}>
+                      <button
+                        onClick={() => {
+                          setLogin("step1");
+                          setCode(new Array(6).fill(""));
+                        }}
+                      >
+                        {/* {translate("back")} */}
+                        {translate("Назад")}
+                      </button>
+                      <button onClick={LoginVerifySubmit}>
+                        {/* {translate("next")} */}
+                        Далее
+                      </button>
+                    </div>
+                    <button onClick={LoginSubmit} disabled={isButtonDisabled}>
+                      <h6
+                        style={
+                          isButtonDisabled
+                            ? {}
+                            : { textDecoration: "underline" }
+                        }
+                      >
+                        {isButtonDisabled ? `${secondsLeft} ` : "sendagain"}
+                      </h6>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+          </StyledModal>
+        </ModalContainer>
+      ) : (
+        ""
+      )}
       <Footer />
       <NavAdaptive />
-    </section >
-
+    </section>
   );
 }

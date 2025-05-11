@@ -633,10 +633,10 @@
 
 .boxColQrCode {
   display: flex;
-  max-width: 358px;
   width: 100%;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   gap: 40px;
 }
 
@@ -652,13 +652,22 @@
   align-items: center;
 }
 
+.boxButtonsInQrSection{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 320px;
+  width: 100%;
+}
+
 .boxBtnBack {
+  max-width: 320px;
+  width: 100%;
   display: flex;
   padding: 16px 40px;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  align-self: stretch;
   border-radius: 999px;
   background: var(--loginButton);
   color: var(--foreground);
