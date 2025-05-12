@@ -109,5 +109,15 @@
   "Оплатить": "To‘lash",
   "Итого": "Jami",
   "Мы отправили СМС на ваш номер": "Biz sizning raqamingizga SMS yubordik",
-  "Скачать чек":"Chekni yuklab olish"
+  "Скачать чек": "Chekni yuklab olish",
+  "payments": "Toʻlovlar",
+  "Заказ": "Buyurtma",
+  "sum": "soʻm",
+  "Оплачено": "Toʻlangan",
+  "В ожидании": "Kutilmoqda",
+  "Чек": "Chek",
+  "Отменено": "Bekor qilingan",
+  "У вас нет платежей": "Sizda toʻlovlar yoʻq",
+  "readhistory": "Toʻlovlar tarixi",
+  "tickets": "Chiptalar"
 }

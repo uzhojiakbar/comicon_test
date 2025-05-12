@@ -36,6 +36,7 @@
   --ModalSectionContainer: #f2f3f7;
   --ModalSectionContainerPaymentCard: #fff;
   --btnBackground: #191d2b;
+  --buttonWarning:#959EBB;
 }
 
 .dark {
@@ -67,12 +68,8 @@
   --borderChexkbox: rgba(255, 255, 255, 0.3);
   --ModalSectionContainer: #21232f;
   --ModalSectionContainerPaymentCard: #21232f;
-  --btnBackground: radial-gradient(
-      64.97% 100% at 50.24% 0%,
-      #954cff 0%,
-      #ba8aff 100%
-    ),
-    #191d2b;
+  --btnBackground: radial-gradient(64.97% 100% at 50.24% 0%,#954cff 0%,#ba8aff 100%),#191d2b;
+  --buttonWarning:#3B3D4C;
 }
 
 @font-face {

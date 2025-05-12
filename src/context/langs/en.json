@@ -109,5 +109,15 @@
   "Оплатить": "Pay",
   "Итого": "Total",
   "Мы отправили СМС на ваш номер": "We sent an SMS to your number",
-  "Скачать чек":"Download receipt"
+  "Скачать чек": "Download receipt",
+  "payments": "Payments",
+  "Заказ": "Order",
+  "sum": "sum",
+  "Оплачено": "Paid",
+  "В ожидании": "Pending",
+  "Чек": "Receipt",
+  "Отменено": "Canceled",
+  "У вас нет платежей": "You have no payments",
+  "readhistory": "Payment history",
+  "tickets": "Tickets"
 }

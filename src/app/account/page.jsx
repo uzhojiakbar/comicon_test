@@ -1,5 +1,5 @@
 "use client";
-import NextImage from 'next/image';
+import NextImage from "next/image";
 import styles from "./account.module.css";
 import NavBar from "@/components/nav";
 import Footer from "@/components/footer";
@@ -16,9 +16,10 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { useTheme } from "next-themes";
-import { QRCodeSVG } from 'qrcode.react';
+import { QRCodeSVG } from "qrcode.react";
 import { useLanguage } from "@/context/languageContext";
 import NavAdaptive from "@/components/navAdaptive";
+import Link from "next/link";
 
 export default function account() {
   const { translate, language } = useLanguage();
@@ -409,42 +410,60 @@ export default function account() {
 
   // ------------------------------------------------------------------------------
 
-
-
-
-const downloadQRCode = () => {
-  const svg = document.getElementById('qr-code');
-  if (!svg || !(svg instanceof SVGSVGElement)) return;
-
-  const svgData = new XMLSerializer().serializeToString(svg);
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  if (!ctx) {
-    console.error("Failed to get 2D context");
-    return;
-  }
-
-  const img = new Image();
-  const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
-  const url = URL.createObjectURL(svgBlob);
-
-  img.onload = () => {
-    canvas.width = svg.clientWidth;
-    canvas.height = svg.clientHeight;
-    ctx.drawImage(img, 0, 0);
-    URL.revokeObjectURL(url);
-
-    const pngUrl = canvas.toDataURL('image/png');
-    const link = document.createElement('a');
-    link.href = pngUrl;
-    link.download = 'qrcode.png';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const fetchPaymentsList = async () => {
+    const response = await api.get("/payments/list/");
+    return response.data;
   };
 
-  img.src = url;
-};
+  const {
+    data: paymentsList,
+    isLoading: isLoadingPaymentsList,
+    isError: isErrorPaymentsList,
+  } = useQuery({
+    queryKey: ["paymentsList"],
+    queryFn: fetchPaymentsList,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: false,
+    enabled: true,
+  });
+  console.log(paymentsList, paymentsList?.by_list_type?.active?.count);
+
+  const downloadQRCode = () => {
+    const svg = document.getElementById("qr-code");
+    if (!svg || !(svg instanceof SVGSVGElement)) return;
+
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      console.error("Failed to get 2D context");
+      return;
+    }
+
+    const img = new Image();
+    const svgBlob = new Blob([svgData], {
+      type: "image/svg+xml;charset=utf-8",
+    });
+    const url = URL.createObjectURL(svgBlob);
+
+    img.onload = () => {
+      canvas.width = svg.clientWidth;
+      canvas.height = svg.clientHeight;
+      ctx.drawImage(img, 0, 0);
+      URL.revokeObjectURL(url);
+
+      const pngUrl = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = pngUrl;
+      link.download = "qrcode.png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+
+    img.src = url;
+  };
 
   return (
     <section className={styles.mainContainer}>
@@ -456,14 +475,38 @@ const downloadQRCode = () => {
         account === "qrcode" ||
         account === "favourites" ||
         account === "missed" ||
-        account === "archived" ? (
+        account === "archived" ||
+        account === "paymentsHistory" ? (
           <>
             <div className={styles.boxUserInfo}>
               <div className={styles.boxUserAvatar}>
-                <NextImage src={user?.avatar} alt="avatar" width={80} height={80} />
+                <NextImage
+                  src={user?.avatar}
+                  alt="avatar"
+                  width={80}
+                  height={80}
+                />
                 <p>
                   {user?.first_name} {user?.last_name}
                 </p>
+              </div>
+
+              <div className={styles.boxTicketsAndPayments}>
+                <button
+                  onClick={() => setAccount("tickets")}
+                  className={
+                    account === "tickets"
+                      ? styles.boxTicketOrPaymentsHistoryButtonActive
+                      : styles.boxTicketOrPaymentsHistoryButton
+                  }
+                >
+                  {translate("tickets")}
+                </button>
+                <button
+                  onClick={() => setAccount("paymentsHistory")}
+                  className={account === "paymentsHistory" ? styles.boxTicketOrPaymentsHistoryButtonActive: styles.boxTicketOrPaymentsHistoryButton}>
+                  {translate("readhistory")}
+                </button>
               </div>
 
               <div className={styles.boxUserSettingsButton}>
@@ -499,7 +542,8 @@ const downloadQRCode = () => {
         account === "qrcode" ||
         account === "favourites" ||
         account === "missed" ||
-        account === "archived" ? (
+        account === "archived" ||
+        account === "paymentsHistory" ? (
           <div className={styles.boxTicketsTab}>
             {/* -------------------------- Вкладка билеты -------------------------- */}
             <div className={styles.boxRightBlock}>
@@ -596,6 +640,85 @@ const downloadQRCode = () => {
                   )}
                 </>
               )}
+              {/* -------------------------- Вкладка платежы -------------------------- */}
+            {account === "paymentsHistory" && (
+              <div className={styles.boxMapPayments}>
+                <div className={styles.boxPaymentsH1}>
+                  <NextImage
+                    src={theme === "dark" ? "/payments.svg" : "/paymentsLight.svg"}
+                    alt="notification"
+                    width={32}
+                    height={32}
+                    loading="lazy"
+                  />
+                  <h1>{translate("payments")}</h1>
+                </div>
+                <div className={styles.boxScrollX}>
+                  {paymentsList.length > 0 ? (
+                    paymentsList.map(
+                      ({order_id, amount, status, method, created_at, action_url}, index) => (
+                        <div key={index} className={styles.boxPaymentsMap}>
+                          <div className={styles.onePayments}>
+                            <div className={styles.boxRowGap105}>
+                              <p>
+                                {translate("Заказ")}: {order_id}
+                              </p>
+                              <p>
+                                {new Date(created_at)
+                                  .toLocaleString("ru-RU", {
+                                    day: "2-digit",
+                                    month: "2-digit",
+                                    year: "numeric",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                  })
+                                  .replace(",", "")}
+                              </p>
+                              <h6>
+                                {Math.floor(amount)} {translate("sum")}
+                              </h6>
+                              {status !== "DENIED" && status !== "RETURNED" && (
+                                <div
+                                  className={status === "ACCEPTED" ? styles.statusSucsess : styles.statusWarning}>
+                                  <h5>
+                                    {status === "ACCEPTED"
+                                      ? translate("Оплачено")
+                                      : status === "PENDING" || status === "CREATED" &&
+                                        translate("В ожидании")}
+                                  </h5>
+                                </div>
+                              )}
+                            </div>
+                            {status === "ACCEPTED" || status === "PENDING" || status === "CREATED" ? (
+                              <Link
+                              href={action_url || "404"}
+                                target="_blank"
+                                className={status === "ACCEPTED" ? styles.buttonSucsess : styles.buttonWarning}>
+                                <NextImage
+                                  src={theme === 'dark' ? "/chek.svg" : "/chekLight.svg"}
+                                  alt="chek"
+                                  width={18}
+                                  height={18}
+                                />
+                                {status === "ACCEPTED"
+                                  ? translate("Чек")
+                                  : translate("Оплатить")}
+                              </Link>
+                            ) : (
+                              <div className={styles.statusError}>
+                                <h5>{translate("Отменено")}</h5>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )
+                    )
+                  ) : (
+                    <div className={styles.notHavePayments}>{translate("У вас нет платежей")}</div>
+                  )}
+                </div>
+              </div>
+            )}
               {/* -------------------------- Вкладка QR коды билетов -------------------------- */}
               {account === "qrcode" && (
                 <>
@@ -638,7 +761,7 @@ const downloadQRCode = () => {
                   <div className={styles.boxColQrCode}>
                     <div className={styles.boxQr}>
                       <QRCodeSVG
-                      id="qr-code"
+                        id="qr-code"
                         value={
                           ticketdata?.barcode
                             ? ticketdata?.barcode
@@ -648,7 +771,10 @@ const downloadQRCode = () => {
                       />
                     </div>
                     <div className={styles.boxButtonsInQrSection}>
-                      <button onClick={downloadQRCode} className={styles.boxBtnBack}>
+                      <button
+                        onClick={downloadQRCode}
+                        className={styles.boxBtnBack}
+                      >
                         <p>{translate("Скачать чек")}</p>
                         <NextImage
                           src={

@@ -81,6 +81,51 @@
   background: var(--secondColor);
 }
 
+.boxTicketsAndPayments {
+  display: flex;
+  flex-direction: row;
+  height: 44px;
+  padding: 10px;
+  align-items: center;
+  gap: 4px;
+  border-radius: 999px;
+  background-color: var(--loginButton);
+}
+
+.boxTicketOrPaymentsHistoryButtonActive {
+  display: flex;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  background: var(--loginBackground);
+  transition: 0.2s;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.boxTicketOrPaymentsHistoryButton {
+  display: flex;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  background: var(--loginButton);
+  transition: 0.2s;
+  color: var(--foreground);
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
 .boxUserTicketButton .oneButtonNotActive {
   display: flex;
   padding: 8px;
@@ -321,55 +366,163 @@
 
 /* -------------------------- Вкладка История покупок -------------------------- */
 
-.boxOneTicketHistory {
+.boxSettingsRight {
   display: flex;
-  justify-content: space-between;
+  width: 73%;
+  padding: 22px 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  border-radius: 30px;
+  background: var(--accountBackground);
+  position: relative;
+}
+
+
+.boxPaymentsH1 {
+  display: flex;
   align-items: center;
+  gap: 12px;
+}
+
+.boxPaymentsH1 h1 {
+  color: var(--boxUserName);
+  font-family: Involve;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 90%;
+  margin-top: 3px;
+}
+
+.boxScrollX {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+  height: 100%;
+}
+
+.boxPaymentsMap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
   align-self: stretch;
 }
 
-.boxOneInfoHistory {
+.onePayments {
   display: flex;
-  padding: 12px 15px 9px 15px;
-  flex-direction: column;
+  padding: 18px;
+  flex-direction: row;
   align-items: center;
-  gap: 20px;
-  border-radius: 999px;
+  justify-content: space-between;
+  gap: 12px;
+  height: 74px;
+  align-self: stretch;
+  border-radius: 20px;
   background: var(--loginButton);
-  color: var(--foreground);
-  text-align: center;
-  font-family: Involve;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 120%;
 }
 
-.boxHistoryTicketPrice {
-  display: flex;
-  padding: 12px 15px 9px 15px;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  border-radius: 999px;
-  background: var(--loginButton);
-  color: var(--foreground);
-  text-align: center;
+.onePayments p {
+  overflow: hidden;
+  color: #959EBB;
+  text-overflow: ellipsis;
   font-family: Involve;
-  font-size: 16px;
+  font-size: 15px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 120%;
+  margin-top: 2px;
 }
 
-.boxHistoryAndMpInfo {
-  max-width: 419px;
-  width: 100%;
+.onePayments p:last-child {
+  width: 140px;
+}
+
+.onePayments h6 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Involve;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  margin-top: 3px;
+}
+
+.boxRowGap105 {
   display: flex;
   align-items: center;
-  align-content: center;
+  gap: 105px;
+}
+
+
+.statusSucsess,
+.statusWarning,
+.statusError {
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  margin-top: 1px;
+}
+
+.statusSucsess {
+  background: var(--Colors-Green-100, #84EBB4);
+  color: var(--Colors-Green-New-Shade, #10A44E);
+}
+
+.statusWarning {
+  color: var(--Warning-Warning400, #E99022);
+  background: var(--Warning-Warning200, #F8DAB5);
+}
+
+.statusError {
+  background: var(--Error-Error100, #FFBBC2);
+  color: var(--Error-Error, #FF3347);
+}
+
+
+.buttonSucsess {
+  border-radius: 999px;
+  background: radial-gradient(64.97% 100% at 50.24% 0%, #954CFF 0%, #BA8AFF 100%), #F1F2F6;
+  color: #FFF;
+  display: flex;
+  width: 136px;
+  padding: 8px 0 6px 0;
+  justify-content: center;
+  align-items: center;
   gap: 4px;
-  flex-wrap: wrap;
+}
+
+.buttonWarning {
+  border-radius: 999px;
+  color: var(--foreground);
+  background: var(--cardDarkColor);
+  display: flex;
+  width: 136px;
+  padding: 8px 0 6px 0;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.boxMapPayments {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
 }
 
 /* -------------------------- Вкладка настройки -------------------------- */
@@ -652,7 +805,7 @@
   align-items: center;
 }
 
-.boxButtonsInQrSection{
+.boxButtonsInQrSection {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -692,10 +845,41 @@
   display: none;
 }
 
+@media screen and (max-width:1400px) {
+  .boxRowGap105 {
+    gap: 50px;
+  }
+}
+
+@media screen and (max-width:1200px) {
+  .boxRowGap105 {
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width:1090px) {
+  .boxSettingsRight {
+    width: 100%;
+    min-height: 300px;
+  }
+}
+
+@media screen and (max-width:770px) {
+  .boxScrollX {
+    overflow-x: scroll;
+    scrollbar-width: none;
+  }
+
+  .boxPaymentsMap {
+    width: 650px;
+  }
+}
+
 @media screen and (max-width: 700px) {
   .boxUserSettingsButton span {
     display: none;
   }
+
   .accountContent {
     display: flex;
     flex-direction: column;

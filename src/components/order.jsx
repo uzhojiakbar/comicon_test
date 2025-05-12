@@ -58,7 +58,6 @@ export default function order({ seans, isOpen, onClose }) {
       const expireTimeUTC = new Date(expireData.replace(" ", "T") + "Z");
       const nowUTC = new Date(new Date().toISOString());
 
-      console.log("expireTimeUTC", expireTimeUTC);
 
       const difference = expireTimeUTC - nowUTC;
 
@@ -146,8 +145,6 @@ export default function order({ seans, isOpen, onClose }) {
       },
     });
   }
-
-  console.log("EventData", eventData);
 
 
   useEffect(() => {
