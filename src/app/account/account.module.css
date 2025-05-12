@@ -81,15 +81,20 @@
   background: var(--secondColor);
 }
 
-.boxTicketsAndPayments {
+.boxTicketsAndPayments,
+.boxTicketsAndPayments2 {
   display: flex;
   flex-direction: row;
+  margin: 0 auto;
   height: 44px;
   padding: 10px;
   align-items: center;
   gap: 4px;
   border-radius: 999px;
   background-color: var(--loginButton);
+}
+.boxTicketsAndPayments2{
+  display: none;
 }
 
 .boxTicketOrPaymentsHistoryButtonActive {
@@ -861,6 +866,14 @@
   .boxSettingsRight {
     width: 100%;
     min-height: 300px;
+  }
+}
+@media screen and (max-width:850px) {
+  .boxTicketsAndPayments{
+    display: none;
+  }
+  .boxTicketsAndPayments2{
+    display: flex;
   }
 }
 

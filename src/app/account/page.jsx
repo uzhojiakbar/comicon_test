@@ -504,7 +504,12 @@ export default function account() {
                 </button>
                 <button
                   onClick={() => setAccount("paymentsHistory")}
-                  className={account === "paymentsHistory" ? styles.boxTicketOrPaymentsHistoryButtonActive: styles.boxTicketOrPaymentsHistoryButton}>
+                  className={
+                    account === "paymentsHistory"
+                      ? styles.boxTicketOrPaymentsHistoryButtonActive
+                      : styles.boxTicketOrPaymentsHistoryButton
+                  }
+                >
                   {translate("readhistory")}
                 </button>
               </div>
@@ -532,6 +537,28 @@ export default function account() {
                   <span>{translate("Выход")}</span>
                 </button>
               </div>
+            </div>
+            <div className={styles.boxTicketsAndPayments2}>
+              <button
+                onClick={() => setAccount("tickets")}
+                className={
+                  account === "tickets"
+                    ? styles.boxTicketOrPaymentsHistoryButtonActive
+                    : styles.boxTicketOrPaymentsHistoryButton
+                }
+              >
+                {translate("tickets")}
+              </button>
+              <button
+                onClick={() => setAccount("paymentsHistory")}
+                className={
+                  account === "paymentsHistory"
+                    ? styles.boxTicketOrPaymentsHistoryButtonActive
+                    : styles.boxTicketOrPaymentsHistoryButton
+                }
+              >
+                {translate("readhistory")}
+              </button>
             </div>
           </>
         ) : (
@@ -641,84 +668,118 @@ export default function account() {
                 </>
               )}
               {/* -------------------------- Вкладка платежы -------------------------- */}
-            {account === "paymentsHistory" && (
-              <div className={styles.boxMapPayments}>
-                <div className={styles.boxPaymentsH1}>
-                  <NextImage
-                    src={theme === "dark" ? "/payments.svg" : "/paymentsLight.svg"}
-                    alt="notification"
-                    width={32}
-                    height={32}
-                    loading="lazy"
-                  />
-                  <h1>{translate("payments")}</h1>
-                </div>
-                <div className={styles.boxScrollX}>
-                  {paymentsList.length > 0 ? (
-                    paymentsList.map(
-                      ({order_id, amount, status, method, created_at, action_url}, index) => (
-                        <div key={index} className={styles.boxPaymentsMap}>
-                          <div className={styles.onePayments}>
-                            <div className={styles.boxRowGap105}>
-                              <p>
-                                {translate("Заказ")}: {order_id}
-                              </p>
-                              <p>
-                                {new Date(created_at)
-                                  .toLocaleString("ru-RU", {
-                                    day: "2-digit",
-                                    month: "2-digit",
-                                    year: "numeric",
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                  })
-                                  .replace(",", "")}
-                              </p>
-                              <h6>
-                                {Math.floor(amount)} {translate("sum")}
-                              </h6>
-                              {status !== "DENIED" && status !== "RETURNED" && (
-                                <div
-                                  className={status === "ACCEPTED" ? styles.statusSucsess : styles.statusWarning}>
-                                  <h5>
-                                    {status === "ACCEPTED"
-                                      ? translate("Оплачено")
-                                      : status === "PENDING" || status === "CREATED" &&
-                                        translate("В ожидании")}
-                                  </h5>
+              {account === "paymentsHistory" && (
+                <div className={styles.boxMapPayments}>
+                  <div className={styles.boxPaymentsH1}>
+                    <NextImage
+                      src={
+                        theme === "dark"
+                          ? "/payments.svg"
+                          : "/paymentsLight.svg"
+                      }
+                      alt="notification"
+                      width={32}
+                      height={32}
+                      loading="lazy"
+                    />
+                    <h1>{translate("payments")}</h1>
+                  </div>
+                  <div className={styles.boxScrollX}>
+                    {paymentsList.length > 0 ? (
+                      paymentsList.map(
+                        (
+                          {
+                            order_id,
+                            amount,
+                            status,
+                            method,
+                            created_at,
+                            action_url,
+                          },
+                          index
+                        ) => (
+                          <div key={index} className={styles.boxPaymentsMap}>
+                            <div className={styles.onePayments}>
+                              <div className={styles.boxRowGap105}>
+                                <p>
+                                  {translate("Заказ")}: {order_id}
+                                </p>
+                                <p>
+                                  {new Date(created_at)
+                                    .toLocaleString("ru-RU", {
+                                      day: "2-digit",
+                                      month: "2-digit",
+                                      year: "numeric",
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                    })
+                                    .replace(",", "")}
+                                </p>
+                                <h6>
+                                  {Math.floor(amount)} {translate("sum")}
+                                </h6>
+                                {status !== "DENIED" &&
+                                  status !== "RETURNED" && (
+                                    <div
+                                      className={
+                                        status === "ACCEPTED"
+                                          ? styles.statusSucsess
+                                          : styles.statusWarning
+                                      }
+                                    >
+                                      <h5>
+                                        {status === "ACCEPTED"
+                                          ? translate("Оплачено")
+                                          : status === "PENDING" ||
+                                            (status === "CREATED" &&
+                                              translate("В ожидании"))}
+                                      </h5>
+                                    </div>
+                                  )}
+                              </div>
+                              {status === "ACCEPTED" ||
+                              status === "PENDING" ||
+                              status === "CREATED" ? (
+                                <Link
+                                  href={action_url || "404"}
+                                  target="_blank"
+                                  className={
+                                    status === "ACCEPTED"
+                                      ? styles.buttonSucsess
+                                      : styles.buttonWarning
+                                  }
+                                >
+                                  <NextImage
+                                    src={
+                                      theme === "dark"
+                                        ? "/chek.svg"
+                                        : "/chekLight.svg"
+                                    }
+                                    alt="chek"
+                                    width={18}
+                                    height={18}
+                                  />
+                                  {status === "ACCEPTED"
+                                    ? translate("Чек")
+                                    : translate("Оплатить")}
+                                </Link>
+                              ) : (
+                                <div className={styles.statusError}>
+                                  <h5>{translate("Отменено")}</h5>
                                 </div>
                               )}
                             </div>
-                            {status === "ACCEPTED" || status === "PENDING" || status === "CREATED" ? (
-                              <Link
-                              href={action_url || "404"}
-                                target="_blank"
-                                className={status === "ACCEPTED" ? styles.buttonSucsess : styles.buttonWarning}>
-                                <NextImage
-                                  src={theme === 'dark' ? "/chek.svg" : "/chekLight.svg"}
-                                  alt="chek"
-                                  width={18}
-                                  height={18}
-                                />
-                                {status === "ACCEPTED"
-                                  ? translate("Чек")
-                                  : translate("Оплатить")}
-                              </Link>
-                            ) : (
-                              <div className={styles.statusError}>
-                                <h5>{translate("Отменено")}</h5>
-                              </div>
-                            )}
                           </div>
-                        </div>
+                        )
                       )
-                    )
-                  ) : (
-                    <div className={styles.notHavePayments}>{translate("У вас нет платежей")}</div>
-                  )}
+                    ) : (
+                      <div className={styles.notHavePayments}>
+                        {translate("У вас нет платежей")}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
               {/* -------------------------- Вкладка QR коды билетов -------------------------- */}
               {account === "qrcode" && (
                 <>
