@@ -332,12 +332,25 @@ export default function order({ seans, isOpen, onClose }) {
 
   const AtmosPyPreApply = () => {
 
+    // Agar foydalanuvchi MM/YY formatida kiritgan bo'lsa, uni YY/MM formatiga o'zgartirish
+    let expiry = cardData.expiry
+    if (expiry.length === 5) {
+      const [month, year] = expiry.split("/");
+      if (month <= 12 && year <= 12) {
+        expiry = expiry
+      } else if (month <= 12) {
+        expiry = `${year}/${month}`; // YY/MM formatiga o'zgartirish
+      }
+    }
 
     const sanitizedCardData = {
       ...cardData,
       card_number: cardData.card_number.replace(/\s/g, ""), // Bo'sh joylarni olib tashlash
-      expiry: cardData.expiry.replace(/\//g, ""), // "/" belgisini olib tashlash
+      expiry: expiry.replace(/\//g, ""), // "/" belgisini olib tashlash
     };
+
+
+    console.log("sanitizedCardData", sanitizedCardData);
 
 
     AtmosPayPreApplyMutation.mutate(
@@ -1000,15 +1013,7 @@ export default function order({ seans, isOpen, onClose }) {
                         value = `${value.slice(0, 2)}/${value.slice(2)}`;
                       }
 
-                      // Agar foydalanuvchi MM/YY formatida kiritgan bo'lsa, uni YY/MM formatiga o'zgartirish
-                      if (value.length === 5) {
-                        const [month, year] = value.split("/");
-                        if (month <= 12 && year <= 12) {
-                          value = value
-                        } else if (month <= 12) {
-                          value = `${year}/${month}`; // YY/MM formatiga o'zgartirish
-                        }
-                      }
+
 
                       setCardData({
                         ...cardData,
