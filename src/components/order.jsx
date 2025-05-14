@@ -824,7 +824,7 @@ export default function order({ seans, isOpen, onClose }) {
                     width={24}
                     height={24}
                   />
-                  <p>{translate("Оплатите в течении 15:00 минут")}</p>
+                  <p>{translate("payWithin").replace("$time", timeLeft)}</p>
                 </div>
                 <div className={styles.boxPaymentsType}>
                   <p>{translate("Способ оплаты")}</p>
