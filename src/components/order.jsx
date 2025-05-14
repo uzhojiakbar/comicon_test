@@ -878,13 +878,21 @@ export default function order({ seans, isOpen, onClose }) {
                       </button>
                       : ""}
                   </div>
+
+
+                  {/* PostPromocode */}
+
                   <div
                     style={{
                       display: "flex",
                       gap: "20px"
                     }}
                   > <input
-                      style={{ width: "80%" }}
+                      style={{
+                        width: "80%",
+                        filter: !!eventData?.promo?.discount_amount ? "grayscale(100%)" : "none",
+                        cursor: !!eventData?.promo?.discount_amount ? "not-allowed" : "text",
+                      }}
                       type="text"
                       disabled={!!eventData?.promo?.discount_amount}
                       onChange={(e) => setPromocodeVerify(e?.target?.value)}
@@ -892,7 +900,7 @@ export default function order({ seans, isOpen, onClose }) {
                     />
                     {/* PostPromocode */}
                     <button
-                      disabled={!!eventData?.promo?.discount_amount}
+                      disabled={!!eventData?.promo?.discount_amount || !promocodeVerify}
                       onClick={() => PostPromocode()}
                       className={styles.boxButtonNext}
                     >
