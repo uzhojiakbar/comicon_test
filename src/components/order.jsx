@@ -803,7 +803,7 @@ export default function order({ seans, isOpen, onClose }) {
             <div className={styles.boxModalRightTop}>
               <div className={styles.boxRowH1}>
                 <h1>{translate("ОПЛАТА")}</h1>
-                <button onClick={onClose}>
+                <button onClick={CloseAndClearModal}>
                   <Image
                     src="/closeModal.svg"
                     alt="closeModal"
@@ -837,6 +837,7 @@ export default function order({ seans, isOpen, onClose }) {
                             ? styles.onePaymentTypeActive
                             : styles.onePaymentType
                         }
+
                       >
                         <div className={styles.paymentName}>
                           <Image
@@ -876,7 +877,6 @@ export default function order({ seans, isOpen, onClose }) {
                         <p>{translate("newBankCard")}</p>
                       </button>
                       : ""}
-
                   </div>
                   <div
                     style={{
